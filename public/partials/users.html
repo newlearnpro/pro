@@ -1,0 +1,27 @@
+<div ng-cloak ng-controller='usersCtrl'>
+	<users-table></users-table>
+	
+	<div ng-if='users'>
+		<div>
+			<label>{{language.username_hint}}</label>
+			<input id='userName' type='text' value='{{userField.username}}' />
+		</div>
+		<div>	
+			<label>{{language.first_name_hint}}</label>
+			<input id='firstName' type='text' value='{{userField.first_name}}' />
+		</div>
+		<div>
+			<label>{{language.position_hint}}</label>			
+			<select id='position' ng-model='userField.position'>
+				<option  ng-repeat='items in position' ng-selected='{{userField.position}}'>{{items.position}}</option>
+			</select>
+		</div>
+		<input ng-click='editUser()' type='button' value='save' class='btn btn-info' />
+		{{tt.first_name_hint}}
+	</div>
+
+
+
+
+
+</div>
