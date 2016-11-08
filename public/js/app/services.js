@@ -19,9 +19,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/index/contacts',
             templateUrl: '../../public/partials/contacts.html',
         })
-        .state('tasks', {
-            url: '/index/tasks',
-            templateUrl: '../../public/partials/tasks.html',
+        .state('list', {
+            url: '/index/list',
+            templateUrl: '../../public/partials/list.html',
         })
     $locationProvider.html5Mode(true);
 });

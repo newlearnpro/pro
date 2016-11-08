@@ -53,7 +53,6 @@ class Admin extends CI_Controller {
 		}
 
 		echo json_encode($lang);
-
 	}
 
 	public function create_position()
@@ -68,11 +67,33 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function edit_position()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		//$this->create_tables_model->create_position_table();
+
+
+//$this->db->set('field', 'field+1');
+//$this->db->where('id', 2);
+//$this->db->update('mytable'); 
+
+
+
+
+
+		$get_info = $this->input->post('id');
+		$get_info2 = $this->input->post('position');
+			$this->db->set('position', $get_info2);
+			$this->db->where('id', $get_info);
+			$this->db->update('position');
+
+	}
+
 	public function remove_position()
 	{
 		$_POST = json_decode(file_get_contents('php://input'), true);
-		$this->create_tables_model->create_position_table();
-		$get_info = $this->input->post('position');
+		//$this->create_tables_model->create_position_table();
+		$get_info = $this->input->post('id');
 			$this->db->where('id', $get_info);
 			$this->db->delete('position');
 

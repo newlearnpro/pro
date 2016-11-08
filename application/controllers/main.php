@@ -24,6 +24,18 @@ class Main extends CI_Controller {
 		}
 	}
 
+
+		public function admin_lang()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$get_info = $this->input->post('data');
+		for($i = 0; $i < count($get_info); $i++){
+			$lang[$get_info[$i]] = lang($get_info[$i]);
+		}
+
+		echo json_encode($lang);
+	}
+
 	public function send_message()
 	{
 		$_POST = json_decode(file_get_contents('php://input'), true);
@@ -40,5 +52,11 @@ class Main extends CI_Controller {
 		$get_info = $this->input->post('message_box');
 		$get_messages = $this->membership_model->messages($get_info);
 		echo json_encode($get_messages);
+	}
+
+	public function load_position()
+	{
+		$query = $this->membership_model->position();
+		echo json_encode($query);
 	}
 }

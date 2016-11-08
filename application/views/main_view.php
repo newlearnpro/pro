@@ -2,7 +2,7 @@
 
 
 <span><a ui-sref='contacts' ui-sref-active='active' class='btn btn-default'><?=lang('contacts') ?></a></span>
-<span><a ui-sref='tasks' ui-sref-active='active' class='btn btn-default'><?=lang('tasks') ?></a></span>  
+<span><a ui-sref='list' ui-sref-active='active' class='btn btn-default'><?=lang('list') ?></a></span>  
 
 
 

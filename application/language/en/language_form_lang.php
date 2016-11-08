@@ -77,6 +77,7 @@ $lang['registration_employees']     = 'Registration of employees';
 $lang['change_info_employees']      = 'To change information of employees';
 $lang['contacts']                   = 'Contacts';
 $lang['tasks']                   	= 'Tasks';
+$lang['list']                   	= 'List';
 
 
 

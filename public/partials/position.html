@@ -1,80 +1,26 @@
 <div ng-cloak ng-controller='classCtrl'>
 	<h2>This is position.html</h2>
 	<div>
-			<label>{{language.position_hint}}</label>			
-			<select id='position' ng-model='userField.id'>
-				<option ng-selected='0'>{{language.position_main}}ԳԼԽԱՎՈՐ</option>
-				<option ng-repeat='items in position' ng-selected='{{items.id}}'>{{items.id}} - {{items.position}} - {{items.parent_id}}</option>
-			</select>
-
+		<label>{{language.position_hint}}</label>			
+		<select id='position' ng-model='userField.id'>
+			<option ng-selected='0'>{{language.position_main}}ԳԼԽԱՎՈՐ</option>
+			<option ng-repeat='items in position' ng-selected='{{items.id}}'>{{items.id}} - {{items.position}} - {{items.parent_id}}</option>
+		</select>
 		<label>{{language.new_position}}</label>&nbsp;
 		<position-group></position-group>
 	</div>
-
 	<div>
 		<label>{{language.structure}}</label>&nbsp;
-
 		<div class='mainPosition'>
 			<div ng-repeat='items in position'>
-				<div class='position1' data1='{{items.id}}' data2='{{items.parent_id}}'>
+				<div class='position1' data1='{{items.id}}' data2='{{items.parent_id}}' ng-click='openClosePosition()'>
+					<span>+</span>					
 					<input value='{{items.position}}' />
 					<a class='btn btn-danger btn-xs' ng-click='editPosition()'>edit</a>
 					<a class='btn btn-danger btn-xs' ng-click='removePosition()'>remove</a>
 				</div>	
 			</div>
 		</div>
-		<!--div ng-repeat='items in position' >
-			<div >
-				<input value='{{items.position}}' />
-				<a class='btn btn-danger btn-xs' ng-click='editPosition()'>edit</a>
-				<a class='btn btn-danger btn-xs' ng-click='removePosition()'>remove</a>
-				<input dat='{{items.id}}' value='' />
-				<a class='addpos btn btn-danger btn-xs' ng-click='addPosition($index)'>
-				add</a>	
-
-
-
-
-
-		<div ng-repeat='items in position2'>
-			<div>
-				<input value='{{items.position}}' />
-				<a class='btn btn-danger btn-xs' ng-click='editPosition()'>edit</a>
-				<a class='btn btn-danger btn-xs' ng-click='removePosition()'>remove</a>
-				<input dat='{{items.id}}' value='' />
-				<a class='addpos btn btn-danger btn-xs' ng-click='addPosition($index)'>
-				add</a>					
-			</div>
-		</div>
-
-
-
-
-
-
-			</div>
-		</div-->
-
-
-
-
-
-
-
-		<!--div style="margin-left:50px" ng-repeat='items in position' ng-if='items.parent_id==17'>
-			<input value='{{items.position}}' />
-			<a class='btn btn-danger btn-xs' ng-click='editPosition()'>edit</a>
-			<a class='btn btn-danger btn-xs' ng-click='removePosition()'>remove</a>
-			<a class='addpos btn btn-danger btn-xs' ng-click='addPosition($index)'>
-			add</a>
-		</div-->
-
-
-		</div>
-
-
-
-
 	</div>
 </div>
 

@@ -161,7 +161,7 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
                         for (var i = 0; i < data.length; i++) {
                             $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
                         }
-                    }, 500);
+                    }, 10);
 
 
                     //  $('.mainPosition div[data2^="46"]').appendTo(".mainPosition div[data1^='46']").removeClass("position1").addClass("position2");
@@ -367,19 +367,31 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
                     });
                 });
             }
+            scope.editPosition = function() {
+                $http({
+                    method: 'POST',
+                    url: '../admin/edit_position',
+                    data: {
+                        'id': this.items.id,
+                        'position': $('.mainPosition div[data1^="' + this.items.id + '"]').children('input').val()
+                    }
+                }).success(function(data) {
+
+                    scope.loadPosition();
+                });
+                // console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children().val())
+            }
             scope.removePosition = function() {
-                alert("df");
+                //  console.log($(this).parent())
                 $http({
                     method: 'POST',
                     url: '../admin/remove_position',
                     data: {
-                        'position': null
+                        'id': this.items.id
                     }
                 }).success(function(data) {
-
-                    // scope.loadPosition();
+                    scope.loadPosition();
                 });
-                console.log(this.items);
             }
             scope.addPosition = function(index) {
                 // console.log(this.$index);
@@ -395,15 +407,16 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
 
                 //element.after('<div><input id="pos_text" type="text" /><button id="pos_add">OK</button></div>');
                 element.after("<input />");
+            }
 
-
-
-
-
-
-
-
-
+            scope.openClosePosition = function() {
+                /*console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text())
+                    //   $('.mainPosition div[data1^="' + this.items.id + '"]').children().toggle();
+                if ($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text() == "+") {
+                    $('.mainPosition div[data1^="' + this.items.id + '"]').children().hide();
+                } else {
+                    $('.mainPosition div[data1^="' + this.items.id + '"]').children().show();
+                }*/
             }
 
         }
@@ -433,4 +446,55 @@ app.controller('classCtrl', function($scope, $http, $q, language) {
     });*/
 
 
+});
+
+
+
+
+
+
+
+
+
+app.directive('listGroup', function($http, $q, $timeout, language) {
+    return {
+        restrict: 'EA',
+        replace: true,
+        template: "<div></input type='button' value='bebe'/></div>",
+        //scope: {},
+        link: function(scope, element, attrs, ctrl) {
+            var promise = language.getLang();
+            promise.then(function(data) {
+                scope.language = data;
+                scope.loadPosition(scope, element);
+
+            });
+            scope.loadPosition = function() {
+                $http({
+                    method: 'GET',
+                    url: 'load_position',
+
+                }).
+                success(function(data, status) {
+                    scope.position = data;
+                    setTimeout(function() {
+                        for (var i = 0; i < data.length; i++) {
+                            $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                        }
+                    }, 10);
+                });
+            }
+
+            scope.openClosePosition = function() {
+                /*console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text())
+                    //   $('.mainPosition div[data1^="' + this.items.id + '"]').children().toggle();
+                if ($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text() == "+") {
+                    $('.mainPosition div[data1^="' + this.items.id + '"]').children().hide();
+                } else {
+                    $('.mainPosition div[data1^="' + this.items.id + '"]').children().show();
+                }*/
+            }
+
+        }
+    }
 });
