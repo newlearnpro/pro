@@ -59,8 +59,8 @@ class Membership_model extends CI_Model {
       
         //  $this->db->query("position");    
      $query =   $this->db->query("SELECT id, position, parent_id FROM position;");  
-      //  $this->db->order_by('parent_id', 'acs');
-    //    $query = $this->db->get('position');
+      //  $this->db->order_by('position', 'acs');
+      //  $query = $this->db->get('position');
 
      //   return   $query->result_array();
 
