@@ -156,25 +156,12 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
 
                 }).
                 success(function(data, status) {
-
                     scope.position = data;
-
-
-                    //  console.log(data)
-
-
-
-                    element.append('<div class="mainPosition"></div>');
-                    for (let i = 0; i < data.length; i++) {
-                        $(".mainPosition").append('<div class="position1" data1="' + data[i].id + '" data2="' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-
-                        //if ($('.position1[dat2^="46"]') != undefined) {
-
-                        //  }
-                        $('.mainPosition div[data2^="' + i + '"]').appendTo(".mainPosition div[data1^='" + i + "']").removeClass("position1").addClass("position2");
-
-                    }
-
+                    setTimeout(function() {
+                        for (var i = 0; i < data.length; i++) {
+                            $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                        }
+                    }, 500);
 
 
                     //  $('.mainPosition div[data2^="46"]').appendTo(".mainPosition div[data1^='46']").removeClass("position1").addClass("position2");
@@ -386,10 +373,11 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
                     method: 'POST',
                     url: '../admin/remove_position',
                     data: {
-                        'position': this.items.id
+                        'position': null
                     }
                 }).success(function(data) {
-                    scope.loadPosition();
+
+                    // scope.loadPosition();
                 });
                 console.log(this.items);
             }
