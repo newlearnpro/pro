@@ -484,7 +484,20 @@ app.directive('listGroup', function($http, $q, $timeout, language) {
                     }, 10);
                 });
             }
+            scope.getClass = function() {
+                $http({
+                    method: 'GET',
+                    url: 'load_class',
+                    data: {
+                        'id': this.items.id
+                    }
 
+                }).
+                success(function(data, status) {
+                    console.log(data);
+
+                });
+            }
             scope.openClosePosition = function() {
                 /*console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text())
                     //   $('.mainPosition div[data1^="' + this.items.id + '"]').children().toggle();

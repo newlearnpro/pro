@@ -74,9 +74,22 @@ class Membership_model extends CI_Model {
       //  = $this->db->get();
     //    print_r($query->result_array());
         return   $query->result_array();
+    }
+    public function classes($get_info)
+    {      
+       // $this->db->where('id', $get_info);
+        $query =   $this->db->query("SELECT id, has_file_id FROM position;");  
+      //  return   $query->result_array();
+
+         
+        
+        foreach ($query->result() as $row)
+        {
+
+                return $row->id;
+        }
 
     }
-    
 
     public function messages($get_info)
     {   

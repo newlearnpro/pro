@@ -56,7 +56,16 @@ class Main extends CI_Controller {
 
 	public function load_position()
 	{
+		$this->load->model('membership_model');
 		$query = $this->membership_model->position();
+		echo json_encode($query);
+	}
+
+	public function load_class()
+	{
+		$this->load->model('membership_model');
+		$get_info = $this->input->get('id');
+		$query = $this->membership_model->classes($get_info);
 		echo json_encode($query);
 	}
 }
