@@ -63,9 +63,10 @@ class Main extends CI_Controller {
 
 	public function load_class()
 	{
+		$_POST = json_decode(file_get_contents('php://input'), true);
 		$this->load->model('membership_model');
-		$get_info = $this->input->get('id');
+		$get_info = $this->input->post('id');
 		$query = $this->membership_model->classes($get_info);
-		echo json_encode($query);
+		echo $query;
 	}
 }

@@ -486,12 +486,11 @@ app.directive('listGroup', function($http, $q, $timeout, language) {
             }
             scope.getClass = function() {
                 $http({
-                    method: 'GET',
+                    method: 'POST',
                     url: 'load_class',
                     data: {
                         'id': this.items.id
                     }
-
                 }).
                 success(function(data, status) {
                     console.log(data);
