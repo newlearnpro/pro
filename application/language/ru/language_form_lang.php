@@ -85,7 +85,7 @@ $lang['new_position']            = 'Новая должность';
 $lang['structure']               = 'Структура';
 
 
-$lang['add_class']            = 'Добавить урок';
+$lang['add_lesson']            = 'Добавить урок';
 $lang['save']            = 'Сохранить';
 
 ?>

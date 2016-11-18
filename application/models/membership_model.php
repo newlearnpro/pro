@@ -58,7 +58,7 @@ class Membership_model extends CI_Model {
 
       
         //  $this->db->query("position");    
-     $query =   $this->db->query("SELECT id, position, parent_id FROM position;");  
+     $query = $this->db->query("SELECT id, position, parent_id FROM position;");  
       //  $this->db->order_by('position', 'acs');
       //  $query = $this->db->get('position');
 
@@ -75,13 +75,18 @@ class Membership_model extends CI_Model {
     //    print_r($query->result_array());
         return   $query->result_array();
     }
-    public function classes($get_info)
+    public function lesson()
     {      
-        $query = $this->db->select('has_file_id')->where('id', $get_info)->get('position');
-        foreach ($query->result() as $row)
-        {
-          return $row->has_file_id;
-        }
+        $query = $this->db->query("SELECT name, description, src, type_id, parent_id FROM file;");
+        return $query->result();
+    }
+
+    public function main_lesson($get_info)
+    {      
+        $query = $this->db->select('*')->where('parent_id', $get_info)->get('file');
+        //foreach ($query->result() as $row)
+        //{ }
+          return $query->result();
     }
 
     public function messages($get_info)

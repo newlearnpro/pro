@@ -11,9 +11,9 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/index/users',
             templateUrl: '../../public/partials/users.html',
         })
-        .state('addclass', {
-            url: '/index/addclass',
-            templateUrl: '../../public/partials/addclass.html',
+        .state('addlesson', {
+            url: '/index/addlesson',
+            templateUrl: '../../public/partials/addlesson.html',
         })
         .state('contacts', {
             url: '/index/contacts',

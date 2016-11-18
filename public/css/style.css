@@ -7,11 +7,11 @@
 }
 
 
-#lang_en.en{
+#lang_en.en, #lang_am.am{
 	background: red;
 	color:yellow;
 }
-#lang_en.en:hover{
+#lang_en.en:hover, #lang_am.am{
 	background: brown;
 	color:yellow;
 }
@@ -34,3 +34,66 @@
 	margin-left: 20px;
 }
 
+
+.lesson_type_1{
+	width: 200px;
+	height:30px;
+	background: blue;
+	color: white;
+	border-radius: 5px;
+	border:2px solid black;
+}
+
+.lesson_type_2{
+	width: 200px;
+	height:30px;
+	background: orange;
+	color: white;
+	border-radius: 5px;
+	border:2px solid black;
+}
+
+.lesson_type_3{
+	width: 200px;
+	height:30px;
+	background: green;
+	color: white;
+	border-radius: 5px;
+	border:2px solid black;
+}
+
+
+
+
+
+
+
+
+
+
+
+/****************************angular css*******/
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+/*
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}*/
+
+
+.check-element {
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}

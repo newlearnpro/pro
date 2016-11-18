@@ -74,18 +74,40 @@ class Login extends CI_Controller {
       }
 
       if($this->session->userdata('prm')==='admin'){
-        $this->load->view('includes/header');
+         $this->load->view('includes/header');
          $this->load->view('signup_form', $data);
-        $this->load->view('includes/footer');
+         $this->load->view('includes/footer');
+      }else{
+          redirect($this->uri->segment(1).'/login');
+      }
+  }
+    
+  public function tables()         
+  {
+      if($this->session->userdata('prm')==='admin'){
+         $this->load->view('includes/header');
+         $this->load->view('tables_form');
+         $this->load->view('includes/footer');
       }else{
           redirect($this->uri->segment(1).'/login');
       }
 
-
-
   }
-    
-    
+
+
+  public function add_tables()         
+  {
+    if($this->session->userdata('prm')==='admin'){
+        $this->load->model('create_tables_model');
+        $this->create_tables_model->create_users_table();
+        //$this->create_tables_model->create_position_table();
+    }else{
+        redirect($this->uri->segment(1).'/login');
+    }
+  }
+
+
+
     
   public function admin_lang()
   {

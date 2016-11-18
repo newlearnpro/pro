@@ -48,4 +48,26 @@ $lang['logout']                      = 'ելք';
 
 $lang['verify_username_password']    = 'Մուտքանունը կամ գաղտնաբառը սխալ է';
 
+
+$lang['create_position']            = 'Ստեղծել կատալոգներ';
+$lang['registration_employees']     = 'Ռեգիստրացիա';
+$lang['change_info_employees']      = 'To change information of employees';
+$lang['contacts']                   = 'Կոնտակտներ';
+$lang['tasks']                   	= 'Tasks';
+$lang['list']                   	= 'Դասեր';
+
+
+
+/*******************************************************************************/
+
+
+$lang['new_position']            = 'New position';
+$lang['structure']               = 'Ստրուկտուրա';
+
+
+
+
+$lang['add_lesson']            = 'Դաս ավելացնել';
+$lang['save']            	   = 'Պահպանել';
+
 ?>

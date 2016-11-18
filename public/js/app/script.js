@@ -23,6 +23,7 @@ app.controller('contactsCtrl', function($scope, $http) {
     $scope.recipient = '';
     $scope.selectUser = function(param) {
         $scope.recipient = param;
+        // console.log($("#lang_am").text())
         var username = document.querySelector("#username").innerHTML;
         var data = {
             'sender': username,
@@ -70,7 +71,9 @@ app.controller('contactsCtrl', function($scope, $http) {
             }
         }).
         success(function(data) {
-            // console.log(data);
+            $scope.selectUser($scope.recipient);
+            // message_text = "";
+            $("#message_text").val("");
         });
     }
 });
@@ -81,14 +84,6 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
     promise.then(function(data) {
         $scope.language = data;
     });
-
-
-
-
-
-
-
-
     $scope.selectUser = function(param) {
         $http({
             method: 'POST',
@@ -99,8 +94,6 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
             //  $scope.userField = data[0];
             //   console.log(data);
         });
-
-
         $http({
             method: 'POST',
             url: '../admin/users_info',
@@ -140,14 +133,15 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
     return {
         restrict: 'EA',
         replace: true,
-        template: "<div></input type='button' value='bebe'/></div>",
+        //template: "<div></input type='button' value='bebe'/></div>",
         //scope: {},
         link: function(scope, element, attrs, ctrl) {
             var promise = language.getLang();
             promise.then(function(data) {
                 scope.language = data;
                 scope.loadPosition(scope, element);
-                scope.createPosition(scope, element);
+                scope.loadLesson(scope, element);
+                // scope.createPosition(scope, element);
             });
             scope.loadPosition = function() {
                 $http({
@@ -161,210 +155,54 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
                         for (var i = 0; i < data.length; i++) {
                             $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
                         }
-                    }, 10);
-
-
-                    //  $('.mainPosition div[data2^="46"]').appendTo(".mainPosition div[data1^='46']").removeClass("position1").addClass("position2");
-                    // setTimeout(function() {
-                    //  $('.mainPosition div[data2^="54"]').appendTo(".mainPosition div[data1^='54']").removeClass("position1").addClass("position2");
-                    //  $('.mainPosition div[data2^="62"]').appendTo(".mainPosition div[data1^='62']").removeClass("position1").addClass("position2");
-                    //console.log($('.position1[dat2^="54"]')[0]);
-                    //  }, 500);
-
-
-
-                    /*   element.append('<div class="mainPosition"></div>');
-                       var myEl = angular.element(document.querySelector('.mainPosition'));
-                       // console.log(myEl);
-                       for (let i = 0; i < data.length; i++) {
-                           // if (data[i].parent_id == 0) {
-                           myEl.append('<div class="position1" dat="' + data[i].id + '" dat2="' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-
-
-                           //getAttribute("dat2")
-
-                           //   }
-
-                       }
-                       //.getAttribute("dat")
-                       var myEl2 = angular.element(document.querySelector('.position1'));
-                       for (var j = 0; j < 5; j++) {
-                           console.log(myEl2[j]);
-
-                           myEl2.append("<input>");
-                       }*/
-
-                    /*
-                                            var strPosition2 = data[i].position2;
-                                            var res = strPosition2.split("|");
-                                            //    console.log(res);
-
-
-
-
-                                            for (let j = 0; j < res.length; j++) {
-                                                // if (res[j] != "") {
-                                                myEl.append('<div class="position2"><input type="text" value="' + res[j] + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-                                                // }
-
-
-                                                var strPosition3 = data[i].position3;
-                                                var res2 = strPosition3.split("|");
-                                                //var res22 = res2[i].split(",");
-
-                                                //  console.log(res2[k])
-
-
-                                                console.log(typeof(res2[j]));
-
-                                                //  for (let k = 0; k < res22.length; k++) {
-
-                                                myEl.append('<div class="position3"><input type="text" value="' + res2[j] + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-
-                                                // }
-
-                                            }
-
-
-                                        }
-
-                    */
-
-
-
-
-
-
-
-                    //    }
-                    //   }, 500);
-
-
-
-                    /*  data.bind("click", function() {
-                          alert("fg");
-                      });*/
-                    //console.log(data);
-                    //if(){
-                    // element.after("<input />");
-
-                    /*  element.append('<div class="aaa0"></div>');
-
-
-                    var arr_parrent_id = [];
-                    var arr_id = [];
-*/
-
-
-                    /*     var node = document.createElement("LI");
-                    var textnode = document.createTextNode("Water");
-                    node.appendChild(textnode);
-                    document.getElementById("myList").appendChild(node);
-*/
-                    /*  var myEl = angular.element(document.querySelector('.aaa0'));
-                      console.log(myEl[0])
-
-                      for (var i = 0; i < data.length; i++) {
-                          //    arr_id.push(data[i].id);
-                          //arr_id_div.push('<div dat="' + data[i].id + '" class="bbb' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-                          //    console.log(myEl);
-                          //   arr_parrent_id.push(data[i].parent_id);
-                          //    arr_parrent_id_div.push('<div dat="' + data[i].id + '" class="bbb' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-                          //    console.log(arr_parrent_id);
-
-
-
-                          //if (data[i].parent_id == 0) {
-
-                          myEl.append('<div dat="' + data[i].id + '" dat2="' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-
-                      }
-                      console.log(myEl.children()[0]);
-                      myEl.children()[0].remove()
-                      console.log(myEl.children()[0]);*/
-                    /* for (var j = 0; j < arr_parrent_id.length; j++) {
-                         if (arr_parrent_id[i] == arr_id[j]) {
-                             //         console.log(i + 1, j + 1);
-                             // console.log(myEl);
-                             //  myEl[0].childNodes[0].append('<div style="margin-left:50px" dat="' + data[i].id + '" class="' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-                             // myEl.append('<div style="margin-left:50px" dat="' + data[i].id + '" class="' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-                         }
-                     }*/
-                    //    }
-
-
-
-
-                    //  this.find = function(array, value) {
-                    //  for (var i = 0; i < arr_parrent_id.length; i++) {
-                    /*      for (var j = 0; j < arr_parrent_id.length; j++) {
-                              if (arr_parrent_id[i] == arr_id[j]) {
-                                  console.log(i);
-                                  myEl.append('<div style="margin-left:20px" dat="' + data[i].id + '" class="' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-                              }
-                          }*/
-                    //}
-
-
-
-
-
-                    //   console.log(element[0].lastChild.getElementsByClassName("bbb" + "9")[0]);
-                    /*    console.log(arr_id);
-                        console.log(arr_parrent_id);
-
-                        var newLi = document.querySelector('.aaa0');
-                        $timeout(function() {
-                            // console.log(arr_id_div[0].toString)
-                            //   arr_id_div[0].toString.appendChild(arr_parrent_id_div[0].toString);
-                            // newLi.children[1].appendChild(element[0].lastChild.children[4]);
-                            //    newLi.children[1].appendChild(element[0].lastChild.children[4]);
-                            //  console.log(document.getElementsByName('dat'));
-
-                            for (var t = 0; t < data.length; t++) {
-                                //  console.log(element[0].lastChild.children[t].getAttribute("dat2"));
-                                // console.log(element[0].lastChild.children[t].attributes);
-                                //   console.log(element[0].lastChild.children[t]);
-                                //  console.log(element[0].lastChild.children[t].getAttribute("dat2"));
-                                for (var t2 = 0; t2 < data.length; t2++) {
-
-                                    if (arr_parrent_id[t] == arr_id[t2]) {
-                                        console.log(t, t2);
-                                        newLi.children[t2].appendChild(element[0].lastChild.children[t]);
-                                        // myEl.append('<div style="margin-left:20px" dat="' + data[i].id + '" class="' + data[i].parent_id + '"><input type="text" value="' + data[i].position + '"/><a class="btn btn-danger btn-xs" ng-click="scope.removePosition()">remove</a></div>');
-                                    }
-
-                                }
-
-
+                        for (var j = 0; j < data.length; j++) {
+                            if ($('.mainPosition div').children('div').has('div')[j]) {
+                                $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
                             }
+                        }
+                    }, 10);
+                });
+            }
+            scope.loadLesson = function() {
+                $http({
+                    method: 'POST',
+                    url: 'load_lesson',
 
-
-                        }, 500);*/
-
-
+                }).
+                success(function(data, status) {
+                    //   console.log(data);
+                    //    scope.position = data;
+                    setTimeout(function() {
+                        for (var i = 0; i < data.length; i++) {
+                            //      console.log($('.mainPosition div[data1^="' + data[i].parent_id + '"]'))
+                            $('.mainPosition div[data1^="' + data[i].parent_id + '"]').append('<div><a class="lesson_type_' + data[i].type_id + '">' + data[i].name + '</a></div>');
+                        }
+                        /*
+                        for (var j = 0; j < data.length; j++) {
+                            if ($('.mainPosition div').children('div').has('div')[j]) {
+                                $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
+                            }
+                        }*/
+                    }, 100);
                 });
             }
             scope.createPosition = function() {
-                element.append('<input id="position_text" type="text" /><button id="position_add">OK</button>');
-                element.find("button").bind("click", function() {
-                    var arr = [];
-                    var position_name = document.querySelector('#position_text').value;
-                    var x = document.querySelector("#position").selectedIndex;
-                    var parent_id = document.getElementsByTagName("option")[x].getAttribute("ng-selected");
+                var arr = [];
+                var position_name = document.querySelector('#position_name').value;
+                var x = document.querySelector("#position").selectedIndex;
+                var parent_id = document.getElementsByTagName("option")[x].getAttribute("ng-selected");
 
-                    arr.push(position_name);
-                    $http({
-                        method: 'POST',
-                        url: 'create_position',
-                        data: {
-                            'position': arr,
-                            'parent_id': parent_id
-                        }
-                    }).
-                    success(function(data) {
-                        scope.loadPosition();
-                    });
+                arr.push(position_name);
+                $http({
+                    method: 'POST',
+                    url: 'create_position',
+                    data: {
+                        'position': arr,
+                        'parent_id': parent_id
+                    }
+                }).
+                success(function(data) {
+                    scope.loadPosition();
                 });
             }
             scope.editPosition = function() {
@@ -376,13 +214,11 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
                         'position': $('.mainPosition div[data1^="' + this.items.id + '"]').children('input').val()
                     }
                 }).success(function(data) {
-
                     scope.loadPosition();
                 });
                 // console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children().val())
             }
             scope.removePosition = function() {
-                //  console.log($(this).parent())
                 $http({
                     method: 'POST',
                     url: '../admin/remove_position',
@@ -391,6 +227,7 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
                     }
                 }).success(function(data) {
                     scope.loadPosition();
+                    //console.log(data);
                 });
             }
             scope.addPosition = function(index) {
@@ -403,7 +240,7 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
 
                 //  element = nodeList[index];
                 // var index = Array.prototype.indexOf.call(nodeList, element);
-                console.log(element);
+
 
                 //element.after('<div><input id="pos_text" type="text" /><button id="pos_add">OK</button></div>');
                 element.after("<input />");
@@ -487,15 +324,36 @@ app.directive('listGroup', function($http, $q, $timeout, language) {
             scope.getClass = function() {
                 $http({
                     method: 'POST',
-                    url: 'load_class',
+                    url: 'load_lesson',
                     data: {
                         'id': this.items.id
                     }
                 }).
                 success(function(data, status) {
-                    console.log(data);
+                    //   console.log(data);
+                    scope.lessons = data;
+                });
+            }
+            scope.getLessons = function(focus, blur) {
+                $http({
+                    method: 'POST',
+                    url: 'get_lessons',
+                }).
+                success(function(data, status) {
+                    if (focus === true) {
+                        scope.searchLessons = data;
+                    } else if (blur === true) {
+                        scope.searchLessons = "";
+                    }
 
                 });
+            }
+            scope.loadPage = function() {
+                //   console.log(this.items.src);
+                scope.src = this.items.src;
+                // element.after("<iframe  scrolling='auto'  src='../../uploads/" + this.items.src + "/index.html' width='800' height='600' align='left'></iframe>");
+                // $(".mainPage").empty().append("<iframe  scrolling='auto'  src='../../uploads/" + this.items.src + "/index.html' width='800' height='600' align='left'></iframe>");
+                $("iframe").attr('src', '../../uploads/' + this.items.src + '/index.html');
             }
             scope.openClosePosition = function() {
                 /*console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text())
@@ -510,3 +368,13 @@ app.directive('listGroup', function($http, $q, $timeout, language) {
         }
     }
 });
+
+
+
+
+
+
+
+app.controller('uploader', ['$scope', '$http', function($scope, $http) {
+
+}]);

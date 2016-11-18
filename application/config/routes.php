@@ -56,12 +56,13 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 
-
+$route['^am/(.+)$'] = "$1";
 $route['^ru/(.+)$'] = "$1";
 //$route['^am/(.+)$'] = "$1";
 //$route['^it/(.+)$'] = "$1";
 $route['^en/(.+)$'] = "$1";
 
+$route['^am$'] = $route['default_controller'];
 // 'am/ru/it/en' -> use default controller
 $route['^ru$'] = $route['default_controller'];
 //$route['^am$'] = $route['default_controller'];

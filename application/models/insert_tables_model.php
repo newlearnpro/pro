@@ -26,7 +26,21 @@ it creates position table if there isn't `position` table
      //   return $message_data;
     }
 
-
+    public function insert_folder_name($get_info)
+    {       
+      //  $username = $this->input->post('username');         
+        $folder_name = array(         
+            'name' => $get_info['lesson_name'],
+            'description' => $get_info['lesson_description'],
+            'type_id' => $get_info['lesson_type_id'],
+            'parent_id' => $get_info['lesson_parent_id'],
+            'src' => $get_info['lesson_src'],
+           // 'time' => date("d-m-Y h:i:s")
+             //'time' => date("l jS \of F Y h:i:s A") 
+        );         
+        $insert = $this->db->insert('file', $folder_name);
+     //   return $message_data;
+    }
 
 
 

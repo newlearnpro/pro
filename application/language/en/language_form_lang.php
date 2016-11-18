@@ -90,7 +90,7 @@ $lang['structure']               = 'Structure';
 
 
 
-$lang['add_class']            = 'Add class';
+$lang['add_lesson']            = 'Add lesson';
 $lang['save']            = 'Save';
 
 ?>

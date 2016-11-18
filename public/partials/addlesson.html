@@ -1,0 +1,40 @@
+<div ng-cloak ng-controller='uploader'>
+	<h2>This is addlesson.html</h2>
+	<form method="post" enctype="multipart/form-data" action='add_lesson'>  
+		<div>
+		<label>{{language.position_hint}}</label>			
+		<select id='position' name='lesson_parent_id' ng-model='userField.id'>
+			<option ng-selected='0'>{{language.position_main}}ԳԼԽԱՎՈՐ</option>
+			<option ng-repeat='items in position' ng-selected='{{items.id}}'>{{items.id}} - {{items.position}} - {{items.parent_id}}</option>
+		</select>
+		<label>{{language.new_position}}</label>&nbsp;
+		<position-group></position-group>
+	</div>
+	<div>
+		
+		<input id='name' placeholder='name' type='text' name='lesson_name' /><br/>
+		<input id='description' placeholder='description' type='text' name='lesson_description' /><br/>
+		<select name="lesson_type_id" >
+			<option value='1' class='lesson_type_1'>Ինտերակտիվներ</option>
+			<option value='2' class='lesson_type_2'>Դասեր</option>			
+			<option value='3' class='lesson_type_3'>Թեստեր</option>
+		</select>
+		
+		<!--input id='savefiles' type='button' value='{{language.save}}' /-->
+                
+                     <label>Please Select Zip File</label>  
+                     <input type="file" name="zip_file" />  
+                     <br />  
+                     <input type='submit' name='btn_zip' class='btn btn-info' value={{language.save}} />  
+     </form> 
+
+			<!--form ng-submit="submit()" >
+			  Enter text and hit enter:
+			  <input type="text" ng-model="text" name="text" />
+			  <input type="submit" id="submit" value="Submit" />
+			  <pre>list={{list}}</pre>
+			</form-->
+
+
+	</div>
+</div>
