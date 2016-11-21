@@ -7,8 +7,40 @@ class Create_tables_model extends CI_Model {
         $this->load->dbforge();
     }
 
+
 /*********************
-position for users.
+ci_sessions
+it creates ci_sessions table if there isn't `ci_sessions` table        
+*******************/ 
+    public function create_ci_sessions_table()
+    {   
+        /*********For MySQL: 
+        CREATE TABLE IF NOT EXISTS `ci_sessions` (
+                `id` varchar(128) NOT NULL,
+                `ip_address` varchar(45) NOT NULL,
+                `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+                `data` blob NOT NULL,
+                KEY `ci_sessions_timestamp` (`timestamp`)
+        );
+        */
+        $this->load->dbforge();
+        $fields = array(
+            'id' => array('type' => 'VARCHAR', 'constraint' => 128, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
+            'ip_address' => array('type'=>'VARCHAR', 'constraint' => 45, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
+            'user_agent' => array('type'=>'VARCHAR', 'constraint' => 255, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
+            'last_activity' => array('type'=>'int', 'constraint' => 10, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
+            'timestamp' => array('type'=>'int', 'constraint' => 10, 'collation'=>'utf8_general_ci','null'=>'FALSE', 'UNSIGNED'=>true),
+            'data' => array('type'=>'blob', 'collation'=>'utf8_general_ci','null'=>'FALSE')
+        );      
+        
+        $this->dbforge->add_field($fields);
+        $this->dbforge->add_key('timestamp', true);
+        $this->dbforge->create_table('ci_sessions');
+    }
+
+
+/*********************
+position folder.
 it creates position table if there isn't `position` table        
 *******************/   
     public function create_position_table()
@@ -70,12 +102,18 @@ it creates position table if there isn't `position` table
         $this->dbforge->add_field($fields);
         $this->dbforge->add_key('id', true);
         $this->dbforge->create_table('users2');
-        echo "Users table created";
     }   
     
 
-
+ 
     
+
+
+
+
+
+
+
     
 /*
 //drop tables    

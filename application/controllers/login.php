@@ -100,6 +100,7 @@ class Login extends CI_Controller {
     if($this->session->userdata('prm')==='admin'){
         $this->load->model('create_tables_model');
         $this->create_tables_model->create_users_table();
+       // $this->create_tables_model->create_ci_sessions_table();
         //$this->create_tables_model->create_position_table();
     }else{
         redirect($this->uri->segment(1).'/login');

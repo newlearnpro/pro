@@ -76,13 +76,15 @@ class Membership_model extends CI_Model {
         return   $query->result_array();
     }
     public function lesson()
-    {      
-        $query = $this->db->query("SELECT name, description, src, type_id, parent_id FROM file;");
+    {    
+        $this->db->order_by('number', 'DESC');  
+        $query = $this->db->get("file");       
         return $query->result();
     }
 
     public function main_lesson($get_info)
-    {      
+    {    
+        $this->db->order_by('number', 'DESC');   
         $query = $this->db->select('*')->where('parent_id', $get_info)->get('file');
         //foreach ($query->result() as $row)
         //{ }

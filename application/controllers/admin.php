@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
 
+	private $upload_folder = 'uploads/';
+
 	public function __construct() {
         parent::__construct();
         $this->load->model('create_tables_model');
@@ -110,6 +112,40 @@ class Admin extends CI_Controller {
 		$query = $this->membership_model->lesson();
 		echo json_encode($query);
 	}
+	public function edit_number_lesson()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$get_info_id = $this->input->post('id');
+		$get_info_number = $this->input->post('number');
+		$this->db->set('number', $get_info_number);
+		$this->db->where('id', $get_info_id);
+		$this->db->update('file');
+		//echo $get_info_id;
+	}
+	public function remove_lesson()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);		
+		$get_info_id = $this->input->post('id');
+		$get_info_src = $this->input->post('src');
+		$this->db->where('id', $get_info_id);
+		$this->db->delete('file');
+		$path = $this->upload_folder . $get_info_src;
+		$this->remove_dir($path);
+	}
+
+
+	private function remove_dir($path) {
+	     // Open the source directory to read in files
+	        $item = new DirectoryIterator($path);
+	        foreach($item as $folder) {
+	            if($folder->isFile()) {
+	                unlink($folder->getRealPath());
+	            } else if(!$folder->isDot() && $folder->isDir()) {
+	                $this->remove_dir($folder->getRealPath());
+	            }
+	        }
+	        rmdir($path);
+	}
 
 	public function add_lesson()
 	{
@@ -121,11 +157,12 @@ class Admin extends CI_Controller {
 			$get_info['lesson_type_id'] = 	$this->input->post('lesson_type_id');
 			$get_info['lesson_parent_id'] = $this->input->post('lesson_parent_id') * 1;
 			$get_info['lesson_src'] = '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'';
-		    $output = '';  
+			$get_info['lesson_number'] = 0;
+		    $output = '';
 		    
 		   
 		    if($_FILES['zip_file']['name'] != ''){ 
-		    	   mkdir('uploads/0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'', 0777); 		           	
+		    	   mkdir($this->upload_folder . '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'', 0777); 		           	
 		           $file_name = $_FILES['zip_file']['name'];  
 
 		           $array = explode(".", $file_name);  		   
@@ -136,7 +173,7 @@ class Admin extends CI_Controller {
 		           if($ext == 'zip'){
 						$this->insert_tables_model->insert_folder_name($get_info);
 		           //	sleep(5);
-		                $path = 'uploads/0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'/';  
+		                $path = $this->upload_folder . '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'/';  
 		                $location = $path . $file_name;  
 		                if(move_uploaded_file($_FILES['zip_file']['tmp_name'], $location )){ 			
 		                    $zip = new ZipArchive; 
