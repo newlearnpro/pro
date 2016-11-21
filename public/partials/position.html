@@ -14,11 +14,18 @@
 		<label>{{language.structure}}</label>&nbsp;
 		<div class='mainPosition'>
 			<div ng-repeat='items in position'>
-				<div class='position1' data1='{{items.id}}' data2='{{items.parent_id}}' ng-click='openClosePosition()'>
+				<div class='position_item position1' data1='{{items.id}}' data2='{{items.parent_id}}' ng-click='openClosePosition()'>
 					<span>+</span>					
 					<input value='{{items.position}}' />
-					<a class='btn btn-danger btn-xs ' ng-click='editPosition()'>edit</a>					
+					<a class='btn btn-danger btn-xs ' ng-click='editPosition()'>edit</a>
 					<a class='btn btn-danger btn-xs remove' ng-click='removePosition()'>remove</a>
+				</div>	
+			</div>
+			<div ng-repeat='items in lesson'>
+				<div class='lesson_item' data1='{{items.id}}' data2='{{items.parent_id}}'>
+					<a class='lesson_type_{{items.type_id}}'>{{items.name}}</a>
+					<a class='btn btn-danger btn-xs remove' ng-click='removeLesson()'>remove</a>
+					<a class='glyphicon glyphicon-arrow-up btn btn-danger btn-xs remove' ng-click='editNumberLesson($index)'>iop</a>
 				</div>	
 			</div>
 		</div>

@@ -138,9 +138,11 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
         link: function(scope, element, attrs, ctrl) {
             var promise = language.getLang();
             promise.then(function(data) {
+
                 scope.language = data;
                 scope.loadPosition(scope, element);
                 scope.loadLesson(scope, element);
+
                 // scope.createPosition(scope, element);
             });
             scope.loadPosition = function() {
@@ -153,7 +155,7 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
                     scope.position = data;
                     setTimeout(function() {
                         for (var i = 0; i < data.length; i++) {
-                            $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                            $('.position_item[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
                         }
                         for (var j = 0; j < data.length; j++) {
                             if ($('.mainPosition div').children('div').has('div')[j]) {
@@ -170,19 +172,11 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
 
                 }).
                 success(function(data, status) {
-                    //   console.log(data);
-                    //    scope.position = data;
+                    scope.lesson = data;
                     setTimeout(function() {
                         for (var i = 0; i < data.length; i++) {
-                            //      console.log($('.mainPosition div[data1^="' + data[i].parent_id + '"]'))
-                            $('.mainPosition div[data1^="' + data[i].parent_id + '"]').append('<div><a class="lesson_type_' + data[i].type_id + '">' + data[i].name + '</a></div>');
+                            $('.lesson_item[data2^="' + data[i].parent_id + '"]').appendTo(".position_item[data1^='" + data[i].parent_id + "']");
                         }
-                        /*
-                        for (var j = 0; j < data.length; j++) {
-                            if ($('.mainPosition div').children('div').has('div')[j]) {
-                                $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
-                            }
-                        }*/
                     }, 100);
                 });
             }
@@ -227,6 +221,45 @@ app.directive('positionGroup', function($http, $q, $timeout, language) {
                     }
                 }).success(function(data) {
                     scope.loadPosition();
+                    //console.log(data);
+                });
+            }
+            scope.editNumberLesson = function(number) {
+
+                //  number += 3;
+                //  console.log(this$$phase);
+                //console.log(this.$$nextSibling);
+
+
+
+                $('.lesson_item').eq(number).insertBefore(".lesson_item:eq(" + (parseInt(number) - 1) + ")");
+                console.log(this.$index);
+                $http({
+                    method: 'POST',
+                    url: '../admin/edit_number_lesson',
+                    data: {
+                        'id': this.items.id,
+                        //  'number': this.$parent
+                    }
+                }).success(function(data) {
+                    //  scope.loadPosition();
+                    //  scope.loadLesson();
+                    // scope.loadPosition();
+                    //console.log(data);
+                });
+
+            }
+            scope.removeLesson = function() {
+                $http({
+                    method: 'POST',
+                    url: '../admin/remove_lesson',
+                    data: {
+                        'id': this.items.id,
+                        'src': this.items.src
+                    }
+                }).success(function(data) {
+                    scope.loadPosition();
+                    // scope.loadPosition();
                     //console.log(data);
                 });
             }
