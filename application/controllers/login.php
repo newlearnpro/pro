@@ -15,31 +15,34 @@ class Login extends CI_Controller {
 	{
       $query = $this->db->get_where('users', array('username' => $this->input->post('username'), 'password' => md5($this->input->post('password'))), 0, 0);
       $data = array('usr' => $this->input->post('username'), 'pwd' => md5($this->input->post('password')));
- 
+      $info['activation'] = true;
+
       foreach($query->result() as $row){           
-          if($row->permission == "admin"){
+          if($row->permission == 'admin'){
              $data['prm'] = 'admin';
              $this->session->set_userdata($data); 
              redirect($this->uri->segment(1).'/admin');
-          }else{
+          }else if($row->permission == 'user' && $row->activation == 'yes'){
              $data['prm'] = 'user';
-             $this->session->set_userdata($data); 
+             $this->session->set_userdata($data);
              redirect($this->uri->segment(1).'/main');
-          }      
+          }else if($row->permission == 'user' && $row->activation == 'no'){
+             $info['activation'] = false;
+          }     
       }    
 
 
-    if(!$this->session->userdata('usr')){
-          $this->load->view('includes/header');
-          $this->load->view('login_form' );
-          $this->load->view('includes/footer');
-    }else{  
-        if($this->session->userdata('prm')==='admin'){
-            redirect($this->session->userdata('lang').'/admin');
-        }else{
-            redirect($this->session->userdata('lang').'/main');
-        }
-    }
+      if(!$this->session->userdata('usr')){
+            $this->load->view('includes/header');
+            $this->load->view('login_form', $info);
+            $this->load->view('includes/footer');
+      }else{  
+          if($this->session->userdata('prm')==='admin'){
+              redirect($this->session->userdata('lang').'/admin');
+          }else if($this->session->userdata('prm')==='user'){
+              redirect($this->session->userdata('lang').'/main');
+          }
+      }
 	}
 
     
@@ -50,14 +53,16 @@ class Login extends CI_Controller {
   {  
       $this->load->helper('captcha');    
       $this->load->helper('string');
-      $position = $this->membership_model->position();
+     // $position = $this->membership_model->position();
+    //  $this->membership_model->position();
 
       $captcha = array(
-          'word'  => random_string('alnum', 6),
+        //  'word'  => random_string('alnum', 6),
+          'word'  => random_string('numeric', 6),
           'img_path'  => 'public/img/captcha/',
           'img_url'   => base_url() .'public/img/captcha/',
           //'font_path' => 'public/fonts/gheagpalatbld.ttf',
-          'font_size'     => 32,
+          'font_size'     => 40,
           'img_width' => '200',
           'img_height' => 60,
           'expiration' => 0,
@@ -67,21 +72,21 @@ class Login extends CI_Controller {
       
       $data['captcha_img'] = $img['image'];
       $data['captcha_word'] = $captcha['word']; 
-      $data['position'] = [];
+      /*$data['position'] = [];
       for($i=0; $i<count($position); $i++){
         $pos_arr = implode("", $position[$i]);
         array_push($data['position'], array($pos_arr=>$pos_arr));
-      }
+      }*/
 
-      if($this->session->userdata('prm')==='admin'){
+     // if($this->session->userdata('prm')==='admin'){
          $this->load->view('includes/header');
          $this->load->view('signup_form', $data);
          $this->load->view('includes/footer');
-      }else{
-          redirect($this->uri->segment(1).'/login');
-      }
+    //  }else{
+   //       redirect($this->uri->segment(1).'/login');
+    //  }
   }
-    
+  /*  
   public function tables()         
   {
       if($this->session->userdata('prm')==='admin'){
@@ -106,40 +111,47 @@ class Login extends CI_Controller {
         redirect($this->uri->segment(1).'/login');
     }
   }
+*/
 
 
 
-    
-  public function admin_lang()
+/*****************after activation
+/****************/
+  public function activation()
   {
-  /*  $_POST = json_decode(file_get_contents('php://input'), true);
-    $get_info = $this->input->post('data');
+      $get_info_username = $this->uri->segment(4);
+      $get_info_keycode = $this->uri->segment(5);
+      $username ='';
+      $key_code='';
 
-    for($i = 0; $i<count($get_info); $i++){
-      $lang[$get_info[$i]] = lang($get_info[$i]);
-    }
+      $query = $this->db->get_where('users', array('username' => $get_info_username, 'key_code' => $get_info_keycode));
+      foreach ($query->result() as $row)
+      {         
+        $username = $row->username;
+        $key_code = $row->key_code;
+      }
 
-    echo json_encode($lang);*/
+      if($this->session->userdata('prm')=='' && ($username!=='' || $key_code!=='')){
+          $this->db->where('username', $get_info_username);
+          $this->db->update('users', array('activation'=>'yes'));
+          $this->load->view('includes/header');
+          $this->load->view('activation_view');
+          $this->load->view('includes/footer');
+      }else if($this->session->userdata('prm')==='admin'){
+          redirect($this->session->userdata('lang').'/admin');
+      }else if($this->session->userdata('prm')==='user'){
+          redirect($this->session->userdata('lang').'/main');
+      }else{
+          redirect($this->session->userdata('lang').'/login');
+      }   
   }
+
     
     
     
     
-    
-    /*public function change()
-  {    
-     $query = $this->membership_model->change_users_data();
-        echo   json_encode($query);
-  }*/
-    
-    
-    
-    
-    
-    
-// verify validation and create user  
-    
-    public function membership()
+// verify validation and create user     
+  public function membership()
   {
         $this->config->set_item('language', $this->uri->segment(1));
         $this->form_validation->set_rules('first_name','lang:first_name', 'trim|required');
@@ -155,7 +167,7 @@ class Login extends CI_Controller {
               $this->signup();
         }else{
             if($query = $this->membership_model->membership()){
-                  redirect($this->session->userdata('lang').'/login'); 
+                  redirect($this->session->userdata('lang').'/login/activation'); 
             }      
         }
   }

@@ -27,14 +27,15 @@ it creates position table if there isn't `position` table
     }
 
     public function insert_folder_name($get_info)
-    {       
-      //  $username = $this->input->post('username');         
+    {             
         $folder_name = array(         
             'name' => $get_info['lesson_name'],
             'description' => $get_info['lesson_description'],
+            'src' => $get_info['lesson_src'],
             'type_id' => $get_info['lesson_type_id'],
             'parent_id' => $get_info['lesson_parent_id'],
-            'src' => $get_info['lesson_src'],
+            'number' => 1,
+            'free' => $get_info['lesson_is_free']
            // 'time' => date("d-m-Y h:i:s")
              //'time' => date("l jS \of F Y h:i:s A") 
         );         

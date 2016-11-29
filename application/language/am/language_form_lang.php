@@ -1,6 +1,6 @@
 <?php
 
-$lang['title'] = 'ԱսԼինգուա';
+$lang['title'] = 'LearnPro';
 
 $lang['welcome'] = 'Բարի գալուստ';
 $lang['armenian'] = 'Հայերեն';
@@ -16,11 +16,11 @@ $lang['first_name_hint']             = 'Անուն';
 $lang['last_name_hint']              = 'Ազգանուն';
 $lang['email_hint']                  = 'Էլեկտրոնային հասցե';
 $lang['username_hint']               = 'Մուտքանուն';
-$lang['password_hint']               = 'Ծածկագիր';
-$lang['password_confirm_hint']       = 'Կրկնել ծածկագիրը';
+$lang['password_hint']               = 'Գաղտնաբառ';
+$lang['password_confirm_hint']       = 'Կրկնել գաղտնաբառը';
 $lang['captcha_hint']                = 'Ներմուծել վերևում երևացող տեքստը';
-$lang['old_password_hint']           = 'Հին ծածկագիր';
-$lang['new_password_hint']           = 'Նոր ծածկագիր';
+$lang['old_password_hint']           = 'Հին գաղտնաբառ';
+$lang['new_password_hint']           = 'Նոր գաղտնաբառ';
 
 
 $lang['account_created']             = 'Գրանցումը հաջողությամբ ավարտված է';
@@ -46,8 +46,9 @@ $lang['user']                        = 'օգտագործող';
 
 $lang['logout']                      = 'ելք';
 
-$lang['verify_username_password']    = 'Մուտքանունը կամ գաղտնաբառը սխալ է';
-
+$lang['verify_username_password']   = 'Մուտքանունը կամ գաղտնաբառը սխալ է';
+$lang['need_activation']			= 'Դուք պետք է ակտիվացնեք ձեր գրանցումը';
+$lang['enter_login_password'] 		= 'Մուտքագրեք ձեր մուտքանունը եւ գաղտնաբառը';
 
 $lang['create_position']            = 'Ստեղծել կատալոգներ';
 $lang['registration_employees']     = 'Ռեգիստրացիա';

@@ -1,4 +1,4 @@
-<div ng-cloak ng-controller='uploader'>
+<div ng-cloak ng-controller='positionGroup'>
 	<h2>This is addlesson.html</h2>
 	<form method="post" enctype="multipart/form-data" action='add_lesson'>  
 		<div>
@@ -8,7 +8,7 @@
 			<option ng-repeat='items in position' ng-selected='{{items.id}}'>{{items.id}} - {{items.position}} - {{items.parent_id}}</option>
 		</select>
 		<label>{{language.new_position}}</label>&nbsp;
-		<position-group></position-group>
+		<!--position-group></position-group-->
 	</div>
 	<div>
 		
@@ -22,9 +22,11 @@
 		
 		<!--input id='savefiles' type='button' value='{{language.save}}' /-->
                 
-                     <label>Please Select Zip File</label>  
-                     <input type="file" name="zip_file" />  
-                     <br />  
+                     <br /><label>Please Select Zip File</label>  
+                     <input type='file' name='zip_file' />  
+                     <br />
+                     <label><input name='lesson_is_free' type='checkbox' /> {{language.free_lesson}}</label>
+                     <br />
                      <input type='submit' name='btn_zip' class='btn btn-info' value={{language.save}} />  
      </form> 
 

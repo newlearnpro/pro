@@ -1,0 +1,167 @@
+#shelf_1 {
+    width: 578px;
+    height: 305px;
+    top: 33px;
+    left: 142px;
+}
+#shelf_2 {
+    width: 529px;
+    height: 61px;
+    bottom: 16px;
+    left: 31px;
+}
+.cactus {
+    height: 62px;
+    width: 42px;
+}
+.cactus1 {
+    bottom: 368px;
+    left: 179px;
+}
+.cup1 {
+    bottom: 368px;
+    left: 293px;
+}
+#cup1_drag {
+    height: 29px;
+    width: 43px;
+}
+.bicycle1 {
+    height: 43px;
+    width: 69px;
+}
+.bicycle1_1 {
+    bottom: 368px;
+    left: 394px;
+}
+.cherry1 {
+    bottom: 368px;
+    left: 523px;
+}
+#cherry1_drag {
+    height: 44px;
+    width: 39px;
+}
+.bicycle2 {
+    height: 58px;
+    width: 102px;
+}
+.bicycle2_1 {
+    bottom: 368px;
+    left: 608px;
+}
+.strawberry {
+    height: 35px;
+    width: 49px;
+}
+#strawberry1_drag {
+    bottom: 285px;
+    left: 177px;
+}
+#bicycle3_drag {
+    bottom: 285px;
+    left: 261px;
+}
+.cream {
+    bottom: 285px;
+    left: 412px;
+}
+#cream_drag {
+    height: 54px;
+    width: 29px;
+}
+.cup2 {
+    height: 32px;
+    width: 52px;
+}
+.cup2_1 {
+    bottom: 285px;
+    left: 517px;
+}
+#strawberry2_drag {
+    bottom: 285px;
+    left: 636px;
+}
+#cup3_drag {
+    bottom: 198px;
+    left: 174px;
+}
+.cherry2 {
+    bottom: 198px;
+    left: 282px;
+}
+#cherry2_drag {
+    height: 45px;
+    width: 57px;
+}
+.cactus2 {
+    bottom: 198px;
+    left: 405px;
+}
+.pear {
+    bottom: 198px;
+    left: 517px;
+}
+#pear_drag {
+    height: 53px;
+    width: 56px;
+}
+.bicycle1_2 {
+    bottom: 198px;
+    left: 626px;
+}
+.last_child {
+    margin-left: 8px !important;
+}
+#obj_drop {
+    height: 113px;
+    width: 248px;
+    bottom: 42px;
+    left: 171px;
+}
+#obj_drop2 {
+    height: 78px;
+    width: 248px;
+    left: 0;
+    top: 0;
+}
+.red_triangle {
+    top: 138px;
+    left: 406px;
+}
+.orange_oval {
+    top: 259px;
+    left: 523px;
+}
+.blue_rect {
+    top: 243px;
+    left: 394px;
+}
+.blue_rect2 {
+    top: 243px;
+    left: 626px;
+}
+.green_square {
+    bottom: 285px;
+    left: 523px;
+}
+.pink_star {
+    bottom: 197px;
+    left: 264px;
+}
+.orange_rect {
+    top: 62px;
+    left: 295px;
+}
+.blue_triangle {
+    top: 84px;
+    left: 399px;
+}
+.red_parall {
+    top: 71px;
+    left: 630px;
+}
+.green_table {
+    top: 64px;
+    left: 516px;
+}

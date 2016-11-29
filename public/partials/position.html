@@ -1,4 +1,4 @@
-<div ng-cloak ng-controller='classCtrl'>
+<div ng-cloak ng-controller='positionGroup'>
 	<h2>This is position.html</h2>
 	<div>
 		<label>{{language.position_hint}}</label>			
@@ -7,7 +7,7 @@
 			<option ng-repeat='items in position' ng-selected='{{items.id}}'>{{items.id}} - {{items.position}} - {{items.parent_id}}</option>
 		</select>
 		<label>{{language.new_position}}</label>&nbsp;
-		<position-group></position-group>
+		<!--position-group></position-group-->
 		<div><input type='text' id='position_name' /><input type='button' value='OK' ng-click='createPosition()' /</div>
 	</div>
 	<div>
@@ -21,11 +21,20 @@
 					<a class='btn btn-danger btn-xs remove' ng-click='removePosition()'>remove</a>
 				</div>	
 			</div>
-			<div ng-repeat='items in lesson'>
+			<!--div ng-repeat='items in lesson'>
 				<div class='lesson_item' data1='{{items.id}}' data2='{{items.parent_id}}'>
 					<a class='lesson_type_{{items.type_id}}'>{{items.name}}</a>
 					<a class='btn btn-danger btn-xs remove' ng-click='removeLesson()'>remove</a>
 					<a class='glyphicon glyphicon-arrow-up btn btn-danger btn-xs remove' ng-click='editNumberLesson($index)'>iop</a>
+				</div>	
+			</div-->
+			<div ng-repeat='items in lesson'>
+				<div class='lesson_item' data1='{{items.id}}' data2='{{items.parent_id}}'>
+					<a class='lesson_type_{{items.type_id}}'>{{items.name}}</a>
+					<a class='btn btn-danger btn-xs remove' ng-click='removeLesson()'>remove</a>
+					<input type='number' ng-value='items.number' min='1' max='99' />
+					<a class='btn btn-danger btn-xs' ng-click='editNumberLesson($index)'>edit position</a>
+
 				</div>	
 			</div>
 		</div>

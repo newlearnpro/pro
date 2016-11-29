@@ -1,0 +1,134 @@
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+.flags {
+  background-size: 60px 68px;
+  background-repeat: no-repeat;
+  width: 60px;
+  height: 68px;
+  margin: 0px 10px;
+}
+#lang_am,
+#lang_ru,
+#lang_en {
+  display: inline-block;
+}
+#flag_am {
+  background-image: url('../img/flags/flag_am.png');
+}
+#flag_am.am,
+#flag_am.am:hover {
+  background-image: url('../img/flags/flag_am_select.png');
+  border-bottom: 3px solid #337ab7;
+}
+#flag_am:hover {
+  background-image: url('../img/flags/flag_am_hover.png');
+}
+#flag_ru {
+  background-image: url('../img/flags/flag_ru.png');
+  background-size: 60px 36px;
+  background-position-y: 16px;
+}
+#flag_ru.ru,
+#flag_ru.ru:hover {
+  background-image: url('../img/flags/flag_ru_select.png');
+  background-size: 60px 36px;
+  background-position-y: 16px;
+  border-bottom: 3px solid #337ab7;
+}
+#flag_ru:hover {
+  background-image: url('../img/flags/flag_ru_hover.png');
+}
+#flag_en {
+  background-image: url('../img/flags/flag_en.png');
+}
+#flag_en.en,
+#flag_en.en:hover {
+  background-image: url('../img/flags/flag_en_select.png');
+  border-bottom: 3px solid #337ab7;
+}
+#flag_en:hover {
+  background-image: url('../img/flags/flag_en_hover.png');
+}
+.form_error2 {
+  color: red;
+}
+.position_text {
+  border: 1px solid red;
+  padding: 10px;
+}
+.position2 {
+  margin-left: 20px;
+}
+/*
+@media (min-width: 480px) and (max-width: 767px) {
+	#glue, .resize{
+		width:100%;
+	}
+	
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+	#glue, .resize{
+		width:100%;
+	}
+
+}
+
+*/
+/****************lesson style******************/
+.lesson_type_1 {
+  width: 200px;
+  height: 30px;
+  background: #0000ff;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+.lesson_type_2 {
+  width: 200px;
+  height: 30px;
+  background: #ffa500;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+.lesson_type_3 {
+  width: 200px;
+  height: 30px;
+  background: #008000;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid black;
+}
+/****************lesson style END******************/
+/****************************for angular*******************/
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+/*
+.animate-show.ng-hide-add, .animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+
+.animate-show.ng-hide {
+  line-height: 0;
+  opacity: 0;
+  padding: 0 10px;
+}*/
+.check-element {
+  padding: 10px;
+  border: 1px solid black;
+  background: white;
+}
+/****************************for angular END*******************/

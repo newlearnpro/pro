@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,IAAI;EACH,KAAK,EAAC,GAAG",
+"sources": ["../scss/style.scss"],
+"names": [],
+"file": "prc-sass.min.css"
+}

@@ -68,7 +68,9 @@ $lang['user']                       = 'Пользовотель';
 $lang['logout']                     = 'Выход';
 
 
-$lang['verify_username_password']    = 'Пароль не верный';
+$lang['verify_username_password']   = 'Пароль не верный';
+$lang['need_activation']			= 'Вам нужна активировать ваш аккаунт';
+$lang['enter_login_password'] 		= 'Введите ваш логин и пароль';
 
 
 $lang['create_position']            = 'Создать должность';
@@ -84,7 +86,7 @@ $lang['list']                   	= 'Список';
 $lang['new_position']            = 'Новая должность';
 $lang['structure']               = 'Структура';
 
-
+$lang['free_lesson']               = 'бесплатный урок';
 $lang['add_lesson']            = 'Добавить урок';
 $lang['save']            = 'Сохранить';
 

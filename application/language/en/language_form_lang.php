@@ -69,8 +69,8 @@ $lang['logout']                     = 'logOut';
 
 
 $lang['verify_username_password']   = 'Login or password is wrong';
-
-
+$lang['need_activation']			= 'You need to activate your account';
+$lang['enter_login_password'] 		= 'Enter your username and password';
 
 $lang['create_position']            = 'Create position';
 $lang['registration_employees']     = 'Registration of employees';

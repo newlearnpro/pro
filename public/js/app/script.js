@@ -13,6 +13,7 @@ app.directive('usersTable', function($http) {
             }).
             success(function(data) {
                 scope.users = data;
+                //   console.log(data);
             });
         },
         templateUrl: '../../public/partials/templates/users_tmpl.html'
@@ -103,7 +104,7 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
         }).
         success(function(data) {
             $scope.userField = data[0];
-            //console.log($scope.userField);
+            // console.log('f');
 
         });
     }
@@ -128,170 +129,157 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
     }
 });
 
+app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language', function($scope, $http, $q, $timeout, language) {
+    //app.directive('positionGroup', function($http, $q, $timeout, language) {
 
-app.directive('positionGroup', function($http, $q, $timeout, language) {
-    return {
-        restrict: 'EA',
-        replace: true,
-        //template: "<div></input type='button' value='bebe'/></div>",
-        //scope: {},
-        link: function(scope, element, attrs, ctrl) {
-            var promise = language.getLang();
-            promise.then(function(data) {
 
-                scope.language = data;
-                scope.loadPosition(scope, element);
-                scope.loadLesson(scope, element);
+    //template: "<div></input type='button' value='bebe'/></div>",
+    //scope: {},
 
-                // scope.createPosition(scope, element);
-            });
-            scope.loadPosition = function() {
-                $http({
-                    method: 'GET',
-                    url: 'load_position',
+    var promise = language.getLang();
+    promise.then(function(data) {
 
-                }).
-                success(function(data, status) {
-                    scope.position = data;
-                    setTimeout(function() {
-                        for (var i = 0; i < data.length; i++) {
-                            $('.position_item[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
-                        }
-                        for (var j = 0; j < data.length; j++) {
-                            if ($('.mainPosition div').children('div').has('div')[j]) {
-                                $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
-                            }
-                        }
-                    }, 10);
-                });
-            }
-            scope.loadLesson = function() {
-                $http({
-                    method: 'POST',
-                    url: 'load_lesson',
+        $scope.language = data;
+        $scope.loadPosition();
+        $scope.loadLesson();
 
-                }).
-                success(function(data, status) {
-                    scope.lesson = data;
-                    setTimeout(function() {
-                        for (var i = 0; i < data.length; i++) {
-                            $('.lesson_item[data2^="' + data[i].parent_id + '"]').appendTo(".position_item[data1^='" + data[i].parent_id + "']");
-                        }
-                    }, 100);
-                });
-            }
-            scope.createPosition = function() {
-                var arr = [];
-                var position_name = document.querySelector('#position_name').value;
-                var x = document.querySelector("#position").selectedIndex;
-                var parent_id = document.getElementsByTagName("option")[x].getAttribute("ng-selected");
+        // scope.createPosition(scope, element);
+    });
+    $scope.loadPosition = function() {
+        $http({
+            method: 'GET',
+            url: 'load_position',
 
-                arr.push(position_name);
-                $http({
-                    method: 'POST',
-                    url: 'create_position',
-                    data: {
-                        'position': arr,
-                        'parent_id': parent_id
+        }).
+        success(function(data, status) {
+            $scope.position = data;
+            setTimeout(function() {
+                for (var i = 0; i < data.length; i++) {
+                    $('.position_item[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                }
+                for (var j = 0; j < data.length; j++) {
+                    if ($('.mainPosition div').children('div').has('div')[j]) {
+                        $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
                     }
-                }).
-                success(function(data) {
-                    scope.loadPosition();
-                });
-            }
-            scope.editPosition = function() {
-                $http({
-                    method: 'POST',
-                    url: '../admin/edit_position',
-                    data: {
-                        'id': this.items.id,
-                        'position': $('.mainPosition div[data1^="' + this.items.id + '"]').children('input').val()
-                    }
-                }).success(function(data) {
-                    scope.loadPosition();
-                });
-                // console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children().val())
-            }
-            scope.removePosition = function() {
-                $http({
-                    method: 'POST',
-                    url: '../admin/remove_position',
-                    data: {
-                        'id': this.items.id
-                    }
-                }).success(function(data) {
-                    scope.loadPosition();
-                    //console.log(data);
-                });
-            }
-            scope.editNumberLesson = function(number) {
-
-                //  number += 3;
-                //  console.log(this$$phase);
-                //console.log(this.$$nextSibling);
-
-
-
-                $('.lesson_item').eq(number).insertBefore(".lesson_item:eq(" + (parseInt(number) - 1) + ")");
-                console.log(this.$index);
-                $http({
-                    method: 'POST',
-                    url: '../admin/edit_number_lesson',
-                    data: {
-                        'id': this.items.id,
-                        //  'number': this.$parent
-                    }
-                }).success(function(data) {
-                    //  scope.loadPosition();
-                    //  scope.loadLesson();
-                    // scope.loadPosition();
-                    //console.log(data);
-                });
-
-            }
-            scope.removeLesson = function() {
-                $http({
-                    method: 'POST',
-                    url: '../admin/remove_lesson',
-                    data: {
-                        'id': this.items.id,
-                        'src': this.items.src
-                    }
-                }).success(function(data) {
-                    scope.loadPosition();
-                    // scope.loadPosition();
-                    //console.log(data);
-                });
-            }
-            scope.addPosition = function(index) {
-                // console.log(this.$index);
-
-                //  console.log(index);
-                //  console.log(document.querySelector('#addpos').parentNode.indexOf(0))
-
-                var nodeList = document.querySelectorAll('.addpos');
-
-                //  element = nodeList[index];
-                // var index = Array.prototype.indexOf.call(nodeList, element);
-
-
-                //element.after('<div><input id="pos_text" type="text" /><button id="pos_add">OK</button></div>');
-                element.after("<input />");
-            }
-
-            scope.openClosePosition = function() {
-                /*console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text())
-                    //   $('.mainPosition div[data1^="' + this.items.id + '"]').children().toggle();
-                if ($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text() == "+") {
-                    $('.mainPosition div[data1^="' + this.items.id + '"]').children().hide();
-                } else {
-                    $('.mainPosition div[data1^="' + this.items.id + '"]').children().show();
-                }*/
-            }
-
-        }
+                }
+            }, 10);
+        });
     }
-});
+    $scope.loadLesson = function() {
+        $http({
+            method: 'POST',
+            url: 'load_lesson',
+
+        }).
+        success(function(data, status) {
+            $scope.lesson = data;
+            setTimeout(function() {
+                for (var i = 0; i < data.length; i++) {
+                    $('.lesson_item[data2^="' + data[i].parent_id + '"]').appendTo(".position_item[data1^='" + data[i].parent_id + "']");
+                }
+            }, 100);
+        });
+    }
+    $scope.createPosition = function() {
+        var arr = [];
+        var position_name = document.querySelector('#position_name').value;
+        var x = document.querySelector("#position").selectedIndex;
+        var parent_id = document.getElementsByTagName("option")[x].getAttribute("ng-selected");
+
+        arr.push(position_name);
+        $http({
+            method: 'POST',
+            url: 'create_position',
+            data: {
+                'position': arr,
+                'parent_id': parent_id
+            }
+        }).
+        success(function(data) {
+            $scope.loadPosition();
+            $scope.loadLesson();
+        });
+    }
+    $scope.editPosition = function() {
+        $http({
+            method: 'POST',
+            url: '../admin/edit_position',
+            data: {
+                'id': this.items.id,
+                'position': $('.mainPosition div[data1^="' + this.items.id + '"]').children('input').val()
+            }
+        }).success(function(data) {
+            $scope.loadPosition();
+            $scope.loadLesson();
+        });
+        // console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children().val())
+    }
+    $scope.removePosition = function() {
+        $http({
+            method: 'POST',
+            url: '../admin/remove_position',
+            data: {
+                'id': this.items.id
+            }
+        }).success(function(data) {
+            $scope.loadPosition();
+            $scope.loadLesson();
+            //console.log(data);
+        });
+    }
+    $scope.editNumberLesson = function(number) {
+
+        //  number += 3;
+        //  console.log(this$$phase);
+        //console.log(this.$$nextSibling);
+
+        var number = $('.lesson_item[data1^="' + this.items.id + '"]').find('input').val();
+
+
+        $http({
+            method: 'POST',
+            url: '../admin/edit_number_lesson',
+            data: {
+                'id': this.items.id,
+                'number': number
+            }
+        }).success(function(data) {
+            $scope.loadPosition();
+            $scope.loadLesson();
+            // scope.loadPosition();
+            //console.log(data);
+        });
+
+    }
+    $scope.removeLesson = function() {
+        $http({
+            method: 'POST',
+            url: '../admin/remove_lesson',
+            data: {
+                'id': this.items.id,
+                'src': this.items.src
+            }
+        }).success(function(data) {
+            $scope.loadPosition();
+            $scope.loadLesson();
+            // scope.loadPosition();
+            //console.log(data);
+        });
+    }
+
+    $scope.openClosePosition = function() {
+        /*console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text())
+            //   $('.mainPosition div[data1^="' + this.items.id + '"]').children().toggle();
+        if ($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text() == "+") {
+            $('.mainPosition div[data1^="' + this.items.id + '"]').children().hide();
+        } else {
+            $('.mainPosition div[data1^="' + this.items.id + '"]').children().show();
+        }*/
+    }
+
+
+
+}]);
 
 
 
@@ -325,7 +313,7 @@ app.controller('classCtrl', function($scope, $http, $q, language) {
 
 
 
-
+/*
 app.directive('listGroup', function($http, $q, $timeout, language) {
     return {
         restrict: 'EA',
@@ -389,19 +377,142 @@ app.directive('listGroup', function($http, $q, $timeout, language) {
                 $("iframe").attr('src', '../../uploads/' + this.items.src + '/index.html');
             }
             scope.openClosePosition = function() {
-                /*console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text())
-                    //   $('.mainPosition div[data1^="' + this.items.id + '"]').children().toggle();
-                if ($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text() == "+") {
-                    $('.mainPosition div[data1^="' + this.items.id + '"]').children().hide();
-                } else {
-                    $('.mainPosition div[data1^="' + this.items.id + '"]').children().show();
-                }*/
+
             }
 
         }
     }
 });
+*/
+app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', function($scope, $http, $q, $timeout, language) {
+    var promise = language.getLang();
+    promise.then(function(data) {
+        $scope.language = data;
+        $scope.loadPosition();
+    });
 
+    $scope.loadPosition = function() {
+        $("#glu").css({
+            'width': $('.mainPage').width(),
+            'height': parseInt($('.mainPage').width()) / 1.4
+        });
+        $http({
+            method: 'GET',
+            url: 'load_position',
+
+        }).
+        success(function(data, status) {
+            $scope.position = data;
+            setTimeout(function() {
+                for (var i = 0; i < data.length; i++) {
+                    $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").css('display', 'none').removeClass("position1").addClass("position2");
+                }
+            }, 10);
+        });
+    }
+    $scope.getClass = function() {
+        var position = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
+        position.slideToggle('fast');
+        if (!position.parent().attr('openFolder')) {
+            position.parent().children('a').css('color', '#ff0000');
+            position.parent().attr('openFolder', 'yes');
+        } else {
+            position.parent().children('a').css('color', '#333333');
+            position.parent().attr('openFolder', '');
+        }
+
+        $http({
+            method: 'POST',
+            url: 'load_lesson',
+            data: {
+                'id': this.items.id
+            }
+        }).success(function(data, status) {
+            $scope.lessons = data;
+        });
+    }
+    $scope.getLessons = function(focus, blur) {
+        $http({
+            method: 'POST',
+            url: 'get_lessons',
+        }).
+        success(function(data, status) {
+            if (focus === true) {
+                $scope.searchLessons = data;
+            } else if (blur === true) {
+                $scope.searchLessons = "";
+            }
+
+        });
+    }
+    $scope.loadPage = function() {
+        //   console.log(this.items.src);
+        $scope.src = this.items.src;
+        // element.after("<iframe  scrolling='auto'  src='../../uploads/" + this.items.src + "/index.html' width='800' height='600' align='left'></iframe>");
+        // $(".mainPage").empty().append("<iframe  scrolling='auto'  src='../../uploads/" + this.items.src + "/index.html' width='800' height='600' align='left'></iframe>");
+        $("#pagePlayer").css({
+            'width': '100%',
+            'height': parseInt($('#pagePlayer').css('width')) / 1.33,
+            'maxWidth': '1000px'
+        }).attr('src', '../../uploads/' + this.items.src + '/index.html');
+        $(window).resize(function() {
+            $("#pagePlayer").css({
+                'width': '100%',
+                'height': parseInt($('#pagePlayer').css('width')) / 1.33,
+                'maxWidth': '1000px'
+            });
+        });
+    }
+    $scope.openClosePosition = function() {
+        // console.log('fg');
+        /*console.log($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text())
+            //   $('.mainPosition div[data1^="' + this.items.id + '"]').children().toggle();
+        if ($('.mainPosition div[data1^="' + this.items.id + '"]').children('span').text() == "+") {
+            $('.mainPosition div[data1^="' + this.items.id + '"]').children().hide();
+        } else {
+            $('.mainPosition div[data1^="' + this.items.id + '"]').children().show();
+        }*/
+    }
+    $scope.resizeIframe = function() {
+
+        if ($('#pagePlayer').hasClass('resizePlayer')) {
+            $('#fullPage').show();
+            $('#pagePlayer, #learnpro_logo').appendTo('.mainPage');
+            $('#pagePlayer').removeClass('resizePlayer');
+            $("#pagePlayer").css({
+                'width': '100%',
+                'height': parseInt($('#pagePlayer').css('width')) / 1.33,
+                'maxWidth': '1000px'
+            });
+            $(window).resize(function() {
+                $("#pagePlayer").css({
+                    'width': '100%',
+                    'height': parseInt($('#pagePlayer').css('width')) / 1.33,
+                    'maxWidth': '1000px'
+                });
+            });
+
+        } else {
+            $('#pagePlayer').addClass('resizePlayer');
+            $('.resizePlayer, #learnpro_logo').appendTo('#fullIframe');
+            $('#fullPage').hide();
+            $(".resizePlayer").css({
+                'width': '100%',
+                'height': $(window).height() - 8,
+                'maxWidth': '100%'
+            });
+            $(window).resize(function() {
+                $(".resizePlayer").css({
+                    'width': '100%',
+                    'height': $(window).height() - 8,
+                    'maxWidth': '100%'
+                });
+            });
+        }
+    }
+
+
+}]);
 
 
 
