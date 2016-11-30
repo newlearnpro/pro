@@ -122,16 +122,16 @@ class Login extends CI_Controller {
       $get_info_username = $this->uri->segment(4);
       $get_info_keycode = $this->uri->segment(5);
       $username ='';
-      $key_code='';
+      $activation_code='';
 
-      $query = $this->db->get_where('users', array('username' => $get_info_username, 'key_code' => $get_info_keycode));
+      $query = $this->db->get_where('users', array('username' => $get_info_username, 'activation_code' => $get_info_keycode));
       foreach ($query->result() as $row)
       {         
         $username = $row->username;
-        $key_code = $row->key_code;
+        $activation_code = $row->activation_code;
       }
 
-      if($this->session->userdata('prm')=='' && ($username!=='' || $key_code!=='')){
+      if($this->session->userdata('prm')=='' && ($username!=='' || $activation_code!=='')){
           $this->db->where('username', $get_info_username);
           $this->db->update('users', array('activation'=>'yes'));
           $this->load->view('includes/header');

@@ -23,6 +23,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/index/list',
             templateUrl: '../../public/partials/list.html',
         })
+        .state('personalpage', {
+            url: '/index/personalpage',
+            templateUrl: '../../public/partials/personalpage.html',
+        })
     $locationProvider.html5Mode(true);
 });
 

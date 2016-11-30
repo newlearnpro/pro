@@ -41,6 +41,7 @@ class Membership_model extends CI_Model {
         return   $query->result_array(); 
     }
 
+
     public function users_change($get_info)
     {   
         $data = array(
@@ -52,7 +53,20 @@ class Membership_model extends CI_Model {
         $this->db->update('users', $data);        
     }
 
-
+    public function user_page($get_info)
+    {   
+     //   $this->db->where('username', 'artak');
+        $this->db->where('username', $get_info);
+        $this->db->select('username, first_name, last_name, email, activation_code');        
+        $query = $this->db->get("users");
+        return   $query->result_array();
+        /*foreach ($query->result() as $row){ 
+            return  array(
+                'username'=> $row->username,
+                'password'=> $row->password,
+            );
+        }*/
+    }
 
 
 
@@ -120,7 +134,7 @@ class Membership_model extends CI_Model {
              'email' => $this->input->post('email'),
              'username' => $this->input->post('username'),
              'password' => md5($this->input->post('password')),
-             'key_code' => random_string('alnum', 16),
+             'activation_code' => random_string('alnum', 16),
              'activation' => 'no',
              'permission' => 'user'
             // 'img_src' => $this->input->post('img_base64')
@@ -145,9 +159,9 @@ class Membership_model extends CI_Model {
           $this->email->from($new_member_insert_data['email']);
           $this->email->to($new_member_insert_data['email']);
           $this->email->subject('Email using Gmail.');
-          //$this->email->message('<a href="'.base_url().$this->session->userdata('lang').'"/login/activation?username="'.$new_member_insert_data['username'].'"&keycode="'.$new_member_insert_data['key_code'].'">Click here for activation</a>');
-          //$this->email->message('<a href="http://localhost/newlearnpro/pro/'.$this->session->userdata('lang').'/login/activation/'.$new_member_insert_data['username'].'/'.$new_member_insert_data['key_code'].'">Click here for activation</a>');
-          $this->email->message('<div><span>Your Login: '.$new_member_insert_data['username'].'</span><br /><span>Your Password: '.$new_member_insert_data['password'].'</span><br /><span>Your keyCode: '.$new_member_insert_data['key_code'].'</span><br /><a href="http://localhost/newlearnpro/pro/'.$this->session->userdata('lang').'/login/activation/'.$new_member_insert_data['username'].'/'.$new_member_insert_data['key_code'].'">Click here for activation</a></div>');
+          //$this->email->message('<a href="'.base_url().$this->session->userdata('lang').'"/login/activation?username="'.$new_member_insert_data['username'].'"&keycode="'.$new_member_insert_data['activation_code'].'">Click here for activation</a>');
+          //$this->email->message('<a href="http://localhost/newlearnpro/pro/'.$this->session->userdata('lang').'/login/activation/'.$new_member_insert_data['username'].'/'.$new_member_insert_data['activation_code'].'">Click here for activation</a>');
+          $this->email->message('<div><span>Your Login: '.$new_member_insert_data['username'].'</span><br /><span>Your Password: '.$this->input->post('password').'</span><br /><span>Your keyCode: '.$new_member_insert_data['activation_code'].'</span><br /><a href="http://localhost/newlearnpro/pro/'.$this->session->userdata('lang').'/login/activation/'.$new_member_insert_data['username'].'/'.$new_member_insert_data['activation_code'].'">Click here for activation</a></div>');
           $this->email->send();
           return $insert;
         /*if($this->email->send())

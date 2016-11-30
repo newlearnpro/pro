@@ -25,7 +25,7 @@ class Main extends CI_Controller {
 	}
 
 
-		public function admin_lang()
+	public function admin_lang()
 	{
 		$_POST = json_decode(file_get_contents('php://input'), true);
 		$get_info = $this->input->post('data');
@@ -34,6 +34,14 @@ class Main extends CI_Controller {
 		}
 
 		echo json_encode($lang);
+	}
+
+	public function user_personal_page(){
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$get_info = $this->input->post('user');
+		$this->load->model('membership_model');
+		$query = $this->membership_model->user_page($get_info);
+		echo json_encode($query);
 	}
 
 	public function send_message()

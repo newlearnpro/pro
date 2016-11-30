@@ -14,8 +14,8 @@
 		<label>{{language.structure}}</label>&nbsp;
 		<div class='mainPosition'>
 			<div ng-repeat='items in position'>
-				<div class='position_item position1' data1='{{items.id}}' data2='{{items.parent_id}}' ng-click='openClosePosition()'>
-					<span>+</span>					
+				<div class='position_item position1' data1='{{items.id}}' data2='{{items.parent_id}}'>
+					<span class='glyphicon glyphicon-plus-sign' ng-click='openClosePosition()'></span>					
 					<input value='{{items.position}}' />
 					<a class='btn btn-danger btn-xs ' ng-click='editPosition()'>edit</a>
 					<a class='btn btn-danger btn-xs remove' ng-click='removePosition()'>remove</a>

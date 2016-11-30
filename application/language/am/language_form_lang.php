@@ -21,6 +21,7 @@ $lang['password_confirm_hint']       = 'Կրկնել գաղտնաբառը';
 $lang['captcha_hint']                = 'Ներմուծել վերևում երևացող տեքստը';
 $lang['old_password_hint']           = 'Հին գաղտնաբառ';
 $lang['new_password_hint']           = 'Նոր գաղտնաբառ';
+$lang['activation_code']	         = 'Ակտիվացման կոդ';
 
 
 $lang['account_created']             = 'Գրանցումը հաջողությամբ ավարտված է';
@@ -56,7 +57,7 @@ $lang['change_info_employees']      = 'To change information of employees';
 $lang['contacts']                   = 'Կոնտակտներ';
 $lang['tasks']                   	= 'Tasks';
 $lang['list']                   	= 'Դասեր';
-
+$lang['personal_page']              = 'Անձնական էջ';
 
 
 /*******************************************************************************/

@@ -48,6 +48,7 @@ $lang['position_hint']               = 'Position';
 $lang['captcha_hint']                = 'Type the text above here';
 $lang['old_password_hint']           = 'Old password';
 $lang['new_password_hint']           = 'New Password';
+$lang['activation_code']	         = 'Activation code';
 
 $lang['account_created']             = 'accaunt created';
 $lang['img_error']                   = 'Your picture is too large';
@@ -78,7 +79,7 @@ $lang['change_info_employees']      = 'To change information of employees';
 $lang['contacts']                   = 'Contacts';
 $lang['tasks']                   	= 'Tasks';
 $lang['list']                   	= 'List';
-
+$lang['personal_page']              = 'Personal page';
 
 
 /*******************************************************************************/

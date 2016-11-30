@@ -48,6 +48,7 @@ $lang['position_hint']               = 'Должность';
 $lang['captcha_hint']                = 'Напечатаейте текст капча';
 $lang['old_password_hint']           = 'Old password';
 $lang['new_password_hint']           = 'New Password';
+$lang['activation_code']	         = 'Код активации';
 
 $lang['account_created']             = 'accaunt created';
 $lang['img_error']                   = 'Your picture is too large';
@@ -79,6 +80,7 @@ $lang['change_info_employees']      = 'Изменить информацию с�
 $lang['contacts']                   = 'Контакты';
 $lang['tasks']                   	= 'Задачы';
 $lang['list']                   	= 'Список';
+$lang['personal_page']              = 'Личная страница';
 
 /*******************************************************************************/
 
