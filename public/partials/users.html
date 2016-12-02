@@ -19,9 +19,10 @@
 		<input ng-click='editUser()' type='button' value='save' class='btn btn-info' />
 		{{tt.first_name_hint}}
 	</div>
+</div>
 
-
-
-
-
+<div ng-cloak ng-controller='sessionsCtrl'>
+	<ul ng-repeat='item in session_name'>
+		<li >{{item}}</li>
+	</ul>
 </div>

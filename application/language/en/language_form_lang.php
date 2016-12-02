@@ -75,7 +75,8 @@ $lang['enter_login_password'] 		= 'Enter your username and password';
 
 $lang['create_position']            = 'Create position';
 $lang['registration_employees']     = 'Registration of employees';
-$lang['change_info_employees']      = 'To change information of employees';
+$lang['change_users_info']          = 'Information about users';
+$lang['sessions']                   = 'Sessions';
 $lang['contacts']                   = 'Contacts';
 $lang['tasks']                   	= 'Tasks';
 $lang['list']                   	= 'List';

@@ -371,18 +371,106 @@ app.controller('personalpageGroup', ['$scope', '$http', 'language', function($sc
     var promise = language.getLang();
     promise.then(function(data) {
         $scope.language = data;
+        $scope.autoload();
         //  $scope.loadPosition();
     });
     var username = document.querySelector("#username").innerHTML;
-    $http({
-        method: 'POST',
-        url: '../main/user_personal_page',
-        data: {
-            'user': username
-        }
-    }).
-    success(function(data) {
-        $scope.user_page = data;
-        console.log(data);
+    $scope.autoload = function() {
+        $http({
+            method: 'POST',
+            url: '../main/user_personal_page',
+            data: {
+                'user': username
+            }
+        }).
+        success(function(data) {
+            $scope.user_page = data;
+            //  console.log(data);
+        });
+    }
+
+}]);
+
+app.controller('sessionsCtrl', ['$scope', '$http', 'language', function($scope, $http, language) {
+    var promise = language.getLang();
+    promise.then(function(data) {
+        $scope.language = data;
+        $scope.autoload();
+        //  $scope.loadPosition();
     });
+    //   var username = document.querySelector("#username").innerHTML;
+    $scope.autoload = function() {
+        $http({
+            method: 'GET',
+            url: '../admin/sessions_info',
+            /* data: {
+                 'user': username
+             }*/
+        }).
+        success(function(data) {
+            var sessions = [];
+            //     var ip_address = [];
+            $scope.session_name = [];
+            var iop_address = [];
+            $scope.session_start_time = [];
+            $scope.session_ip_address = [];
+
+            for (let i = 0; i < data.length; i++) {
+                sessions.push(data[i].data.split(';'));
+                //   console.log(sessions[i][0]);
+                var from = sessions[i][1].search('"');
+
+                var to = sessions[i][1].length;
+                var newstr = sessions[i][1].substring(from, to);
+
+
+
+            }
+            console.log(newstr)
+                //   $scope.tt = $scope.session_name;
+            $scope.session_name.push(newstr);
+
+            /*   angular.forEach(data, function(value, key) {
+                   sessions.push(value.data.split(';'));
+
+
+                   var from = sessions[key][1].search('"');
+                   var to = sessions[key][1].length;
+                   var newstr = sessions[key][1].substring(from, to);
+                   $scope.session_name.push(newstr);
+
+                   iop_address.push(data[key].ip_address);
+                   $scope.session_start_time.push(data[key].timestamp);
+
+
+               });
+
+
+               setTimeout(function() {
+                   $scope.session_ip_address = iop_address
+                   console.log($.type(iop_address));
+                   if ($.type($scope.session_ip_address) == $.type(iop_address)) {
+                       console.log('1')
+                   } else {
+                       console.log('0')
+                   }
+                   $scope.$apply();
+               }, 500);*/
+            //    for (var i = 0; i < iop_address.length; i++) {
+            // $scope.session_ip_address.push(iop_address[data.length]);
+            //  }
+            //      $scope.$apply();
+            //   }, 1500);
+            /*setTimeout(function() {
+                $scope.session_ip_address = ip_address;
+                $scope.$apply();
+            }, 500);*/
+
+            //  console.log(data[i].ip_address);
+            // console.log($scope.session_name);
+            //   console.log($.type($scope.session_ip_address));
+
+        });
+    }
+
 }]);

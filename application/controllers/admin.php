@@ -256,8 +256,20 @@ class Admin extends CI_Controller {
             		}
         	}
         	redirect($this->uri->segment(1).'/admin/index/addlesson');
-    }
-		
+    }	
+
+
+	}
+
+	public function sessions_info()
+	{
+
+
+		$this->load->model('membership_model');
+		$query = $this->membership_model->ci_sessions_info();
+		echo json_encode($query);
+		//$this->db->where('username', $get_info);
+        //$this->db->select('username, first_name, last_name, email, activation_code');        
 
 
 	}

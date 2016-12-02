@@ -53,7 +53,8 @@ $lang['enter_login_password'] 		= 'Մուտքագրեք ձեր մուտքանո�
 
 $lang['create_position']            = 'Ստեղծել կատալոգներ';
 $lang['registration_employees']     = 'Ռեգիստրացիա';
-$lang['change_info_employees']      = 'To change information of employees';
+$lang['change_users_info']          = 'Ինֆորմացիա օգտատերերի մասին';
+$lang['sessions']                   = 'Սեսիաներ';
 $lang['contacts']                   = 'Կոնտակտներ';
 $lang['tasks']                   	= 'Tasks';
 $lang['list']                   	= 'Դասեր';

@@ -7,53 +7,46 @@
   display: none !important;
 }
 .flags {
-  background-size: 60px 68px;
+  background-image: url('../img/icons/flags.png');
+  background-size: 240px 240px;
   background-repeat: no-repeat;
-  width: 60px;
-  height: 68px;
-  margin: 0px 10px;
-}
-#lang_am,
-#lang_ru,
-#lang_en {
+  width: 80px;
+  height: 80px;
+  margin: 0 10px;
   display: inline-block;
 }
 #flag_am {
-  background-image: url('../img/flags/flag_am.png');
+  background-position: 0 0;
 }
 #flag_am.am,
 #flag_am.am:hover {
-  background-image: url('../img/flags/flag_am_select.png');
+  background-position: 0 -160px;
   border-bottom: 3px solid #337ab7;
 }
 #flag_am:hover {
-  background-image: url('../img/flags/flag_am_hover.png');
+  background-position: 0px -80px;
 }
 #flag_ru {
-  background-image: url('../img/flags/flag_ru.png');
-  background-size: 60px 36px;
-  background-position-y: 16px;
+  background-position: -80px 0;
 }
 #flag_ru.ru,
 #flag_ru.ru:hover {
-  background-image: url('../img/flags/flag_ru_select.png');
-  background-size: 60px 36px;
-  background-position-y: 16px;
+  background-position: -80px -160px;
   border-bottom: 3px solid #337ab7;
 }
 #flag_ru:hover {
-  background-image: url('../img/flags/flag_ru_hover.png');
+  background-position: -80px -80px;
 }
 #flag_en {
-  background-image: url('../img/flags/flag_en.png');
+  background-position: -160px 0;
 }
 #flag_en.en,
 #flag_en.en:hover {
-  background-image: url('../img/flags/flag_en_select.png');
+  background-position: -160px -160px;
   border-bottom: 3px solid #337ab7;
 }
 #flag_en:hover {
-  background-image: url('../img/flags/flag_en_hover.png');
+  background-position: -160px -80px;
 }
 .form_error2 {
   color: red;

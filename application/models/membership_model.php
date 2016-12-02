@@ -207,6 +207,13 @@ class Membership_model extends CI_Model {
         } 
 	}
     
+
+    function ci_sessions_info()
+  {
+        $query = $this->db->get("ci_sessions");
+        return   $query->result_array();
+  }
+
  /////////////////////////////////////////////////////   
     
     
