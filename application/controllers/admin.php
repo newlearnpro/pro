@@ -190,7 +190,8 @@ class Admin extends CI_Controller {
 			$date = date('U');
 			$get_info['lesson_name'] = 	$this->input->post('lesson_name');
 			$get_info['lesson_description'] = 	$this->input->post('lesson_description');
-			$get_info['lesson_src'] = '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'';			
+			$get_info['lesson_keywords'] = $this->input->post('lesson_name') . ' ' .  $this->input->post('lesson_description') . ' ' . $this->input->post('lesson_keywords');
+			$get_info['lesson_src'] = '0' . $this->input->post('lesson_type_id') . ($this->input->post('lesson_parent_id')*1) . '_'.$date.'';			
 			$get_info['lesson_type_id'] = 	$this->input->post('lesson_type_id');
 			$get_info['lesson_parent_id'] = $this->input->post('lesson_parent_id') * 1;	
 			$this->input->post('lesson_is_free') ? $get_info['lesson_is_free'] = $this->input->post('lesson_is_free') : $get_info['lesson_is_free'] = 'off';
@@ -263,15 +264,17 @@ class Admin extends CI_Controller {
 
 	public function sessions_info()
 	{
-
-
 		$this->load->model('membership_model');
 		$query = $this->membership_model->ci_sessions_info();
-		echo json_encode($query);
-		//$this->db->where('username', $get_info);
-        //$this->db->select('username, first_name, last_name, email, activation_code');        
-
-
+		echo json_encode($query);    
 	}
+	
+	public function sessions_remove()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);		
+		$get_info = $this->input->post('session_id');
+		$this->db->delete('ci_sessions', array('id' => $get_info));
+	}
+
 
 }

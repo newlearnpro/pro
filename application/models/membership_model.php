@@ -2,36 +2,10 @@
 
 class Membership_model extends CI_Model {
 
-
-/*
-  function __construct()
-    {
-
-        parent::__construct();
- 	     $go_table = $this->input->post('$go_table');
-    }*/
-
-
-//_________________________this function validate login and password
-  /*  public function validate()
- 	{
- 	  $this->db->where('username', $this->input->post('username'));
-      $this->db->where('password', md5($this->input->post('password')));
-      $query = $this->db->get('users');      
-      if($query->num_rows == 1){
-        return true;
-      }      
-    }*/
-
-
     public function users($permission, $get_info)
     {   
         if($permission == "admin"){
             $query = $this->db->query("SELECT * FROM users");
-           /* foreach ($query->result() as $row)
-            { 
-                return $row;
-            }*/
             if($get_info){
                 $query = $this->db->get_where('users', array('username'=>$get_info));
             }            
@@ -68,35 +42,16 @@ class Membership_model extends CI_Model {
         }*/
     }
 
-
-
-
     public function position()
     {   
-
-      
-        //  $this->db->query("position");    
-     $query = $this->db->query("SELECT id, position, parent_id FROM position");  
-      //  $this->db->order_by('position', 'acs');
-      //  $query = $this->db->get('position');
-
-     //   return   $query->result_array();
-
-
-     //   $this->db->query('position');
-        /*$this->db->from('position');
-
-        $this->db->join('position2', 'position.id = position2.parent_id');*/
-      //  $this->db->from('position2');
-    //    $this->db->join('position3', 'position2.id = position3.parent_id', 'left');
-      //  = $this->db->get();
-    //    print_r($query->result_array());
+        $query = $this->db->query("SELECT id, position, parent_id FROM position");  
         return   $query->result_array();
     }
+
     public function lesson()
     {    
-        $this->db->order_by('number', 'ASC');  
-        $query = $this->db->get("file");       
+        $this->db->order_by('number', 'ASC'); 
+        $query = $this->db->get("file");
         return $query->result();
     }
 
@@ -125,7 +80,7 @@ class Membership_model extends CI_Model {
 
 
     function membership()
-	{
+	  {
         $this->load->helper('string');
         $username = $this->input->post('username');         
         $new_member_insert_data = array(         
@@ -172,11 +127,11 @@ class Membership_model extends CI_Model {
         {
             show_error($this->email->print_debugger());
         }*/
-	}
+	  }
     
     
    	function check_if_field_exists($field_str, $field)
-	{
+	  {
         $this->db->where($field_str, $field);
         $result = $this->db->get('users');
         if($result->num_rows()>0){
@@ -184,73 +139,32 @@ class Membership_model extends CI_Model {
         }else{
             return true;
        }   
-	}   
-    
+	  }       
     
     function get_first_last_names()
-	{
+	  {
         $var = $this->session->userdata('username'); 
         $this->db->where('username',$var['username']);       
           $l_n = $this->db->get('users');            
         foreach($l_n->result() as $row){
             return $row->username;
         } 
-	}
+	  }
     
     function get_img_src()
-	{
+	  {
         $var = $this->session->userdata('username'); 
         $this->db->where('username',$var['username']);       
           $l_n = $this->db->get('users');            
         foreach($l_n->result() as $row){
             return $row->img_src;
         } 
-	}
-    
+	  }    
 
     function ci_sessions_info()
-  {
+    {
         $query = $this->db->get("ci_sessions");
         return   $query->result_array();
-  }
-
- /////////////////////////////////////////////////////   
-    
-    
-    
-    /*function change_users_data()
-	{   
-	   $user_last_name = $this->input->post('user_last_name');
-       $save_first_name  = $this->input->post('save_first_name');
-	   $save_last_name  = $this->input->post('save_last_name');
-       $old_password = md5($this->input->post('old_password'));
-       $new_password = md5($this->input->post('new_password'));
-
-	    
-        $this->db->where('username',$user_last_name);
-        $result = $this->db->get('users');
-        foreach($result->result() as $row){
-            if ($this->input->post('edit') == 1 && $old_password == $row->password){
-                
-                $object = array(
-                 'first_name' => $save_first_name,
-                 'last_name' => $save_last_name,
-                 'password' => $new_password
-                );                    
-                $var = $this->input->post('user_last_name');
-                $this->db->where('username',$user_last_name );
-                $this->db->update('users', $object);                
-                $this->lang->load('language_form');
-                $array = array('account_change' => $this->lang->line('account_change'), 'change_true' => 1);
-                return $array;    
-            }else{
-                return $row;
-            }        
-	    }    
-     } */
-    
-    
-    
-   
-    
+    }
+ 
 }

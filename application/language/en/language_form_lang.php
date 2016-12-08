@@ -93,6 +93,8 @@ $lang['structure']               = 'Structure';
 
 
 $lang['add_lesson']            = 'Add lesson';
-$lang['save']            = 'Save';
+$lang['save']            		= 'Save';
+$lang['delete']            		= 'Delete';
+$lang['update']            	    = 'Update';
 
 ?>

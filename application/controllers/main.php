@@ -14,10 +14,10 @@ class Main extends CI_Controller {
 
 	public function index()
 	{
-		$urs['username'] = $this->session->userdata('usr');
-		if($this->session->userdata('prm')!=='admin'){
+		$usr['username'] = $this->session->userdata('usr');
+		if($this->session->userdata('prm')==='user'){
 			$this->load->view('includes/header');
-			$this->load->view('main_view', $urs);
+			$this->load->view('main_view', $usr);
 			$this->load->view('includes/footer'); 
 		}else{
 		    redirect($this->uri->segment(1).'/login');
@@ -40,7 +40,7 @@ class Main extends CI_Controller {
 		$_POST = json_decode(file_get_contents('php://input'), true);
 		$get_info = $this->input->post('user');
 		$this->load->model('membership_model');
-		$query = $this->membership_model->user_page($get_info);
+		$query = $this->membership_model->user_page($get_info);		
 		echo json_encode($query);
 	}
 

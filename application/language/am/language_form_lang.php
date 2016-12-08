@@ -72,5 +72,7 @@ $lang['structure']               = 'Ստրուկտուրա';
 
 $lang['add_lesson']            = 'Դաս ավելացնել';
 $lang['save']            	   = 'Պահպանել';
+$lang['delete']            	   = 'Ջնջել';
+$lang['update']            	   = 'Թարմացնել';
 
 ?>

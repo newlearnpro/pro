@@ -91,6 +91,8 @@ $lang['structure']               = 'Структура';
 
 $lang['free_lesson']               = 'бесплатный урок';
 $lang['add_lesson']            = 'Добавить урок';
-$lang['save']            = 'Сохранить';
+$lang['save']           		 = 'Сохранить';
+$lang['delete']            		= 'Удалить';
+$lang['update']            	   = 'Обновить';
 
 ?>
