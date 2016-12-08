@@ -391,86 +391,55 @@ app.controller('personalpageGroup', ['$scope', '$http', 'language', function($sc
 
 }]);
 
-app.controller('sessionsCtrl', ['$scope', '$http', 'language', function($scope, $http, language) {
+app.controller('sessionsCtrl', ['$scope', '$http', '$timeout', 'language', function($scope, $http, $timeout, language) {
     var promise = language.getLang();
     promise.then(function(data) {
         $scope.language = data;
         $scope.autoload();
-        //  $scope.loadPosition();
     });
-    //   var username = document.querySelector("#username").innerHTML;
     $scope.autoload = function() {
         $http({
             method: 'GET',
-            url: '../admin/sessions_info',
-            /* data: {
-                 'user': username
-             }*/
+            url: '../admin/sessions_info'
         }).
         success(function(data) {
-            var sessions = [];
-            //     var ip_address = [];
-            $scope.session_name = [];
-            var iop_address = [];
-            $scope.session_start_time = [];
-            $scope.session_ip_address = [];
-
-            for (let i = 0; i < data.length; i++) {
-                sessions.push(data[i].data.split(';'));
-                //   console.log(sessions[i][0]);
-                var from = sessions[i][1].search('"');
-
-                var to = sessions[i][1].length;
-                var newstr = sessions[i][1].substring(from, to);
-
-
-
-            }
-            console.log(newstr)
-                //   $scope.tt = $scope.session_name;
-            $scope.session_name.push(newstr);
-
-            /*   angular.forEach(data, function(value, key) {
-                   sessions.push(value.data.split(';'));
-
-
-                   var from = sessions[key][1].search('"');
-                   var to = sessions[key][1].length;
-                   var newstr = sessions[key][1].substring(from, to);
-                   $scope.session_name.push(newstr);
-
-                   iop_address.push(data[key].ip_address);
-                   $scope.session_start_time.push(data[key].timestamp);
-
-
-               });
-
-
-               setTimeout(function() {
-                   $scope.session_ip_address = iop_address
-                   console.log($.type(iop_address));
-                   if ($.type($scope.session_ip_address) == $.type(iop_address)) {
-                       console.log('1')
-                   } else {
-                       console.log('0')
-                   }
-                   $scope.$apply();
-               }, 500);*/
-            //    for (var i = 0; i < iop_address.length; i++) {
-            // $scope.session_ip_address.push(iop_address[data.length]);
-            //  }
-            //      $scope.$apply();
-            //   }, 1500);
-            /*setTimeout(function() {
-                $scope.session_ip_address = ip_address;
-                $scope.$apply();
-            }, 500);*/
-
-            //  console.log(data[i].ip_address);
-            // console.log($scope.session_name);
-            //   console.log($.type($scope.session_ip_address));
-
+            $scope.sessions = [];
+            var sessions_data = [],
+                options = {
+                    // weekday: 'long',
+                    month: 'numeric',
+                    year: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric'
+                },
+                intlDate = new Intl.DateTimeFormat(undefined, options);
+            angular.forEach(data, function(value, key) {
+                sessions_data.push(data[key].data.split(';'));
+                var from = sessions_data[key][1].search('"'),
+                    to = sessions_data[key][1].length,
+                    newstr = sessions_data[key][1].substring(from, to),
+                    user = newstr.slice(1, -1);
+                $scope.sessions.push({
+                    'id': data[key].id,
+                    'usr': user,
+                    'ip_address': data[key].ip_address,
+                    'time': intlDate.format(new Date(1000 * data[key].timestamp))
+                });
+            });
         });
     }
-
+    $scope.session_remove = function(index) {
+        $http({
+            method: 'POST',
+            url: '../admin/sessions_remove',
+            data: {
+                'session_id': $scope.sessions[index].id
+            }
+        }).
+        success(function(data) {
+            $scope.autoload();
+        });
+    }
 }]);

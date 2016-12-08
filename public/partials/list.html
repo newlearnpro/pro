@@ -12,10 +12,10 @@
 <!--list-group></list-group-->
 <div>
 	Search <input type="checkbox" ng-model='checked' >
-	<input id='searchLessonText'  type='text' ng-show="checked" ng-model='searchLesson' ng-focus='getLessons(focus=true, blur=false)' ng-blur='getLessons(focus=false, blur=true)'/>
-		<div ng-show="checked" ng-repeat='items in searchLessons | filter:searchLesson'>
-			<div  class='lesson_type_{{items.type_id}}' ng-click='loadPage()'><span>{{items.name}}</span></div>
-		</div>
+	<input id='searchLessonText'  type='text' ng-show="checked" ng-model='searchLesson.keywords' ng-focus='getLessons(focus=true, blur=false)' ng-blur='getLessons(focus=false, blur=true)'/>
+	<div ng-show="checked" ng-repeat='items in searchLessons | filter:searchLesson'>
+		<div  class='lesson_type_{{items.type_id}}' ng-click='loadPage()'><span >{{items.name}}</span></div>
+	</div>
 </div>
 
 

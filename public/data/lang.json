@@ -8,6 +8,8 @@
     "new_position",
     "structure",
     "save",
+    "delete",
+    "update",
     "free_lesson",
     "activation_code"
 ]
