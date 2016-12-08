@@ -20,6 +20,23 @@ app.directive('usersTable', function($http) {
     }
 });
 
+
+app.controller('headerCtrl', ['$scope', function($scope) {
+    $scope.nail = function() {
+        if (this.isNailed == undefined) {
+            $('#nail').css('background', 'blue');
+            $('header').css('position', 'fixed');
+            $('.blockHead').addClass('mrgTop');
+            this.isNailed = true;
+        } else {
+            $('#nail').css('background', 'red');
+            $('header').css('position', 'relative');
+            $('.blockHead').removeClass('mrgTop');
+            this.isNailed = undefined;
+        }
+    }
+}]);
+
 app.controller('contactsCtrl', function($scope, $http) {
     $scope.recipient = '';
     $scope.selectUser = function(param) {
@@ -345,8 +362,13 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
         } else {
             $('#pagePlayer').addClass('resizePlayer');
             $('.resizePlayer, #learnpro_logo').appendTo('#fullIframe');
+            //  $('.resizePlayer, #learnpro_logo').detach().clone('#fullIframe');
             $('#fullPage').hide();
+            //  $('#fullPage, #fullFrame').css('position', 'relative');
             $(".resizePlayer").css({
+                //  'position': 'absolute',
+                //   'top': '0px',
+                //   'left': '0',
                 'width': '100%',
                 'height': $(window).height() - 8,
                 'maxWidth': '100%'
