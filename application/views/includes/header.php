@@ -16,7 +16,8 @@
 <body>
     <div id='fullIframe' class='fullIframe' ></div>
     <section id='fullPage'>
-    <header>
+    <header ng-controller='headerCtrl'>
+    <div id='nail' ng-click='nail()'></div>
         <div>
         <?php 
             echo $this->session->userdata('usr');
@@ -55,7 +56,6 @@
 
             echo anchor($this->session->userdata('lang'). "/login/signup" , lang('signup'), 'class="btn btn-primary"');
         ?></div>
-        <hr />
     </header>
 
     
