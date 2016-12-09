@@ -14,17 +14,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.3/ui-bootstrap-tpls.min.js"></script>
 </head>
 <body>
-    <div id='fullIframe' class='fullIframe' ></div>
-    <section id='fullPage'>
     <header ng-controller='headerCtrl'>
-    <div id='nail' ng-click='nail()'></div>
+    <div id='nail' ng-click='nail()' class='icons_sm off'></div>
         <div>
         <?php 
-            echo $this->session->userdata('usr');
+            if($this->session->userdata('usr')){
+                echo lang('welcome') . ' ' . $this->session->userdata('usr');
+            }
         ?>
 
         </div>
+
         <div>
+        <a href="<?=base_url() . $this->uri->segment(1)?>"><div class="logo"></div></a>
         <?php 
            // echo heading('This is header page', 3);
           //  echo $this->uri->total_rsegments(). br();
@@ -37,9 +39,12 @@
             if($this->uri->total_rsegments() > 2){
               $url = explode('/', $this->uri->ruri_string(), $this->uri->total_rsegments());
             }  
-            echo "<a href='".base_url()."am/".$this->uri->ruri_string()."' id='lang_am'><div id='flag_am' class='flags ".$this->uri->segment(1)."' title='".lang('armenian')."'></div></a>";
-            echo "<a href='".base_url()."ru/".$this->uri->ruri_string()."' id='lang_ru'><div id='flag_ru' class='flags ".$this->uri->segment(1)."' title='".lang('russian')."'></div></a>";
-            echo "<a href='".base_url()."en/".$this->uri->ruri_string()."' id='lang_en'><div id='flag_en' class='flags ".$this->uri->segment(1)."' title='".lang('english')."'></div></a>";
+
+            echo "<a href='".base_url()."en/".$this->uri->ruri_string()."' id='lang_en'><div id='flag_en' class='pull-right flags ".$this->uri->segment(1)."' title='".lang('english')."'></div></a>";
+            echo "<a href='".base_url()."ru/".$this->uri->ruri_string()."' id='lang_ru'><div id='flag_ru' class='pull-right flags ".$this->uri->segment(1)."' title='".lang('russian')."'></div></a>";
+            echo "<a href='".base_url()."am/".$this->uri->ruri_string()."' id='lang_am'><div id='flag_am' class='pull-right flags ".$this->uri->segment(1)."' title='".lang('armenian')."'></div></a>";
+            
+            
             
            /* 
              echo anchor('am/'. $this->uri->ruri_string(), lang('armenian'), 'id="lang_am"  class=" '.$this->uri->segment(1).'"');
@@ -56,6 +61,4 @@
 
             echo anchor($this->session->userdata('lang'). "/login/signup" , lang('signup'), 'class="btn btn-primary"');
         ?></div>
-    </header>
-
-    
+    </header>    

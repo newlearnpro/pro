@@ -1,4 +1,6 @@
-<?="<base href='/company/".$this->uri->segment(1)."/login/'>" ?>
+<!--?="<base href='/company/".$this->uri->segment(1)."/login/'>" ?-->
+<!--base href=<base_url().$this->uri->segment(1).'/login/'-->
+<?="<base href='".base_url().$this->uri->segment(1)."/login/'>" ?>
 <?php    
 
 if($activation === false){

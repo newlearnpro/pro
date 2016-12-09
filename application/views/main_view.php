@@ -1,9 +1,9 @@
 <base href=<?=base_url().$this->uri->segment(1).'/main/'?>
 
 
-<span><a ui-sref='contacts' ui-sref-active='active' class='btn btn-default'><?=lang('contacts') ?></a></span>
-<span><a ui-sref='list' ui-sref-active='active' class='btn btn-default'><?=lang('list') ?></a></span>  
-<span><a ui-sref='personalpage' ui-sref-active='active' class='btn btn-default'><?=lang('personal_page') ?></a></span>  
+<span><a ui-sref='contacts' ui-sref-active='active' class='blockHead btn btn-default'><?=lang('contacts') ?></a></span>
+<span><a ui-sref='list' ui-sref-active='active' class='blockHead btn btn-default'><?=lang('list') ?></a></span>  
+<span><a ui-sref='personalpage' ui-sref-active='active' class='blockHead btn btn-default'><?=lang('personal_page') ?></a></span>  
 
 
 
@@ -18,4 +18,4 @@
 
 
 
- </div>
+</div>
