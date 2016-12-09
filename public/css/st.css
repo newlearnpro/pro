@@ -6,47 +6,134 @@
 .x-ng-cloak {
   display: none !important;
 }
+/*
+$grid-breakpoints: (
+  // Extra small screen / phone
+  xs: 0,
+  // Small screen / phone
+  sm: 576px,
+  // Medium screen / tablet
+  md: 768px,
+  // Large screen / desktop
+  lg: 992px,
+  // Extra large screen / wide desktop
+  xl: 1200px
+);
+
+@phone: 576px;
+@tablet: 768px;
+@desktop: 992px;
+@widedesktop:1200px;
+
+*/
+.logo {
+  background-image: url('../img/icons/logo.png');
+  background-size: 100px 56px;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 56px;
+  margin: 10px;
+  display: inline-block;
+}
 .flags {
   background-image: url('../img/icons/flags.png');
-  background-size: 240px 240px;
+  background-size: 180px 180px;
   background-repeat: no-repeat;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   margin: 0 10px;
   display: inline-block;
+}
+@media (max-width: 479px) {
+  .flags {
+    background-size: 120px 120px;
+    width: 40px;
+    height: 40px;
+  }
 }
 #flag_am {
   background-position: 0 0;
 }
 #flag_am.am,
 #flag_am.am:hover {
-  background-position: 0 -160px;
+  background-position: 0 -120px;
   border-bottom: 3px solid #337ab7;
 }
 #flag_am:hover {
-  background-position: 0px -80px;
+  background-position: 0 -60px;
+}
+@media (max-width: 479px) {
+  #flag_am {
+    background-position: 0 0;
+  }
+  #flag_am.am,
+  #flag_am.am:hover {
+    background-position: 0 -80px;
+  }
+  #flag_am:hover {
+    background-position: 0 -40px;
+  }
 }
 #flag_ru {
-  background-position: -80px 0;
+  background-position: -60px 0;
 }
 #flag_ru.ru,
 #flag_ru.ru:hover {
-  background-position: -80px -160px;
+  background-position: -60px -120px;
   border-bottom: 3px solid #337ab7;
 }
 #flag_ru:hover {
-  background-position: -80px -80px;
+  background-position: -60px -60px;
+}
+@media (max-width: 479px) {
+  #flag_ru {
+    background-position: -40px 0;
+  }
+  #flag_ru.ru,
+  #flag_ru.ru:hover {
+    background-position: -40px -80px;
+  }
+  #flag_ru:hover {
+    background-position: -40px -40px;
+  }
 }
 #flag_en {
-  background-position: -160px 0;
+  background-position: -120px 0;
 }
 #flag_en.en,
 #flag_en.en:hover {
-  background-position: -160px -160px;
+  background-position: -120px -120px;
   border-bottom: 3px solid #337ab7;
 }
 #flag_en:hover {
-  background-position: -160px -80px;
+  background-position: -120px -60px;
+}
+@media (max-width: 479px) {
+  #flag_en {
+    background-position: -80px 0;
+  }
+  #flag_en.en,
+  #flag_en.en:hover {
+    background-position: -80px -80px;
+  }
+  #flag_en:hover {
+    background-position: -80px -40px;
+  }
+}
+.icons_sm {
+  background-image: url('../img/icons/icons_sm.png');
+  background-size: 400px 400px;
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  margin: 0 10px;
+  display: inline-block;
+}
+.icons_sm.on {
+  background-position: -32px 0;
+}
+.icons_sm.off {
+  background-position: 0px 0px;
 }
 .form_error2 {
   color: red;
@@ -140,9 +227,11 @@ header {
   margin-top: 120px;
 }
 #nail {
-  width: 30px;
-  height: 30px;
-  background: red;
   float: right;
   cursor: pointer;
+}
+.mainPage {
+  background: white;
+  margin: 0;
+  padding: 0;
 }

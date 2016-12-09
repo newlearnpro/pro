@@ -23,13 +23,15 @@ app.directive('usersTable', function($http) {
 
 app.controller('headerCtrl', ['$scope', function($scope) {
     $scope.nail = function() {
+        $('#nail').toggleClass('on').toggleClass('off');
         if (this.isNailed == undefined) {
-            $('#nail').css('background', 'blue');
-            $('header').css('position', 'fixed');
+            $('header').css({
+                'position': 'fixed',
+                'top': 0
+            });
             $('.blockHead').addClass('mrgTop');
             this.isNailed = true;
         } else {
-            $('#nail').css('background', 'red');
             $('header').css('position', 'relative');
             $('.blockHead').removeClass('mrgTop');
             this.isNailed = undefined;
@@ -344,10 +346,9 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
     }
     $scope.resizeIframe = function() {
         if ($('#pagePlayer').hasClass('resizePlayer')) {
-            $('#fullPage').show();
-            $('#pagePlayer, #learnpro_logo').appendTo('.mainPage');
-            $('#pagePlayer').removeClass('resizePlayer');
-            $("#pagePlayer").css({
+            $('header').show();
+            $('.mainPage').removeAttr('style');
+            $("#pagePlayer").removeClass('resizePlayer').css({
                 'width': '100%',
                 'height': parseInt($('#pagePlayer').css('width')) / 1.33,
                 'maxWidth': '1000px'
@@ -361,14 +362,14 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
             });
         } else {
             $('#pagePlayer').addClass('resizePlayer');
-            $('.resizePlayer, #learnpro_logo').appendTo('#fullIframe');
-            //  $('.resizePlayer, #learnpro_logo').detach().clone('#fullIframe');
-            $('#fullPage').hide();
-            //  $('#fullPage, #fullFrame').css('position', 'relative');
+            $('.mainPage').css({
+                'position': 'absolute',
+                'top': 0,
+                'left': 0,
+                'width': '100%'
+            });
+            $('header').hide();
             $(".resizePlayer").css({
-                //  'position': 'absolute',
-                //   'top': '0px',
-                //   'left': '0',
                 'width': '100%',
                 'height': $(window).height() - 8,
                 'maxWidth': '100%'
