@@ -5,22 +5,34 @@
 			<div ng-if='users'>
 				<div>
 					<label>{{language.username_hint}}</label>
-					<input id='userName' type='text' value='{{userField.username}}' />
+					<span>{{userField.username}}</span>
 				</div>
 				<div>	
 					<label>{{language.first_name_hint}}</label>
 					<input id='firstName' type='text' value='{{userField.first_name}}' />
 				</div>
-				<div>
-					<label>{{language.position_hint}}</label>			
-					<select id='position' ng-model='userField.position'>
-						<option  ng-repeat='items in position' ng-selected='{{userField.position}}'>{{items.position}}</option>
-					</select>
+				<div>	
+					<label>{{language.last_name_hint}}</label>
+					<input id='lastName' type='text' value='{{userField.last_name}}' />
 				</div>
-				<input ng-click='editUser()' type='button' value='{{language.save}}' class='btn btn-info' />
+				<div>	
+					<label>{{language.email_hint}}</label>
+					<span>{{userField.email}}</span>
+				</div>
+				<div>	
+					<label>{{language.activation_code}}</label>
+					<span>{{userField.activation_code}}</span>
+				</div>
+				<div>	
+					<label>{{language.activation}}</label>
+					<input id='activation' type='text' value='{{userField.activation}}' />
+				</div>
+				<input ng-click='editUser()' type='button' value='{{language.save}}' class='btn lp_button' />
 				{{tt.first_name_hint}}
 			</div>
 		</div>
+
+
 		<div ng-controller='sessionsCtrl' class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
 			<table  class='table'>
 				 <thead>

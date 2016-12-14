@@ -27,12 +27,16 @@ app.controller('headerCtrl', ['$scope', function($scope) {
         if (this.isNailed == undefined) {
             $('header').css({
                 'position': 'fixed',
-                'top': 0
+                'top': 0,
+                'opacity': 0.9
             });
             $('.blockHead').addClass('mrgTop');
             this.isNailed = true;
         } else {
-            $('header').css('position', 'relative');
+            $('header').css({
+                'position': 'relative',
+                'opacity': 1
+            });
             $('.blockHead').removeClass('mrgTop');
             this.isNailed = undefined;
         }
@@ -58,19 +62,37 @@ app.controller('contactsCtrl', function($scope, $http) {
             }
         }).
         success(function(data) {
-            var list = document.querySelector("#list")
+            //    console.log(data)
+            var list = document.querySelector("#list"),
+                options = {
+                    // weekday: 'long',
+                    month: 'numeric',
+                    year: 'numeric',
+                    day: 'numeric',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric'
+                },
+                intlDate = new Intl.DateTimeFormat(undefined, options);
             while (list.hasChildNodes()) {
                 list.removeChild(list.lastChild);
             }
 
             for (var i = 0; i < data.length; i++) {
+
+                //   p.push(data[i].sender + " : " + data[i].message + "   " + intlDate.format(new Date(1000 * data[i].timestamp)) + '\n');
+                //  p[i] = data[i].sender + " : " + data[i].message + "   " + intlDate.format(new Date(1000 * data[i].timestamp)) + '\n';
+                // console.log(data[i].sender + " : " + data[i].message + "   " + intlDate.format(new Date(1000 * data[i].timestamp)))
+
                 var div = document.createElement('option');
-                // div.className = "alert alert-success";
-                div.innerHTML = data[i].sender + " : " + data[i].message;
+
+                div.innerHTML = data[i].sender + " : " + data[i].message + "   " + intlDate.format(new Date(1000 * data[i].timestamp));
                 document.querySelector("#list").appendChild(div);
             }
-
-
+        }).
+        error(function(data) {
+            //  console.log(data);
+            alert('Տվյալների բազան գոյություն չունի');
         });
         //}, 5000);
     }
@@ -112,7 +134,7 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
             $scope.position = data;
             //  console.log(data);
             //  $scope.userField = data[0];
-            //   console.log(data);
+            //  console.log(data);
         });
         $http({
             method: 'POST',
@@ -134,10 +156,12 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
             data: {
                 'edit_user': {
                     login: $scope.userField.username,
-                    username: document.querySelector("#userName").value,
+                    // username: document.querySelector("#userName").value,
                     first_name: document.querySelector("#firstName").value,
+                    last_name: document.querySelector("#lastName").value,
+                    activation: document.querySelector("#activation").value,
                     //  last_name: document.querySelector("#lastName").value,
-                    position: document.querySelector("#position").firstElementChild.getAttribute("ng-selected")
+                    //     position: document.querySelector("#position").firstElementChild.getAttribute("ng-selected")
 
                 }
             }
@@ -287,7 +311,7 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
         }).
         success(function(data, status) {
             $scope.position = data;
-            setTimeout(function() {
+            $timeout(function() {
                 for (var i = 0; i < data.length; i++) {
                     $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
                 }
@@ -295,6 +319,7 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
         });
     }
     $scope.getClass = function() {
+        $scope.ttl = this.items.position;
         var position = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
         position.slideToggle('fast');
         if (!position.parent().attr('openFolder')) {
@@ -313,11 +338,14 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
             }
         }).success(function(data, status) {
             $scope.lessons = data;
+            if (data[0]) {
+                console.log(data[0].src)
+            }
         });
     }
     $scope.getLessons = function(focus, blur) {
         $http({
-            method: 'POST',
+            method: 'GET',
             url: 'get_lessons',
         }).
         success(function(data, status) {
@@ -330,6 +358,7 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
         });
     }
     $scope.loadPage = function() {
+        console.log(this.items.src)
         $scope.src = this.items.src;
         $("#pagePlayer").css({
             'width': '100%',
@@ -399,17 +428,29 @@ app.controller('personalpageGroup', ['$scope', '$http', 'language', function($sc
     });
     var username = document.querySelector("#username").innerHTML;
     $scope.autoload = function() {
-        $http({
-            method: 'POST',
-            url: '../main/user_personal_page',
-            data: {
-                'user': username
-            }
-        }).
-        success(function(data) {
-            $scope.user_page = data;
-            //  console.log(data);
-        });
+        $http.get('../main/user_personal_page', {
+                params: {
+                    user: username
+                }
+            })
+            .then(function(data) {
+                $scope.user_page = data.data;
+                //  console.log(data.data);
+            });
+
+
+        /*  $http({
+                  method: 'GET',
+                  url: '../main/user_personal_page',
+                   data: {
+                       'user': username
+                   }
+              }).
+              //  $http.get('../main/user_personal_page', conf).
+          success(function(data) {
+              $scope.user_page = data;
+              console.log(data);
+          });*/
     }
 
 }]);

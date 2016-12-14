@@ -1,4 +1,5 @@
-var app = angular.module('companyApp', ['ui.router', 'ngTouch', 'ui.bootstrap']);
+//var app = angular.module('companyApp', ['ui.router', 'ngTouch', 'ui.bootstrap']);
+var app = angular.module('companyApp', ['ui.router', 'ui.bootstrap']);
 
 app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');

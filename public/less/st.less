@@ -2,6 +2,20 @@
   display: none !important;
 }
 
+
+@font-face {
+  font-family: lpFont;
+  src: url(../fonts/gheagpalatbld.ttf);
+}
+
+.user_select {  
+  -webkit-user-select: all;  /* Chrome 49+ */
+  -moz-user-select: all;     /* Firefox 43+ */
+  -ms-user-select: all;      /* No support yet */
+  user-select: all;          /* Likely future */   
+}
+
+
 /*
 $grid-breakpoints: (
   // Extra small screen / phone
@@ -39,7 +53,9 @@ $grid-breakpoints: (
 
 @phones: ~"(max-width: 479px)";
 @smartphones: ~"(min-width: 480px) and (max-width: 767px)";
-@tablets: ~"(min-width: 768px) and (max-width: 959px)";
+@tablets: ~"(min-width: 768px) and (max-width: 991px)";
+@desktops: ~"(min-width: 992px) and (max-width: 1199px)";
+@widedesktops: ~"(min-width: 1200px)";
 
 @flags_position_x : -60px;
 @flags_position_y : -120px;
@@ -161,6 +177,22 @@ $grid-breakpoints: (
 	padding:10px;
 }
 
+.pos_a{
+	/*.user_select;*/
+	width:120px;
+	padding:10px 0;	 
+	border-bottom:1px solid red; 
+	display:block; 
+	text-decoration:none; 
+	cursor:pointer;
+	color:#000;
+	&:hover{
+		color:red;
+		border-bottom:2px solid #e7e5e5;
+	}
+}
+
+
 .position2{
 	display:none;
 	margin-left: 20px;
@@ -169,23 +201,7 @@ $grid-breakpoints: (
 	display:none;
 }
 
-/*
-@media (min-width: 480px) and (max-width: 767px) {
-	#glue, .resize{
-		width:100%;
-	}
-	
-}
 
-
-@media (min-width: 768px) and (max-width: 991px) {
-	#glue, .resize{
-		width:100%;
-	}
-
-}
-
-*/
 
 
 
@@ -280,3 +296,91 @@ header{
 	margin:0;
 	padding:0;
 }
+
+
+
+.lp_button, .lp_link{
+    background: #badcf2;
+    background-image: linear-gradient(to bottom, #badcf2, #2980b9);
+    -webkit-border-radius: 40px 10px;
+    -moz-border-radius: 40px 10px;
+    border-radius: 40px 10px;
+    -webkit-box-shadow: 2px 4px 8px #666666;
+    -moz-box-shadow: 2px 4px 8px #666666;
+    box-shadow: 2px 4px 8px #666666;
+    font-family: lpFont;
+    color: #ffffff;
+    font-size: 14px;
+    border-top: solid #666666 1px;
+    border-right: solid #666666 8px;
+    border-bottom: solid #666666 1px;
+    border-left: solid #666666 8px;
+    width:140px;
+    display: inline-block;
+
+    cursor: pointer;
+}
+
+.lp_button:hover, .lp_link:hover {
+color: #ffffff;
+      background: #f0f0f0;
+      background-image: -webkit-linear-gradient(top, #f0f0f0, #22638f);
+      background-image: -moz-linear-gradient(top, #f0f0f0, #22638f);
+      background-image: -ms-linear-gradient(top, #f0f0f0, #22638f);
+      background-image: -o-linear-gradient(top, #f0f0f0, #22638f);
+      background-image: linear-gradient(to bottom, #f0f0f0, #22638f);
+}
+
+.lp_button:active, .lp_link:active {
+color: #ffffff;
+      border-top: solid #FBF94F 1px;
+      border-right: solid #FBF94F 8px;
+      border-bottom: solid #FBF94F 1px;
+      border-left: solid #FBF94F 8px; 
+}
+
+
+
+
+
+
+
+/**************media*/////////////////////////
+
+@media @phones{
+	.carousel-caption > h1{
+		font-size:18px;
+	}
+}
+
+@media @smartphones{
+	.carousel-caption > h1{
+		font-size:24px;
+	}
+}
+
+@media @tablets{
+	.carousel-caption > h1{
+		font-size:32px;
+	}
+}
+
+@media @desktops{
+	.carousel-caption > h1{
+		font-size:48px;
+	}
+}
+
+@media @widedesktops{
+	.carousel-caption > h1{
+		font-size:56px;
+	}
+}
+
+
+/**************media end*/////////////////////////
+
+.carousel-caption > h3 > a{
+		padding:10px;
+		text-decoration:none;
+	}

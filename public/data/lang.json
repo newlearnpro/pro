@@ -11,5 +11,6 @@
     "delete",
     "update",
     "free_lesson",
-    "activation_code"
+    "activation_code",
+    "activation"
 ]
