@@ -49,6 +49,7 @@ $lang['captcha_hint']                = 'Напечатаейте текст ка
 $lang['old_password_hint']           = 'Old password';
 $lang['new_password_hint']           = 'New Password';
 $lang['activation_code']	         = 'Код активации';
+$lang['activation']	         		 = 'Активация';
 
 $lang['account_created']             = 'accaunt created';
 $lang['img_error']                   = 'Your picture is too large';

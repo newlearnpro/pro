@@ -14,7 +14,7 @@ it creates ci_sessions table if there isn't `ci_sessions` table
 *******************/ 
     public function create_ci_sessions_table()
     {   
-        /*********For MySQL: 
+        /*********For MySQL:
         CREATE TABLE IF NOT EXISTS `ci_sessions` (
                 `id` varchar(128) NOT NULL,
                 `ip_address` varchar(45) NOT NULL,
@@ -60,7 +60,77 @@ it creates position table if there isn't `position` table
 
 
 
+/*********************
+messages_room
+it creates messages_room table if there isn't `messages_room` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `messages_room` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `sender` varchar(50) collate utf8_general_ci NOT NULL,
+                `recipient` varchar(50) collate utf8_general_ci NOT NULL,
+                `message` text collate utf8_general_ci NOT NULL,
+                `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+               PRIMARY KEY(`id`)
 
+        );
+        */
+
+
+
+/*********************
+file
+it creates file table if there isn't `file` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `file` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `name` varchar(255) collate utf8_general_ci NOT NULL,
+                `description` varchar(255) collate utf8_general_ci NOT NULL,
+                `keywords` varchar(255) collate utf8_general_ci NOT NULL,
+                `src` varchar(100) NOT NULL,
+                `type_id` int(11) NOT NULL,
+                `parent_id` int(11) NOT NULL,
+                `number` int(11) NOT NULL,
+                `free` varchar(10) NOT NULL,
+               PRIMARY KEY(`id`)
+        );
+        */
+
+/*********************
+position
+it creates file table if there isn't `position` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `position2` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `position` varchar(255) collate utf8_general_ci NOT NULL,
+                `parent_id` int(11) unsigned NOT NULL,
+               PRIMARY KEY(`id`)
+        );
+        */
+
+/*********************
+users
+it creates file table if there isn't `users` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `users2` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `username` varchar(15) collate utf8_general_ci NOT NULL UNIQUE,
+                `password` varchar(35) collate utf8_general_ci NOT NULL,
+                `first_name` varchar(40) collate utf8_general_ci NOT NULL,
+                `last_name` varchar(40) collate utf8_general_ci NOT NULL,
+                `email` varchar(50) collate utf8_general_ci NOT NULL UNIQUE,
+                `img_src` text NOT NULL,
+                `activation_code` varchar(100) NOT NULL,
+                `activation` varchar(10) NOT NULL,
+                `permission` varchar(10) NOT NULL,
+               PRIMARY KEY(`id`)
+        );
+        */
+
+//////////////////////////////////////////////////////////////////////////////////////
   
   /*  public function create_users()
     {   
@@ -93,7 +163,7 @@ it creates position table if there isn't `position` table
             'password' => array('type'=>'VARCHAR', 'constraint' => 255, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
             'first_name' => array('type'=>'VARCHAR', 'constraint' => 255, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
             'last_name' => array('type'=>'VARCHAR', 'constraint' => 255, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
-            'email' => array('type'=>'VARCHAR', 'constraint' => 255, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
+            'email' => array('type'=>'VARCHAR', 'constraint' => 255, 'collation'=>'utf8_general_ci','null'=>'FALSE', 'UNIQUE'=>true),
             'img_src' => array('type'=>'LONGTEXT', 'collation'=>'utf8_general_ci','null'=>'FALSE'),
             'license_code' => array('type'=>'VARCHAR', 'constraint' => 255, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
             'permission' => array('type'=>'VARCHAR', 'constraint' => 10, 'collation'=>'utf8_general_ci','null'=>'FALSE')
@@ -115,46 +185,7 @@ it creates position table if there isn't `position` table
 
 
     
-/*
-//drop tables    
-    public function delete_tables($table)
-    {   
-        $this->load->dbforge();
-        $this->dbforge->drop_table($table);
-        echo "remove $table table";
-    }
 
-
-//create pos for 'noun', 'adjective' ...    
-    public function create_pos_1($pos)
-    {   
-       $xml=simplexml_load_file(site_url() . "xml/main_"  . $pos . ".xml") or die("Error: Cannot create object");
-       foreach($xml as $main){
-            $array = array();
-            foreach ($main->children() as $node) {  
-                if (is_array($node)) {
-                   $array[$node->getName()] = simplexml_to_array($node);
-                } else {
-                 $array[$node->getName()] = (string) $node;
-                }
-           }
-           $this->db->insert($pos, $array);           
-      }
-      echo "alraedy $pos into table";
-    }    
-    
-    
-    
-    
-    
-     public function delete_pos($pos)
-     {
-        $this->db->empty_table($pos);
-        echo "empty $pos table"; 
-     }
-    
-    */
-    
     
     
     

@@ -32,13 +32,11 @@ class Main extends CI_Controller {
 		for($i = 0; $i < count($get_info); $i++){
 			$lang[$get_info[$i]] = lang($get_info[$i]);
 		}
-
 		echo json_encode($lang);
 	}
 
 	public function user_personal_page(){
-		$_POST = json_decode(file_get_contents('php://input'), true);
-		$get_info = $this->input->post('user');
+		$get_info = $this->input->get('user');
 		$this->load->model('membership_model');
 		$query = $this->membership_model->user_page($get_info);		
 		echo json_encode($query);
@@ -80,7 +78,7 @@ class Main extends CI_Controller {
 
 	public function get_lessons()
 	{
-		$_POST = json_decode(file_get_contents('php://input'), true);
+	//	$_POST = json_decode(file_get_contents('php://input'), true);
 		$this->load->model('membership_model');
 		$query = $this->membership_model->lesson();
 		echo json_encode($query);

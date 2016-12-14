@@ -20,7 +20,8 @@ it creates position table if there isn't `position` table
             'message' => $get_info['message'],
            // 'time' => date("d-m-Y h:i:s")
              //'time' => date("l jS \of F Y h:i:s A") 
-            'time' => date("d-m-Y h:i:s") 
+          //  'time' => date("d-m-Y h:i:s") 
+            'timestamp' => date("U")
         );         
         $insert = $this->db->insert('messages_room', $message_data);
      //   return $message_data;

@@ -18,10 +18,10 @@ class Membership_model extends CI_Model {
 
     public function users_change($get_info)
     {   
-        $data = array(
-            'username' => $get_info['username'],
+        $data = array(           
             'first_name' => $get_info['first_name'],
-            'position' => $get_info['position']
+            'last_name' => $get_info['last_name'],
+            'activation' => $get_info['activation'],
         );
         $this->db->where('username', $get_info['login']);
         $this->db->update('users', $data);        
@@ -29,7 +29,6 @@ class Membership_model extends CI_Model {
 
     public function user_page($get_info)
     {   
-     //   $this->db->where('username', 'artak');
         $this->db->where('username', $get_info);
         $this->db->select('username, first_name, last_name, email, activation_code');        
         $query = $this->db->get("users");
