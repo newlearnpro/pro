@@ -15,9 +15,13 @@
 	<div ng-show="checked" ng-repeat='items in searchLessons | filter:searchLesson'>
 		<div  class='lesson_type_{{items.type_id}}' ng-click='loadPage()'><span >{{items.name}}</span></div>
 	</div>
+
+	<!--div ng-show="checked" ng-repeat='items in searchPositions | filter:position'>
+		<div  class='lesson_type_{{items.type_id}}' ng-click='loadPage()'><span >{{items.name}}</span></div>
+	</div-->
 </div>
 
-
+<input type='button' value='open' ng-click='open()' />
 
 		<label>{{language.structure}}</label>&nbsp;
 		<div class='mainPosition'>
@@ -30,6 +34,7 @@
 	</div>	
 	<div class='mainLesson col-xs-12 col-sm-12  col-md-3  col-lg-3'>
 		<div ng-repeat='items in lessons'>
+			<div><span>{{ttl}}</span></div>
 			<div><span>{{ttl}}</span></div>
 			<div  class='lesson_type_{{items.type_id}}' ng-click='loadPage()'><span>{{items.name}}</span></div>
 		</div>
