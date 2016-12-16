@@ -293,16 +293,41 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
 }]);
 
 app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', function($scope, $http, $q, $timeout, language) {
+    var obj = [];
     var promise = language.getLang();
     promise.then(function(data) {
         $scope.language = data;
         //   $scope.lo();
         $scope.loadPosition();
     });
-    $scope.lo = function() {
+
+
+
+
+
+    $scope.lp = function($event) {
+
+        /*   $scope.$evalAsync(function() {
+               console.log('evalAsync ' + $event.target.value);
+           });
+
+           $scope.$eval(function() {
+               console.log('eval ' + $event.target.value);
+           });
+
+           console.log('click ' + $event.target.value);
+
+
+
+
+
+
+           $event.target.value = 'close';*/
+
 
     }
     $scope.open = function() {
+
         /*  //   var position = $('.mainPosition div[openfolder^="yes"]');
 
 
@@ -318,35 +343,27 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
               position.eq(i).attr('openfolder', '');
 
           }*/
-        var obj = [{
-            'id': 102,
-            'parent_id': 0
-        }, {
-            'id': 105,
-            'parent_id': 102
-        }, {
-            'id': 106,
-            'parent_id': 105
-        }, {
-            'id': 108,
-            'parent_id': 106
-        }]
-        console.log(obj.length)
+        /* var obj = [{
+             'id': 102,
+             'parent_id': 0
+         }, {
+             'id': 105,
+             'parent_id': 102
+         }, {
+             'id': 106,
+             'parent_id': 105
+         }, {
+             'id': 108,
+             'parent_id': 106
+         }]*/
         var position = [];
-        //, .mainPosition div[data1^="102", data2^="0", [openfolder^="yes"]');
-
-        //console.log(position);
-
         for (var i = 0; i < obj.length; i++) {
             position.push($('.mainPosition div[data1^="' + obj[i].id + '"][data2^="' + obj[i].parent_id + '"]'));
-            //console.log(obj[i].id)
-            position[i].children('div').slideToggle();
-            position[i].children('a').css({
-                'color': 'red',
-                'border-bottom': '1px solid red'
-            });
-            position[i].attr('openfolder', '');
-            // console.log(position[0].eq(i).children('div'))
+            if (!position[i].attr('openfolder')) {
+                position[i].attr('openfolder', 'yes');
+                position[i].children('div').slideDown();
+                position[i].children('a').css('color', '#ff0000');
+            }
         }
 
     }
@@ -371,10 +388,32 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
             }, 10);
         });
     }
-    $scope.getClass = function() {
-        console.log(this.items)
-            //var pos = $('.mainPosition div[openfolder^="yes"]').children('div');
-            //   var pos = $('.mainPosition div[data1^="' + this.items.id + '"][data2^="' + this.items.parent_id + '"]');
+    $scope.getClass = function($event) {
+        var that = this;
+        //  console.log($event.target.parentNode)
+        $scope.$evalAsync(function() {
+            console.log($event.target.parentNode.attributes.openfolder)
+            if ($event.target.parentNode.attributes.openfolder) {
+                obj.push({
+                    'id': that.items.id,
+                    'parent_id': that.items.parent_id
+                });
+            } else {
+                obj = [];
+            }
+            console.log(obj);
+        });
+
+        //  console.log(this.items)
+        //if(this.items.parent_id)
+        //  if ($event.target.attr) {
+
+        /* } else if ($('.position1').attr('openfolder')) {
+             obj = [];
+         }*/
+        //    console.log(obj);
+        //var pos = $('.mainPosition div[openfolder^="yes"]').children('div');
+        //   var pos = $('.mainPosition div[data1^="' + this.items.id + '"][data2^="' + this.items.parent_id + '"]');
 
         // var tt = position.pop();
 
@@ -386,9 +425,14 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
 
         //console.log(this)
         var position_all = $('.position2');
+
+        //var position_all = $('.position2').children('div').not($('.mainPosition div[data1^="' + this.items.id + '"]'));
+        var position_all = $('.mainPosition div[openfolder^="yes"]').children('div');
         var position_curent = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
         //   console.log(position[0])
 
+
+        //position_all.slideToggle('fast');
         position_curent.slideToggle('fast');
 
 
@@ -399,12 +443,27 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
             position_curent.parent().children('a').css('color', '#ff0000');
             position_curent.parent().attr('openFolder', 'yes');
 
+
         } else {
             //     position_all.slideDown('fast');
             //   position_all.slideUp('fast');
             position_curent.parent().children('a').css('color', '#333333');
             position_curent.parent().removeAttr('openFolder');
+
+
+
         }
+
+        /*if (!position_all.parent().attr('openFolder')) {
+            position_all.parent().children('a').css('color', '#ff0000');
+            position_all.parent().attr('openFolder', 'yes');
+            position_all.slideUp('fast');
+        } else {
+            position_all.parent().children('a').css('color', '#333333');
+            position_all.parent().removeAttr('openFolder');
+            position_all.slideDown('fast');
+
+        }*/
 
         $http({
             method: 'POST',
@@ -443,7 +502,7 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
             'width': '100%',
             'height': parseInt($('#pagePlayer').css('width')) / 1.33,
             'maxWidth': '1000px'
-        }).attr('src', '../../uploads/' + this.items.src + '/index.html');
+        });
         $(window).resize(function() {
             $("#pagePlayer").css({
                 'width': '100%',

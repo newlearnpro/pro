@@ -44,7 +44,7 @@ app.service('language', function($http, $q) {
         }).success(function(data) {
             deffered.resolve(data);
         }).error(function() {
-            deffered.reject("error langage json file");
+            deffered.reject("error language json file");
         });
     });
 
