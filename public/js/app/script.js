@@ -292,82 +292,28 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
     }
 }]);
 
-app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', function($scope, $http, $q, $timeout, language) {
+app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 'language', function($scope, $rootScope, $http, $q, $timeout, language) {
     var obj = [];
     var promise = language.getLang();
     promise.then(function(data) {
         $scope.language = data;
-        //   $scope.lo();
         $scope.loadPosition();
+        openPosition();
     });
-
-
-
-
-
-    $scope.lp = function($event) {
-
-        /*   $scope.$evalAsync(function() {
-               console.log('evalAsync ' + $event.target.value);
-           });
-
-           $scope.$eval(function() {
-               console.log('eval ' + $event.target.value);
-           });
-
-           console.log('click ' + $event.target.value);
-
-
-
-
-
-
-           $event.target.value = 'close';*/
-
-
-    }
-    $scope.open = function() {
-
-        /*  //   var position = $('.mainPosition div[openfolder^="yes"]');
-
-
-
-          var position = $('.mainPosition div[data1^="105"][data2^="102"]');
-          //, .mainPosition div[data1^="102", data2^="0", [openfolder^="yes"]');
-
-          console.log(position);
-          console.log(position.length);
-          for (var i = 0; i < position.length; i++) {
-              position.eq(i).children('div').slideToggle();
-              position.eq(i).children('A').css('color', '#000');
-              position.eq(i).attr('openfolder', '');
-
-          }*/
-        /* var obj = [{
-             'id': 102,
-             'parent_id': 0
-         }, {
-             'id': 105,
-             'parent_id': 102
-         }, {
-             'id': 106,
-             'parent_id': 105
-         }, {
-             'id': 108,
-             'parent_id': 106
-         }]*/
-        var position = [];
-        for (var i = 0; i < obj.length; i++) {
-            position.push($('.mainPosition div[data1^="' + obj[i].id + '"][data2^="' + obj[i].parent_id + '"]'));
-            if (!position[i].attr('openfolder')) {
-                position[i].attr('openfolder', 'yes');
-                position[i].children('div').slideDown();
-                position[i].children('a').css('color', '#ff0000');
+    var openPosition = function() {
+        $timeout(function() {
+            console.log($rootScope.obj);
+            var position = [];
+            for (var i = 0; i < $rootScope.obj.length; i++) {
+                position.push($('.mainPosition div[data1^="' + $rootScope.obj[i].id + '"][data2^="' + $rootScope.obj[i].parent_id + '"]'));
+                if (!position[i].attr('openfolder')) {
+                    position[i].attr('openfolder', 'yes');
+                    position[i].children('div').slideDown();
+                    position[i].children('a').css('color', '#ff0000');
+                }
             }
-        }
-
+        }, 600);
     }
-
     $scope.loadPosition = function() {
         $("#glu").css({
             'width': $('.mainPage').width(),
@@ -390,18 +336,18 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
     }
     $scope.getClass = function($event) {
         var that = this;
-        //  console.log($event.target.parentNode)
         $scope.$evalAsync(function() {
-            console.log($event.target.parentNode.attributes.openfolder)
             if ($event.target.parentNode.attributes.openfolder) {
-                obj.push({
+                $rootScope.obj.push({
                     'id': that.items.id,
                     'parent_id': that.items.parent_id
                 });
             } else {
-                obj = [];
+                var johnRemoved = $rootScope.obj.filter(function(el) {
+                    return el.id !== that.items.id && el.parent_id !== that.items.parent_id;
+                });
+                $rootScope.obj = johnRemoved;
             }
-            console.log(obj);
         });
 
         //  console.log(this.items)
@@ -502,7 +448,7 @@ app.controller('listGroup', ['$scope', '$http', '$q', '$timeout', 'language', fu
             'width': '100%',
             'height': parseInt($('#pagePlayer').css('width')) / 1.33,
             'maxWidth': '1000px'
-        });
+        }).attr('src', '../../uploads/' + this.items.src + '/index.html');;
         $(window).resize(function() {
             $("#pagePlayer").css({
                 'width': '100%',

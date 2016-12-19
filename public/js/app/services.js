@@ -29,7 +29,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             templateUrl: '../../public/partials/personalpage.html',
         })
     $locationProvider.html5Mode(true);
-});
+}).run(['$state', '$rootScope', function($state, $rootScope) {
+    $rootScope.obj = [];
+    console.log("TT");
+}]);
 
 
 app.service('language', function($http, $q) {
