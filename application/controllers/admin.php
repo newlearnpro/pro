@@ -99,7 +99,7 @@ class Admin extends CI_Controller {
 		$this->create_tables_model->create_position_table();
 		$get_info = $this->input->post('position');
 		$get_info2 = $this->input->post('parent_id');
-		$data = array('position'=>$get_info[0], 'custom_id'=>'1', 'parent_id'=>$get_info2);
+		$data = array('position'=>$get_info[0], 'parent_id'=>$get_info2);
 		if(!empty($get_info[0])){
 			$this->db->insert('position', $data);
 		}

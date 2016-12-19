@@ -44,7 +44,7 @@ position folder.
 it creates position table if there isn't `position` table        
 *******************/   
     public function create_position_table()
-    {       
+    {
         $this->dbforge->add_field(array(
                     'id' => array('type' => 'INT', 'constraint' => 11, 'unsigned' => TRUE, 'auto_increment' => TRUE),
                     'position' => array('type' => 'VARCHAR', 'constraint' => '50'),
@@ -102,7 +102,7 @@ position
 it creates file table if there isn't `position` table        
 *******************/ 
         /*********For MySQL:
-        CREATE TABLE IF NOT EXISTS `position2` (
+        CREATE TABLE IF NOT EXISTS `position` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `position` varchar(255) collate utf8_general_ci NOT NULL,
                 `parent_id` int(11) unsigned NOT NULL,
@@ -115,7 +115,7 @@ users
 it creates file table if there isn't `users` table        
 *******************/ 
         /*********For MySQL:
-        CREATE TABLE IF NOT EXISTS `users2` (
+        CREATE TABLE IF NOT EXISTS `users` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `username` varchar(15) collate utf8_general_ci NOT NULL UNIQUE,
                 `password` varchar(35) collate utf8_general_ci NOT NULL,
