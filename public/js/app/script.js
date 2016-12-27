@@ -187,7 +187,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
         }).
         success(function(data, status) {
             $scope.position = data;
-            setTimeout(function() {
+            $timeout(function() {
                 for (var i = 0; i < data.length; i++) {
                     $('.position_item[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
                 }
@@ -207,7 +207,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
         }).
         success(function(data, status) {
             $scope.lesson = data;
-            setTimeout(function() {
+            $timeout(function() {
                 for (var i = 0; i < data.length; i++) {
                     $('.lesson_item[data2^="' + data[i].parent_id + '"]').appendTo(".position_item[data1^='" + data[i].parent_id + "']");
                 }
@@ -295,24 +295,27 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
 app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 'language', function($scope, $rootScope, $http, $q, $timeout, language) {
     var obj = [];
     var promise = language.getLang();
+
     promise.then(function(data) {
         $scope.language = data;
         $scope.loadPosition();
         openPosition();
     });
     var openPosition = function() {
-        $timeout(function() {
-            console.log($rootScope.obj);
-            var position = [];
-            for (var i = 0; i < $rootScope.obj.length; i++) {
-                position.push($('.mainPosition div[data1^="' + $rootScope.obj[i].id + '"][data2^="' + $rootScope.obj[i].parent_id + '"]'));
-                if (!position[i].attr('openfolder')) {
-                    position[i].attr('openfolder', 'yes');
-                    position[i].children('div').slideDown();
-                    position[i].children('a').css('color', '#ff0000');
-                }
-            }
-        }, 600);
+        /*  var sesStorage = JSON.parse(sessionStorage.getItem('ofol'));
+          $timeout(function() {
+              var position = [];
+              if (sesStorage != undefined) {
+                  for (var i = 0; i < sesStorage.length; i++) {
+                      position.push($('.mainPosition div[data1^="' + sesStorage[i].id + '"][data2^="' + sesStorage[i].parent_id + '"]'));
+                      if (!position[i].attr('openfolder')) {
+                          position[i].attr('openfolder', 'yes');
+                          position[i].children('div').slideDown();
+                          position[i].children('a').css('color', '#ff0000');
+                      }
+                  }
+              }
+          }, 600);*/
     }
     $scope.loadPosition = function() {
         $("#glu").css({
@@ -330,12 +333,27 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             $timeout(function() {
                 for (var i = 0; i < data.length; i++) {
                     $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+
+
+
+
+                    //  $('.mainPosition').children().children().attr('dirq', i);
+
                 }
+                if ($('.position1').has('a').length) {
+                    $('.position1').attr('dirq', 1);
+                } else if ($('.position1').has('a').length) {
+                    $('.position1').attr('dirq', 1);
+                }
+                $timeout(function() {
+                    console.log($('.position1').has('a').length)
+                }, 1000);
+
             }, 10);
         });
     }
     $scope.getClass = function($event) {
-        var that = this;
+        /*   var that = this;
         $scope.$evalAsync(function() {
             if ($event.target.parentNode.attributes.openfolder) {
                 $rootScope.obj.push({
@@ -343,12 +361,23 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                     'parent_id': that.items.parent_id
                 });
             } else {
-                var johnRemoved = $rootScope.obj.filter(function(el) {
+                var positionUp = $rootScope.obj.filter(function(el) {
+                    //   console.log(el.id);
                     return el.id !== that.items.id && el.parent_id !== that.items.parent_id;
                 });
-                $rootScope.obj = johnRemoved;
+                $rootScope.obj = positionUp;
+                //  console.log(positionUp)
+
             }
+            sessionStorage.setItem('ofol', JSON.stringify($rootScope.obj));
+            //    console.log($rootScope.obj)
         });
+*/
+
+
+
+
+        // Получение данных из sessionStorage
 
         //  console.log(this.items)
         //if(this.items.parent_id)
@@ -374,28 +403,71 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
         //var position_all = $('.position2').children('div').not($('.mainPosition div[data1^="' + this.items.id + '"]'));
         var position_all = $('.mainPosition div[openfolder^="yes"]').children('div');
+        var position_1 = $('div[openfolder^="yes"]').children('div');
+        //  var position_1 = $('div[openfolder^="yes"]').children('div').siblings('.mainPosition div[data1^="' + this.items.id + '"]')
         var position_curent = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
+
+        // console.log(this.$parent);
+
+        //var position_curent2 = $('.mainPosition div[data1^="' + this.items.id + '"]').next();
         //   console.log(position[0])
 
 
         //position_all.slideToggle('fast');
         position_curent.slideToggle('fast');
+        //    console.log(position_all);
+
+        //  var tt = $event.target
+
+        //   console.log($(this).siblings().css("background", "red"));
+
+        //  console.log(tt.parentNode);
+        //  console.log($event.target.parentNode.childNodes[3]);
+        //    $event.currentTarget.nextSibling.innerHTML.style.display = 'none';
 
 
-        if (!position_curent.parent().attr('openFolder')) {
+        if (position_curent.parent().attr('openFolder')) {
+
             //      position_all.slideUp('fast');
             //      position_curent.slideDown('fast');
+            //   console.log(position_curent2[0])
+            //   position_curent2.slideUp('fast');
+            //       position_curent.parent().children().children().slideUp('fast');
+
+            console.log()
+                //  if (position_curent.parent().attr('openFolder')) {
+                //   position_1.slideDown('fast')
+                //    position_curent.slideUp('fast');
+
+            //     position_1.parent().children('a').css('color', '#ff0000');
+            //      position_1.parent().attr('openFolder', 'yes');
+
+            position_curent.parent().children('a').css('color', '#333333');
+            position_curent.parent().removeAttr('openFolder');
+            //}
+
+
+
+
+        } else if (!position_curent.parent().attr('openFolder')) {
+            //    console.log(position_curent.parent()[0])
+            //   console.log(position_curent2[0])
+            //     position_all.slideDown('fast');
+            //     position_all.slideUp('fast');
+            //    position_curent.parent().children().children().slideDown('fast')
+            //position_curent.parent().parent().children().slideDown('fast');
+            //   position_curent2.slideDown('fast');
+
+            //     position_1.slideUp('fast');
+            //    position_curent.slideDown('fast');
+
+
+            //     position_1.parent().children('a').css('color', '#333333');
+            //     position_1.parent().removeAttr('openFolder');
+
 
             position_curent.parent().children('a').css('color', '#ff0000');
             position_curent.parent().attr('openFolder', 'yes');
-
-
-        } else {
-            //     position_all.slideDown('fast');
-            //   position_all.slideUp('fast');
-            position_curent.parent().children('a').css('color', '#333333');
-            position_curent.parent().removeAttr('openFolder');
-
 
 
         }
