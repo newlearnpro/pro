@@ -130,6 +130,21 @@ it creates file table if there isn't `users` table
         );
         */
 
+/*********************
+users_data
+it creates file table if there isn't `users_data` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `users_data` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `username` varchar(15) collate utf8_general_ci NOT NULL,
+                `lesson_id` varchar(100) collate utf8_general_ci NOT NULL,
+                `lesson_name` varchar(100) collate utf8_general_ci NOT NULL,
+                `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+               PRIMARY KEY(`id`)
+        );
+        */
+
 //////////////////////////////////////////////////////////////////////////////////////
   
   /*  public function create_users()

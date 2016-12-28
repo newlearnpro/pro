@@ -46,7 +46,17 @@ it creates position table if there isn't `position` table
     }
 
 
-
+    public function insert_users_data($get_info)
+    {
+        $opened_lesson = array(
+            'username' =>  $get_info['username'],
+            'lesson_id' =>  $get_info['id'],
+            'lesson_name' => $get_info['name'],
+            'timestamp' => date("U")
+        );         
+        $insert = $this->db->insert('users_data', $opened_lesson);
+     //   return $message_data;
+    }
 
 
 
