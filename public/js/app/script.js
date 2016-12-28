@@ -374,7 +374,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         });
 */
 
-
+        //  this.parent().children('div').css('border', '2px solid blue');
 
 
         // Получение данных из sessionStorage
@@ -407,6 +407,9 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         //  var position_1 = $('div[openfolder^="yes"]').children('div').siblings('.mainPosition div[data1^="' + this.items.id + '"]')
         var position_curent = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
 
+        var position_cur2 = $('.mainPosition div[data1^="' + this.items.id + '"]').parent().parent().children().children('div').children('div');
+
+        // var position_cur3 = $('.mainPosition div[data1^="' + this.items.id + '"]').parent().parent().children();
         // console.log(this.$parent);
 
         //var position_curent2 = $('.mainPosition div[data1^="' + this.items.id + '"]').next();
@@ -414,7 +417,33 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
         //position_all.slideToggle('fast');
-        position_curent.slideToggle('fast');
+
+        //console.log(position_cur2);
+
+
+        position_cur2.slideUp('fast');
+        // $('.mainPosition div[data1^="' + this.items.id + '"]').removeAttr('openFolder');
+        position_cur2.parent().parent().children().removeAttr('openFolder');
+        position_cur2.parent().parent().children().children('a').css('color', '#333333');
+        /*   if ($('.mainPosition div[data1^="' + this.items.id + '"]').attr('openFolder') == 'yes') {
+
+            position_curent.slideUp('fast');
+            position_cur2.attr('openFolder', '');
+            //  alert('pp');
+
+        } else {
+
+            position_curent.slideDown('fast');
+  
+                
+
+        }
+
+*/
+
+
+
+
         //    console.log(position_all);
 
         //  var tt = $event.target
@@ -427,17 +456,18 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
         if (position_curent.parent().attr('openFolder')) {
-
+            position_curent.slideUp('fast');
+            position_cur2.attr('openFolder', '');
             //      position_all.slideUp('fast');
             //      position_curent.slideDown('fast');
             //   console.log(position_curent2[0])
             //   position_curent2.slideUp('fast');
             //       position_curent.parent().children().children().slideUp('fast');
 
-            console.log()
-                //  if (position_curent.parent().attr('openFolder')) {
-                //   position_1.slideDown('fast')
-                //    position_curent.slideUp('fast');
+            //        console.log()
+            //  if (position_curent.parent().attr('openFolder')) {
+            //   position_1.slideDown('fast')
+            //    position_curent.slideUp('fast');
 
             //     position_1.parent().children('a').css('color', '#ff0000');
             //      position_1.parent().attr('openFolder', 'yes');
@@ -450,6 +480,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
         } else if (!position_curent.parent().attr('openFolder')) {
+            position_curent.slideDown('fast');
             //    console.log(position_curent.parent()[0])
             //   console.log(position_curent2[0])
             //     position_all.slideDown('fast');
@@ -513,8 +544,22 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         });
     }
     $scope.loadPage = function() {
+        var username = document.querySelector("#username").innerHTML;
+        $http.get('../main/users_data', {
+                params: {
+                    username: username,
+                    lesson_id: this.items.id,
+                    lesson_name: this.items.name
+                }
+            })
+            .then(function(data) {
+
+                console.log("gnac");
+            });
+        //console.log(this.items)
+        // alert()
         //lesson    
-        //     console.log(this.items.src)
+        console.log(this.items)
         $scope.src = this.items.src;
         $("#pagePlayer").css({
             'width': '100%',
