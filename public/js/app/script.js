@@ -345,174 +345,44 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                 } else if ($('.position1').has('a').length) {
                     $('.position1').attr('dirq', 1);
                 }
-                $timeout(function() {
-                    console.log($('.position1').has('a').length)
-                }, 1000);
+                /*    $timeout(function() {
+                        console.log($('.position1').has('a').length)
+                    }, 1000);*/
 
             }, 10);
         });
     }
     $scope.getClass = function($event) {
-        /*   var that = this;
-        $scope.$evalAsync(function() {
-            if ($event.target.parentNode.attributes.openfolder) {
-                $rootScope.obj.push({
-                    'id': that.items.id,
-                    'parent_id': that.items.parent_id
-                });
-            } else {
-                var positionUp = $rootScope.obj.filter(function(el) {
-                    //   console.log(el.id);
-                    return el.id !== that.items.id && el.parent_id !== that.items.parent_id;
-                });
-                $rootScope.obj = positionUp;
-                //  console.log(positionUp)
 
-            }
-            sessionStorage.setItem('ofol', JSON.stringify($rootScope.obj));
-            //    console.log($rootScope.obj)
-        });
-*/
-
-        //  this.parent().children('div').css('border', '2px solid blue');
-
-
-        // Получение данных из sessionStorage
-
-        //  console.log(this.items)
-        //if(this.items.parent_id)
-        //  if ($event.target.attr) {
-
-        /* } else if ($('.position1').attr('openfolder')) {
-             obj = [];
-         }*/
-        //    console.log(obj);
-        //var pos = $('.mainPosition div[openfolder^="yes"]').children('div');
-        //   var pos = $('.mainPosition div[data1^="' + this.items.id + '"][data2^="' + this.items.parent_id + '"]');
-
-        // var tt = position.pop();
-
-
-        //   var pp = $("" + position + "");
-        //   console.log(pos);
-        //  console.log(position.length);
         $scope.ttl = this.items.position;
 
-        //console.log(this)
-        var position_all = $('.position2');
-
-        //var position_all = $('.position2').children('div').not($('.mainPosition div[data1^="' + this.items.id + '"]'));
-        var position_all = $('.mainPosition div[openfolder^="yes"]').children('div');
-        var position_1 = $('div[openfolder^="yes"]').children('div');
-        //  var position_1 = $('div[openfolder^="yes"]').children('div').siblings('.mainPosition div[data1^="' + this.items.id + '"]')
         var position_curent = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
-
         var position_cur2 = $('.mainPosition div[data1^="' + this.items.id + '"]').parent().parent().children().children('div').children('div');
 
-        // var position_cur3 = $('.mainPosition div[data1^="' + this.items.id + '"]').parent().parent().children();
-        // console.log(this.$parent);
-
-        //var position_curent2 = $('.mainPosition div[data1^="' + this.items.id + '"]').next();
-        //   console.log(position[0])
 
 
-        //position_all.slideToggle('fast');
-
-        //console.log(position_cur2);
-
-
-        position_cur2.slideUp('fast');
-        // $('.mainPosition div[data1^="' + this.items.id + '"]').removeAttr('openFolder');
         position_cur2.parent().parent().children().removeAttr('openFolder');
-        position_cur2.parent().parent().children().children('a').css('color', '#333333');
-        /*   if ($('.mainPosition div[data1^="' + this.items.id + '"]').attr('openFolder') == 'yes') {
 
-            position_curent.slideUp('fast');
-            position_cur2.attr('openFolder', '');
-            //  alert('pp');
 
+        if (position_curent.parent().children('a').attr('style')) {
+            setTimeout(function() {
+                position_curent.parent().children('a').removeAttr('style');
+                position_curent.slideUp('fast');
+            }, 100);
         } else {
-
-            position_curent.slideDown('fast');
-  
-                
-
+            position_cur2.slideUp('fast');
+            //     console.log(position_curent.parent().children('a').html())
+            position_cur2.parent().parent().children().children('a').removeAttr('style');
         }
 
-*/
-
-
-
-
-        //    console.log(position_all);
-
-        //  var tt = $event.target
-
-        //   console.log($(this).siblings().css("background", "red"));
-
-        //  console.log(tt.parentNode);
-        //  console.log($event.target.parentNode.childNodes[3]);
-        //    $event.currentTarget.nextSibling.innerHTML.style.display = 'none';
-
-
-        if (position_curent.parent().attr('openFolder')) {
-            position_curent.slideUp('fast');
-            position_cur2.attr('openFolder', '');
-            //      position_all.slideUp('fast');
-            //      position_curent.slideDown('fast');
-            //   console.log(position_curent2[0])
-            //   position_curent2.slideUp('fast');
-            //       position_curent.parent().children().children().slideUp('fast');
-
-            //        console.log()
-            //  if (position_curent.parent().attr('openFolder')) {
-            //   position_1.slideDown('fast')
-            //    position_curent.slideUp('fast');
-
-            //     position_1.parent().children('a').css('color', '#ff0000');
-            //      position_1.parent().attr('openFolder', 'yes');
-
-            position_curent.parent().children('a').css('color', '#333333');
-            position_curent.parent().removeAttr('openFolder');
-            //}
-
-
-
-
-        } else if (!position_curent.parent().attr('openFolder')) {
+        if (!position_curent.parent().attr('openFolder')) {
             position_curent.slideDown('fast');
-            //    console.log(position_curent.parent()[0])
-            //   console.log(position_curent2[0])
-            //     position_all.slideDown('fast');
-            //     position_all.slideUp('fast');
-            //    position_curent.parent().children().children().slideDown('fast')
-            //position_curent.parent().parent().children().slideDown('fast');
-            //   position_curent2.slideDown('fast');
+            position_curent.parent().children('a').css('color', 'red');
 
-            //     position_1.slideUp('fast');
-            //    position_curent.slideDown('fast');
-
-
-            //     position_1.parent().children('a').css('color', '#333333');
-            //     position_1.parent().removeAttr('openFolder');
-
-
-            position_curent.parent().children('a').css('color', '#ff0000');
+            position_cur2.parent().parent().children().removeAttr('openFolder');
             position_curent.parent().attr('openFolder', 'yes');
-
-
         }
 
-        /*if (!position_all.parent().attr('openFolder')) {
-            position_all.parent().children('a').css('color', '#ff0000');
-            position_all.parent().attr('openFolder', 'yes');
-            position_all.slideUp('fast');
-        } else {
-            position_all.parent().children('a').css('color', '#333333');
-            position_all.parent().removeAttr('openFolder');
-            position_all.slideDown('fast');
-
-        }*/
 
         $http({
             method: 'POST',
@@ -522,10 +392,6 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             }
         }).success(function(data, status) {
             $scope.lessons = data;
-
-            if (data[0]) {
-                //console.log(data[0].src)
-            }
         });
     }
     $scope.getLessons = function(focus, blur) {
@@ -534,7 +400,6 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             url: 'get_lessons',
         }).
         success(function(data, status) {
-            //console.log(data);
             if (focus === true) {
                 $scope.searchLessons = data;
             } else if (blur === true) {
@@ -556,9 +421,6 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
                 console.log("gnac");
             });
-        //console.log(this.items)
-        // alert()
-        //lesson    
         console.log(this.items)
         $scope.src = this.items.src;
         $("#pagePlayer").css({
