@@ -16,6 +16,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/index/addlesson',
             templateUrl: '../../public/partials/addlesson.html',
         })
+        .state('questions', {
+            url: '/index/questions',
+            templateUrl: '../../public/partials/questions.html',
+        })
         .state('contacts', {
             url: '/index/contacts',
             templateUrl: '../../public/partials/contacts.html',

@@ -7,6 +7,7 @@
 
 <span><a ui-sref='position' ui-sref-active='active' class='btn btn-default'><?=lang('create_position') ?></a></span> 
 <span><a ui-sref='addlesson' ui-sref-active='active' class='btn btn-default'><?=lang('add_lesson') ?></a></span>
+<span><a ui-sref='questions' ui-sref-active='active' class='btn btn-default'><?=lang('question_list') ?></a></span>
 <span><a ui-sref='users' ui-sref-active='active' class='btn btn-default'><?=lang('change_users_info') ?></a></span>
 
 

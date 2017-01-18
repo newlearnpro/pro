@@ -58,8 +58,20 @@ it creates position table if there isn't `position` table
      //   return $message_data;
     }
 
-
-
+    public function insert_question($get_info)
+    {
+        $question_field = array(
+            'lesson_id' =>  $get_info['lesson_id'],
+            'question_type' =>  $get_info['question_type'],
+            'question' => $get_info['question'],
+            'answers' => $get_info['answers'],
+          //  'answers' => '[1,2,3]',
+            'correct_answer' => $get_info['correct_answer']
+        );
+        
+       $insert = $this->db->insert('questions', $question_field);
+     //   return $message_data;
+    }
 
 
 

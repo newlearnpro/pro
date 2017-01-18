@@ -145,8 +145,28 @@ it creates file table if there isn't `users_data` table
         );
         */
 
+
 //////////////////////////////////////////////////////////////////////////////////////
-  
+ 
+
+/*********************
+questions
+it creates question table if there isn't `questions` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `questions` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `lesson_id` int(11) NOT NULL,
+                `question_type` int(11) NOT NULL,
+                `question` text collate utf8_general_ci NOT NULL,
+                `answers` varchar(255) collate utf8_general_ci NOT NULL,
+                `correct_answer` int(11) NOT NULL,
+               PRIMARY KEY(`id`)
+
+        );
+        */
+
+
   /*  public function create_users()
     {   
         $this->load->dbforge();

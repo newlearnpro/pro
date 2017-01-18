@@ -11,9 +11,6 @@ class Admin extends CI_Controller {
         $this->load->model('membership_model');        
         $this->lang->load('language_form',$this->uri->segment(1));
         $this->session->set_userdata('lang',$this->uri->segment(1));
-
-
-      //  echo $this->input->post('aa');
     }
 
 	public function index()
@@ -25,41 +22,6 @@ class Admin extends CI_Controller {
 		}else{
 		    redirect($this->uri->segment(1).'/login');
 		}
-	}
-
-	public function email()
-	{
-//$this->load->helper('string');
-//echo random_string('alnum', 16);
-	/*	$config = Array(
-		  'protocol' => 'smtp',
-		  'smtp_host' => 'ssl://smtp.googlemail.com',
-		  'smtp_port' => 465,
-		  'smtp_user' => 'artakgevorgyan83@gmail.com',
-		  'smtp_pass' => 'theaaaaaaa',
-		  'mailtype' => 'html',
-		  'charset' => 'iso-8859-1',
-		  'wordwrap' => TRUE
-		);
-		 
-		  $this->load->library('email', $config);
-		  $this->email->set_newline("\r\n");
-		  $this->email->from('gevorggevorgyan-79@mail.ru');
-		  $this->email->to('gevorggevorgyan-79@mail.ru');
-		  $this->email->subject('Email using Gmail.');
-		  $this->email->message('<a href="http://learnpro.am">Working fine ! !</a>');
-		 
-		  if($this->email->send())
-		 {
-		  echo 'Email sent.';
-		 }
-		 else
-		{
-		 show_error($this->email->print_debugger());
-		}*/
-
-
-
 	}
 
 
@@ -89,7 +51,6 @@ class Admin extends CI_Controller {
 		for($i = 0; $i < count($get_info); $i++){
 			$lang[$get_info[$i]] = lang($get_info[$i]);
 		}
-
 		echo json_encode($lang);
 	}
 
@@ -109,22 +70,14 @@ class Admin extends CI_Controller {
 	{
 		$_POST = json_decode(file_get_contents('php://input'), true);
 		//$this->create_tables_model->create_position_table();
-
-
-//$this->db->set('field', 'field+1');
-//$this->db->where('id', 2);
-//$this->db->update('mytable'); 
-
-
-
-
-
+		//$this->db->set('field', 'field+1');
+		//$this->db->where('id', 2);
+		//$this->db->update('mytable'); 
 		$get_info = $this->input->post('id');
 		$get_info2 = $this->input->post('position');
 			$this->db->set('position', $get_info2);
 			$this->db->where('id', $get_info);
 			$this->db->update('position');
-
 	}
 
 	public function remove_position()
@@ -148,6 +101,7 @@ class Admin extends CI_Controller {
 		$query = $this->membership_model->lesson();
 		echo json_encode($query);
 	}
+
 	public function edit_number_lesson()
 	{
 		$_POST = json_decode(file_get_contents('php://input'), true);
@@ -158,6 +112,7 @@ class Admin extends CI_Controller {
 		$this->db->update('file');
 		//echo $get_info_id;
 	}
+
 	public function remove_lesson()
 	{
 		$_POST = json_decode(file_get_contents('php://input'), true);		
@@ -169,7 +124,6 @@ class Admin extends CI_Controller {
 		$path = $this->upload_folder . $lesson_type .'/'. $get_info_src;
 		$this->remove_dir($path);
 	}
-
 
 	private function remove_dir($path) {
 	     // Open the source directory to read in files
@@ -184,6 +138,11 @@ class Admin extends CI_Controller {
 	        rmdir($path);
 	}
 
+
+/*************************************
+into add lesson case there is opportunity add zip file whitch will extract.
+We must write 'name', 'description', 'keywords' into the fields
+*************************************/
 	public function add_lesson()
 	{
 		$this->load->model('insert_tables_model');
@@ -200,68 +159,42 @@ class Admin extends CI_Controller {
 		    		   
 		    if($_FILES['zip_file']['name'] != ''){ 
 		    	   mkdir($this->upload_folder .'lesson_type_'.$get_info['lesson_type_id'].'/'. '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'', 0777); 		           	
-		           $file_name = $_FILES['zip_file']['name'];  
-
-		           $array = explode(".", $file_name);  		   
-
-		           $name = $array[0];  
+		           $file_name = $_FILES['zip_file']['name'];
+		           $array = explode(".", $file_name);
+		        //   $name = $array[0];  
 		           $ext = $array[1];  
 		           
 		           if($ext == 'zip'){
 						$this->insert_tables_model->insert_folder_name($get_info);
-		           //	sleep(5);
 		                $path = $this->upload_folder .'lesson_type_'.$get_info['lesson_type_id'].'/' .'0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'/';
 		                $location = $path . $file_name;
 		                if(move_uploaded_file($_FILES['zip_file']['tmp_name'], $location )){
 		                    $zip = new ZipArchive;
 		                    if($zip->open($location)){
 		                          $zip->extractTo($path);
-								  
-						/*		  echo "numFiles: " . $zip->numFiles . "\n";
-								  echo "oldstatus: " . $zip->status  . "<br>";
-							echo "<pre>";
-							print_r($zip);
-							echo "</pre>";
-							
-							echo "statusSys: " . $zip->statusSys . "\n";
-							echo "filename: " . $zip->filename . "\n";
-							echo "comment: " . $zip->comment . "\n";
-								 */ 
-							//echo $zip->filename = '';  
-								 
-								//  $zip->addEmptyDir('newDirectory');
-								  
-								 // $zip->filename = "";
-								// $zip->deleteName($location); 
 		                          $zip->close();
-		                         
-								//	delete $zip;
-		                    }
-		                  ////////////////   $files = scandir($path . $name);  
-		                     //$name is extract folder from zip file  
-		                    /* foreach($files as $file)  
-		                     {  
-		                          $file_ext = end(explode(".", $file));  
-		                          $allowed_ext = array('jpg', 'png');  
-		                          if(in_array($file_ext, $allowed_ext))  
-		                          {  
-		                               $new_name = md5(rand()).'.' . $file_ext;  
-		                               $output .= '<div class="col-md-6"><div style="padding:16px; border:1px solid #CCC;"><img src="upload/'.$new_name.'" width="170" height="240" /></div></div>';  
-		                               copy($path.$name.'/'.$file, $path . $new_name);  
-		                               unlink($path.$name.'/'.$file);  
-		                          }       
-		                     }  */
-		                  //  unlink($location);  
-		                  //  rmdir($path . $name); 
-												 
+		                    }					 
 		                }
             		}
         	}
         	redirect($this->uri->segment(1).'/admin/index/addlesson');
-    }	
-
-
+    	}	
 	}
+
+	public function add_question()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$this->load->model('insert_tables_model');
+		$get_info['lesson_id'] = $this->input->post('lesson_id');
+		$get_info['question_type'] = $this->input->post('question_type');
+		$get_info['question'] = $this->input->post('question');
+		$get_info['answers'] = $this->input->post('answers');
+		$get_info['correct_answer'] = $this->input->post('correct_answer');
+		$this->insert_tables_model->insert_question($get_info);
+		echo json_encode($get_info);
+	}
+
+
 
 	public function sessions_info()
 	{
@@ -272,10 +205,9 @@ class Admin extends CI_Controller {
 	
 	public function sessions_remove()
 	{
-		$_POST = json_decode(file_get_contents('php://input'), true);		
+		$_POST = json_decode(file_get_contents('php://input'), true);
 		$get_info = $this->input->post('session_id');
 		$this->db->delete('ci_sessions', array('id' => $get_info));
 	}
-
 
 }

@@ -292,6 +292,76 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
     }
 }]);
 
+
+app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope, $http, language) {
+    var promise = language.getLang();
+
+    promise.then(function(data) {
+        $scope.language = data;
+        //    $scope.loadPosition();
+        //    $scope.loadLesson();
+    });
+    $scope.question = {
+        number: '1'
+    };
+
+    $scope.quesionPart1 = true;
+    $scope.questionType = function($event) {
+        console.log($event.target.value);
+        if ($event.target.value == 1) {
+            $scope.quesionPart1 = true;
+        } else {
+            $scope.quesionPart1 = false;
+        }
+    }
+
+
+
+    $scope.questionSave = function() {
+        var question = $('.questionTextField').val(),
+            answers = [],
+            answerVersionField = $('.answerVersionField.ng-valid-parse').val();
+
+
+
+
+
+
+
+        for (let i = 0; i < $('.answerTextField').length; i++) {
+            answers.push($('.answerTextField').eq(i).val());
+        }
+        console.log(answers);
+
+        $http({
+            method: 'POST',
+            url: 'add_question',
+            data: {
+                'lesson_id': 102,
+                'question_type': 1,
+                'question': question,
+                'answers': answers.toString(),
+                'correct_answer': answerVersionField
+            }
+        }).success(function(data, status) {
+            //   $scope.lessons = data;
+            console.log(data)
+        }).error(function(data, status) {
+            console.log('sxal e chan...' + status);
+
+        });
+
+
+
+
+
+
+    }
+
+}]);
+
+
+
 app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 'language', function($scope, $rootScope, $http, $q, $timeout, language) {
     var obj = [];
     var promise = language.getLang();

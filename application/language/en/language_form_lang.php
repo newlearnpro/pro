@@ -94,6 +94,7 @@ $lang['structure']               = 'Structure';
 
 
 $lang['add_lesson']            = 'Add lesson';
+$lang['question_list']		   = 'Question list';
 $lang['save']            		= 'Save';
 $lang['delete']            		= 'Delete';
 $lang['update']            	    = 'Update';
