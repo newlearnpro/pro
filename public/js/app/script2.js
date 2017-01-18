@@ -359,7 +359,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         var position_curent = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
         var position_cur2 = $('.mainPosition div[data1^="' + this.items.id + '"]').parent().parent().children().children('div').children('div');
 
-        console.log(this.items.id)
+
 
         position_cur2.parent().parent().children().removeAttr('openFolder');
 
@@ -379,14 +379,6 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             position_curent.slideDown('fast');
             position_curent.parent().children('a').css('color', 'red');
 
-            var content_src = '../../uploads/images/content_' + this.items.id + '.png ';
-            //   $scope.src = this.items.src;
-            $("#pagePlayer, #learnpro_logo").hide();
-            $("#content_image").show().css({
-                'width': '100%',
-                'height': 'auto',
-                'maxWidth': '1000px'
-            }).attr('src', '../../uploads/images/content_' + this.items.id + '.png ');
             position_cur2.parent().parent().children().removeAttr('openFolder');
             position_curent.parent().attr('openFolder', 'yes');
         }
@@ -400,9 +392,6 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             }
         }).success(function(data, status) {
             $scope.lessons = data;
-        }).error(function(data, status) {
-            console.log('sxal e chan...' + status);
-
         });
     }
     $scope.getLessons = function(focus, blur) {
@@ -432,15 +421,13 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
                 console.log("gnac");
             });
-        console.log(this.lessons[0].type_id)
+        console.log(this.items)
         $scope.src = this.items.src;
-        $("#content_image").hide();
-        $("#learnpro_logo").show();
-        $("#pagePlayer").show().css({
+        $("#pagePlayer").css({
             'width': '100%',
             'height': parseInt($('#pagePlayer').css('width')) / 1.33,
             'maxWidth': '1000px'
-        }).attr('src', '../../uploads/lesson_type_' + this.lessons[0].type_id + '/' + this.items.src + '/index.html');
+        }).attr('src', '../../uploads/' + this.items.src + '/index.html');;
         $(window).resize(function() {
             $("#pagePlayer").css({
                 'width': '100%',
