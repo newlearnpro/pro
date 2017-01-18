@@ -163,9 +163,10 @@ class Admin extends CI_Controller {
 		$_POST = json_decode(file_get_contents('php://input'), true);		
 		$get_info_id = $this->input->post('id');
 		$get_info_src = $this->input->post('src');
+		$lesson_type = 'lesson_type_' . substr($get_info_src,1,1);
 		$this->db->where('id', $get_info_id);
 		$this->db->delete('file');
-		$path = $this->upload_folder . $get_info_src;
+		$path = $this->upload_folder . $lesson_type .'/'. $get_info_src;
 		$this->remove_dir($path);
 	}
 
@@ -198,7 +199,7 @@ class Admin extends CI_Controller {
 		    $output = '';
 		    		   
 		    if($_FILES['zip_file']['name'] != ''){ 
-		    	   mkdir($this->upload_folder . '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'', 0777); 		           	
+		    	   mkdir($this->upload_folder .'lesson_type_'.$get_info['lesson_type_id'].'/'. '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'', 0777); 		           	
 		           $file_name = $_FILES['zip_file']['name'];  
 
 		           $array = explode(".", $file_name);  		   
@@ -209,7 +210,7 @@ class Admin extends CI_Controller {
 		           if($ext == 'zip'){
 						$this->insert_tables_model->insert_folder_name($get_info);
 		           //	sleep(5);
-		                $path = $this->upload_folder . '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'/';
+		                $path = $this->upload_folder .'lesson_type_'.$get_info['lesson_type_id'].'/' .'0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'/';
 		                $location = $path . $file_name;
 		                if(move_uploaded_file($_FILES['zip_file']['tmp_name'], $location )){
 		                    $zip = new ZipArchive;
