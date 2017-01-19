@@ -306,6 +306,7 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
     };
 
     $scope.quesionPart1 = true;
+    //$scope.mypattern = /^\s*$/g;
     $scope.questionType = function($event) {
         console.log($event.target.value);
         if ($event.target.value == 1) {
@@ -315,24 +316,39 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
         }
     }
 
+    $scope.questionAnswersLength = 2;
+    $scope.qal = function($event) {
+        //   console.log($event.target.value)
+
+
+    }
+    $scope.answer = {
+        version: 0
+    }
+
+    $scope.$watch('questionAnswersLength', function(newValue, oldValue) {
+        console.log(newValue, oldValue);
+        $('#answersGroup').empty();
+        $scope.newValue = newValue;
+        $scope.fruitsView = [];
+        for (let i = 0; i < newValue; i++) {
+            $scope.fruitsView.push(i + 1);
+        }
+    });
+
+
 
 
     $scope.questionSave = function() {
         var question = $('.questionTextField').val(),
             answers = [],
             answerVersionField = $('.answerVersionField.ng-valid-parse').val();
-
-
-
-
-
-
-
         for (let i = 0; i < $('.answerTextField').length; i++) {
             answers.push($('.answerTextField').eq(i).val());
         }
-        console.log(answers);
 
+
+        console.log('lenh' + $('.questionTextField').val().length);
         $http({
             method: 'POST',
             url: 'add_question',
@@ -340,24 +356,16 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
                 'lesson_id': 102,
                 'question_type': 1,
                 'question': question,
-                'answers': answers.toString(),
+                'answers': answers.join('|'),
                 'correct_answer': answerVersionField
             }
-        }).success(function(data, status) {
-            //   $scope.lessons = data;
-            console.log(data)
-        }).error(function(data, status) {
-            console.log('sxal e chan...' + status);
-
+        }).success(function() {}).error(function(data, status) {
+            if (status == 500) {
+                $scope.questionError = 'nshir'
+            }
+            console.log('sxal e ...' + status);
         });
-
-
-
-
-
-
     }
-
 }]);
 
 

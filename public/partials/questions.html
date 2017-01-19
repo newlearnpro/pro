@@ -11,12 +11,24 @@
 <div ng-show='quesionPart1'>
 	<div><span>Հարց</span></div>
 	<input type='text' class='questionTextField' /><br />
+	<input type='number' min='2' max='6' ng-model='questionAnswersLength' ng-value='questionAnswersLength' ng-click='qal($event)' required />
 	<div><span>Պատասխանի տարբերակներ</span></div>
-	<input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='1'/><br />
+
+
+
+<div ng-repeat='items in fruitsView'>
+<input type='text' class='answerTextField'  /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='{{items+1}}'/>
+
+</div>
+
+	<!--input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='1'/><br />
 	<input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='2' /><br />
 	<input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='3' /><br />
-	<input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='4' /><br />
+	<input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='4' /><br /-->
+
+	<div ng-bind-html-unsafe="fruitsView"></div>
 	<input type='button' value={{language.save}} ng-click='questionSave()'/>
+	<div><span ng-model='questionError'>{{questionError}}</span></div>
 </div>
 
 
