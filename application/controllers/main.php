@@ -84,6 +84,14 @@ class Main extends CI_Controller {
 		echo json_encode($query);
 	}
 
+	public function get_questions()
+	{
+	//	$_POST = json_decode(file_get_contents('php://input'), true);
+		$this->load->model('membership_model');
+		$get_info['lesson_id'] = $this->input->get('lesson_id');
+		$query = $this->membership_model->question($get_info);
+		echo json_encode($query);
+	}
 
 	public function users_data(){
 		$get_info['username'] = $this->input->get('username');

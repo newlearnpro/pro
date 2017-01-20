@@ -54,6 +54,15 @@ class Membership_model extends CI_Model {
         return $query->result();
     }
 
+    public function question($get_info)
+    {    
+       // $this->db->order_by('number', 'ASC'); 
+      /*  $query = $this->db->get("questions");
+        return $query->result();*/
+        $query = $this->db->get_where('questions', array('lesson_id' => $get_info['lesson_id']));
+        return   $query->result_array();
+    }
+
     public function main_lesson($get_info)
     {    
         $this->db->order_by('number', 'ASC');   

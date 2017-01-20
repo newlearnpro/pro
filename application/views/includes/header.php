@@ -1,12 +1,13 @@
 <!DOCTYPE HTML >
 <html ng-app="companyApp">
 <head>
-    <link rel="stylesheet"  href="<?=base_url();?>/public/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="<?=base_url();?>/public/css/vendor/bootstrap.min.css">
     <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"-->
     <link rel="stylesheet"  href="<?=base_url();?>/public/css/st.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
 	<title>LearnPro</title>
     <script src="<?=base_url();?>/public/js/vendor/jquery-3.1.1.min.js"></script>
+    <script src="<?=base_url();?>/public/js/vendor/jquery-ui.js"></script>
     <script src="<?=base_url();?>/public/js/vendor/angular.min.js"></script>
     <script src="<?=base_url();?>/public/js/vendor/angular-ui-router.min.js"></script>
     <!--script src="https://cdnjs.cloudflare.com/ajax/libs/angular-touch/1.5.7/angular-touch.min.js"></script-->
