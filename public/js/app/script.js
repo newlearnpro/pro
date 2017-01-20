@@ -121,6 +121,11 @@ app.controller('contactsCtrl', function($scope, $http) {
 });
 
 
+
+
+
+
+
 app.controller('usersCtrl', function($scope, $http, $q, language) {
     var promise = language.getLang();
     promise.then(function(data) {
@@ -172,6 +177,14 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
     }
 });
 
+
+
+
+
+
+
+
+/*********կատալոգների բաժին *****/
 app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language', function($scope, $http, $q, $timeout, language) {
     var promise = language.getLang();
     promise.then(function(data) {
@@ -290,7 +303,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
         var position = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
         position.slideToggle('fast');
     }
-}]);
+}]); /*end*********կատալոգների բաժին *****/
 
 
 app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope, $http, language) {
@@ -299,13 +312,53 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
     promise.then(function(data) {
         $scope.language = data;
         //    $scope.loadPosition();
-        //    $scope.loadLesson();
+        $scope.loadLesson();
     });
     $scope.question = {
         number: '1'
     };
 
-    $scope.quesionPart1 = true;
+
+    /*$scope.loadLesson = function() {
+        $http({
+            method: 'GET',
+            url: 'load_position',
+
+        }).
+        success(function(data, status) {
+            $scope.position = data;
+            $timeout(function() {
+                for (var i = 0; i < data.length; i++) {
+                    $('.position_item[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                }
+                for (var j = 0; j < data.length; j++) {
+                    if ($('.mainPosition div').children('div').has('div')[j]) {
+                        $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
+                    }
+                }
+            }, 10);
+        });
+    });*/
+    $scope.loadLesson = function() {
+        $http({
+            method: 'POST',
+            url: 'load_lesson',
+
+        }).
+        success(function(data, status) {
+            $scope.lesson = data;
+            console.log($scope.lesson)
+                /* $timeout(function() {
+                     for (var i = 0; i < data.length; i++) {
+                         $('.lesson_item[data2^="' + data[i].parent_id + '"]').appendTo(".position_item[data1^='" + data[i].parent_id + "']");
+                     }
+                 }, 100);*/
+        });
+    }
+
+
+
+    //  $scope.quesionPart1 = true;
     //$scope.mypattern = /^\s*$/g;
     $scope.questionType = function($event) {
         console.log($event.target.value);
@@ -317,22 +370,17 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
     }
 
     $scope.questionAnswersLength = 2;
-    $scope.qal = function($event) {
-        //   console.log($event.target.value)
-
-
-    }
-    $scope.answer = {
+    $scope.aq = {
+        type: 0,
         version: 0
     }
 
     $scope.$watch('questionAnswersLength', function(newValue, oldValue) {
         console.log(newValue, oldValue);
-        $('#answersGroup').empty();
         $scope.newValue = newValue;
-        $scope.fruitsView = [];
+        $scope.answersInput = [];
         for (let i = 0; i < newValue; i++) {
-            $scope.fruitsView.push(i + 1);
+            $scope.answersInput.push(i + 1);
         }
     });
 
@@ -340,21 +388,24 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
 
 
     $scope.questionSave = function() {
-        var question = $('.questionTextField').val(),
+        var lessonId = $('#lesson').val(),
+            question = $('.questionTextField').val(),
+            questionType = $('.questionType.ng-valid-parse').val(),
             answers = [],
             answerVersionField = $('.answerVersionField.ng-valid-parse').val();
+        console.log('log' + $('.answerTextField').length)
         for (let i = 0; i < $('.answerTextField').length; i++) {
             answers.push($('.answerTextField').eq(i).val());
         }
 
 
-        console.log('lenh' + $('.questionTextField').val().length);
+        //  console.log('lenh' + $('.questionTextField').val().length);
         $http({
             method: 'POST',
             url: 'add_question',
             data: {
-                'lesson_id': 102,
-                'question_type': 1,
+                'lesson_id': lessonId,
+                'question_type': questionType,
                 'question': question,
                 'answers': answers.join('|'),
                 'correct_answer': answerVersionField
@@ -369,7 +420,7 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
 }]);
 
 
-
+/*********դասերի բաժին *****/
 app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 'language', function($scope, $rootScope, $http, $q, $timeout, language) {
     var obj = [];
     var promise = language.getLang();
@@ -377,24 +428,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     promise.then(function(data) {
         $scope.language = data;
         $scope.loadPosition();
-        openPosition();
     });
-    var openPosition = function() {
-        /*  var sesStorage = JSON.parse(sessionStorage.getItem('ofol'));
-          $timeout(function() {
-              var position = [];
-              if (sesStorage != undefined) {
-                  for (var i = 0; i < sesStorage.length; i++) {
-                      position.push($('.mainPosition div[data1^="' + sesStorage[i].id + '"][data2^="' + sesStorage[i].parent_id + '"]'));
-                      if (!position[i].attr('openfolder')) {
-                          position[i].attr('openfolder', 'yes');
-                          position[i].children('div').slideDown();
-                          position[i].children('a').css('color', '#ff0000');
-                      }
-                  }
-              }
-          }, 600);*/
-    }
+
     $scope.loadPosition = function() {
         $("#glu").css({
             'width': $('.mainPage').width(),
@@ -432,57 +467,58 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     }
     $scope.getClass = function($event) {
 
-        $scope.ttl = this.items.position;
+            $scope.ttl = this.items.position;
 
-        var position_curent = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
-        var position_cur2 = $('.mainPosition div[data1^="' + this.items.id + '"]').parent().parent().children().children('div').children('div');
+            var position_curent = $('.mainPosition div[data1^="' + this.items.id + '"]').children('div');
+            var position_cur2 = $('.mainPosition div[data1^="' + this.items.id + '"]').parent().parent().children().children('div').children('div');
+            var questions = {};
+            //console.log(this.items.id)
 
-        console.log(this.items.id)
-
-        position_cur2.parent().parent().children().removeAttr('openFolder');
-
-
-        if (position_curent.parent().children('a').attr('style')) {
-            setTimeout(function() {
-                position_curent.parent().children('a').removeAttr('style');
-                position_curent.slideUp('fast');
-            }, 100);
-        } else {
-            position_cur2.slideUp('fast');
-            //     console.log(position_curent.parent().children('a').html())
-            position_cur2.parent().parent().children().children('a').removeAttr('style');
-        }
-
-        if (!position_curent.parent().attr('openFolder')) {
-            position_curent.slideDown('fast');
-            position_curent.parent().children('a').css('color', 'red');
-
-            var content_src = '../../uploads/images/content_' + this.items.id + '.png ';
-            //   $scope.src = this.items.src;
-            $("#pagePlayer, #learnpro_logo").hide();
-            $("#content_image").show().css({
-                'width': '100%',
-                'height': 'auto',
-                'maxWidth': '1000px'
-            }).attr('src', '../../uploads/images/content_' + this.items.id + '.png ');
             position_cur2.parent().parent().children().removeAttr('openFolder');
-            position_curent.parent().attr('openFolder', 'yes');
-        }
 
 
-        $http({
-            method: 'POST',
-            url: 'load_lesson',
-            data: {
-                'id': this.items.id
+            if (position_curent.parent().children('a').attr('style')) {
+                setTimeout(function() {
+                    position_curent.parent().children('a').removeAttr('style');
+                    position_curent.slideUp('fast');
+                }, 100);
+            } else {
+                position_cur2.slideUp('fast');
+                //     console.log(position_curent.parent().children('a').html())
+                position_cur2.parent().parent().children().children('a').removeAttr('style');
             }
-        }).success(function(data, status) {
-            $scope.lessons = data;
-        }).error(function(data, status) {
-            console.log('sxal e chan...' + status);
 
-        });
-    }
+            if (!position_curent.parent().attr('openFolder')) {
+                position_curent.slideDown('fast');
+                position_curent.parent().children('a').css('color', 'red');
+
+                var content_src = '../../uploads/images/content_' + this.items.id + '.png ';
+                //   $scope.src = this.items.src;
+                $("#pagePlayer, #learnpro_logo").hide();
+                $("#content_image").show().css({
+                    'width': '100%',
+                    'height': 'auto',
+                    'maxWidth': '1000px'
+                }).attr('src', '../../uploads/images/content_' + this.items.id + '.png ');
+                position_cur2.parent().parent().children().removeAttr('openFolder');
+                position_curent.parent().attr('openFolder', 'yes');
+            }
+
+
+            $http({
+                method: 'POST',
+                url: 'load_lesson',
+                data: {
+                    'id': this.items.id
+                }
+            }).success(function(data, status) {
+                $scope.lessons = data;
+            }).error(function(data, status) {
+                console.log('sxal e chan...' + status);
+
+            });
+        }
+        /*********փնտրել դասերը *****/
     $scope.getLessons = function(focus, blur) {
         $http({
             method: 'GET',
@@ -494,23 +530,52 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             } else if (blur === true) {
                 $scope.searchLessons = "";
             }
-
         });
-    }
+    } /*end********փնտրել դասերը *****/
+
+    /*********Մտնել թեստի բաժին *****/
+    $scope.questionTest = function() {
+
+        $scope.testQuestion = $scope.testList.question;
+        $scope.testAnswers = $scope.testList.answers.split('|');
+
+
+        $("#pagePlayer, #learnpro_logo").hide();
+
+        console.log($scope.test);
+
+    } /*end********Մտնել թեստի բաժին *****/
+
+
+
+    /********* ներբեռնել դասը*****/
     $scope.loadPage = function() {
         var username = document.querySelector("#username").innerHTML;
-        $http.get('../main/users_data', {
+        $http.get('../main/get_questions', {
                 params: {
-                    username: username,
                     lesson_id: this.items.id,
-                    lesson_name: this.items.name
                 }
             })
             .then(function(data) {
-
-                console.log("gnac");
+                // console.log(data.data.length)
+                if (data.data.length != 0) {
+                    $scope.testList = data.data[0];
+                    $scope.question = 'Հարցեր դասի մասին';
+                }
             });
-        console.log(this.lessons[0].type_id)
+        /* $http.get('../main/users_data', {
+                 params: {
+                     username: username,
+                     lesson_id: this.items.id,
+                     lesson_name: this.items.name
+                 }
+             })
+             .then(function(data) {
+
+
+                 console.log(data.config.params.lesson_id);
+             });*/
+        //     console.log(this.items.type_id);
         $scope.src = this.items.src;
         $("#content_image").hide();
         $("#learnpro_logo").show();
@@ -518,7 +583,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             'width': '100%',
             'height': parseInt($('#pagePlayer').css('width')) / 1.33,
             'maxWidth': '1000px'
-        }).attr('src', '../../uploads/lesson_type_' + this.lessons[0].type_id + '/' + this.items.src + '/index.html');
+        }).attr('src', '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/index.html');
+
         $(window).resize(function() {
             $("#pagePlayer").css({
                 'width': '100%',
@@ -526,7 +592,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                 'maxWidth': '1000px'
             });
         });
-    }
+    } /*end******** *****/
     $scope.resizeIframe = function() {
         if ($('#pagePlayer').hasClass('resizePlayer')) {
             $('header').show();
@@ -566,7 +632,10 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             });
         }
     }
-}]);
+}]); /*end********կատալոգների բաժին *****/
+
+
+
 
 
 
@@ -608,6 +677,14 @@ app.controller('personalpageGroup', ['$scope', '$http', 'language', function($sc
     }
 
 }]);
+
+
+
+
+
+
+
+
 
 app.controller('sessionsCtrl', ['$scope', '$http', '$timeout', 'language', function($scope, $http, $timeout, language) {
     var promise = language.getLang();
