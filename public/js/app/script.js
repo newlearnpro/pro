@@ -425,6 +425,14 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     var obj = [];
     var promise = language.getLang();
 
+    /******փորձ******/
+    $scope.a = 100;
+    $timeout(function() {
+        $scope.a = 300;
+        //    $scope.$digest();
+    }, 1500);
+    /***************/
+
     promise.then(function(data) {
         $scope.language = data;
         $scope.loadPosition();
@@ -550,48 +558,152 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
     /********* ներբեռնել դասը*****/
     $scope.loadPage = function() {
-        var username = document.querySelector("#username").innerHTML;
-        $http.get('../main/get_questions', {
-                params: {
-                    lesson_id: this.items.id,
-                }
-            })
-            .then(function(data) {
-                // console.log(data.data.length)
-                if (data.data.length != 0) {
-                    $scope.testList = data.data[0];
-                    $scope.question = 'Հարցեր դասի մասին';
-                }
-            });
-        /* $http.get('../main/users_data', {
-                 params: {
-                     username: username,
-                     lesson_id: this.items.id,
-                     lesson_name: this.items.name
-                 }
-             })
-             .then(function(data) {
+        if (this.items.type_id == 1 || this.items.type_id == 2) {
+            var username = document.querySelector("#username").innerHTML;
+            $http.get('../main/get_questions', {
+                    params: {
+                        lesson_id: this.items.id,
+                    }
+                })
+                .then(function(data) {
+                    // console.log(data.data.length)
+                    if (data.data.length != 0) {
+                        $scope.testList = data.data[0];
+                        $scope.question = 'Հարցեր դասի մասին';
+                    }
+                });
+            /* $http.get('../main/users_data', {
+                     params: {
+                         username: username,
+                         lesson_id: this.items.id,
+                         lesson_name: this.items.name
+                     }
+                 })
+                 .then(function(data) {
 
 
-                 console.log(data.config.params.lesson_id);
-             });*/
-        //     console.log(this.items.type_id);
-        $scope.src = this.items.src;
-        $("#content_image").hide();
-        $("#learnpro_logo").show();
-        $("#pagePlayer").show().css({
-            'width': '100%',
-            'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-            'maxWidth': '1000px'
-        }).attr('src', '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/index.html');
-
-        $(window).resize(function() {
-            $("#pagePlayer").css({
+                     console.log(data.config.params.lesson_id);
+                 });*/
+            //     console.log(this.items.type_id);
+            $scope.src = this.items.src;
+            $("#content_image").hide();
+            $("#learnpro_logo").show();
+            $("#pagePlayer").show().css({
                 'width': '100%',
                 'height': parseInt($('#pagePlayer').css('width')) / 1.33,
                 'maxWidth': '1000px'
+            }).attr('src', '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/index.html');
+
+            $(window).resize(function() {
+                $("#pagePlayer").css({
+                    'width': '100%',
+                    'height': parseInt($('#pagePlayer').css('width')) / 1.33,
+                    'maxWidth': '1000px'
+                });
             });
-        });
+        }
+
+
+
+        /*******************************************************************************************/
+        if (this.items.type_id == 3) {
+            console.log(this.items.src)
+
+
+
+
+            //  video.play();
+
+            new jPlayerPlaylist({
+                jPlayer: "#jquery_jplayer_1",
+                cssSelectorAncestor: "#jp_container_1"
+            }, [{
+                    title: "ՄՄԿ",
+                    artist: "LearnPro",
+                    //free:true,
+                    m4v: '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/data.zip',
+                    poster: "http://www.jplayer.org/video/poster/Finding_Nemo_Teaser_640x352.png"
+                }
+                /*, {
+                                title: "Finding Nemo Teaser",
+                                artist: "LearnPro",
+                                //  m4v: "http://www.jplayer.org/video/m4v/Finding_Nemo_Teaser.m4v",
+                                m4v: '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/data.zip',
+                                //  ogv: "http://www.jplayer.org/video/ogv/Finding_Nemo_Teaser.ogv",
+                                //  webmv: "http://www.jplayer.org/video/webm/Finding_Nemo_Teaser.webm",
+                            }*/
+            ], {
+                swfPath: "../../dist/jplayer",
+                supplied: "webmv, ogv, m4v",
+                useStateClassSkin: true,
+                autoBlur: false,
+                smoothPlayBar: true,
+                keyEnabled: true
+            });
+
+
+
+            //document.oncontextmenu =new Function("return false;");
+            //  $("#jp_video_0").attr({"autoplay":"true", "preload":"true"});
+            $(".jp-playlist").css("display", "none");
+
+
+
+
+
+            var video = document.getElementsByTagName("video")[0];
+
+
+
+            $("#jp_video_0").attr("src", "../../uploads/lesson_type_" + this.items.type_id + "/" + this.items.src + "/data.zip");
+            video.play();
+            $("#next").bind("click", function() {
+
+
+
+                /*if(video.currentTime == 10){
+                //console.log(video.currentTime);
+    
+                }*/
+                video.currentTime = 10;
+                video.play();
+
+                video.ontimeupdate = function() {
+
+                    /*setTimeout(function(){
+                        $("#time").text("time: " + video.currentTime);
+                        video.pause();
+                    },3000);*/
+                    if (video.currentTime >= 13) {
+                        //video.currentTime = 12.6;
+                        video.pause();
+                        setTimeout(function() {
+
+                        }, 1000);
+
+                    }
+                }
+
+            });
+
+
+
+
+
+
+        }
+
+
+        /********************************************************************************************/
+
+
+
+
+
+
+
+
+
     } /*end******** *****/
     $scope.resizeIframe = function() {
         if ($('#pagePlayer').hasClass('resizePlayer')) {
@@ -632,6 +744,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             });
         }
     }
+
 }]); /*end********կատալոգների բաժին *****/
 
 
