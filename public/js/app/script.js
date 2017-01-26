@@ -436,6 +436,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     promise.then(function(data) {
         $scope.language = data;
         $scope.loadPosition();
+
     });
 
     $scope.loadPosition = function() {
@@ -557,9 +558,24 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
     /********* ներբեռնել դասը*****/
-    $scope.loadPage = function() {
-        if (this.items.type_id == 1 || this.items.type_id == 2) {
-            var username = document.querySelector("#username").innerHTML;
+    $scope.loadPage = function($event) {
+
+        //  var video = document.getElementsByTagName("video")[0];
+
+
+
+
+        if ($event.currentTarget.classList.contains('lesson_selected') == false) {
+            //   console.log($event.currentTarget.classList.contains('lesson_selected'));
+            $('.lesson_types').removeClass('lesson_selected');
+            $event.currentTarget.classList.add('lesson_selected');
+
+
+
+
+
+
+            var username = document.querySelector('#username').innerHTML;
             $http.get('../main/get_questions', {
                     params: {
                         lesson_id: this.items.id,
@@ -585,114 +601,139 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                      console.log(data.config.params.lesson_id);
                  });*/
             //     console.log(this.items.type_id);
-            $scope.src = this.items.src;
-            $("#content_image").hide();
-            $("#learnpro_logo").show();
-            $("#pagePlayer").show().css({
-                'width': '100%',
-                'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                'maxWidth': '1000px'
-            }).attr('src', '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/index.html');
 
-            $(window).resize(function() {
-                $("#pagePlayer").css({
+            if ((this.items.type_id == 1 || this.items.type_id == 2)) {
+                $('#jp_container_1').hide();
+                $timeout(function() {
+                    $('#jp_video_0').get(0).pause();
+                }, 200);
+
+
+                $scope.src = this.items.src;
+                $("#content_image").hide();
+                $("#learnpro_logo").show();
+                $("#pagePlayer").show().css({
                     'width': '100%',
                     'height': parseInt($('#pagePlayer').css('width')) / 1.33,
                     'maxWidth': '1000px'
+                }).attr('src', '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/index.html');
+
+                $(window).resize(function() {
+                    $("#pagePlayer").css({
+                        'width': '100%',
+                        'height': parseInt($('#pagePlayer').css('width')) / 1.33,
+                        'maxWidth': '1000px'
+                    });
                 });
-            });
-        }
-
-
-
-        /*******************************************************************************************/
-        if (this.items.type_id == 3) {
-            console.log(this.items.src)
-
-
-
-
-            //  video.play();
-
-            new jPlayerPlaylist({
-                jPlayer: "#jquery_jplayer_1",
-                cssSelectorAncestor: "#jp_container_1"
-            }, [{
-                    title: "ՄՄԿ",
-                    artist: "LearnPro",
-                    //free:true,
-                    m4v: '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/data.zip',
-                    poster: "http://www.jplayer.org/video/poster/Finding_Nemo_Teaser_640x352.png"
-                }
-                /*, {
-                                title: "Finding Nemo Teaser",
-                                artist: "LearnPro",
-                                //  m4v: "http://www.jplayer.org/video/m4v/Finding_Nemo_Teaser.m4v",
-                                m4v: '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/data.zip',
-                                //  ogv: "http://www.jplayer.org/video/ogv/Finding_Nemo_Teaser.ogv",
-                                //  webmv: "http://www.jplayer.org/video/webm/Finding_Nemo_Teaser.webm",
-                            }*/
-            ], {
-                swfPath: "../../dist/jplayer",
-                supplied: "webmv, ogv, m4v",
-                useStateClassSkin: true,
-                autoBlur: false,
-                smoothPlayBar: true,
-                keyEnabled: true
-            });
-
-
-
-            //document.oncontextmenu =new Function("return false;");
-            //  $("#jp_video_0").attr({"autoplay":"true", "preload":"true"});
-            $(".jp-playlist").css("display", "none");
+            }
 
 
 
 
 
-            var video = document.getElementsByTagName("video")[0];
+
+            // console.log($(this))
+
+            /*******************************************************************************************/
+            if (this.items.type_id == 3) {
 
 
 
-            $("#jp_video_0").attr("src", "../../uploads/lesson_type_" + this.items.type_id + "/" + this.items.src + "/data.zip");
-            video.play();
-            $("#next").bind("click", function() {
 
 
 
-                /*if(video.currentTime == 10){
-                //console.log(video.currentTime);
-    
-                }*/
-                video.currentTime = 10;
-                video.play();
 
-                video.ontimeupdate = function() {
-
-                    /*setTimeout(function(){
-                        $("#time").text("time: " + video.currentTime);
-                        video.pause();
-                    },3000);*/
-                    if (video.currentTime >= 13) {
-                        //video.currentTime = 12.6;
-                        video.pause();
-                        setTimeout(function() {
-
-                        }, 1000);
-
+                new jPlayerPlaylist({
+                    jPlayer: "#jquery_jplayer_1",
+                    cssSelectorAncestor: "#jp_container_1"
+                }, [{
+                        title: this.items.name,
+                        artist: "LearnPro",
+                        //free:true,
+                        m4v: '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/data.zip',
+                        poster: "http://www.jplayer.org/video/poster/Finding_Nemo_Teaser_640x352.png"
                     }
-                }
+                    /*, {
+                                    title: "Finding Nemo Teaser",
+                                    artist: "LearnPro",
+                                    //  m4v: "http://www.jplayer.org/video/m4v/Finding_Nemo_Teaser.m4v",
+                                    m4v: '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/data.zip',
+                                    //  ogv: "http://www.jplayer.org/video/ogv/Finding_Nemo_Teaser.ogv",
+                                    //  webmv: "http://www.jplayer.org/video/webm/Finding_Nemo_Teaser.webm",
+                                }*/
+                ], {
+                    swfPath: "../../dist/jplayer",
+                    supplied: "webmv, ogv, m4v",
+                    useStateClassSkin: true,
+                    autoBlur: false,
+                    smoothPlayBar: true,
+                    keyEnabled: true
+                });
 
-            });
+
+
+                //document.oncontextmenu =new Function("return false;");
+                //  $("#jp_video_0").attr({"autoplay":"true", "preload":"true"});
+                $(".jp-playlist").css("display", "none");
 
 
 
 
 
 
+
+
+                //  video.pause();
+                $('#pagePlayer').empty();
+                $('#jp_container_1').show();
+                $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/data.zip');
+                $timeout(function() {
+                    $('#jp_video_0').get(0).play();
+                    // video.play();
+                }, 200);
+                //$scope.$digest();
+
+
+
+
+
+
+                $("#next").bind("click", function() {
+
+
+
+                    /*if(video.currentTime == 10){
+                    //console.log(video.currentTime);
+    
+                    }*/
+                    $('#jp_video_0').get(0).currentTime = 10;
+                    $('#jp_video_0').get(0).play();
+
+                    $('#jp_video_0').get(0).ontimeupdate = function() {
+
+                        /*setTimeout(function(){
+                            $("#time").text("time: " + video.currentTime);
+                            video.pause();
+                        },3000);*/
+                        if ($('#jp_video_0').get(0).currentTime >= 13) {
+                            //video.currentTime = 12.6;
+                            $('#jp_video_0').get(0).pause();
+                            setTimeout(function() {
+
+                            }, 1000);
+
+                        }
+                    }
+
+                });
+
+
+
+
+
+
+            }
         }
-
 
         /********************************************************************************************/
 

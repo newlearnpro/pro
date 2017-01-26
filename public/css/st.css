@@ -178,6 +178,14 @@ $grid-breakpoints: (
   display: none;
 }
 /****************lesson style******************/
+.lesson_selected > span {
+  padding-left: 10px;
+  color: red;
+  font-weight: bold;
+}
+.lesson_types {
+  cursor: pointer;
+}
 .lesson_type_1 {
   width: 200px;
   height: 30px;
