@@ -63,7 +63,8 @@ class Admin extends CI_Controller {
 		$data = array('position'=>$get_info[0], 'parent_id'=>$get_info2);
 		if(!empty($get_info[0])){
 			$this->db->insert('position', $data);
-		}
+		//	copy($this->upload_folder .'images/content_default.jpg', $this->upload_folder .'images/content_'.$get_id.'.jpg');
+		}		
 	}
 
 	public function edit_position()
@@ -151,7 +152,8 @@ We must write 'name', 'description', 'keywords' into the fields
 			$get_info['lesson_name'] = 	$this->input->post('lesson_name');
 			$get_info['lesson_description'] = 	$this->input->post('lesson_description');
 			$get_info['lesson_keywords'] = $this->input->post('lesson_name') . ' ' .  $this->input->post('lesson_description') . ' ' . $this->input->post('lesson_keywords');
-			$get_info['lesson_src'] = '0' . $this->input->post('lesson_type_id') . ($this->input->post('lesson_parent_id')*1) . '_'.$date.'';			
+			$get_info['lesson_src'] = '0' . $this->input->post('lesson_type_id') . ($this->input->post('lesson_parent_id')*1) . '_'.$date.'';
+			$get_info['lesson_type_name'] = 	$this->input->post('lesson_type_name');
 			$get_info['lesson_type_id'] = 	$this->input->post('lesson_type_id');
 			$get_info['lesson_parent_id'] = $this->input->post('lesson_parent_id') * 1;	
 			$this->input->post('lesson_is_free') ? $get_info['lesson_is_free'] = $this->input->post('lesson_is_free') : $get_info['lesson_is_free'] = 'off';

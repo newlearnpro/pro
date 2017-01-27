@@ -87,14 +87,21 @@ $lang['personal_page']              = 'Личная страница';
 /*******************************************************************************/
 
 
-$lang['new_position']            = 'Новая должность';
-$lang['structure']               = 'Структура';
+$lang['new_position']              = 'Новая должность';
+$lang['structure']                 = 'Структура';
 
 $lang['free_lesson']               = 'бесплатный урок';
-$lang['add_lesson']            = 'Добавить урок';
-$lang['question_list']           = 'Вопросник';
-$lang['save']           		 = 'Сохранить';
-$lang['delete']            		= 'Удалить';
-$lang['update']            	   = 'Обновить';
+$lang['add_lesson']                = 'Добавить урок';
+$lang['question_list']             = 'Вопросник';
+$lang['save']           		   = 'Сохранить';
+$lang['delete']            		   = 'Удалить';
+$lang['update']            	       = 'Обновить';
+
+
+$lang['lesson']               = 'Урок';
+$lang['interesting']  	      = 'Интересно знать';
+$lang['laboratory_work']      = 'Лабораторная работа';
+$lang['task']   			  = 'Задача';
+$lang['interactive']          = 'Интерактив';
 
 ?>

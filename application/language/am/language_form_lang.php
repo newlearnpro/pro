@@ -70,11 +70,19 @@ $lang['structure']               = 'Ստրուկտուրա';
 
 
 
-
+$lang['free_lesson']            = 'Անվճար դաս';
 $lang['add_lesson']            = 'Դաս ավելացնել';
 $lang['question_list']		   = 'Հարցաշար';
 $lang['save']            	   = 'Պահպանել';
 $lang['delete']            	   = 'Ջնջել';
 $lang['update']            	   = 'Թարմացնել';
+
+
+
+$lang['lesson']               = 'Դաս';
+$lang['interesting']  	      = 'Հետաքրքիր է իմանալ';
+$lang['laboratory_work']      = 'Լաբորատոր աշխատանք';
+$lang['task']   			  = 'Խնդիր';
+$lang['interactive']          = 'Ինտերակտիվ';
 
 ?>

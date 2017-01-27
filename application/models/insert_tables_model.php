@@ -34,6 +34,7 @@ it creates position table if there isn't `position` table
             'description' => $get_info['lesson_description'],
             'keywords' => $get_info['lesson_keywords'],
             'src' => $get_info['lesson_src'],
+            'type_name' => $get_info['lesson_type_name'],
             'type_id' => $get_info['lesson_type_id'],
             'parent_id' => $get_info['lesson_parent_id'],
             'number' => 1,

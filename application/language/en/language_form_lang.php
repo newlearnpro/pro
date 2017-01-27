@@ -92,11 +92,19 @@ $lang['structure']               = 'Structure';
 
 
 
-
+$lang['free_lesson']            = 'Free lesson';
 $lang['add_lesson']            = 'Add lesson';
 $lang['question_list']		   = 'Question list';
 $lang['save']            		= 'Save';
 $lang['delete']            		= 'Delete';
 $lang['update']            	    = 'Update';
+
+
+$lang['lesson']               = 'Lesson';
+$lang['interesting']  	      = 'It\'s interesting to know';
+$lang['laboratory_work']      = 'Laboratory work';
+$lang['task']   			  = 'Task';
+$lang['interactive']          = 'Interactive';
+
 
 ?>

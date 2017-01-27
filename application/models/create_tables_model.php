@@ -89,6 +89,7 @@ it creates file table if there isn't `file` table
                 `description` varchar(255) collate utf8_general_ci NOT NULL,
                 `keywords` varchar(255) collate utf8_general_ci NOT NULL,
                 `src` varchar(100) NOT NULL,
+                `type_name` varchar(100) NOT NULL,
                 `type_id` int(11) NOT NULL,
                 `parent_id` int(11) NOT NULL,
                 `number` int(11) NOT NULL,
