@@ -12,5 +12,10 @@
     "update",
     "free_lesson",
     "activation_code",
-    "activation"
+    "activation",
+    "lesson",
+    "interesting",
+    "laboratory_work",
+    "task",
+    "interactive"
 ]

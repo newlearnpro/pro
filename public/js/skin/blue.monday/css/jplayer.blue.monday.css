@@ -164,7 +164,7 @@
 .jp-state-playing .jp-play:focus {
   background: url("../image/jplayer.blue.monday.jpg") -48px -42px no-repeat; }
 
-.jp-stop, .jp-previous, .jp-next, .jp-own-next {
+.jp-stop, .jp-previous, .jp-next, .jp-own-prev, .jp-own-next {
   width: 32px;
   height: 32px;
   margin-top: 4px; }
@@ -178,6 +178,9 @@
 
 .jp-previous {
   background: url("../image/jplayer.blue.monday.jpg") 0 -112px no-repeat; }
+
+.jp-own-prev {
+  background: url("../image/jplayer.blue.monday.jpg") -99px -118px no-repeat; }
 
 .jp-previous:focus {
   background: url("../image/jplayer.blue.monday.jpg") -29px -112px no-repeat; }

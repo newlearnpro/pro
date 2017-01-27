@@ -30,7 +30,7 @@
 			</div-->
 			<div ng-repeat='items in lesson'>
 				<div class='lesson_item' data1='{{items.id}}' data2='{{items.parent_id}}'>
-					<a class='lesson_type_{{items.type_id}}'>{{items.name}}</a>
+					<a class='lesson_types lesson_type_{{items.type_id}}'>{{items.name}}</a>
 					<a class='btn btn-danger btn-xs remove' ng-click='removeLesson()'>remove</a>
 					<input type='number' ng-value='items.number' min='1' max='99' />
 					<a class='btn btn-danger btn-xs' ng-click='editNumberLesson($index)'>edit position</a>

@@ -49,6 +49,12 @@ $grid-breakpoints: (
   margin: 10px;
   display: inline-block;
 }
+#learnpro_logo {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  z-index: 9999;
+}
 .flags {
   background-image: url('../img/icons/flags.png');
   background-size: 180px 180px;
@@ -147,7 +153,7 @@ $grid-breakpoints: (
   background-position: -32px 0;
 }
 .icons_sm.off {
-  background-position: 0px 0px;
+  background-position: 0 0;
 }
 .form_error2 {
   color: red;
@@ -179,36 +185,137 @@ $grid-breakpoints: (
 }
 /****************lesson style******************/
 .lesson_selected > span {
-  padding-left: 10px;
-  color: red;
-  font-weight: bold;
+  margin-left: 10px;
+  color: #000;
 }
 .lesson_types {
   cursor: pointer;
 }
-.lesson_type_1 {
-  width: 200px;
-  height: 30px;
+.lesson_types > span {
+  vertical-align: top;
+}
+.lesson_types.lesson_type_1 {
+  width: auto;
+  height: 40px;
+  background: #efefef;
+  color: #ed145b;
+  border: 1px solid #ed145b;
+  border-left: 6px solid #ed145b;
+  margin-top: 2px;
+  padding: 4px;
+  padding-top: 6px;
+  font-family: lpFont;
+  font-size: 16px;
+  overflow: hidden;
+}
+.lesson_types.lesson_type_2 {
+  width: auto;
+  height: 40px;
+  background: #efefef;
+  color: #7c0adc;
+  border: 1px solid #7c0adc;
+  border-left: 6px solid #7c0adc;
+  margin-top: 2px;
+  padding: 4px;
+  padding-top: 6px;
+  font-family: lpFont;
+  font-size: 16px;
+  overflow: hidden;
+}
+.lesson_types.lesson_type_3 {
+  width: auto;
+  height: 40px;
+  background: #efefef;
+  color: #f26522;
+  border: 1px solid #f26522;
+  border-left: 6px solid #f26522;
+  margin-top: 2px;
+  padding: 4px;
+  padding-top: 6px;
+  font-family: lpFont;
+  font-size: 16px;
+  overflow: hidden;
+}
+.lesson_types.lesson_type_4 {
+  width: auto;
+  height: 40px;
+  background: #efefef;
+  color: #8dc63f;
+  border: 1px solid #8dc63f;
+  border-left: 6px solid #8dc63f;
+  margin-top: 2px;
+  padding: 4px;
+  padding-top: 6px;
+  font-family: lpFont;
+  font-size: 16px;
+  overflow: hidden;
+}
+.lesson_types.lesson_type_5 {
+  width: auto;
+  height: 40px;
+  background: #efefef;
+  color: #0000ff;
+  border: 1px solid #0000ff;
+  border-left: 6px solid #0000ff;
+  margin-top: 2px;
+  padding: 4px;
+  padding-top: 6px;
+  font-family: lpFont;
+  font-size: 16px;
+  overflow: hidden;
+}
+.lesson_types:hover.lesson_type_1 {
+  width: auto;
+  height: 40px;
+  background: #ed145b;
+  color: #FFFFFF;
+}
+.lesson_types:hover.lesson_type_2 {
+  width: auto;
+  height: 40px;
+  background: #7c0adc;
+  color: #FFFFFF;
+}
+.lesson_types:hover.lesson_type_3 {
+  width: auto;
+  height: 40px;
+  background: #f26522;
+  color: #FFFFFF;
+}
+.lesson_types:hover.lesson_type_4 {
+  width: auto;
+  height: 40px;
+  background: #8dc63f;
+  color: #FFFFFF;
+}
+.lesson_types:hover.lesson_type_5 {
+  width: auto;
+  height: 40px;
   background: #0000ff;
-  color: white;
-  border-radius: 5px;
-  border: 2px solid black;
+  color: #FFFFFF;
 }
-.lesson_type_2 {
-  width: 200px;
-  height: 30px;
-  background: #ffa500;
-  color: white;
-  border-radius: 5px;
-  border: 2px solid black;
+.lesson_icons {
+  background-image: url('../img/icons/icons_sm.png');
+  background-size: 400px 400px;
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  display: inline-block;
 }
-.lesson_type_3 {
-  width: 200px;
-  height: 30px;
-  background: #008000;
-  color: white;
-  border-radius: 5px;
-  border: 2px solid black;
+.lesson_icons.lesson_icon_1 {
+  background-position: 0 -32px;
+}
+.lesson_icons.lesson_icon_2 {
+  background-position: -32px -32px;
+}
+.lesson_icons.lesson_icon_3 {
+  background-position: -64px -32px;
+}
+.lesson_icons.lesson_icon_4 {
+  background-position: -96px -32px;
+}
+.lesson_icons.lesson_icon_5 {
+  background-position: -128px -32px;
 }
 /****************lesson style END******************/
 /****************************for angular*******************/

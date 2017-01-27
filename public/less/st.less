@@ -49,6 +49,13 @@ $grid-breakpoints: (
 	display: inline-block;
 }
 
+#learnpro_logo{
+	position:absolute; 
+	top:10px; 
+	left:20px;
+	z-index:9999
+}
+
 @flag_underline: 3px solid #337ab7;
 
 @phones: ~"(max-width: 479px)";
@@ -155,7 +162,7 @@ $grid-breakpoints: (
 	    background-position: -32px 0;
 	}
 	&.off{
-		background-position: 0px 0px;
+		background-position: 0 0;
 	}
 }
 
@@ -211,37 +218,98 @@ $grid-breakpoints: (
 
 
 /****************lesson style******************/
-.lesson_type(@background){
-	width: 200px;
-	height:30px;
+.lesson_type_func(@background){
+	width: auto;
+	height:40px;
+	background: #efefef;
+	color: @background;	
+	border:1px solid @background;
+	border-left:6px solid @background;
+	margin-top:2px;
+	padding:4px;
+	padding-top:6px;
+	font-family: lpFont;
+	font-size: 16px;
+	overflow:hidden;
+}
+.lesson_type_hover_func(@background){
+	width: auto;
+	height:40px;
 	background: @background;
-	color: white;
-	border-radius: 5px;
-	border:2px solid black;
+	color: #FFFFFF;	
+
 }
 
-
-
-
 .lesson_selected >span{
-	padding-left:10px;
-	color:red;
-	font-weight:bold;
+	margin-left:10px;
+	color:#000;
 }
 
 .lesson_types{
 	cursor:pointer;
+	&>span{
+		vertical-align:top;
+	}
+	&.lesson_type_1{
+		.lesson_type_func(#ed145b);
+	}
+	&.lesson_type_2{
+		.lesson_type_func(#7c0adc);
+	}
+	&.lesson_type_3{
+		.lesson_type_func(#f26522);
+	}
+	&.lesson_type_4{
+		.lesson_type_func(#8dc63f);
+	}
+	&.lesson_type_5{
+		.lesson_type_func(#0000ff);
+	}
 }
 
-.lesson_type_1{
-	.lesson_type(blue);
+.lesson_types:hover{
+	&.lesson_type_1{
+		.lesson_type_hover_func(#ed145b);
+	}
+	&.lesson_type_2{
+		.lesson_type_hover_func(#7c0adc);
+	}
+	&.lesson_type_3{
+		.lesson_type_hover_func(#f26522);
+	}
+	&.lesson_type_4{
+		.lesson_type_hover_func(#8dc63f);
+	}
+	&.lesson_type_5{
+		.lesson_type_hover_func(#0000ff);
+	}
 }
-.lesson_type_2{
-	.lesson_type(orange);
+
+.lesson_icons{	
+	background-image: url('../img/icons/icons_sm.png');
+	background-size: 400px 400px;
+	background-repeat: no-repeat;
+	width: 32px;
+	height: 32px;
+	display: inline-block;
+	&.lesson_icon_1{
+	    background-position: 0 -32px;
+	}
+	&.lesson_icon_2{
+		background-position: -32px -32px;
+	}
+	&.lesson_icon_3{
+	    background-position: -64px -32px;
+	}
+	&.lesson_icon_4{
+		background-position: -96px -32px;
+	}
+	&.lesson_icon_5{
+	    background-position: -128px -32px;
+	}
 }
-.lesson_type_3{
-	.lesson_type(green);
-}
+
+
 /****************lesson style END******************/
 
 

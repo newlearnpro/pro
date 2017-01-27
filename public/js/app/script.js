@@ -422,15 +422,15 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
 
 /*********դասերի բաժին *****/
 app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 'language', function($scope, $rootScope, $http, $q, $timeout, language) {
-    var obj = [];
+    var nextPrev = 0;
     var promise = language.getLang();
 
     /******փորձ******/
-    $scope.a = 100;
-    $timeout(function() {
-        $scope.a = 300;
-        //    $scope.$digest();
-    }, 1500);
+    /*  $scope.a = 100;
+      $timeout(function() {
+          $scope.a = 300;
+          //    $scope.$digest();
+      }, 1500);*/
     /***************/
 
     promise.then(function(data) {
@@ -503,8 +503,9 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
                 var content_src = '../../uploads/images/content_' + this.items.id + '.png ';
                 //   $scope.src = this.items.src;
-                $("#pagePlayer, #learnpro_logo").hide();
-                $("#content_image").show().css({
+                $('#pagePlayer,#jp_video_0').attr('src', '');
+                $('#pagePlayer, #learnpro_logo, #jp_container_1').hide();
+                $('#content_image').show().css({
                     'width': '100%',
                     'height': 'auto',
                     'maxWidth': '1000px'
@@ -602,11 +603,10 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                  });*/
             //     console.log(this.items.type_id);
 
-            if ((this.items.type_id == 1 || this.items.type_id == 2)) {
+            if (this.items.type_name == 'html') {
+
+                $('#jp_video_0').attr('src', '');
                 $('#jp_container_1').hide();
-                $timeout(function() {
-                    $('#jp_video_0').get(0).pause();
-                }, 200);
 
 
                 $scope.src = this.items.src;
@@ -635,13 +635,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             // console.log($(this))
 
             /*******************************************************************************************/
-            if (this.items.type_id == 3) {
-
-
-
-
-
-
+            if (this.items.type_name == 'video') {
 
                 new jPlayerPlaylist({
                     jPlayer: "#jquery_jplayer_1",
@@ -684,50 +678,67 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
                 //  video.pause();
-                $('#pagePlayer').empty();
+                $('#pagePlayer').attr('src', '').hide();
                 $('#jp_container_1').show();
                 $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + this.items.type_id + '/' + this.items.src + '/data.zip');
                 $timeout(function() {
                     $('#jp_video_0').get(0).play();
-                    // video.play();
                 }, 200);
-                //$scope.$digest();
 
 
 
+                //  var
+                var tt = {
+                    startFrame: [10, 20, 30, 40],
+                    endFrame: [13, 25, 34, 46]
+                };
 
 
+                $("#nextEpisode").bind("click", function() {
 
-                $("#next").bind("click", function() {
+                    if (nextPrev < tt.startFrame.length) {
+                        nextPrev++;
+                        console.log(nextPrev)
 
-
-
-                    /*if(video.currentTime == 10){
-                    //console.log(video.currentTime);
+                        /*if(video.currentTime == 10){
+                        //console.log(video.currentTime);
     
-                    }*/
-                    $('#jp_video_0').get(0).currentTime = 10;
-                    $('#jp_video_0').get(0).play();
+                        }*/
 
-                    $('#jp_video_0').get(0).ontimeupdate = function() {
 
-                        /*setTimeout(function(){
-                            $("#time").text("time: " + video.currentTime);
-                            video.pause();
-                        },3000);*/
-                        if ($('#jp_video_0').get(0).currentTime >= 13) {
-                            //video.currentTime = 12.6;
-                            $('#jp_video_0').get(0).pause();
-                            setTimeout(function() {
-
-                            }, 1000);
-
-                        }
+                        $('#jp_video_0').get(0).currentTime = tt.startFrame[nextPrev - 1];
+                        $('#jp_video_0').get(0).play();
                     }
+                    /* $('#jp_video_0').get(0).ontimeupdate = function() {
+
+
+                         if ($('#jp_video_0').get(0).currentTime >= 13) {
+                             //video.currentTime = 12.6;
+                             $('#jp_video_0').get(0).pause();
+                             setTimeout(function() {
+
+                             }, 1000);
+
+                         }
+                     }*/
 
                 });
 
 
+                $("#prevEpisode").bind("click", function() {
+
+                    if (nextPrev > 1) {
+                        nextPrev--;
+                        console.log(nextPrev)
+
+
+                        $('#jp_video_0').get(0).currentTime = tt.startFrame[nextPrev - 1];
+
+                    } else if (nextPrev == 1) {
+                        $('#jp_video_0').get(0).currentTime = tt.startFrame[0];
+                    }
+                    $('#jp_video_0').get(0).play();
+                });
 
 
 
