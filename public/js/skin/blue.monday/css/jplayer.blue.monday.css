@@ -107,7 +107,7 @@
 /* @group CONTROLS */
 .jp-controls-holder {
   clear: both;
-  width: 440px;
+
   margin: 0 auto;
   position: relative;
   overflow: hidden;
@@ -134,8 +134,8 @@
   margin-left: 200px; }
 
 .jp-video .jp-type-playlist .jp-controls {
-  width: 134px;
-  margin-left: 172px; }
+  margin-left:10px;
+  width: 110px;}
 
 .jp-video .jp-controls {
   float: left; }
@@ -164,7 +164,7 @@
 .jp-state-playing .jp-play:focus {
   background: url("../image/jplayer.blue.monday.jpg") -48px -42px no-repeat; }
 
-.jp-stop, .jp-previous, .jp-next, .jp-own-prev, .jp-own-next {
+.jp-stop {
   width: 32px;
   height: 32px;
   margin-top: 4px; }
@@ -175,26 +175,6 @@
 
 .jp-stop:focus {
   background: url("../image/jplayer.blue.monday.jpg") -34px -83px no-repeat; }
-
-.jp-previous {
-  background: url("../image/jplayer.blue.monday.jpg") 0 -112px no-repeat; }
-
-.jp-own-prev {
-  background: url("../image/jplayer.blue.monday.jpg") -99px -118px no-repeat; }
-
-.jp-previous:focus {
-  background: url("../image/jplayer.blue.monday.jpg") -29px -112px no-repeat; }
-
-.jp-next {
-  background: url("../image/jplayer.blue.monday.jpg") 0 -141px no-repeat; }
-
-.jp-own-next {
-  background: url("../image/jplayer.blue.monday.jpg") 0 -118px no-repeat; }
-
-
-
-.jp-next:focus {
-  background: url("../image/jplayer.blue.monday.jpg") -29px -141px no-repeat; }
 
 /* @end */
 /* @group progress bar */
@@ -239,20 +219,19 @@
 /* @end */
 /* @group volume controls */
 .jp-state-no-volume .jp-volume-controls {
-  display: none; }
+  /*display: none; */}
 
 .jp-volume-controls {
   position: absolute;
   top: 32px;
-  left: 308px;
-  width: 200px; }
+  width: 100px; }
 
 .jp-audio-stream .jp-volume-controls {
   left: 70px; }
 
 .jp-video .jp-volume-controls {
-  top: 12px;
-  left: 50px; }
+  top: 32px;
+  right: 10px; }
 
 .jp-volume-controls button {
   display: block;
@@ -319,12 +298,12 @@
 
 .jp-current-time,
 .jp-duration {
-  width: 60px;
+  width: 44px;
   font-size: .64em;
   font-style: oblique; }
 
 .jp-current-time {
-  float: left;
+  float: right;
   display: inline;
   cursor: default; }
 
@@ -347,8 +326,7 @@
   text-align: center;
   cursor: default; }
 
-.jp-details,
-.jp-playlist {
+.jp-details{
   width: 100%;
   background-color: #ccc;
   border-top: 1px solid #009be3; }
@@ -424,13 +402,6 @@ span.jp-artist {
   color: #666; }
 
 /* @end */
-.jp-video-play {
-  width: 100%;
-  overflow: hidden;
-  /* Important for nested negative margins to work in modern browsers */
-  cursor: pointer;
-  background-color: transparent;
-  /* Makes IE9 work with the active area over the whole video area. IE6/7/8 only have the button as active area. */ }
 
 .jp-video-270p .jp-video-play {
   margin-top: -270px;
@@ -442,24 +413,7 @@ span.jp-artist {
 
 .jp-video-full .jp-video-play {
   height: 100%; }
-/*
-.jp-video-play-icon {
-  position: relative;
-  display: block;
-  width: 112px;
-  height: 100px;
-  margin-left: -56px;
-  margin-top: -50px;
-  left: 50%;
-  top: 50%;
-  background: url("../image/jplayer.blue.monday.video.play.png") 0 0 no-repeat;
-  text-indent: -9999px;
-  border: none;
-  cursor: pointer; }
 
-.jp-video-play-icon:focus {
-  background: url("../image/jplayer.blue.monday.video.play.png") 0 -100px no-repeat; }
-*/
 .jp-jplayer audio,
 .jp-jplayer {
   width: 0px;
@@ -487,10 +441,10 @@ span.jp-artist {
 
 .jp-video .jp-toggles {
   position: absolute;  
-  left: 266px;
+  right:120px;
   margin: 0;
 /*  margin-top: 4px;*/
-  width: 160px; }
+  width: 80px; }
 
 .jp-toggles button {
   display: block;
@@ -504,9 +458,9 @@ span.jp-artist {
   cursor: pointer; }
 
 .jp-full-screen {
-  margin-top: 4px;
+  margin-top: 6px;
   background: url("../image/jplayer.blue.monday.jpg") 0 -324px no-repeat;
-  margin-left: 20px; }
+  margin-left: 4px; }
 
 .jp-full-screen:focus {
   background: url("../image/jplayer.blue.monday.jpg") -34px -324px no-repeat; }
@@ -564,11 +518,15 @@ span.jp-artist {
 
 /* @end */
 
-html, body{
-	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+
+.jp-marker{
+  width:148px;
+  height: 30px;
+  background:#8ad875;
+  color:#000000;
+  margin-top:6px;
+  float:left;
+  font-family:lpFont;
+  font-style: italic;
 }
+

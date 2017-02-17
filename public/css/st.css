@@ -46,7 +46,8 @@ $grid-breakpoints: (
   background-repeat: no-repeat;
   width: 100px;
   height: 56px;
-  margin: 10px;
+  margin: 8px;
+  margin-left: 20px;
   display: inline-block;
 }
 #learnpro_logo {
@@ -54,6 +55,7 @@ $grid-breakpoints: (
   top: 10px;
   left: 20px;
   z-index: 9999;
+  display: none;
 }
 .flags {
   background-image: url('../img/icons/flags.png');
@@ -155,6 +157,14 @@ $grid-breakpoints: (
 .icons_sm.off {
   background-position: 0 0;
 }
+#pagePlayer,
+#content_image,
+#jp_container_1 {
+  display: none;
+}
+.form_error {
+  color: red;
+}
 .form_error2 {
   color: red;
 }
@@ -182,6 +192,26 @@ $grid-breakpoints: (
 }
 .lesson_item {
   display: none;
+  margin-left: 50px;
+}
+.lesson_item table {
+  border: 1px solid #000000;
+  /*width:80%;*/
+}
+.lesson_item table tr td {
+  display: inline-block;
+  overflow: hidden;
+  width: 160px;
+  height: 36px;
+}
+.position_group_in {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.position_group_out {
+  visibility: visible;
 }
 /****************lesson style******************/
 .lesson_selected > span {
@@ -193,6 +223,23 @@ $grid-breakpoints: (
 }
 .lesson_types > span {
   vertical-align: top;
+}
+.lesson_types.lesson_type_0 {
+  width: auto;
+  height: 40px;
+  background: #efefef;
+  color: #808080;
+  border: 1px solid #808080;
+  border-left: 6px solid #808080;
+  margin-top: 2px;
+  padding: 4px;
+  padding-top: 6px;
+  font-family: lpFont;
+  font-size: 16px;
+  overflow: hidden;
+  padding: 0;
+  margin: 6px 0;
+  height: 2px;
 }
 .lesson_types.lesson_type_1 {
   width: auto;
@@ -345,12 +392,26 @@ $grid-breakpoints: (
 header {
   position: relative;
   width: 100%;
-  height: 120px;
-  background: #efefef;
+  height: 100px;
   z-index: 9999999;
 }
+.header-parts {
+  height: 68px;
+  background: #efefef;
+  padding: 0;
+}
+.header-part1 {
+  background-color: #7c7c7d;
+}
+.header-part1 > span {
+  position: absolute;
+  top: 6px;
+  right: 70px;
+  color: #ffffff;
+  font-family: lpFont;
+}
 .mrgTop {
-  margin-top: 120px;
+  margin-top: 100px;
 }
 #nail {
   float: right;
@@ -363,21 +424,15 @@ header {
 }
 .lp_button,
 .lp_link {
-  background: #badcf2;
-  background-image: linear-gradient(to bottom, #badcf2, #2980b9);
-  -webkit-border-radius: 40px 10px;
-  -moz-border-radius: 40px 10px;
+  background: #ffffff;
+  color: #3971c8;
   border-radius: 40px 10px;
-  -webkit-box-shadow: 2px 4px 8px #666666;
-  -moz-box-shadow: 2px 4px 8px #666666;
-  box-shadow: 2px 4px 8px #666666;
   font-family: lpFont;
-  color: #ffffff;
   font-size: 14px;
-  border-top: solid #666666 1px;
-  border-right: solid #666666 8px;
-  border-bottom: solid #666666 1px;
-  border-left: solid #666666 8px;
+  border-top: solid #7c7c7d 1px;
+  border-right: solid #7c7c7d 8px;
+  border-bottom: solid #7c7c7d 1px;
+  border-left: solid #7c7c7d 8px;
   width: 140px;
   display: inline-block;
   cursor: pointer;
@@ -385,31 +440,32 @@ header {
 .lp_button:hover,
 .lp_link:hover {
   color: #ffffff;
-  background: #f0f0f0;
-  background-image: -webkit-linear-gradient(top, #f0f0f0, #22638f);
-  background-image: -moz-linear-gradient(top, #f0f0f0, #22638f);
-  background-image: -ms-linear-gradient(top, #f0f0f0, #22638f);
-  background-image: -o-linear-gradient(top, #f0f0f0, #22638f);
-  background-image: linear-gradient(to bottom, #f0f0f0, #22638f);
+  background: #31b0d5;
 }
-.lp_button:active,
-.lp_link:active {
-  color: #ffffff;
-  border-top: solid #FBF94F 1px;
-  border-right: solid #FBF94F 8px;
-  border-bottom: solid #FBF94F 1px;
-  border-left: solid #FBF94F 8px;
-}
+/*
+.lp_button:active, .lp_link:active {
+color: #ffffff;
+      border-top: solid #31b0d5 1px;
+      border-right: solid #31b0d5 8px;
+      border-bottom: solid #31b0d5 1px;
+      border-left: solid #31b0d5 8px; 
+}*/
 /**************media*/
 @media (max-width: 479px) {
   .carousel-caption > h1 {
     font-size: 18px;
   }
+  /*header{
+		height:160px;
+	}*/
 }
 @media (min-width: 480px) and (max-width: 767px) {
   .carousel-caption > h1 {
     font-size: 24px;
   }
+  /*header{
+		height:160px;
+	}*/
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .carousel-caption > h1 {
@@ -430,4 +486,8 @@ header {
 .carousel-caption > h3 > a {
   padding: 10px;
   text-decoration: none;
+}
+/*successes*/
+.successes {
+  color: green;
 }

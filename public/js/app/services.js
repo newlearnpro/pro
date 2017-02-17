@@ -59,3 +59,20 @@ app.service('language', function($http, $q) {
         return deffered.promise;
     }
 });
+
+app.service('currentUserData', function($http) {
+    var userObj = '';
+    var username = document.querySelector("#username").innerHTML;
+    $http.get('../main/user_personal_page', {
+            params: {
+                user: username
+            }
+        })
+        .then(function(data) {
+            userObj = data.data;
+        });
+
+    this.getUserData = function() {
+        return userObj;
+    }
+});

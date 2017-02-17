@@ -1,6 +1,7 @@
 <div ng-cloak class="container-fluid">
 	<div class="row-fluid" > 
-		<div  ng-controller='usersCtrl' class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+		<div  ng-controller='usersCtrl'>
+		<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
 			<users-table></users-table>			
 			<div ng-if='users'>
 				<div>
@@ -31,9 +32,21 @@
 				{{tt.first_name_hint}}
 			</div>
 		</div>
+		<div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+			<select id='position' ng-model='userField.id'>
+				<option id='position' ng-selected='0' data1='0' data2='0'>{{language.position_main}}Բոլորը</option>
+				<option ng-repeat='items in position' ng-selected='{{items.id}}' data1='{{items.id}}' data2='{{items.parent_id}}'>{{items.id}} - {{items.position}}</option>
+			</select>
+			<div>
+				<input id='timeMounth' type='number' min='1' max='12' ng-model='licenseMounth' ng-value='licenseMounth'/>
+				<input ng-if='licenseMounth_newValue!=undefined' type='button' value='add license' ng-click='add_license()' />
+				<div><span class='successes'>{{success_add_license}}</span></div>
+			</div>
+		</div>		
+		</div>
 
-
-		<div ng-controller='sessionsCtrl' class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+		<div ng-controller='sessionsCtrl'>
+		<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
 			<table  class='table'>
 				 <thead>
 				 	<tr class='info'>
@@ -49,6 +62,7 @@
 					</tr>
 				</tbody>	
 			</table>
+		</div>
 		</div>
 	</div>
 </div>

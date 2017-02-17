@@ -1,11 +1,11 @@
 [
     "first_name_hint",
     "last_name_hint",
+    "age_hint",
     "email_hint",
     "username_hint",
     "password_hint",
     "position_hint",
-    "new_position",
     "structure",
     "save",
     "delete",
@@ -17,5 +17,6 @@
     "interesting",
     "laboratory_work",
     "task",
-    "interactive"
+    "interactive",
+    "success_add_license"
 ]
