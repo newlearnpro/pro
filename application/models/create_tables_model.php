@@ -107,6 +107,7 @@ it creates file table if there isn't `position` table
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `position` varchar(255) collate utf8_general_ci NOT NULL,
                 `parent_id` int(11) unsigned NOT NULL,
+                `position_group` tinyint(1) default NULL,
                PRIMARY KEY(`id`)
         );
         */
@@ -118,10 +119,36 @@ it creates file table if there isn't `users` table
         /*********For MySQL:
         CREATE TABLE IF NOT EXISTS `users` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
-                `username` varchar(15) collate utf8_general_ci NOT NULL UNIQUE,
+                `username` varchar(20) collate utf8_general_ci NOT NULL UNIQUE,
                 `password` varchar(35) collate utf8_general_ci NOT NULL,
                 `first_name` varchar(40) collate utf8_general_ci NOT NULL,
                 `last_name` varchar(40) collate utf8_general_ci NOT NULL,
+                `status` varchar(40) collate utf8_general_ci NOT NULL,
+                `gender` varchar(40) collate utf8_general_ci NOT NULL,
+                `age` int(11) NOT NULL,
+                `email` varchar(50) collate utf8_general_ci NOT NULL UNIQUE,
+                `img_src` text NOT NULL,
+                `activation_code` varchar(100) NOT NULL,
+                `activation` varchar(10) NOT NULL,
+                `permission` varchar(10) NOT NULL,
+               PRIMARY KEY(`id`)
+        );
+        */
+
+/*********************
+users_armtab
+it creates file table if there isn't `users_armtab` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `users_armtab` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `username` varchar(20) collate utf8_general_ci NOT NULL UNIQUE,
+                `password` varchar(35) collate utf8_general_ci NOT NULL,
+                `first_name` varchar(40) collate utf8_general_ci NOT NULL,
+                `last_name` varchar(40) collate utf8_general_ci NOT NULL,
+                `status` varchar(40) collate utf8_general_ci NOT NULL,
+                `gender` varchar(40) collate utf8_general_ci NOT NULL,
+                `age` int(11) NOT NULL,
                 `email` varchar(50) collate utf8_general_ci NOT NULL UNIQUE,
                 `img_src` text NOT NULL,
                 `activation_code` varchar(100) NOT NULL,
@@ -138,7 +165,7 @@ it creates file table if there isn't `users_data` table
         /*********For MySQL:
         CREATE TABLE IF NOT EXISTS `users_data` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
-                `username` varchar(15) collate utf8_general_ci NOT NULL,
+                `username` varchar(20) collate utf8_general_ci NOT NULL,
                 `lesson_id` varchar(100) collate utf8_general_ci NOT NULL,
                 `lesson_name` varchar(100) collate utf8_general_ci NOT NULL,
                 `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
@@ -146,6 +173,23 @@ it creates file table if there isn't `users_data` table
         );
         */
 
+
+/*********************
+users_license_code
+it creates file table if there isn't `users_license_code` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `users_license_code` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,                
+                `username` varchar(20) collate utf8_general_ci NOT NULL,
+                `license_code` varchar(20) NOT NULL,
+                `position_id` int(11) NOT NULL,                
+                `position_parent_id` int(11) NOT NULL,            
+                `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+                `time_end` int(10) unsigned DEFAULT 0 NOT NULL,
+                PRIMARY KEY(`id`)
+        );
+        */
 
 //////////////////////////////////////////////////////////////////////////////////////
  

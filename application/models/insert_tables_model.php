@@ -59,6 +59,19 @@ it creates position table if there isn't `position` table
      //   return $message_data;
     }
 
+    public function insert_add_license($get_info)
+    {
+        $license_code = array(
+            'username' =>  $get_info['username'],
+            'position_id' =>  $get_info['position_id'],
+            'position_parent_id' => $get_info['position_parent_id'],
+            'timestamp' => date("U"),
+            'time_end' => date("U") + ($get_info['time_end'] * 2592000)
+        );         
+        $insert = $this->db->insert('users_license_code', $license_code);
+     //   return $message_data;
+    }
+
     public function insert_question($get_info)
     {
         $question_field = array(

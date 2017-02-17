@@ -101,4 +101,14 @@ class Main extends CI_Controller {
 		$query = $this->insert_tables_model->insert_users_data($get_info);
 	}
 
+	public function get_users_license_code(){
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$this->load->model('membership_model');
+		$get_info['username'] = $this->input->post('username');
+		$get_info['position_id'] = $this->input->post('position_id');
+		$get_info['position_parent_id'] = $this->input->post('position_parent_id');
+		//$get_info['class_name'] = $this->input->post('class_name');
+		$query = $this->membership_model->get_license_code($get_info);
+		echo json_encode($query);
+	}
 }

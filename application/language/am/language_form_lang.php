@@ -85,4 +85,28 @@ $lang['laboratory_work']      = 'Լաբորատոր աշխատանք';
 $lang['task']   			  = 'Խնդիր';
 $lang['interactive']          = 'Ինտերակտիվ';
 
+
+/*status*/
+$lang['pupil']                = 'Աշակերտ';
+$lang['teacher']              = 'Ուսուցիչ';
+$lang['male']                 = 'Արական';
+$lang['female']               = 'Իգական';
+$lang['status_hint']          = '----';
+$lang['gender_hint']          = 'Սեռ';
+$lang['age_hint']             = 'Տարիք';
+$lang['not_selected']         = 'Ընտրված չէ';
+
+
+
+
+
+/*successes*/
+$lang['success_add_license'] = 'Լիցենզիան հաջողությամբ ավելացված է';
+
+
+
+
+
+
+
 ?>

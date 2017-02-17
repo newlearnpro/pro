@@ -10,6 +10,12 @@ echo form_label(lang('first_name_hint').'*','first_name').br();
 echo form_input('first_name',set_value('first_name', ''), 'class="form-control"') . form_error('first_name', '<span class="form_error" >', '</span>').br() ;
 echo form_label(lang('last_name_hint').'*','last_name').br();
 echo form_input('last_name',set_value('last_name', ''),'class="form-control"') . form_error('last_name', '<span class="form_error">', '</span>').br() ;
+echo form_label(lang('status_hint'),'status').br();
+echo form_dropdown('status', array("pupil"=>lang('pupil'), "teacher"=>lang('teacher')), '', 'class="form-control"').br();
+echo form_label(lang('gender_hint'),'gender').br();
+echo form_dropdown('gender', array("male"=>lang('male'), "female"=>lang('female')), '', 'class="form-control"').br();
+echo form_label(lang('age_hint').'*','age').br();
+echo form_dropdown('age',$age, set_value('age', ''), 'class="form-control"') . form_error('age', '<span class="form_error">', '</span>').br() ;
 echo form_label(lang('email_hint').'*','email').br();
 echo form_input('email',set_value('email', ''),'class="form-control"') . form_error('email', '<span class="form_error">', '</span>').br() ;
 echo form_label(lang('username_hint').'*','username').br();
@@ -18,15 +24,12 @@ echo form_label(lang('password_hint').'*','password').br();
 echo form_password('password','','class="form-control"') . form_error('password', '<span class="form_error">', '</span>').br() ;
 echo form_label(lang('password_confirm_hint').'*','password_confirm').br();
 echo form_password('password_confirm','','class="form-control"') . form_error('password_confirm', '<span class="form_error">', '</span>').br() ;
-//echo form_label(lang('position_hint'),'position').br();
-//echo form_dropdown('position', $position, '', 'class="form-control"').br();
 echo $captcha_img . form_hidden('captcha_img_hint',$captcha_word).br() ;
 echo form_label(lang('captcha_hint').'*','captcha').br();
 echo form_input('captcha','','class="form-control"') . form_error('captcha', '<span class="form_error">', '</span>').br() ;
 echo form_submit('submit','Create Account','class="btn btn-default"');
 echo anchor(base_url() . $this->uri->segment(1), 'Go back to home', 'class="btn btn-default"').br();
 echo form_close();
-
 ?>
 <!--input type="file" id="img_src" name="img_src"  style="display:none;" accept="image/bmp, image/gif, image/jpg, image/jpeg, image/png" style="" /><br />
  <img id="signup_img" src="<?php echo base_url();?>img/default_photo.png" style="width:auto;height:100px; max-width: 100px;"/>

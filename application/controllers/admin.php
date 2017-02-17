@@ -58,10 +58,11 @@ class Admin extends CI_Controller {
 	{
 		$_POST = json_decode(file_get_contents('php://input'), true);
 		$this->create_tables_model->create_position_table();
-		$get_info = $this->input->post('position');
-		$get_info2 = $this->input->post('parent_id');
-		$data = array('position'=>$get_info[0], 'parent_id'=>$get_info2);
-		if(!empty($get_info[0])){
+		$get_position_name = $this->input->post('position_name');
+		$get_position_group = $this->input->post('position_group');
+		$get_position_parent_id = $this->input->post('parent_id');
+		$data = array('position'=>$get_position_name,'position_group'=>$get_position_group, 'parent_id'=>$get_position_parent_id);
+		if(!empty(get_position_name)){
 			$this->db->insert('position', $data);
 		//	copy($this->upload_folder .'images/content_default.jpg', $this->upload_folder .'images/content_'.$get_id.'.jpg');
 		}		
@@ -195,6 +196,28 @@ We must write 'name', 'description', 'keywords' into the fields
 		$this->insert_tables_model->insert_question($get_info);
 		echo json_encode($get_info);
 	}
+
+	public function add_license()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$this->load->model('insert_tables_model');
+		$get_info['username'] = $this->input->post('username');
+		$get_info['position_id'] = $this->input->post('position_id');
+		$get_info['position_parent_id'] = $this->input->post('position_parent_id');
+		$get_info['time_end'] =  $this->input->post('time_mount');
+
+	
+		$this->insert_tables_model->insert_add_license($get_info);
+		//echo json_encode($get_info);
+		
+//echo "dg";
+		//2.592.000
+	}
+
+
+
+
+
 
 
 

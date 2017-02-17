@@ -107,4 +107,16 @@ $lang['task']   			  = 'Task';
 $lang['interactive']          = 'Interactive';
 
 
+/*status*/
+$lang['pupil']                = 'Pupil';
+$lang['teacher']              = 'Teacher';
+$lang['male']                 = 'Male';
+$lang['female']               = 'Female';
+$lang['status_hint']          = '----';
+$lang['gender_hint']          = 'Gender';
+$lang['age_hint']             = 'Age';
+$lang['not_selected']         = 'Not selected';
+
+
+
 ?>

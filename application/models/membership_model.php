@@ -30,7 +30,7 @@ class Membership_model extends CI_Model {
     public function user_page($get_info)
     {   
         $this->db->where('username', $get_info);
-        $this->db->select('username, first_name, last_name, email, activation_code');        
+        $this->db->select('username, first_name, last_name, status, gender, age, email, activation_code');        
         $query = $this->db->get("users");
         return   $query->result_array();
         /*foreach ($query->result() as $row){ 
@@ -43,7 +43,7 @@ class Membership_model extends CI_Model {
 
     public function position()
     {   
-        $query = $this->db->query("SELECT id, position, parent_id FROM position");  
+        $query = $this->db->get("position");  
         return   $query->result_array();
     }
 
@@ -62,6 +62,16 @@ class Membership_model extends CI_Model {
         $query = $this->db->get_where('questions', array('lesson_id' => $get_info['lesson_id']));
         return   $query->result_array();
     }
+
+    public function get_license_code($get_info)
+    {   
+        $where = "(username='$get_info[username]' AND position_id='$get_info[position_id]') OR (username='$get_info[username]') OR (username='$get_info[username]' AND position_parent_id='$get_info[position_id]')";
+      // $where = "(username='$get_info[username]' AND class_id='$get_info[class_id]') OR (username='$get_info[username]' AND class_name=0) OR (username='$get_info[username]')";
+     //   $query = $this->db->get_where('users_license_code', array('username'=>$get_info['username'],'class_id'=>$get_info['class_id']));
+           $query = $this->db->get_where('users_license_code', $where);
+        return   $query->result_array();
+    }
+
 
     public function main_lesson($get_info)
     {    
@@ -94,18 +104,17 @@ class Membership_model extends CI_Model {
         $new_member_insert_data = array(         
              'first_name' => $this->input->post('first_name'),
              'last_name' => $this->input->post('last_name'),
+             'status' => $this->input->post('status'),
+             'gender' => $this->input->post('gender'),
+             'age' => $this->input->post('age') + 4,
              'email' => $this->input->post('email'),
              'username' => $this->input->post('username'),
              'password' => md5($this->input->post('password')),
              'activation_code' => random_string('alnum', 16),
              'activation' => 'no',
              'permission' => 'user'
-            // 'img_src' => $this->input->post('img_base64')
          );         
          $insert = $this->db->insert('users', $new_member_insert_data);
-       
-
-       // return $insert;
          $config = Array(
           'protocol' => 'smtp',
           'smtp_host' => 'ssl://smtp.googlemail.com',
@@ -146,9 +155,9 @@ class Membership_model extends CI_Model {
             return false;
         }else{
             return true;
-       }   
-	  }       
-    
+       }
+	  }
+
     function get_first_last_names()
 	  {
         $var = $this->session->userdata('username'); 

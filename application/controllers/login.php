@@ -3,18 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
-   	public function __construct()
+  public function __construct()
 	{
         parent::__construct();
         $this->load->model('membership_model'); 
-        $this->lang->load('language_form',$this->uri->segment(1));
+        $this->lang->load('language_form',$this->uri->segment(1));                
         $this->session->set_userdata('lang', $this->uri->segment(1));
 	}
 
 	public function index()
 	{
       $query = $this->db->get_where('users', array('username' => $this->input->post('username'), 'password' => md5($this->input->post('password'))), 0, 0);
-      $data = array('usr' => $this->input->post('username'), 'pwd' => md5($this->input->post('password')));
+      $data = array('usr' => $this->input->post('username'), 'pwd' => md5($this->input->post('password')), 'browser'=>$this->input->user_agent());
       $info['activation'] = true;
 
       foreach($query->result() as $row){           
@@ -25,12 +25,11 @@ class Login extends CI_Controller {
           }else if($row->permission == 'user' && $row->activation == 'yes'){
              $data['prm'] = 'user';
              $this->session->set_userdata($data);
-             redirect($this->uri->segment(1).'/main');
+             redirect($this->uri->segment(1).'/main/index/list');
           }else if($row->permission == 'user' && $row->activation == 'no'){
-             $info['activation'] = false;
+             $info['activation'] = false;      
           }     
-      }    
-
+      }
 
       if(!$this->session->userdata('usr')){
             $this->load->view('includes/header');
@@ -39,14 +38,90 @@ class Login extends CI_Controller {
       }else{  
           if($this->session->userdata('prm')==='admin'){
               redirect($this->session->userdata('lang').'/admin');
-          }else if($this->session->userdata('prm')==='user'){
-              redirect($this->session->userdata('lang').'/main');
+          }else if($this->session->userdata('prm')==='user'){      
+              redirect($this->session->userdata('lang').'/main/index/list');
           }
       }
 	}
 
     
+  public function lgn($hostname)         
+  {  
+      $file = "uploads/armtabs_data/" . $hostname .".lp";
+      if(is_file($file)){
+          $query = $this->db->get_where('users', array('username' => $hostname, 'password' => md5('armtab001')), 0, 0);
+        //  $data = array('usr' => $this->input->post('username'), 'pwd' => md5($this->input->post('password')), 'browser'=>$this->input->user_agent());
+          $data = array('usr' => $hostname, 'pwd' => md5('armtab001'));
+          unlink($file);
+          $info['activation'] = true;
+          foreach($query->result() as $row){             
+              if($row->permission == 'user' && $row->activation == 'yes'){
+                  $data['prm'] = 'user';
+                  $this->session->set_userdata($data);
+                  redirect($this->uri->segment(1).'/main/index/list');
+              }     
+          }
+
+
+      if(!$this->session->userdata('usr')){
+          /*  $this->load->view('includes/header');
+            $this->load->view('login_form', $info);
+            $this->load->view('includes/footer');*/
+            redirect($this->session->userdata('lang').'/login');
+      }else{      
+              redirect($this->session->userdata('lang').'/main/index/list');
+
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+      else
+        {
+   
+          redirect($this->uri->segment(1).'/login');
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ }
     
+////////////////
+  public function license()         
+  {  
+      $hostname = $this->input->post('usr');
+      $this->db->where('username', $hostname);
+      $this->db->select('username');        
+      $query = $this->db->get('users');
+      foreach($query->result() as $row){
+          $fp = fopen('uploads/armtabs_data/' . $hostname . '.lp', 'w');
+          fwrite($fp, $hostname);
+          fclose($fp);
+      }
+  }
+
+
 
  // for registration   
   public function signup()         
@@ -71,7 +146,38 @@ class Login extends CI_Controller {
       $img = create_captcha($captcha);    
       
       $data['captcha_img'] = $img['image'];
-      $data['captcha_word'] = $captcha['word']; 
+      $data['captcha_word'] = $captcha['word'];
+
+
+      $data['age'] = array(0 => $this->lang->line('not_selected'));
+
+
+
+//$newArray = array();  
+
+
+
+
+    //  $data['age'] = [$this->lang->line('not_selected')];
+      for($i=5; $i<100; $i++){
+      //  array_push($dat, $i);
+        array_push($data['age'], $i);
+      }
+
+
+
+
+    //  array_push($data['age'], $dat);
+
+/*
+$data['status'] = array(
+        'small'         => 'lang:pupil',
+        'med'           => 'Medium Shirt',
+        'large'         => 'Large Shirt',
+        'xlarge'        => 'Extra Large Shirt',
+);*/
+
+
       /*$data['position'] = [];
       for($i=0; $i<count($position); $i++){
         $pos_arr = implode("", $position[$i]);
@@ -156,6 +262,11 @@ class Login extends CI_Controller {
         $this->config->set_item('language', $this->uri->segment(1));
         $this->form_validation->set_rules('first_name','lang:first_name', 'trim|required');
         $this->form_validation->set_rules('last_name','lang:last_name', 'trim|required');
+
+        $this->form_validation->set_rules('status','lang:status', 'trim|required');
+        $this->form_validation->set_rules('gender','lang:gender', 'trim|required');
+        $this->form_validation->set_rules('age','lang:age', 'trim|required|callback_check_if_age_null');
+
         $this->form_validation->set_rules('email','lang:email', 'trim|required|valid_email|callback_check_if_email_exists');
         $this->form_validation->set_rules('username','lang:username', 'trim|required|min_length[3]|callback_check_if_username_exists');
         $this->form_validation->set_rules('password','lang:password', 'trim|required|min_length[4]|max_length[32]');
@@ -210,7 +321,14 @@ class Login extends CI_Controller {
         }         
   }
 
-
+    public function check_if_age_null($requested_age)
+  { 
+        if($requested_age != 0){
+            return true;          
+        }else{
+            return false;          
+        }   
+  }
 
 
 

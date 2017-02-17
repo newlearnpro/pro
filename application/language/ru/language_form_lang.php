@@ -104,4 +104,17 @@ $lang['laboratory_work']      = 'Лабораторная работа';
 $lang['task']   			  = 'Задача';
 $lang['interactive']          = 'Интерактив';
 
+
+/*status*/
+$lang['pupil']                = 'Ученик';
+$lang['teacher']              = 'Учитель';
+$lang['male']                 = 'Мужской';
+$lang['female']               = 'Женский';
+$lang['status_hint']          = '----';
+$lang['gender_hint']          = 'Пол';
+$lang['age_hint']             = 'Возраст';
+$lang['not_selected']         = 'Не выбран';
+
+
+
 ?>
