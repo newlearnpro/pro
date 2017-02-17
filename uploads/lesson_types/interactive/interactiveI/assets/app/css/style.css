@@ -1,0 +1,224 @@
+
+.cubes{
+	cursor:pointer;
+	
+}
+.cages{
+	position:absolute;
+}
+
+	#cube_group{
+		position: absolute;
+		bottom: 1%;
+		right:2%;
+	}
+
+
+@media (max-width:639px) {
+
+    #part_laboratory {
+	  width: 410px;
+      height: 256px;      
+    } 
+
+ 
+	#start_hint_ref{
+		height: 24px;
+        width: 24px;
+        top: 62px;
+        left: 6px;
+	}
+	
+	
+	.cubes{
+		width: 33px;
+		height: 33px;
+	}
+	
+	.cage1{		
+		top:136px;
+		left:188px;
+		width: 34px;
+		height: 28px;
+	}
+	
+	.cage3{
+
+		top:28.8%;
+		left:36%;
+		width: 34px;
+		height: 28px;
+
+	}
+	.cage5{
+		top:54%;
+		left:28%;
+		width: 34px;
+		height: 28px;
+	}	
+	.cage6{
+
+		top:54%;
+		left:44%;
+		width: 34px;
+		height: 28px;
+	}
+	
+	.cube1{
+		position:absolute;
+		width: 34px;
+		height: 34px;
+		bottom:0;
+	}
+	
+	#table_cont{
+		position:absolute;
+		top:116px;
+		left:84px;
+		width:228px;
+		height:56px;
+	}
+	
+}
+
+
+@media (min-width: 640px) and (max-width:767px) {
+
+    #part_laboratory {
+	  width: 608px;
+      height: 380px;      
+    } 
+
+
+    #bg_sound {
+        height: 25px;
+        width: 25px;
+        top: 2px;
+        right: 2px;
+    }
+
+	#start_hint_ref{
+		height: 24px;
+        width: 24px;
+        top: 62px;
+        left: 6px;	
+	}
+
+	
+	.cubes{
+		width: 48.8px;
+		height: 48.8px;
+	}
+	
+	.cage1{
+		top:52%;
+		left:45%;
+		width: 48.8px;
+		height: 40.6px;
+	}
+	.cage3{
+		top:28.8%;
+		left:36%;
+		width: 48.8px;
+		height: 40.6px;
+	}
+	.cage5{
+		top:52%;
+		left:28%;
+		width: 48.8px;
+		height: 40.6px;
+	}	
+	.cage6{
+		top:52%;
+		left:44%;
+		width: 48.8px;
+		height: 40.6px;
+	}
+	.cube1{
+		position:absolute;
+		width: 48.8px;
+		height: 48.8px;
+		bottom:0;
+	}
+	
+	#table_cont{
+		position:absolute;
+		top:46%;
+		left:20%;
+		width:326px;
+		height:82px;		
+	}
+
+	
+}
+
+@media (min-width: 768px) {
+
+    #part_laboratory {
+        height: 470px;
+        width: 752px;
+    }
+
+    #bg_sound {
+        height: 33px;
+        width: 33px;
+        top: 3px;
+        right: 3px;
+    }
+	
+	#start_hint_ref{
+		 height: 34px;
+        width: 34px;
+        top: 82px;
+        right: 8px;
+	}
+
+	
+
+	
+	.cubes{
+		width: 60px;
+		height: 60px;
+	}
+	
+	.cage1{
+		top:52%;
+		left:45%;
+		width: 60px;
+		height: 50px;
+	}
+	
+	.cage3{
+		top:28.8%;
+		left:36%;
+		width: 60px;
+		height: 50px;
+	}
+	.cage5{
+		top:52%;
+		left:28%;
+		width: 60px;
+		height: 50px;
+	}	
+	.cage6{
+		top:52%;
+		left:44%;
+		width: 60px;
+		height: 50px;
+	}
+	
+	.cube1{
+		position:absolute;
+		width: 60px;
+		height: 60px;
+		bottom:0;
+	}
+	
+	#table_cont{
+		position:absolute;
+		top:46%;
+		left:20%;
+		width:400px;
+		height:100px;
+	}
+}

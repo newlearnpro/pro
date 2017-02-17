@@ -1,0 +1,45 @@
+#sun {
+    height: 253px;
+    width: 253px;
+    top: 16px;
+    left: 126px;
+}
+
+#rainbow_main {
+    top: -25px;
+}
+
+#cloud1 {
+    height: 109px;
+    width: 201px;
+    top: 27px;
+    left: 496px;
+}
+
+#cloud2 {
+    height: 59px;
+    width: 79px;
+    top: 168px;
+    left: 630px;
+}
+
+#cloud3 {
+    height: 132px;
+    width: 185px;
+    top: 350px;
+    left: 545px;
+}
+
+#cloud4 {
+    height: 133px;
+    width: 210px;
+    top: 350px;
+    left: 129px;
+}
+
+#off_rainbow {
+    height: 367px;
+    width: 712px;
+    top: 40px;
+    left: 80px;
+}
