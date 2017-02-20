@@ -189,7 +189,7 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
             position_parent_id = document.getElementsByTagName("option")[x].getAttribute("data2");
 
 
-        console.log(document.querySelector("#timeMounth").value)
+        //  console.log(document.querySelector("#timeMounth").value)
         $http({
             method: 'POST',
             url: 'add_license',
@@ -205,7 +205,7 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
             //  $scope.userField = data[0];
             //  console.log(data);
         }).error(function(data, status) {
-            console.log(data, status);
+            //   console.log(data, status);
         });
 
 
@@ -260,6 +260,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
 
         }).
         success(function(data, status) {
+
             $scope.lesson = data;
             $timeout(function() {
                 for (var i = 0; i < data.length; i++) {
@@ -388,12 +389,12 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
         }).
         success(function(data, status) {
             $scope.lesson = data;
-            console.log($scope.lesson)
-                /* $timeout(function() {
-                     for (var i = 0; i < data.length; i++) {
-                         $('.lesson_item[data2^="' + data[i].parent_id + '"]').appendTo(".position_item[data1^='" + data[i].parent_id + "']");
-                     }
-                 }, 100);*/
+            //  console.log($scope.lesson)
+            /* $timeout(function() {
+                 for (var i = 0; i < data.length; i++) {
+                     $('.lesson_item[data2^="' + data[i].parent_id + '"]').appendTo(".position_item[data1^='" + data[i].parent_id + "']");
+                 }
+             }, 100);*/
         });
     }
 
@@ -565,7 +566,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                 $('#content_image').show().css({
                     'width': '100%',
                     'height': 'auto',
-                    'maxWidth': '1000px'
+                    'maxWidth': '800px'
                 }).attr('src', '../../uploads/images/content_' + that.items.id + '.png ');
                 position_cur2.parent().parent().children().removeAttr('openFolder');
                 position_curent.parent().attr('openFolder', 'yes');
@@ -579,9 +580,13 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                     'id': that.items.id
                 }
             }).success(function(data, status) {
-                console.log(data)
+
                 $scope.lessons = data;
                 $timeout(function() {
+                    //   console.log(data)
+                    if (data.length != 0) {
+                        $("#menuModal").modal("hide");
+                    }
                     if (that.items.position_group == 1) {
                         // $('.mainLesson div').children().first().removeClass('position_group_in').addClass('position_group_out');
 
@@ -590,8 +595,11 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                         $('.mainLesson div').children().first().removeClass('position_group_in').addClass('position_group_out');
                         $('.lesson_group_type_0').children().removeClass('position_group_in').addClass('position_group_out');
                         $('.lesson_group_type_0').next().children().removeClass('position_group_in').addClass('position_group_out');
-                    } else {
-                        //  $('.mainLesson div').children().removeClass('position_group_in').addClass('position_group_out');
+                    } else if (that.items.position_group == 0) {
+
+                        $('.mainLesson div').children().removeClass('position_group_in').addClass('position_group_out');
+                        //    $('.lesson_group_type_0').children().removeClass('position_group_in').addClass('position_group_out');
+                        //    $('.lesson_group_type_0').next().children().removeClass('position_group_in').addClass('position_group_out');
                     }
                 }, 50);
             }).error(function(data, status) {
@@ -624,7 +632,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
         $("#pagePlayer, #learnpro_logo").hide();
 
-        console.log($scope.test);
+        //   console.log($scope.test);
 
     } /*end********Մտնել թեստի բաժին *****/
 
@@ -654,7 +662,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             }
         }).
         success(function(data, status) {
-            console.log(data[0])
+            //  console.log(data[0])
             if (data[0] != undefined && username == data[0].username && (position_id == data[0].position_id || position_parent_id == data[0].position_id || data[0].position_id == 0)) {
 
                 if ($event.currentTarget.classList.contains('lesson_selected') == false) {
@@ -710,14 +718,14 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                         $("#pagePlayer").show().css({
                             'width': '100%',
                             'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                            'maxWidth': '1000px'
+                            'maxWidth': '800px'
                         }).attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/index.html');
 
                         $(window).resize(function() {
                             $("#pagePlayer").css({
                                 'width': '100%',
                                 'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                                'maxWidth': '1000px'
+                                'maxWidth': '800px'
                             });
                         });
                     }
@@ -734,7 +742,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                                     title: that.items.name,
                                     m4v: '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip',
 
-                                    poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
+                                    // poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
                                 });
                             },
                             ended: function() { // The $.jPlayer.event.ended event
@@ -798,8 +806,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                             $scope.timerId = setInterval(function() {
                                 var minsecEndFrame = obj.endFrame[markerIndex].split(':');
                                 var secondEnd = (+minsecEndFrame[0]) * 60 + (+minsecEndFrame[1]);
-                                console.log(obj.startFrame[markerIndex])
-                                    // Restrict playback to first 60 seconds.
+                                //     console.log(obj.startFrame[markerIndex])
+                                // Restrict playback to first 60 seconds.
                                 if ($('.jp-current-time').text() == obj.endFrame[markerIndex]) {
 
                                     $("#jquery_jplayer_1").jPlayer("pause", secondEnd);
@@ -836,13 +844,13 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             $("#pagePlayer").removeClass('resizePlayer').css({
                 'width': '100%',
                 'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                'maxWidth': '1000px'
+                'maxWidth': '800px'
             });
             $(window).resize(function() {
                 $("#pagePlayer").css({
                     'width': '100%',
                     'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                    'maxWidth': '1000px'
+                    'maxWidth': '800px'
                 });
             });
         } else {

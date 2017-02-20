@@ -172,6 +172,7 @@ $grid-breakpoints: (
 
 #pagePlayer, #content_image, #jp_container_1{
 	display:none;
+	border:none;
 }
 
 
@@ -247,6 +248,7 @@ $grid-breakpoints: (
 .lesson_type_func(@background){
 	width: auto;
 	height:40px;
+	max-width:300px;
 	background: #efefef;
 	color: @background;	
 	border:1px solid @background;
@@ -466,7 +468,14 @@ color: #ffffff;
 
 
 
-
+	.modal.in .modal-dialog{
+		width:400px;
+		height:auto;		
+		opacity:0.9;
+	}
+	.modal{
+		z-index:1000100;
+	}
 
 
 /**************media*/////////////////////////
@@ -474,6 +483,10 @@ color: #ffffff;
 @media @phones{
 	.carousel-caption > h1{
 		font-size:18px;
+	}
+
+	.modal.in .modal-dialog{
+		margin: 340px 0 0 0;
 	}
 	/*header{
 		height:160px;
@@ -484,6 +497,10 @@ color: #ffffff;
 	.carousel-caption > h1{
 		font-size:24px;
 	}
+
+	.modal.in .modal-dialog{
+		margin: 340px 0 0 0;
+	}
 	/*header{
 		height:160px;
 	}*/
@@ -493,17 +510,30 @@ color: #ffffff;
 	.carousel-caption > h1{
 		font-size:32px;
 	}
+
+	.modal.in .modal-dialog{
+		margin: 260px 0 0 0;
+	}
 }
 
 @media @desktops{
 	.carousel-caption > h1{
 		font-size:48px;
 	}
+
+	.modal.in .modal-dialog{
+		margin: 200px 0 0 0;
+	}
+
 }
 
 @media @widedesktops{
 	.carousel-caption > h1{
 		font-size:56px;
+	}
+
+	.modal.in .modal-dialog{
+		margin: 200px 0 0 0;
 	}
 
 }

@@ -18,5 +18,8 @@
     "laboratory_work",
     "task",
     "interactive",
-    "success_add_license"
+    "success_add_license",
+    "menu",
+    "open",
+    "close"
 ]

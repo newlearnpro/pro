@@ -161,6 +161,7 @@ $grid-breakpoints: (
 #content_image,
 #jp_container_1 {
   display: none;
+  border: none;
 }
 .form_error {
   color: red;
@@ -227,6 +228,7 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_0 {
   width: auto;
   height: 40px;
+  max-width: 300px;
   background: #efefef;
   color: #808080;
   border: 1px solid #808080;
@@ -244,6 +246,7 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_1 {
   width: auto;
   height: 40px;
+  max-width: 300px;
   background: #efefef;
   color: #ed145b;
   border: 1px solid #ed145b;
@@ -258,6 +261,7 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_2 {
   width: auto;
   height: 40px;
+  max-width: 300px;
   background: #efefef;
   color: #7c0adc;
   border: 1px solid #7c0adc;
@@ -272,6 +276,7 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_3 {
   width: auto;
   height: 40px;
+  max-width: 300px;
   background: #efefef;
   color: #f26522;
   border: 1px solid #f26522;
@@ -286,6 +291,7 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_4 {
   width: auto;
   height: 40px;
+  max-width: 300px;
   background: #efefef;
   color: #8dc63f;
   border: 1px solid #8dc63f;
@@ -300,6 +306,7 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_5 {
   width: auto;
   height: 40px;
+  max-width: 300px;
   background: #efefef;
   color: #0000ff;
   border: 1px solid #0000ff;
@@ -450,10 +457,21 @@ color: #ffffff;
       border-bottom: solid #31b0d5 1px;
       border-left: solid #31b0d5 8px; 
 }*/
+.modal.in .modal-dialog {
+  width: 400px;
+  height: auto;
+  opacity: 0.9;
+}
+.modal {
+  z-index: 1000100;
+}
 /**************media*/
 @media (max-width: 479px) {
   .carousel-caption > h1 {
     font-size: 18px;
+  }
+  .modal.in .modal-dialog {
+    margin: 340px 0 0 0;
   }
   /*header{
 		height:160px;
@@ -463,6 +481,9 @@ color: #ffffff;
   .carousel-caption > h1 {
     font-size: 24px;
   }
+  .modal.in .modal-dialog {
+    margin: 340px 0 0 0;
+  }
   /*header{
 		height:160px;
 	}*/
@@ -471,15 +492,24 @@ color: #ffffff;
   .carousel-caption > h1 {
     font-size: 32px;
   }
+  .modal.in .modal-dialog {
+    margin: 260px 0 0 0;
+  }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .carousel-caption > h1 {
     font-size: 48px;
   }
+  .modal.in .modal-dialog {
+    margin: 200px 0 0 0;
+  }
 }
 @media (min-width: 1200px) {
   .carousel-caption > h1 {
     font-size: 56px;
+  }
+  .modal.in .modal-dialog {
+    margin: 200px 0 0 0;
   }
 }
 /**************media end*/

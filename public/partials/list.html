@@ -1,8 +1,20 @@
 <div ng-cloak ng-controller='listGroup'> 
-	<div class='col-xs-12 col-sm-6  col-md-3  col-lg-3'>
+
+
+<!-- Modal -->
+<div id='menuModal' class='modal fade' role='dialog'>
+  <div class='modal-dialog'>
+
+    <!-- Modal content-->
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' title={{language.close}}>&times;</button>
+        <h4 class='modal-title'>Modal Header</h4>
+      </div>
+      <div class='modal-body'>
 		<div>
-			Search <input type="checkbox" ng-model='checked' >
-			<input id='searchLessonText'  type='text' ng-show="checked" ng-model='searchLesson.keywords' ng-focus='getLessons(focus=true, blur=false)' ng-blur='getLessons(focus=false, blur=true)'/>
+			Search <input type='checkbox' ng-model='checked' >
+			<input id='searchLessonText'  type='text' ng-show='checked' ng-model='searchLesson.keywords' ng-focus='getLessons(focus=true, blur=false)' ng-blur='getLessons(focus=false, blur=true)'/>
 			<div ng-show="checked" ng-repeat='items in searchLessons | filter:searchLesson'>
 				<div  class='lesson_types lesson_type_{{items.type_id}}' ng-click='loadPage($event)'><i class='lesson_icons lesson_icon_{{items.type_id}}'></i><span >{{items.name}}</span></div>
 			</div>
@@ -15,8 +27,26 @@
 				</div>	
 			</div>
 		</div>
-	</div>	
-	<div class='col-xs-12 col-sm-6  col-md-3 pull-right  col-lg-3'>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+	<div class='col-xs-12 col-sm-6  col-md-3  col-lg-2'>
+		<button type='button' class='btn btn-info btn-lg' data-toggle='modal' data-target='#menuModal'>{{language.menu}}</button>
+
+
+
+
 		<div><span id='position_name_header' data1='{{position_id}}' data2='{{parent_id}}'>{{position_name}}</span></div>
 		<div class='mainLesson'>
 			<div ng-repeat='items in lessons' class='lesson_group_type_{{items.type_id}}'>			
@@ -25,8 +55,16 @@
 				</div>
 			</div>
 		</div>
+
+
+
+
+
+
 	</div>
-	<div class='mainPage col-xs-12 col-sm-12  col-md-6  col-lg-6'>
+
+
+	<div class='mainPage col-xs-12 col-sm-12  col-md-8  col-lg-8'>
 		<div ng-include='"../../public/partials/templates/carusel_tmpl.html"'></div>
 
 		<iframe id='pagePlayer' width='100%' height='100px' style='position:relative'>
