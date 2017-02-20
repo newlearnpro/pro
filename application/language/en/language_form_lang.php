@@ -82,7 +82,9 @@ $lang['contacts']                   = 'Contacts';
 $lang['tasks']                   	= 'Tasks';
 $lang['list']                   	= 'List';
 $lang['personal_page']              = 'Personal page';
-
+$lang['menu']              			= 'MENU';
+$lang['open']              			= 'Open';
+$lang['close']              		= 'Close';
 
 /*******************************************************************************/
 

@@ -145,57 +145,71 @@ class Admin extends CI_Controller {
 into add lesson case there is opportunity add zip file whitch will extract.
 We must write 'name', 'description', 'keywords' into the fields
 *************************************/
-	public function add_lesson()
-	{
-		$this->load->model('insert_tables_model');
-		if($this->input->post('btn_zip')){
-			$date = date('U');
-			$get_info['lesson_name'] = 	$this->input->post('lesson_name');
-			$get_info['lesson_description'] = 	$this->input->post('lesson_description');
-			$get_info['lesson_keywords'] = $this->input->post('lesson_name') . ' ' .  $this->input->post('lesson_description') . ' ' . $this->input->post('lesson_keywords');
-			$get_info['lesson_src'] = '0' . $this->input->post('lesson_type_id') . ($this->input->post('lesson_parent_id')*1) . '_'.$date.'';
-			$get_info['lesson_type_name'] = 	$this->input->post('lesson_type_name');
-			$get_info['lesson_type_id'] = 	$this->input->post('lesson_type_id');
-			$get_info['lesson_parent_id'] = $this->input->post('lesson_parent_id') * 1;	
-			$this->input->post('lesson_is_free') ? $get_info['lesson_is_free'] = $this->input->post('lesson_is_free') : $get_info['lesson_is_free'] = 'off';
-		    $output = '';
-		    		   
-		    if($_FILES['zip_file']['name'] != ''){ 
-		    	   mkdir($this->upload_folder .'lesson_type_'.$get_info['lesson_type_id'].'/'. '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'', 0777); 		           	
-		           $file_name = $_FILES['zip_file']['name'];
-		           $array = explode(".", $file_name);
-		        //   $name = $array[0];  
-		           $ext = $array[1];  
-		           
-		           if($ext == 'zip'){
-						$this->insert_tables_model->insert_folder_name($get_info);
-		                $path = $this->upload_folder .'lesson_type_'.$get_info['lesson_type_id'].'/' .'0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'/';
-		                $location = $path . $file_name;
-		                if(move_uploaded_file($_FILES['zip_file']['tmp_name'], $location )){
-		                    $zip = new ZipArchive;
-		                    if($zip->open($location)){
-		                          $zip->extractTo($path);
-		                          $zip->close();
-		                    }					 
-		                }
-            		}
-        	}
-        	redirect($this->uri->segment(1).'/admin/index/addlesson');
-    	}	
+public function add_lesson()
+{
+	$this->load->model('insert_tables_model');
+	if($this->input->post('btn_zip')){
+		$date = date('U');
+		$get_info['lesson_name'] = 	$this->input->post('lesson_name');
+		$get_info['lesson_description'] = 	$this->input->post('lesson_description');
+		$get_info['lesson_keywords'] = $this->input->post('lesson_name') . ' ' .  $this->input->post('lesson_description') . ' ' . $this->input->post('lesson_keywords');
+		$get_info['lesson_src'] = '0' . $this->input->post('lesson_type_id') . ($this->input->post('lesson_parent_id')*1) . '_'.$date.'';
+		$get_info['lesson_type_name'] = 	$this->input->post('lesson_type_name');
+		$get_info['lesson_type_id'] = 	$this->input->post('lesson_type_id');
+		$get_info['lesson_parent_id'] = $this->input->post('lesson_parent_id') * 1;	
+		$this->input->post('lesson_is_free') ? $get_info['lesson_is_free'] = $this->input->post('lesson_is_free') : $get_info['lesson_is_free'] = 'off';
+	    $output = '';
+	    		   
+	    if($_FILES['zip_file']['name'] != ''){
+	    	   mkdir($this->upload_folder .'lesson_type_'.$get_info['lesson_type_id'].'/'. '0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'', 0777); 		           	
+	           $file_name = $_FILES['zip_file']['name'];
+	           $array = explode(".", $file_name);
+	        //   $name = $array[0];  
+	           $ext = $array[1];  
+	           
+	           if($ext == 'zip'){
+					$this->insert_tables_model->insert_folder_name($get_info);
+	                $path = $this->upload_folder .'lesson_type_'.$get_info['lesson_type_id'].'/' .'0' . $get_info['lesson_type_id'] . $get_info['lesson_parent_id'] . '_'.$date.'/';
+	                $location = $path . $file_name;
+	                if(move_uploaded_file($_FILES['zip_file']['tmp_name'], $location )){
+	                    $zip = new ZipArchive;
+	                    if($zip->open($location)){
+	                          $zip->extractTo($path);
+	                          $zip->close();
+	                    }					 
+	                }
+        		}
+    	}
+    	redirect($this->uri->segment(1).'/admin/index/addlesson');
 	}
+	if($this->input->post('add_seperator')){
+		$get_info['lesson_name'] = 	'';
+		$get_info['lesson_description'] = 	'';
+		$get_info['lesson_keywords'] = '';
+		$get_info['lesson_src'] = '';
+		$get_info['lesson_type_name'] = $this->input->post('lesson_type_name');
+		$get_info['lesson_type_id'] = 0;
+		$get_info['lesson_parent_id'] = $this->input->post('lesson_parent_id') * 1;	
+		$get_info['lesson_is_free'] = 'off';
+		$this->insert_tables_model->insert_folder_name($get_info);
+		redirect($this->uri->segment(1).'/admin/index/addlesson');
+	}
+}
 
-	public function add_question()
-	{
-		$_POST = json_decode(file_get_contents('php://input'), true);
-		$this->load->model('insert_tables_model');
-		$get_info['lesson_id'] = $this->input->post('lesson_id');
-		$get_info['question_type'] = $this->input->post('question_type');
-		$get_info['question'] = $this->input->post('question');
-		$get_info['answers'] = $this->input->post('answers');
-		$get_info['correct_answer'] = $this->input->post('correct_answer');
-		$this->insert_tables_model->insert_question($get_info);
-		echo json_encode($get_info);
-	}
+
+
+public function add_question()
+{
+	$_POST = json_decode(file_get_contents('php://input'), true);
+	$this->load->model('insert_tables_model');
+	$get_info['lesson_id'] = $this->input->post('lesson_id');
+	$get_info['question_type'] = $this->input->post('question_type');
+	$get_info['question'] = $this->input->post('question');
+	$get_info['answers'] = $this->input->post('answers');
+	$get_info['correct_answer'] = $this->input->post('correct_answer');
+	$this->insert_tables_model->insert_question($get_info);
+	echo json_encode($get_info);
+}
 
 	public function add_license()
 	{

@@ -8,7 +8,7 @@ class Login extends CI_Controller {
         parent::__construct();
         $this->load->model('membership_model'); 
         $this->lang->load('language_form',$this->uri->segment(1));                
-        $this->session->set_userdata('lang', $this->uri->segment(1));
+       // $this->session->set_userdata('lang', $this->uri->segment(1));
 	}
 
 	public function index()
