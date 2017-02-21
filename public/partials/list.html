@@ -19,7 +19,6 @@
 				<div  class='lesson_types lesson_type_{{items.type_id}}' ng-click='loadPage($event)'><i class='lesson_icons lesson_icon_{{items.type_id}}'></i><span >{{items.name}}</span></div>
 			</div>
 		</div>
-		<label>{{language.structure}}</label>&nbsp;
 		<div class='mainPosition'>
 			<div ng-repeat='items in position'>
 				<div class='position1' data1='{{items.id}}' data2='{{items.parent_id}}' ng-click='openClosePosition()'>								
@@ -40,8 +39,10 @@
 
 
 
-
-	<div class='col-xs-12 col-sm-6  col-md-3  col-lg-2'>
+<div class='container-fluid'>
+<div class='row-fluid'>
+	<div class='menuPage col-xs-12 col-sm-12  col-md-4  col-lg-4' >
+	<div class='mainLessonRight'>
 		<button type='button' class='btn btn-info btn-lg' data-toggle='modal' data-target='#menuModal'>{{language.menu}}</button>
 
 
@@ -55,17 +56,19 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
-
-
+		</div>
 	</div>
 
 
+
+
+
+
+
+
+
 	<div class='mainPage col-xs-12 col-sm-12  col-md-8  col-lg-8'>
-		<div ng-include='"../../public/partials/templates/carusel_tmpl.html"'></div>
+		<div style='max-width: 800px' ng-include='"../../public/partials/templates/carusel_tmpl.html"'></div>
 
 		<iframe id='pagePlayer' width='100%' height='100px' style='position:relative'>
 		</iframe>		
@@ -112,14 +115,23 @@
 		</div>
 
 
-		<div id='question_group' ><div class='questionsBut btn btn-default' ng-click='questionTest()'>{{question}}</div><div class='btn-info'>{{testQuestion}}</div><div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div></div>
+		<!--div id='question_group'><div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div></div-->
+		<div id='question_group' ng-if='currentUser.status === "pupil"'>
+			<div ng-repeat='items in question' class='question_time btn btn-default' ng-click='questionTest($index)'>{{items.question_time}}</div>
+			
+			<div>
+				<div class='btn-info'>{{testQuestion}}</div>
+				<div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div>
+			</div>
+		</div>
 
 
 
 
 
 	</div>
-
+	</div>
+</div>
 
 
 

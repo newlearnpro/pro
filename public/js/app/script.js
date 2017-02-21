@@ -389,6 +389,7 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
         }).
         success(function(data, status) {
             $scope.lesson = data;
+            // alert()
             //  console.log($scope.lesson)
             /* $timeout(function() {
                  for (var i = 0; i < data.length; i++) {
@@ -400,7 +401,7 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
 
 
 
-    //  $scope.quesionPart1 = true;
+    // $scope.quesionPart1 = true;
     //$scope.mypattern = /^\s*$/g;
     $scope.questionType = function($event) {
         console.log($event.target.value);
@@ -624,17 +625,18 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     } /*end********փնտրել դասերը *****/
 
     /*********Մտնել թեստի բաժին *****/
-    $scope.questionTest = function() {
+    $scope.questionTest = function($index) {
+            //console.log($index)
+            $scope.testQuestion = $scope.question[$index].question;
+            $scope.testAnswers = $scope.question[$index].answers.split('|');
 
-        $scope.testQuestion = $scope.testList.question;
-        $scope.testAnswers = $scope.testList.answers.split('|');
 
+            $("#pagePlayer, #learnpro_logo").hide();
 
-        $("#pagePlayer, #learnpro_logo").hide();
+            //   console.log($scope.test);
 
-        //   console.log($scope.test);
-
-    } /*end********Մտնել թեստի բաժին *****/
+        }
+        /*end********Մտնել թեստի բաժին *****/
 
 
     /********* ներբեռնել դասը*****/
@@ -671,18 +673,20 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                     $event.currentTarget.classList.add('lesson_selected');
 
 
-                    /*   $http.get('../main/get_questions', {
-                               params: {
-                                   lesson_id: that.items.id,
-                               }
-                           })
-                           .then(function(data) {
-                               // console.log(data.data.length)
-                               if (data.data.length != 0) {
-                                   $scope.testList = data.data[0];
-                                   $scope.question = 'Հարցեր դասի մասին';
-                               }
-                           });*/
+                    $http.get('../main/get_questions', {
+                            params: {
+                                lesson_id: that.items.id,
+                            }
+                        })
+                        .then(function(data) {
+                            console.log(data.data);
+                            if (data.data.length != 0) {
+                                $scope.question = data.data;
+                                // $scope.questionArr = data.data
+                                //  $scope.testList = data.data;
+                                //   $scope.question = data.data[0].question_time;
+                            }
+                        });
                     /* $http.get('../main/users_data', {
                              params: {
                                  username: username,
@@ -745,7 +749,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                                     // poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
                                 });
                             },
-                            ended: function() { // The $.jPlayer.event.ended event
+                            ended: function() {
+                                // The $.jPlayer.event.ended event
                                 //$(this).jPlayer("play"); // Repeat the media
                                 //jquery version
                                 //  $('.lesson_selected').parent().next().children().trigger('click');
@@ -776,20 +781,74 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
                         $timeout(function() {
                             $("#jquery_jplayer_1").jPlayer("play");
+                            console.log('yes');
                         }, 200);
 
 
 
 
-                        function playerPause() {
-                            clearInterval($scope.timerId);
+
+
+
+
+
+                        $scope.timerQuestion = setInterval(function() {
+                            for (let i = 0; i < $scope.question.length; i++) {
+                                if ($('.jp-current-time').text() == $scope.question[i].question_time) {
+                                    $('#jquery_jplayer_1').jPlayer('pause');
+                                    playerPauseQuestion();
+                                    $('.question_time').eq(i).click();
+                                }
+                            }
+                        }, 1000);
+
+
+
+
+
+
+
+
+
+                        function playerPauseMarker() {
+                            clearInterval($scope.timerMarker);
+                            //  clearInterval($scope.timer);
+                        }
+
+                        function playerPauseQuestion() {
+                            // clearInterval($scope.timerMarker);
+                            clearInterval($scope.timerQuestion);
                         }
 
 
 
-                        $('.jp-play, .jp-stop').bind('click', function() {
-                            playerPause();
-                        });
+
+
+
+
+                        if ($scope.currentUser.status == 'teacher') {
+                            $('.jp-play, .jp-stop').bind('click', function() {
+                                playerPauseMarker();
+                            });
+                        } else {
+
+
+                            $('.jp-play').bind('click', function() {
+                                $scope.timerQuestion = setInterval(function() {
+                                    for (let i = 0; i < $scope.question.length; i++) {
+                                        if ($('.jp-current-time').text() == $scope.question[i].question_time) {
+                                            $('#jquery_jplayer_1').jPlayer('pause');
+                                            playerPauseQuestion();
+                                            $('.question_time').eq(i).click();
+                                        }
+                                    }
+                                }, 1000);
+                            });
+
+                            $('.jp-stop').bind('click', function() {
+                                playerPauseQuestion();
+                            });
+                        }
 
                         $('.jp-marker').empty();
                         for (let i = 0; i < obj.startFrame.length; i++) {
@@ -803,7 +862,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                             $("#jquery_jplayer_1").jPlayer("play", secondStart);
 
 
-                            $scope.timerId = setInterval(function() {
+                            $scope.timerMarker = setInterval(function() {
+
                                 var minsecEndFrame = obj.endFrame[markerIndex].split(':');
                                 var secondEnd = (+minsecEndFrame[0]) * 60 + (+minsecEndFrame[1]);
                                 //     console.log(obj.startFrame[markerIndex])
@@ -811,7 +871,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                                 if ($('.jp-current-time').text() == obj.endFrame[markerIndex]) {
 
                                     $("#jquery_jplayer_1").jPlayer("pause", secondEnd);
-                                    playerPause();
+                                    playerPauseMarker();
                                 }
                             }, 100); // 10Hz
 
@@ -841,6 +901,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         if ($('#pagePlayer').hasClass('resizePlayer')) {
             $('header').show();
             $('.mainPage').removeAttr('style');
+            $('#jp_container_1').css('max-width', '800px');
             $("#pagePlayer").removeClass('resizePlayer').css({
                 'width': '100%',
                 'height': parseInt($('#pagePlayer').css('width')) / 1.33,
@@ -854,6 +915,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                 });
             });
         } else {
+            $('#jp_container_1').css('max-width', '100%');
             $('#pagePlayer').addClass('resizePlayer');
             $('.mainPage').css({
                 'position': 'absolute',

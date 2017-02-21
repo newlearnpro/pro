@@ -168,9 +168,30 @@ $grid-breakpoints: (
 	}
 }
 
+.icons_fwtp{
+	margin:0;
+	padding:0;
+	&#icon_facebook{
+		background-position: 0 -64px;
+	}
+	&#icon_wimeo{
+		background-position: -32px -64px;
+	}
+	&#icon_twitter{
+		background-position: -64px -64px;
+	}
+	&#icon_pinterest{
+		background-position: -96px -64px;
+	}
+
+}
+
+
+
 
 
 #pagePlayer, #content_image, #jp_container_1{
+	max-width:800px;
 	display:none;
 	border:none;
 }
@@ -248,7 +269,6 @@ $grid-breakpoints: (
 .lesson_type_func(@background){
 	width: auto;
 	height:40px;
-	max-width:300px;
 	background: #efefef;
 	color: @background;	
 	border:1px solid @background;
@@ -425,12 +445,22 @@ header{
 
 
 .mainPage{
+/*	max-width:800px;*/
 	background:white;
 	margin:0;
 	padding:0;
 }
 
+.menuPage{
+	margin:0;
+	padding:0;	
+}
 
+#position_name_header{
+	font-family: lpFont;
+	font-size:20px;
+	color: #ed145b;
+}
 
 
 .lp_button, .lp_link{
@@ -469,12 +499,11 @@ color: #ffffff;
 
 
 	.modal.in .modal-dialog{
-		width:400px;
-		height:auto;		
-		opacity:0.9;
+		margin:0 auto;
+		margin-top:30px;
 	}
 	.modal{
-		z-index:1000100;
+		z-index:11000100;
 	}
 
 
@@ -485,12 +514,21 @@ color: #ffffff;
 		font-size:18px;
 	}
 
-	.modal.in .modal-dialog{
-		margin: 340px 0 0 0;
+
+
+	.lesson_types{
+		max-width:100%;
 	}
-	/*header{
-		height:160px;
-	}*/
+
+	.menuPage{
+		padding:0 0 10px 0;	
+	}
+
+	.logo{
+		background-size: 80px 45px;
+		width:80px;
+		height:45px;
+	}
 }
 
 @media @smartphones{
@@ -498,12 +536,15 @@ color: #ffffff;
 		font-size:24px;
 	}
 
-	.modal.in .modal-dialog{
-		margin: 340px 0 0 0;
+
+
+	.lesson_types{
+		max-width:100%;
 	}
-	/*header{
-		height:160px;
-	}*/
+
+	.menuPage{
+		padding:0 0 10px 0;	
+	}
 }
 
 @media @tablets{
@@ -511,8 +552,14 @@ color: #ffffff;
 		font-size:32px;
 	}
 
-	.modal.in .modal-dialog{
-		margin: 260px 0 0 0;
+
+
+	.lesson_types{
+		max-width:100%;
+	}
+
+	.menuPage{
+		padding:0 0 10px 0;	
 	}
 }
 
@@ -521,8 +568,10 @@ color: #ffffff;
 		font-size:48px;
 	}
 
-	.modal.in .modal-dialog{
-		margin: 200px 0 0 0;
+
+
+	.menuPage{
+		padding:0 10px 0 0;	
 	}
 
 }
@@ -532,14 +581,31 @@ color: #ffffff;
 		font-size:56px;
 	}
 
-	.modal.in .modal-dialog{
-		margin: 200px 0 0 0;
+
+
+	.lesson_types{
+		max-width:400px;
+
+	}
+
+	.menuPage{
+		padding:0 10px 0 0;	
+	}
+
+	.mainLessonRight{
+		float:right;
+		width:370px;
 	}
 
 }
 
 
 /**************media end*/////////////////////////
+
+
+
+
+
 
 .carousel-caption > h3 > a{
 		padding:10px;

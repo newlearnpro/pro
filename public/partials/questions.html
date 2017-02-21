@@ -3,7 +3,7 @@
 		<label>Ընտրել դասը</label>			
 		<!--select id='lesson' ng-model='userField.id'-->
 		<select id='lesson'>
-			<option ng-repeat='items in lesson' ng-selected='{{items.id}}'>{{items.id}} - {{items.name}}</option>
+			<option ng-if='items.type_id==1' ng-repeat='items in lesson' ng-selected='{{items.id}}'>{{items.id}} - {{items.name}}</option>
 		</select>
 
 

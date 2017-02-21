@@ -157,9 +157,26 @@ $grid-breakpoints: (
 .icons_sm.off {
   background-position: 0 0;
 }
+.icons_fwtp {
+  margin: 0;
+  padding: 0;
+}
+.icons_fwtp#icon_facebook {
+  background-position: 0 -64px;
+}
+.icons_fwtp#icon_wimeo {
+  background-position: -32px -64px;
+}
+.icons_fwtp#icon_twitter {
+  background-position: -64px -64px;
+}
+.icons_fwtp#icon_pinterest {
+  background-position: -96px -64px;
+}
 #pagePlayer,
 #content_image,
 #jp_container_1 {
+  max-width: 800px;
   display: none;
   border: none;
 }
@@ -228,7 +245,6 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_0 {
   width: auto;
   height: 40px;
-  max-width: 300px;
   background: #efefef;
   color: #808080;
   border: 1px solid #808080;
@@ -246,7 +262,6 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_1 {
   width: auto;
   height: 40px;
-  max-width: 300px;
   background: #efefef;
   color: #ed145b;
   border: 1px solid #ed145b;
@@ -261,7 +276,6 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_2 {
   width: auto;
   height: 40px;
-  max-width: 300px;
   background: #efefef;
   color: #7c0adc;
   border: 1px solid #7c0adc;
@@ -276,7 +290,6 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_3 {
   width: auto;
   height: 40px;
-  max-width: 300px;
   background: #efefef;
   color: #f26522;
   border: 1px solid #f26522;
@@ -291,7 +304,6 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_4 {
   width: auto;
   height: 40px;
-  max-width: 300px;
   background: #efefef;
   color: #8dc63f;
   border: 1px solid #8dc63f;
@@ -306,7 +318,6 @@ $grid-breakpoints: (
 .lesson_types.lesson_type_5 {
   width: auto;
   height: 40px;
-  max-width: 300px;
   background: #efefef;
   color: #0000ff;
   border: 1px solid #0000ff;
@@ -425,9 +436,19 @@ header {
   cursor: pointer;
 }
 .mainPage {
+  /*	max-width:800px;*/
   background: white;
   margin: 0;
   padding: 0;
+}
+.menuPage {
+  margin: 0;
+  padding: 0;
+}
+#position_name_header {
+  font-family: lpFont;
+  font-size: 20px;
+  color: #ed145b;
 }
 .lp_button,
 .lp_link {
@@ -458,58 +479,72 @@ color: #ffffff;
       border-left: solid #31b0d5 8px; 
 }*/
 .modal.in .modal-dialog {
-  width: 400px;
-  height: auto;
-  opacity: 0.9;
+  margin: 0 auto;
+  margin-top: 30px;
 }
 .modal {
-  z-index: 1000100;
+  z-index: 11000100;
 }
 /**************media*/
 @media (max-width: 479px) {
   .carousel-caption > h1 {
     font-size: 18px;
   }
-  .modal.in .modal-dialog {
-    margin: 340px 0 0 0;
+  .lesson_types {
+    max-width: 100%;
   }
-  /*header{
-		height:160px;
-	}*/
+  .menuPage {
+    padding: 0 0 10px 0;
+  }
+  .logo {
+    background-size: 80px 45px;
+    width: 80px;
+    height: 45px;
+  }
 }
 @media (min-width: 480px) and (max-width: 767px) {
   .carousel-caption > h1 {
     font-size: 24px;
   }
-  .modal.in .modal-dialog {
-    margin: 340px 0 0 0;
+  .lesson_types {
+    max-width: 100%;
   }
-  /*header{
-		height:160px;
-	}*/
+  .menuPage {
+    padding: 0 0 10px 0;
+  }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .carousel-caption > h1 {
     font-size: 32px;
   }
-  .modal.in .modal-dialog {
-    margin: 260px 0 0 0;
+  .lesson_types {
+    max-width: 100%;
+  }
+  .menuPage {
+    padding: 0 0 10px 0;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .carousel-caption > h1 {
     font-size: 48px;
   }
-  .modal.in .modal-dialog {
-    margin: 200px 0 0 0;
+  .menuPage {
+    padding: 0 10px 0 0;
   }
 }
 @media (min-width: 1200px) {
   .carousel-caption > h1 {
     font-size: 56px;
   }
-  .modal.in .modal-dialog {
-    margin: 200px 0 0 0;
+  .lesson_types {
+    max-width: 400px;
+  }
+  .menuPage {
+    padding: 0 10px 0 0;
+  }
+  .mainLessonRight {
+    float: right;
+    width: 370px;
   }
 }
 /**************media end*/
