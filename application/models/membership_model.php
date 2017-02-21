@@ -24,7 +24,7 @@ class Membership_model extends CI_Model {
             'activation' => $get_info['activation'],
         );
         $this->db->where('username', $get_info['login']);
-        $this->db->update('users', $data);        
+        $this->db->update('users', $data);
     }
 
     public function user_page($get_info)
@@ -60,6 +60,7 @@ class Membership_model extends CI_Model {
       /*  $query = $this->db->get("questions");
         return $query->result();*/
         $query = $this->db->get_where('questions', array('lesson_id' => $get_info['lesson_id']));
+       // $query = $this->db->get('questions');
         return   $query->result_array();
     }
 

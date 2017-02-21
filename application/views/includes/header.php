@@ -32,33 +32,47 @@
 
 
  
-            <div class='col-xs-6 col-sm-4 col-md-3 col-lg-2 header-parts header-part2'>
+            <div class='col-xs-5 col-sm-6 col-md-3 col-lg-3 header-parts header-part2'>
                 <a href="<?=base_url() . $this->uri->segment(1)?>"><div class="logo"></div></a>
             </div>
 
 
-            <div class='col-xs-6 col-sm-4 col-md-3 col-lg-3 header-parts header-part3'>
+            <div class='col-xs-7 col-sm-6 col-md-3 col-lg-3 header-parts header-part3'>
+                <div>                    
+                    <a href='https://www.facebook.com/Learnpro.am' target='_blank'>
+                        <span id='icon_facebook' class='icons_sm icons_fwtp'></span>
+                    </a>
+                    <a href='https://vimeo.com/user34458599/videos' target='_blank'>
+                        <span id='icon_wimeo' class='icons_sm icons_fwtp'></span>
+                    </a>
+                    <a href='https://twitter.com/LearnProAM' target='_blank'>
+                        <span id='icon_twitter' class='icons_sm icons_fwtp'></span>
+                    </a>
+                    <a href='https://www.pinterest.com/learnpro2' target='_blank'>
+                        <span id='icon_pinterest' class='icons_sm icons_fwtp'></span>
+                    </a>
+                </div>
                 <span class='glyphicon glyphicon-phone-alt'></span>
                 <a href='tel:011211211'>(011 211 211)</a>
             </div>
             
 
-            <div class='col-xs-12 col-sm-4 col-md-3 col-lg-4 header-parts header-part4'>
+            <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3 header-parts header-part4'>
                     <?php 
                         if(!$this->session->userdata('usr')){
                             echo anchor($this->uri->segment(1). "/login" , lang('signin'), 'id="singin" class="btn btn-xs lp_link"');
                         }else{
                             echo anchor($this->uri->segment(1). "/login/logout" , lang('logout'), 'class="btn btn-xs lp_link"');
-                        }
-                        
+                        }                        
                         echo anchor($this->uri->segment(1). "/login/signup" , lang('signup'), 'class="btn btn-xs lp_link"');
+                        echo anchor("https://www.youtube.com/watch?v=v_3Zf5IwbDg" , 'ինչպե՞ս օգտվել', 'class="" target="_blank"');
                     ?>
 
             </div>
 
 
 
-            <div class='col-xs-12 col-sm-12 col-md-3 col-lg-3 header-parts header-part5' >
+            <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3 header-parts header-part5' >
             
 
                     <?php 
