@@ -59,7 +59,8 @@ $lang['img_error']                   = 'Your picture is too large';
 
 
 $lang['account_change']             = 'To save your changes';
-
+$lang['create_account']             = 'Create account';
+$lang['go_back']             		= 'Go Home';
 $lang['signin']                     = 'signIn';
 $lang['signup']                     = 'signUp';
 

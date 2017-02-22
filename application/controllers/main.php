@@ -94,8 +94,8 @@ class Main extends CI_Controller {
 	}
 
 	public function users_data(){
-		$get_info['username'] = $this->input->get('username');
 		$get_info['id'] = $this->input->get('lesson_id');
+		$get_info['username'] = $this->input->get('username');		
 		$get_info['name'] = $this->input->get('lesson_name');
 		$this->load->model('insert_tables_model');
 		$query = $this->insert_tables_model->insert_users_data($get_info);
@@ -111,4 +111,17 @@ class Main extends CI_Controller {
 		$query = $this->membership_model->get_license_code($get_info);
 		echo json_encode($query);
 	}
+
+	public function get_teachers_markers(){
+
+		$this->load->model('membership_model');
+		$get_info['id'] = $this->input->get('lesson_id');
+		$get_info['username'] = $this->input->get('username');		
+		//$get_info['class_name'] = $this->input->post('class_name');
+		$query = $this->membership_model->get_markers($get_info);
+		echo json_encode($query);
+	}
+
+
+
 }

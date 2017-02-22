@@ -175,6 +175,22 @@ it creates file table if there isn't `users_data` table
 
 
 /*********************
+teachers_data
+it creates file table if there isn't `teachers_data` table        
+*******************/ 
+        /*********For MySQL:
+        CREATE TABLE IF NOT EXISTS `teachers_data` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `username` varchar(20) collate utf8_general_ci NOT NULL,
+                `lesson_id` int(11) NOT NULL,
+                `start_time` varchar(5) NOT NULL,
+                `end_time` varchar(5) NOT NULL,
+               PRIMARY KEY(`id`)
+        );
+        */
+
+
+/*********************
 users_license_code
 it creates file table if there isn't `users_license_code` table        
 *******************/ 

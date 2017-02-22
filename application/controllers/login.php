@@ -14,7 +14,7 @@ class Login extends CI_Controller {
 	public function index()
 	{
       $query = $this->db->get_where('users', array('username' => $this->input->post('username'), 'password' => md5($this->input->post('password'))), 0, 0);
-      $data = array('usr' => $this->input->post('username'), 'pwd' => md5($this->input->post('password')), 'browser'=>$this->input->user_agent());
+      $data = array('usr' => $this->input->post('username'), 'pwd' => md5($this->input->post('password')));
       $info['activation'] = true;
 
       foreach($query->result() as $row){           

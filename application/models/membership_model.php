@@ -184,5 +184,13 @@ class Membership_model extends CI_Model {
         $query = $this->db->get("ci_sessions");
         return   $query->result_array();
     }
+
+
+    function get_markers()
+    {
+        $query = $this->db->get_where('teachers_data', array('id' => $get_info['id'], 'username'=> get_info['username']));
+       // $query = $this->db->get('questions');
+        return   $query->result_array();
+    }
  
 }

@@ -51,7 +51,7 @@ $lang['new_password_hint']           = 'New Password';
 $lang['activation_code']	         = 'Код активации';
 $lang['activation']	         		 = 'Активация';
 
-$lang['account_created']             = 'accaunt created';
+$lang['account_created']             = 'аккаунт создан';
 $lang['img_error']                   = 'Your picture is too large';
 
 
@@ -59,7 +59,8 @@ $lang['img_error']                   = 'Your picture is too large';
 
 
 $lang['account_change']             = 'To save your changes';
-
+$lang['create_account']             = 'Создать аккаунт';
+$lang['go_back']             		= 'Главная страница';
 $lang['signin']                     = 'Вход';
 $lang['signup']                     = 'Регистрация';
 
