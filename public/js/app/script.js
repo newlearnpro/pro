@@ -629,6 +629,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             //console.log($index)
             $scope.testQuestion = $scope.question[$index].question;
             $scope.testAnswers = $scope.question[$index].answers.split('|');
+            $scope.verifyAnswers = $scope.question[$index].correct_answer;
 
 
             $("#pagePlayer, #learnpro_logo").hide();
@@ -638,6 +639,51 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         }
         /*end********Մտնել թեստի բաժին *****/
 
+    /*********ստուգել պատասխանը *****/
+    $scope.verifyAnswer = function($index) {
+            if ($index == $scope.verifyAnswers) {
+
+
+                console.log($('.jp-current-time').text());
+                $('.answer_item').eq($index - 1).animate({
+                    backgroundColor: '#8cd675'
+                }, 1500).animate({
+                    backgroundColor: '#cccccc'
+                }, 100);
+                $timeout(function() {
+                    $('#question_group').hide();
+                    $('#jp_container_1').show();
+
+
+                    var minsecStartFrame = $('.jp-current-time').text().split(':');
+                    var secondStart = parseInt(((+minsecStartFrame[0]) * 60 + (+minsecStartFrame[1])) + 2);
+                    console.log(secondStart)
+
+                    $("#jquery_jplayer_1").jPlayer("play", secondStart);
+                    setTimeout(function() {
+                        $scope.timerQuestion = setInterval($scope.timer, 500);
+                    }, 1000);
+
+                }, 1000);
+            } else {
+                $('.answer_item').eq($index - 1).animate({
+                    backgroundColor: '#ed145b'
+                }, 1500).animate({
+                    backgroundColor: '#cccccc'
+                }, 100);
+                $timeout(function() {
+                    $('#question_group').hide();
+                    $('#jp_container_1').show();
+                    $('#jquery_jplayer_1').jPlayer('play', 0);
+                    $scope.timerQuestion = setInterval($scope.timer, 500);
+                }, 600);
+
+            }
+
+            //   console.log($scope.test);
+
+        }
+        /*end********ստուգել պատասխանը *****/
 
     /********* ներբեռնել դասը*****/
     $scope.loadPage = function($event) {
@@ -750,6 +796,9 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                                 });
                             },
                             ended: function() {
+                                clearInterval($scope.timerMarker);
+
+                                clearInterval($scope.timerQuestion);
                                 // The $.jPlayer.event.ended event
                                 //$(this).jPlayer("play"); // Repeat the media
                                 //jquery version
@@ -789,18 +838,21 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
 
-
-
-
-                        $scope.timerQuestion = setInterval(function() {
+                        $scope.timer = function() {
+                            console.log('11');
                             for (let i = 0; i < $scope.question.length; i++) {
                                 if ($('.jp-current-time').text() == $scope.question[i].question_time) {
                                     $('#jquery_jplayer_1').jPlayer('pause');
                                     playerPauseQuestion();
                                     $('.question_time').eq(i).click();
+                                    $('#question_group').show();
+                                    $('#jp_container_1').hide();
                                 }
                             }
-                        }, 1000);
+                        }
+
+
+                        $scope.timerQuestion = setInterval($scope.timer, 500);
 
 
 
@@ -827,55 +879,91 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
                         if ($scope.currentUser.status == 'teacher') {
-                            $('.jp-play, .jp-stop').bind('click', function() {
+                            $('.jp-play').bind('click', function() {
+                                if ($('#jp_container_1').hasClass('jp-state-playing')) {
+                                    playerPauseMarker();
+                                } else {
+                                    $scope.timerMarker = setInterval($scope.timer, 500);
+                                }
+                            });
+
+                            $('.jp-stop').bind('click', function() {
                                 playerPauseMarker();
                             });
+
+
+
+                            console.log(that.items.id);
+                            $http.get('../main/get_teacher_markers', {
+                                    params: {
+                                        id: that.items.id,
+                                        username: username
+                                    }
+                                })
+                                .then(function(data) {
+                                    console.log(data);
+
+                                });
+
+
+
+
+                            $('.jp-marker').empty();
+                            for (let i = 0; i < obj.startFrame.length; i++) {
+                                $('.jp-marker').append('<option value=' + i + '>' + obj.startFrame[i] + ' - ' + obj.endFrame[i] + '</option>');
+                            }
+
+                            $('.jp-marker').bind('change', function() {
+                                var markerIndex = $('.jp-marker option:selected').val();
+                                var minsecStartFrame = obj.startFrame[markerIndex].split(':');
+                                var secondStart = (+minsecStartFrame[0]) * 60 + (+minsecStartFrame[1]);
+                                $('#jquery_jplayer_1').jPlayer('play', secondStart);
+
+
+                                $scope.timerMarker = setInterval(function() {
+
+                                    var minsecEndFrame = obj.endFrame[markerIndex].split(':');
+                                    var secondEnd = (+minsecEndFrame[0]) * 60 + (+minsecEndFrame[1]);
+                                    //     console.log(obj.startFrame[markerIndex])
+                                    // Restrict playback to first 60 seconds.
+                                    if ($('.jp-current-time').text() == obj.endFrame[markerIndex]) {
+
+                                        $('#jquery_jplayer_1').jPlayer('pause', secondEnd);
+                                        playerPauseMarker();
+                                    }
+                                }, 100); // 10Hz
+
+
+                            });
+
+
                         } else {
 
 
                             $('.jp-play').bind('click', function() {
-                                $scope.timerQuestion = setInterval(function() {
-                                    for (let i = 0; i < $scope.question.length; i++) {
-                                        if ($('.jp-current-time').text() == $scope.question[i].question_time) {
-                                            $('#jquery_jplayer_1').jPlayer('pause');
-                                            playerPauseQuestion();
-                                            $('.question_time').eq(i).click();
-                                        }
-                                    }
-                                }, 1000);
+
+
+                                if ($('#jp_container_1').hasClass('jp-state-playing')) {
+                                    playerPauseQuestion();
+                                } else {
+                                    $scope.timerQuestion = setInterval($scope.timer, 500);
+                                }
+                                // if ($.jPlayer.pause()) {
+                                //     alert();
+                                // }
+                                // console.log(this);
+                                /*  if ($('#jquery_jplayer_1').jPlayer('pause')) {
+                                      $scope.timerQuestion = setInterval($scope.timer, 500);
+                                  } else {
+                                      playerPauseQuestion();
+                                  }*/
+
                             });
 
                             $('.jp-stop').bind('click', function() {
                                 playerPauseQuestion();
                             });
                         }
-
-                        $('.jp-marker').empty();
-                        for (let i = 0; i < obj.startFrame.length; i++) {
-                            $('.jp-marker').append('<option value=' + i + '>' + obj.startFrame[i] + ' - ' + obj.endFrame[i] + '</option>');
-                        }
-
-                        $('.jp-marker').bind('change', function() {
-                            var markerIndex = $('.jp-marker option:selected').val();
-                            var minsecStartFrame = obj.startFrame[markerIndex].split(':');
-                            var secondStart = (+minsecStartFrame[0]) * 60 + (+minsecStartFrame[1]);
-                            $("#jquery_jplayer_1").jPlayer("play", secondStart);
-
-
-                            $scope.timerMarker = setInterval(function() {
-
-                                var minsecEndFrame = obj.endFrame[markerIndex].split(':');
-                                var secondEnd = (+minsecEndFrame[0]) * 60 + (+minsecEndFrame[1]);
-                                //     console.log(obj.startFrame[markerIndex])
-                                // Restrict playback to first 60 seconds.
-                                if ($('.jp-current-time').text() == obj.endFrame[markerIndex]) {
-
-                                    $("#jquery_jplayer_1").jPlayer("pause", secondEnd);
-                                    playerPauseMarker();
-                                }
-                            }, 100); // 10Hz
-
-                        });
 
                     }
                 }
@@ -886,7 +974,6 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
         }).
         error(function(data, status) {
-
             alert('Տվյալների բազան լիցենյիայի համար չկա');
         });
 
@@ -988,8 +1075,8 @@ app.controller('sessionsCtrl', ['$scope', '$http', '$timeout', 'language', funct
                 sessions_data.push(data[key].data.split(';'));
                 var from = sessions_data[key][1].search('"'),
                     to = sessions_data[key][1].length,
-                    newstr = sessions_data[key][1].substring(from, to),
-                    user = newstr.slice(1, -1);
+                    newstr = sessions_data[key][0].substring(from, to),
+                    user = newstr.slice(0, -1);
                 $scope.sessions.push({
                     'id': data[key].id,
                     'usr': user,

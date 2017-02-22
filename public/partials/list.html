@@ -116,12 +116,13 @@
 
 
 		<!--div id='question_group'><div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div></div-->
-		<div id='question_group' ng-if='currentUser.status === "pupil"'>
-			<div ng-repeat='items in question' class='question_time btn btn-default' ng-click='questionTest($index)'>{{items.question_time}}</div>
-			
-			<div>
-				<div class='btn-info'>{{testQuestion}}</div>
-				<div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div>
+		<div id='question_answer_group' ng-if='currentUser.status === "pupil"'>
+			<div id='question_time_group'>
+				<div ng-repeat='items in question' class='question_time btn btn-default' ng-click='questionTest($index)'>{{items.question_time}}</div>
+			</div>
+			<div id=question_group>
+				<div class='question_item'>{{testQuestion}}</div>
+				<button class='answer_item btn' ng-repeat='items in testAnswers'  ng-click='verifyAnswer($index + 1)'>{{items}}</button>
 			</div>
 		</div>
 
