@@ -88,7 +88,17 @@ it creates position table if there isn't `position` table
     }
 
 
-
+    public function insert_markers($get_info)
+    {
+        $markers_field = array(
+            'username' =>  $get_info['username'],
+            'lesson_id' =>  $get_info['lesson_id'],
+            'start_time' =>  $get_info['start_time'],
+            'end_time' => $get_info['end_time']
+        );
+        
+       $insert = $this->db->insert('teachers_data', $markers_field);
+    }
     
     
     

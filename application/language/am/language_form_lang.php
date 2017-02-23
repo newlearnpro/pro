@@ -79,6 +79,7 @@ $lang['add_lesson']            = 'Դաս ավելացնել';
 $lang['question_list']		   = 'Հարցաշար';
 $lang['save']            	   = 'Պահպանել';
 $lang['delete']            	   = 'Ջնջել';
+$lang['remove']            	   = 'Հեռացնել';
 $lang['update']            	   = 'Թարմացնել';
 
 

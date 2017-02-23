@@ -16,9 +16,10 @@ class Admin extends CI_Controller {
 	public function index()
 	{
 		if($this->session->userdata('prm')==='admin'){
+			//echo $this->uri->segment(3);			
 			$this->load->view('includes/header');
 			$this->load->view('admin_view');
-			$this->load->view('includes/footer');
+			$this->load->view('includes/footer');	
 		}else{
 		    redirect($this->uri->segment(1).'/login');
 		}

@@ -99,6 +99,7 @@ $lang['add_lesson']                = 'Добавить урок';
 $lang['question_list']             = 'Вопросник';
 $lang['save']           		   = 'Сохранить';
 $lang['delete']            		   = 'Удалить';
+$lang['remove']            	   	   = 'Удалить';
 $lang['update']            	       = 'Обновить';
 
 

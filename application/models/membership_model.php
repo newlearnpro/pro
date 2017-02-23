@@ -31,7 +31,7 @@ class Membership_model extends CI_Model {
     {   
         $this->db->where('username', $get_info);
         $this->db->select('username, first_name, last_name, status, gender, age, email, activation_code');        
-        $query = $this->db->get("users");
+        $query = $this->db->get('users');
         return   $query->result_array();
         /*foreach ($query->result() as $row){ 
             return  array(
@@ -186,11 +186,25 @@ class Membership_model extends CI_Model {
     }
 
 
-    function get_markers()
+    function get_markers($get_info)
     {
-        $query = $this->db->get_where('teachers_data', array('id' => $get_info['id'], 'username'=> get_info['username']));
-       // $query = $this->db->get('questions');
+     //   $query = $this->db->get_where('teachers_data', array('lesson_id' => $get_info['lesson_id'], 'username'=> get_info['username']));
+     //   return   $query->result_array();
+
+
+     /*   $this->db->where('lesson_id', $get_info['lesson_id']);
+        $this->db->select('start_time, end_time');        
+        $query = $this->db->get('teachers_data');
+        return   $query->result_array();*/
+        $arr = array('lesson_id'=>$get_info['lesson_id'], 'username'=>$get_info['username']);
+
+        $this->db->where($arr);
+        $this->db->select('*');
+        $query = $this->db->get("teachers_data");
         return   $query->result_array();
     }
+
+
+
  
 }

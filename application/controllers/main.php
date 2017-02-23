@@ -36,7 +36,8 @@ class Main extends CI_Controller {
 	}
 
 	public function user_personal_page(){
-		$get_info = $this->input->get('user');
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$get_info = $this->input->post('user');
 		$this->load->model('membership_model');
 		$query = $this->membership_model->user_page($get_info);		
 		echo json_encode($query);
@@ -115,13 +116,28 @@ class Main extends CI_Controller {
 	public function get_teachers_markers(){
 
 		$this->load->model('membership_model');
-		$get_info['id'] = $this->input->get('lesson_id');
-		$get_info['username'] = $this->input->get('username');		
+		$get_info['lesson_id'] = $this->input->get('lesson_id');
+		$get_info['username'] = $this->input->get('username');
 		//$get_info['class_name'] = $this->input->post('class_name');
 		$query = $this->membership_model->get_markers($get_info);
 		echo json_encode($query);
+
 	}
 
-
+	public function add_teachers_markers(){
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$get_info['id'] = $this->input->post('id');
+		$get_info['lesson_id'] = $this->input->post('lesson_id');
+		$get_info['start_time'] = $this->input->post('start_time');
+		$get_info['end_time'] = $this->input->post('end_time');
+		$this->load->model('insert_tables_model');
+		$query = $this->insert_tables_model->insert_markers($get_info);
+	}
+	public function remove_teachers_markers(){
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$get_info['id'] = $this->input->post('id');
+		$this->db->delete('teachers_data', array('id' => $get_info['id']));
+		echo 'teachers current marker is deleted';
+	}
 
 }
