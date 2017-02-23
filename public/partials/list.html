@@ -93,7 +93,7 @@
 								<button class="jp-play" role="button" tabindex="0">play</button>
 								<button class="jp-stop" role="button" tabindex="0">stop</button>								
 							</div>
-							<select ng-if='currentUser.status === "teacher"' class='jp-marker'></select>
+							<select ng-if='currentUserStatus === "teacher"' class='jp-marker'></select>
 							<div class="jp-toggles" >
 								<button class="jp-repeat" role="button" tabindex="0">repeat</button>
 								<button class="jp-full-screen" role="button" tabindex="0">full screen</button>	
@@ -112,11 +112,37 @@
 					</div>
 				</div>
 			</div>
+			
+		</div>
+		<div id='teacher_data_group' ng-if='currentUserStatus === "teacher"'>
+
+
+
+
+			<div ng-repeat='items in startEndTime'>
+				<div class='teacher_marker_list'>
+					<span>{{items.start_time}} - {{items.end_time}}</span>
+					<input type='button' ng-click='removeTeachersMarkers($index)' value='{{language.remove}}' />
+				</div>
+			</div>
+
+			<div>	
+				<label>start time
+					<input type='text' class='form-control lesson_time' type=text />
+					<span>:</span><input type='text' class='form-control lesson_time' type=text />
+				</label>
+			</div>
+			<div>	
+				<label>end time
+					<input type='text' class='form-control lesson_time' type=text />
+					<span>:</span><input type='text' class='form-control lesson_time' type=text />
+				</label>
+			</div>
+			<input type='button' value='add' ng-click='addTeachersMarkers()' />
 		</div>
 
-
 		<!--div id='question_group'><div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div></div-->
-		<div id='question_answer_group' ng-if='currentUser.status === "pupil"'>
+		<div id='question_answer_group' ng-if='currentUserStatus === "pupil"'>
 			<div id='question_time_group'>
 				<div ng-repeat='items in question' class='question_time btn btn-default' ng-click='questionTest($index)'>{{items.question_time}}</div>
 			</div>

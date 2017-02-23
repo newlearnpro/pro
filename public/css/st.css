@@ -175,10 +175,15 @@ $grid-breakpoints: (
 }
 #pagePlayer,
 #content_image,
-#jp_container_1 {
+#jp_container_1,
+#teacher_data_group {
   max-width: 800px;
   display: none;
   border: none;
+}
+.lesson_time {
+  width: 50px;
+  display: inline-block;
 }
 .form_error {
   color: red;

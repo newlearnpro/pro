@@ -60,19 +60,31 @@ app.service('language', function($http, $q) {
     }
 });
 
-app.service('currentUserData', function($http) {
-    var userObj = '';
+app.service('currentUserData', function($http, $q) {
+    var deffered = $q.defer();
     var username = document.querySelector("#username").innerHTML;
-    $http.get('../main/user_personal_page', {
-            params: {
-                user: username
-            }
-        })
-        .then(function(data) {
-            userObj = data.data;
-        });
+    /* $http.get('../main/user_personal_page', {
+             params: {
+                 user: username
+             }
+         })
+         .then(function(data) {
+             userObj = data.data;
+         });*/
+    $http({
+        method: 'POST',
+        url: '../main/user_personal_page',
+        data: {
+            'user': username
+        }
+    }).success(function(data) {
+        deffered.resolve(data);
+
+    }).error(function() {
+        deffered.reject("error");
+    });
 
     this.getUserData = function() {
-        return userObj;
+        return deffered.promise;
     }
 });
