@@ -126,11 +126,14 @@ class Main extends CI_Controller {
 
 	public function add_teachers_markers(){
 		$_POST = json_decode(file_get_contents('php://input'), true);
-		$get_info['id'] = $this->input->post('id');
+		$this->load->model('insert_tables_model');
+		$get_info['username'] = $this->input->post('username');
 		$get_info['lesson_id'] = $this->input->post('lesson_id');
 		$get_info['start_time'] = $this->input->post('start_time');
 		$get_info['end_time'] = $this->input->post('end_time');
-		$this->load->model('insert_tables_model');
+
+		echo "fsd";
+	//	
 		$query = $this->insert_tables_model->insert_markers($get_info);
 	}
 	public function remove_teachers_markers(){

@@ -222,6 +222,7 @@ it creates question table if there isn't `questions` table
                 `question` text collate utf8_general_ci NOT NULL,
                 `answers` varchar(255) collate utf8_general_ci NOT NULL,
                 `correct_answer` int(11) NOT NULL,
+                `hint_lessons_id` varchar(50) NOT NULL,
                 `question_time` varchar(20) NOT NULL,
                PRIMARY KEY(`id`)
 

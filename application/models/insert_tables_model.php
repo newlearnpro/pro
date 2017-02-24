@@ -75,12 +75,13 @@ it creates position table if there isn't `position` table
     public function insert_question($get_info)
     {
         $question_field = array(
-            'lesson_id' =>  $get_info['lesson_id'],
+            'position_id' =>  $get_info['position_id'],
             'question_type' =>  $get_info['question_type'],
             'question' => $get_info['question'],
             'answers' => $get_info['answers'],
           //  'answers' => '[1,2,3]',
-            'correct_answer' => $get_info['correct_answer']
+            'correct_answer' => $get_info['correct_answer'],
+            'hint_lessons_id'=> $get_info['hint_lessons_id']
         );
         
        $insert = $this->db->insert('questions', $question_field);
@@ -96,8 +97,8 @@ it creates position table if there isn't `position` table
             'start_time' =>  $get_info['start_time'],
             'end_time' => $get_info['end_time']
         );
-        
-       $insert = $this->db->insert('teachers_data', $markers_field);
+     //  return 'sd' ;
+     $this->db->insert('teachers_data', $markers_field);
     }
     
     

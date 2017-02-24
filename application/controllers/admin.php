@@ -203,11 +203,12 @@ public function add_question()
 {
 	$_POST = json_decode(file_get_contents('php://input'), true);
 	$this->load->model('insert_tables_model');
-	$get_info['lesson_id'] = $this->input->post('lesson_id');
+	$get_info['position_id'] = $this->input->post('position_id');
 	$get_info['question_type'] = $this->input->post('question_type');
 	$get_info['question'] = $this->input->post('question');
 	$get_info['answers'] = $this->input->post('answers');
 	$get_info['correct_answer'] = $this->input->post('correct_answer');
+	$get_info['hint_lessons_id'] = $this->input->post('hint_lessons_id');
 	$this->insert_tables_model->insert_question($get_info);
 	echo json_encode($get_info);
 }
