@@ -15,7 +15,39 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     });
 
 
+    var loadTeachersMarkers = function(id) {
+        var username = document.querySelector('#username').innerHTML;
+        $http.get('../main/get_teachers_markers', {
+                params: {
+                    lesson_id: id,
+                    username: username
+                }
+            })
+            .then(function(data) {
+                $scope.startEndTime = data.data;
+                $('.jp-marker').empty();
+                for (let i = 0; i < data.data.length; i++) {
+                    $('.jp-marker').append('<option value=' + i + '>' + data.data[i].start_time + ' - ' + data.data[i].end_time + '</option>');
+                }
 
+                $('.jp-marker').bind('change', function() {
+                    var markerIndex = $('.jp-marker option:selected').val();
+                    var minsecStartFrame = data.data[markerIndex].start_time.split(':');
+                    var secondStart = (+minsecStartFrame[0]) * 60 + (+minsecStartFrame[1]);
+                    $('#jquery_jplayer_1').jPlayer('play', secondStart);
+
+                    $scope.timerMarker = setInterval(function() {
+                        var minsecEndFrame = data.data[markerIndex].end_time.split(':');
+                        var secondEnd = (+minsecEndFrame[0]) * 60 + (+minsecEndFrame[1]);
+
+                        if ($('.jp-current-time').text() == data.data[markerIndex].end_time) {
+                            $('#jquery_jplayer_1').jPlayer('pause', secondEnd);
+                            playerPauseMarker();
+                        }
+                    }, 100);
+                });
+            });
+    }
 
 
 
@@ -218,6 +250,14 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         }
         /*end********ստուգել պատասխանը *****/
 
+
+
+
+
+
+
+
+
     /********* ներբեռնել դասը*****/
     $scope.loadPage = function($event) {
         var that = this;
@@ -338,7 +378,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
                         $('#pagePlayer').attr('src', '').hide();
                         $('#jp_container_1, #teacher_data_group').show();
-                        $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip');
+                        $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip').attr('data', that.items.id);
 
                         $timeout(function() {
                             $("#jquery_jplayer_1").jPlayer("play");
@@ -369,6 +409,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
                         /*******for teacher**/
+
+
                         if ($scope.currentUserStatus == 'teacher') {
                             $('.jp-play').bind('click', function() {
                                 if ($('#jp_container_1').hasClass('jp-state-playing')) {
@@ -381,58 +423,9 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                             $('.jp-stop').bind('click', function() {
                                 playerPauseMarker();
                             });
+                            //ստեղ
 
-
-
-                            //   console.log(username);
-                            $http.get('../main/get_teachers_markers', {
-                                    params: {
-                                        lesson_id: that.items.id,
-                                        username: username
-                                    }
-                                })
-                                .then(function(data) {
-                                    console.log(data.data);
-
-                                    $scope.startEndTime = data.data;
-
-
-
-                                    $('.jp-marker').empty();
-                                    for (let i = 0; i < data.data.length; i++) {
-                                        $('.jp-marker').append('<option value=' + i + '>' + data.data[i].start_time + ' - ' + data.data[i].end_time + '</option>');
-                                    }
-
-                                    $('.jp-marker').bind('change', function() {
-                                        var markerIndex = $('.jp-marker option:selected').val();
-                                        var minsecStartFrame = data.data[markerIndex].start_time.split(':');
-                                        var secondStart = (+minsecStartFrame[0]) * 60 + (+minsecStartFrame[1]);
-                                        $('#jquery_jplayer_1').jPlayer('play', secondStart);
-
-
-                                        $scope.timerMarker = setInterval(function() {
-                                            //     console.log('timer');
-                                            var minsecEndFrame = data.data[markerIndex].end_time.split(':');
-                                            var secondEnd = (+minsecEndFrame[0]) * 60 + (+minsecEndFrame[1]);
-
-                                            // Restrict playback to first 60 seconds.
-                                            if ($('.jp-current-time').text() == data.data[markerIndex].end_time) {
-                                                $('#jquery_jplayer_1').jPlayer('pause', secondEnd);
-                                                playerPauseMarker();
-                                            }
-                                        }, 100); // 10Hz
-
-                                    });
-
-
-
-
-
-
-
-                                });
-
-
+                            loadTeachersMarkers(that.items.id);
 
 
 
@@ -569,11 +562,10 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
     $scope.addTeachersMarkers = function() {
-        console.log($scope.startEndTime[0].lesson_id);
         var username = document.querySelector('#username').innerHTML,
-            lesson_id = $scope.startEndTime[0].lesson_id,
-            start_time = '00:04',
-            end_time = '00:15';
+            lesson_id = $('#jp_video_0').attr('data'),
+            start_time = $('.st_min').val() + ':' + $('.st_sec').val(),
+            end_time = $('.et_min').val() + ':' + $('.et_sec').val();
 
         $http({
             method: 'POST',
@@ -585,11 +577,12 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                 'end_time': end_time
             }
         }).success(function(data, status) {
-
+            loadTeachersMarkers(lesson_id);
         });
     }
     $scope.removeTeachersMarkers = function($index) {
         var that = this;
+        console.log(that);
         $http({
             method: 'POST',
             url: '../main/remove_teachers_markers',
@@ -597,7 +590,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                 'id': that.items.id
             }
         }).success(function(data, status) {
-            $('.teacher_marker_list, .jp-marker:children').eq($index).remove();
+            loadTeachersMarkers(that.items.lesson_id);
         });
     }
 

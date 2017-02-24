@@ -1,3 +1,4 @@
+/**************directives***************************/
 app.directive('usersTable', function($http) {
     return {
         restrict: 'EA',
@@ -19,6 +20,39 @@ app.directive('usersTable', function($http) {
         templateUrl: '../../public/partials/templates/users_tmpl.html'
     }
 });
+
+app.directive('positionTable', function($http, $timeout) {
+    return {
+        restrict: 'EA',
+        //scope: {},
+        replace: true,
+        link: function(scope, element, attrs, ctrl) {
+            $http({
+                method: 'GET',
+                url: 'load_position'
+            }).
+            success(function(data, status) {
+                scope.position = data;
+                $timeout(function() {
+                    for (var i = 0; i < data.length; i++) {
+                        $('.position_item[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                    }
+                    for (var j = 0; j < data.length; j++) {
+                        if ($('.mainPosition div').children('div').has('div')[j]) {
+                            $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
+                        }
+                    }
+                }, 10);
+            });
+        },
+        templateUrl: '../../public/partials/templates/position_tmpl.html'
+    }
+});
+/*end**************directives***************************/
+
+
+
+
 
 
 app.controller('headerCtrl', ['$scope', function($scope) {
@@ -210,12 +244,6 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
 
 
     }
-
-
-
-
-
-
 });
 
 
@@ -230,29 +258,29 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
     var promise = language.getLang();
     promise.then(function(data) {
         $scope.language = data;
-        $scope.loadPosition();
+        //   $scope.loadPosition();
         $scope.loadLesson();
     });
-    $scope.loadPosition = function() {
-        $http({
-            method: 'GET',
-            url: 'load_position',
+    /* $scope.loadPosition = function() {
+         $http({
+             method: 'GET',
+             url: 'load_position',
 
-        }).
-        success(function(data, status) {
-            $scope.position = data;
-            $timeout(function() {
-                for (var i = 0; i < data.length; i++) {
-                    $('.position_item[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
-                }
-                for (var j = 0; j < data.length; j++) {
-                    if ($('.mainPosition div').children('div').has('div')[j]) {
-                        $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
-                    }
-                }
-            }, 10);
-        });
-    }
+         }).
+         success(function(data, status) {
+             $scope.position = data;
+             $timeout(function() {
+                 for (var i = 0; i < data.length; i++) {
+                     $('.position_item[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                 }
+                 for (var j = 0; j < data.length; j++) {
+                     if ($('.mainPosition div').children('div').has('div')[j]) {
+                         $('.mainPosition div').children('div').has('div').children('.remove').css('display', 'none');
+                     }
+                 }
+             }, 10);
+         });
+     }*/
     $scope.loadLesson = function() {
         $http({
             method: 'POST',
@@ -348,6 +376,9 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
 }]); /*end*********կատալոգների բաժին *****/
 
 
+
+
+
 app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope, $http, language) {
     var promise = language.getLang();
 
@@ -418,7 +449,7 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
     }
 
     $scope.$watch('questionAnswersLength', function(newValue, oldValue) {
-        console.log(newValue, oldValue);
+        // console.log(newValue, oldValue);
         $scope.newValue = newValue;
         $scope.answersInput = [];
         for (let i = 0; i < newValue; i++) {
@@ -430,15 +461,26 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
 
 
     $scope.questionSave = function() {
-        var lessonId = $('#lesson').val(),
+        var position_id = $('#position').val(),
+
+
+            //   var x = document.querySelector("#position").selectedIndex,
+            //       position_id = document.getElementsByTagName("option")[x].getAttribute("ng-selected"),
+
+            //lesson_id = $('#lesson').val(),
             question = $('.questionTextField').val(),
             questionType = $('.questionType.ng-valid-parse').val(),
             answers = [],
+            hint_lessons_id = [],
             answerVersionField = $('.answerVersionField.ng-valid-parse').val();
 
-        console.log('log' + $('.answerTextField').length)
+
+
+        console.log(position_id);
+        //   console.log('log' + $('.answerTextField').length)
         for (let i = 0; i < $('.answerTextField').length; i++) {
-            answers.push($('.answerTextField').eq(i).val());
+            answers.push($('.hintLessonField').eq(i).val());
+            hint_lessons_id.push($('#lesson').eq(i).val());
         }
 
 
@@ -447,11 +489,13 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
             method: 'POST',
             url: 'add_question',
             data: {
-                'lesson_id': lessonId,
+                'position_id': position_id,
+                //'lesson_id': lesson_id,
                 'question_type': questionType,
                 'question': question,
                 'answers': answers.join('|'),
-                'correct_answer': answerVersionField
+                'correct_answer': answerVersionField,
+                'hint_lessons_id': hint_lessons_id.join('|')
             }
         }).success(function() {}).error(function(data, status) {
             if (status == 500) {

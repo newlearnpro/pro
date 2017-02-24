@@ -1,11 +1,7 @@
 <div ng-cloak ng-controller='positionGroup'>
-	<h2>This is position.html</h2>
+
+	<div position-table></div>
 	<div>
-		<label>{{language.position_hint}}</label>		
-		<select id='position' ng-model='userField.id'>
-			<option ng-selected='0'>{{language.position_main}}ԳԼԽԱՎՈՐ</option>
-			<option ng-repeat='items in position' ng-selected='{{items.id}}'>{{items.id}} - {{items.position}}</option>
-		</select>
 		<div><label>имя каталога</label>&nbsp;<input type='text' id='position_name' /><input type='button' value='OK' ng-click='createPosition()' /></div>
 		<div><label><input type='checkbox' id='position_group' />&nbsp;группировать</label></div>
 	</div>
