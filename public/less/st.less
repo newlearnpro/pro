@@ -323,6 +323,9 @@ $grid-breakpoints: (
 	&.lesson_type_5{
 		.lesson_type_func(#0000ff);
 	}
+	&.lesson_type_6{
+		.lesson_type_func(#6e6e6f);
+	}
 }
 
 .lesson_types:hover{
@@ -340,6 +343,9 @@ $grid-breakpoints: (
 	}
 	&.lesson_type_5{
 		.lesson_type_hover_func(#0000ff);
+	}
+	&.lesson_type_6{
+		.lesson_type_hover_func(#6e6e6f);
 	}
 }
 
@@ -364,6 +370,9 @@ $grid-breakpoints: (
 	}
 	&.lesson_icon_5{
 	    background-position: -128px -32px;
+	}
+	&.lesson_icon_6{
+	    background-position: -160px -32px;
 	}
 }
 
@@ -467,38 +476,12 @@ header{
 }
 
 
-.lp_button, .lp_link{
-    background: #ffffff;
-    color: #3971c8;
-    border-radius: 40px 10px;
 
-    font-family: lpFont;
-    
-    font-size: 14px;
-    border-top: solid #7c7c7d 1px;
-    border-right: solid #7c7c7d 8px;
-    border-bottom: solid #7c7c7d 1px;
-    border-left: solid #7c7c7d 8px;
-    width:140px;
-    display: inline-block;
 
-    cursor: pointer;
-}
 
-.lp_button:hover, .lp_link:hover {
-color: #ffffff;
-      background: #31b0d5;
 
-}
 
-/*
-.lp_button:active, .lp_link:active {
-color: #ffffff;
-      border-top: solid #31b0d5 1px;
-      border-right: solid #31b0d5 8px;
-      border-bottom: solid #31b0d5 1px;
-      border-left: solid #31b0d5 8px; 
-}*/
+
 
 
 
@@ -609,21 +592,20 @@ color: #ffffff;
 
 
 
-
+/**********carusel part******/
 
 .carousel-caption > h3 > a{
 		padding:10px;
 		text-decoration:none;
 	}
+/*end************carusel part*****/
 
 
 
-/*successes*/
-.successes{
-	color: green;
+/**********question part******/
+#question_group{
+	display:none;
 }
-
-
 .question_item{
 	font-family:lpFont;
 	font-size: 20px;
@@ -648,16 +630,176 @@ color: #ffffff;
 	padding:10px;
 	margin: 5px auto;
 }
-/*
-.answer_trem_wrong{
-	background: #cccccc;
-}
-*/
+/*end*******question part****/
 
 
-#question_group{
-	display:none;
+
+
+.lp_btn_half{
+	width:50%;
 }
-#question_time_group{
-	opacity: 0.5;	
+.lp_btn_full{
+	width:100%;
 }
+.lp_btn_standA{
+	width:100px;
+}
+.lp_btn_standB{
+	width:200px;
+}
+
+
+.lp_btn{
+ /*  background: #ffffff;*/
+ background: #efefef;
+    color: #3971c8;
+    font-family: lpFont;    
+    font-size: 14px;
+    border-radius:0  0 10px 10px ;
+	/*border: 1px solid #3971c8;*/
+	border-left: 1px solid #3971c8;
+	border-right: 1px solid #3971c8;
+    height:30px;
+    font-size:20px;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    &:hover{
+        background: #3971c8;
+      	color: #ffffff;
+      	text-decoration: none;
+    }
+    &:active{
+    	color: 	#ed243c;
+		outline: none;
+    }
+    &:focus{
+
+    	color: 	#3971c8;
+		outline: none;
+    }
+    &:hover:active{
+    	color: 	#ed243c;
+    	outline: none;
+    }
+    &:hover:focus{
+    	color: 	#ffffff;
+    	outline: none;
+    }
+     &:hover:focus:active{
+    	color: 	#ed243c;
+    	outline: none;
+    }
+     &:focus:active{
+    	outline: none;
+    }
+}
+
+.lp_link{
+    background: #ffffff;
+    color: #3971c8;
+ 	border-radius:0  0 10px 10px ;
+    width:100%;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+}
+
+
+ .lp_link:hover {
+	  color: #ffffff;
+      background: #31b0d5;
+      text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+/*bootstrap rename*/
+
+.btn-info.active{
+	border: 4px solid #3971c8;
+	background-color: #ffffff;
+	color: #3971c8;
+
+    -webkit-animation-name: animation;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease-in-out;
+ 
+    -webkit-animation-play-state: running;
+
+    animation-name: animation;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    
+    animation-play-state: running;
+    border-left: 40px solid #3971c8;
+    border-top: 1px solid #3971c8;
+	border-right: 40px solid #3971c8;
+	border-bottom: 1px solid #3971c8;
+
+}
+
+.btn-info:hover{
+	background-color: #ffffff;
+	color:#ed243c;
+}
+
+.btn-info.active:hover{
+	background-color: #ffffff;
+	color:#3971c8;
+}
+
+.btn-info.active:focus, .btn-info.active:active{
+	background-color: #ffffff;
+	color:#3971c8;
+}
+
+
+.btn-info:active:hover,
+.btn-info.active:hover,
+.btn-info:focus,
+.btn-info.focus,
+.btn-info:hover,
+.btn-info:active,
+.btn-info.active,
+.btn-info:active:focus,
+.btn-info.active:focus,
+.btn-info:active.focus {
+  background-color: #ffffff;
+  color: #ed243c;
+  border-color: #3971c8;
+  text-decoration: none;
+}
+
+
+
+
+
+@-webkit-keyframes animation {
+    0%  {
+	border-left: 1px solid #3971c8;
+	border-top: 1px solid #3971c8;
+	border-right: 1px solid #3971c8;
+	border-bottom: 1px solid #3971c8;
+    }
+    50.0%  {
+	border-left: 40px solid #3971c8;
+	border-top: 1px solid #3971c8;
+	border-right: 40px solid #3971c8;
+	border-bottom: 1px solid #3971c8;
+    }
+    100.0%  {
+	border-left: 40px solid #3971c8;
+	border-top: 1px solid #3971c8;
+	border-right: 40px solid #3971c8;
+	border-bottom: 1px solid #3971c8;
+    }
+
+}
+

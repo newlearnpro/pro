@@ -5,13 +5,11 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     promise_language.then(function(data) {
         $scope.language = data;
         $scope.loadPosition();
-        //   console.log($scope.language);
     });
 
     var promise_currentUserData = currentUserData.getUserData();
     promise_currentUserData.then(function(data) {
         $scope.currentUserStatus = data[0].status;
-        //   console.log($scope.currentStatus);
     });
 
 
@@ -189,45 +187,20 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         });
     } /*end********փնտրել դասերը *****/
 
-    /*********Մտնել թեստի բաժին *****/
-    $scope.questionTest = function($index) {
-            //console.log($index)
-            $scope.testQuestion = $scope.question[$index].question;
-            $scope.testAnswers = $scope.question[$index].answers.split('|');
-            $scope.verifyAnswers = $scope.question[$index].correct_answer;
 
-
-            $("#pagePlayer, #learnpro_logo").hide();
-
-            //   console.log($scope.test);
-
-        }
-        /*end********Մտնել թեստի բաժին *****/
 
     /*********ստուգել պատասխանը *****/
     $scope.verifyAnswer = function($index) {
-            if ($index == $scope.verifyAnswers) {
-
-
-                console.log($('.jp-current-time').text());
+            if ($index == $scope.correctAnswer) {
                 $('.answer_item').eq($index - 1).animate({
                     backgroundColor: '#8cd675'
                 }, 1500).animate({
                     backgroundColor: '#cccccc'
                 }, 100);
                 $timeout(function() {
-                    $('#question_group').hide();
-                    $('#jp_container_1, #teacher_data_group').show();
-
-
-                    var minsecStartFrame = $('.jp-current-time').text().split(':');
-                    var secondStart = parseInt(((+minsecStartFrame[0]) * 60 + (+minsecStartFrame[1])) + 2);
-                    console.log(secondStart)
-
-                    $("#jquery_jplayer_1").jPlayer("play", secondStart);
-                    setTimeout(function() {
-                        $scope.timerQuestion = setInterval($scope.timer, 500);
-                    }, 1000);
+                    if (document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.className != 'lesson_group_type_0') {
+                        document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.firstElementChild.click();
+                    }
 
                 }, 1000);
             } else {
@@ -237,16 +210,54 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                     backgroundColor: '#cccccc'
                 }, 100);
                 $timeout(function() {
-                    $('#question_group').hide();
-                    $('#jp_container_1, #teacher_data_group').show();
-                    $('#jquery_jplayer_1').jPlayer('play', 0);
-                    $scope.timerQuestion = setInterval($scope.timer, 500);
+                    $http({
+                        method: 'POST',
+                        url: 'load_hint_lesson',
+                        data: {
+                            id: $scope.hintLessonId[$index - 1]
+                        }
+                    }).success(function(data, status) {
+                        var that = data[0];
+                        $('#jquery_jplayer_1').jPlayer({
+                            ready: function() {
+                                $(this).jPlayer('setMedia', {
+                                    title: that.name,
+                                    m4v: '../../uploads/lesson_type_' + that.type_id + '/' + that.src + '/data.zip'
+                                });
+                            },
+                            ended: function() {
+                                if (document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.className != 'lesson_group_type_0') {
+                                    document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.firstElementChild.click();
+                                }
+                            },
+                            cssSelectorAncestor: "#jp_container_1",
+                            swfPath: "/js",
+                            supplied: "m4v, ogv",
+                            useStateClassSkin: true,
+                            autoBlur: false,
+                            smoothPlayBar: true,
+                            keyEnabled: true,
+                            remainingDuration: true,
+                            toggleDuration: true
+                        });
+
+
+                        //   $(".jp-playlist").css("display", "none");
+
+                        $('#pagePlayer, #question_group').attr('src', '').hide();
+                        $('#jp_container_1, #teacher_data_group').show();
+                        $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + that.type_id + '/' + that.src + '/data.zip').attr('data', that.id);
+
+                        $timeout(function() {
+                            $("#jquery_jplayer_1").jPlayer("play");
+                            //  console.log('yes');
+                        }, 200);
+                    }).error(function(data, status) {
+                        console.log('error' + status);
+                    });
                 }, 600);
 
             }
-
-            //   console.log($scope.test);
-
         }
         /*end********ստուգել պատասխանը *****/
 
@@ -278,44 +289,17 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             }
         }).
         success(function(data, status) {
-            //  console.log(data[0])
             if (data[0] != undefined && username == data[0].username && (position_id == data[0].position_id || position_parent_id == data[0].position_id || data[0].position_id == 0)) {
-
                 if ($event.currentTarget.classList.contains('lesson_selected') == false) {
-                    //   console.log($event.currentTarget.classList.contains('lesson_selected'));
                     $('.lesson_types').removeClass('lesson_selected');
                     $event.currentTarget.classList.add('lesson_selected');
-
-
-                    /* $http.get('../main/users_data', {
-                             params: {
-                                 username: username,
-                                 lesson_id: this.items.id,
-                                 lesson_name: this.items.name
-                             }
-                         })
-                         .then(function(data) {
-                             console.log(data.config.params.lesson_id);
-                         });*/
-                    //     console.log(this.items.type_id);
                     $("#content_image").hide();
                     $("#learnpro_logo").show();
-
-
-
-
-
-
-
-
 
                     if (that.items.type_name == 'html') {
                         $scope.src = that.items.src;
                         $('#jp_video_0').attr('src', '');
-                        $('#jp_container_1, #teacher_data_group').hide();
-
-
-
+                        $('#jp_container_1, #teacher_data_group, #question_group').hide();
 
                         $("#pagePlayer").show().css({
                             'width': '100%',
@@ -332,35 +316,48 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                         });
                     }
 
+                    /******************************************************************************************/
 
+                    if (that.items.type_name == 'question') {
+                        $scope.src = that.items.src;
+                        $('#jp_video_0, #pagePlayer').attr('src', '');
+                        $('#jp_container_1, #teacher_data_group, #pagePlayer').hide();
+                        //   console.log(that.items.parent_id);
+                        //    console.log(that.items.question_id);
+                        $('#question_group').show();
+                        $http.get('get_questions', {
+                                params: {
+                                    parent_id: that.items.parent_id,
+                                    question_id: that.items.question_id
+                                }
+                            })
+                            .then(function(data) {
+                                if (data.data.length != 0) {
+                                    $scope.testQuestion = data.data[0].question;
+                                    $scope.testAnswers = data.data[0].answers.split('|');
+                                    $scope.correctAnswer = data.data[0].correct_answer;
+                                    $scope.hintLessonId = data.data[0].hint_lessons_id.split('|');
+                                } else {
+                                    alert('f');
+                                }
+                            });
+                    }
 
                     /*******************************************************************************************/
                     if (that.items.type_name == 'video') {
-
-
                         $("#jquery_jplayer_1").jPlayer({
                             ready: function() {
                                 $(this).jPlayer("setMedia", {
                                     title: that.items.name,
-                                    m4v: '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip',
-
-                                    // poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
+                                    m4v: '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip'
+                                        // poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
                                 });
                             },
                             ended: function() {
                                 clearInterval($scope.timerMarker);
-
-                                clearInterval($scope.timerQuestion);
-                                // The $.jPlayer.event.ended event
-                                //$(this).jPlayer("play"); // Repeat the media
-                                //jquery version
-                                //  $('.lesson_selected').parent().next().children().trigger('click');
                                 if (document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.className != 'lesson_group_type_0') {
                                     document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.firstElementChild.click();
                                 }
-                                // document.getElementsByClassName("lesson_selected")[0].parentElement.previousElementSibling.firstElementChild.click();
-                                //  $('.lesson_selected', window.parent.document).parent().next().children().trigger('click');
-
                             },
                             cssSelectorAncestor: "#jp_container_1",
                             swfPath: "/js",
@@ -373,44 +370,21 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                             toggleDuration: true
                         });
 
-
-                        //   $(".jp-playlist").css("display", "none");
-
-                        $('#pagePlayer').attr('src', '').hide();
+                        $('#pagePlayer, #question_group').attr('src', '').hide();
                         $('#jp_container_1, #teacher_data_group').show();
                         $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip').attr('data', that.items.id);
 
                         $timeout(function() {
                             $("#jquery_jplayer_1").jPlayer("play");
-                            //  console.log('yes');
+                            $("#learnpro_logo").trigger('click');
                         }, 200);
-
-
-
-
-
-
-
-
 
                         function playerPauseMarker() {
                             clearInterval($scope.timerMarker);
-                            //  clearInterval($scope.timer);
                         }
-
-                        function playerPauseQuestion() {
-                            // clearInterval($scope.timerMarker);
-                            clearInterval($scope.timerQuestion);
-                        }
-
-
-
-
 
 
                         /*******for teacher**/
-
-
                         if ($scope.currentUserStatus == 'teacher') {
                             $('.jp-play').bind('click', function() {
                                 if ($('#jp_container_1').hasClass('jp-state-playing')) {
@@ -423,82 +397,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                             $('.jp-stop').bind('click', function() {
                                 playerPauseMarker();
                             });
-                            //ստեղ
-
                             loadTeachersMarkers(that.items.id);
-
-
-
-
-
                         } /*******end teacher**/
-                        /*******for pupil**/
-                        else {
-
-
-
-                            if ($scope.currentUserStatus == 'pupil') {
-                                $http.get('../main/get_questions', {
-                                        params: {
-                                            lesson_id: that.items.id,
-                                        }
-                                    })
-                                    .then(function(data) {
-                                        console.log(data.data);
-                                        if (data.data.length != 0) {
-                                            $scope.question = data.data;
-                                            // $scope.questionArr = data.data
-                                            //  $scope.testList = data.data;
-                                            //   $scope.question = data.data[0].question_time;
-                                        }
-                                    });
-                            }
-
-
-                            $scope.timer = function() {
-                                console.log('11');
-                                for (let i = 0; i < $scope.question.length; i++) {
-                                    if ($('.jp-current-time').text() == $scope.question[i].question_time) {
-                                        $('#jquery_jplayer_1').jPlayer('pause');
-                                        playerPauseQuestion();
-                                        $('.question_time').eq(i).click();
-                                        $('#question_group').show();
-                                        $('#jp_container_1, #teacher_data_group').hide();
-                                    }
-                                }
-                            }
-
-
-                            $scope.timerQuestion = setInterval($scope.timer, 500);
-
-
-
-
-                            $('.jp-play').bind('click', function() {
-
-
-                                if ($('#jp_container_1').hasClass('jp-state-playing')) {
-                                    playerPauseQuestion();
-                                } else {
-                                    $scope.timerQuestion = setInterval($scope.timer, 500);
-                                }
-                                // if ($.jPlayer.pause()) {
-                                //     alert();
-                                // }
-                                // console.log(this);
-                                /*  if ($('#jquery_jplayer_1').jPlayer('pause')) {
-                                      $scope.timerQuestion = setInterval($scope.timer, 500);
-                                  } else {
-                                      playerPauseQuestion();
-                                  }*/
-
-                            });
-
-                            $('.jp-stop').bind('click', function() {
-                                playerPauseQuestion();
-                            });
-                        }
-
                     }
                 }
             } else {
@@ -582,7 +482,6 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     }
     $scope.removeTeachersMarkers = function($index) {
         var that = this;
-        console.log(that);
         $http({
             method: 'POST',
             url: '../main/remove_teachers_markers',

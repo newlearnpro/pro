@@ -35,7 +35,12 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
 }).run(['$rootScope', function($rootScope) {
     $rootScope.obj = [];
-    // console.log("TT");
+
+    /**********for tab style******/
+    /*  [].slice.call(document.querySelectorAll('.tabs')).forEach(function(el) {
+          new CBPFWTabs(el);
+      });*/
+    /*end*****for tab style*********/
 }]);
 
 
@@ -63,14 +68,6 @@ app.service('language', function($http, $q) {
 app.service('currentUserData', function($http, $q) {
     var deffered = $q.defer();
     var username = document.querySelector("#username").innerHTML;
-    /* $http.get('../main/user_personal_page', {
-             params: {
-                 user: username
-             }
-         })
-         .then(function(data) {
-             userObj = data.data;
-         });*/
     $http({
         method: 'POST',
         url: '../main/user_personal_page',
@@ -79,7 +76,6 @@ app.service('currentUserData', function($http, $q) {
         }
     }).success(function(data) {
         deffered.resolve(data);
-
     }).error(function() {
         deffered.reject("error");
     });

@@ -14,7 +14,6 @@ app.directive('usersTable', function($http) {
             }).
             success(function(data) {
                 scope.users = data;
-                //   console.log(data);
             });
         },
         templateUrl: '../../public/partials/templates/users_tmpl.html'
@@ -172,7 +171,7 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
             url: '../admin/load_position',
         }).success(function(data) {
             $scope.position = data;
-            //  console.log(data);
+            //console.log(data);
             //  $scope.userField = data[0];
             //  console.log(data);
         });
@@ -313,7 +312,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
             }
         }).
         success(function(data) {
-            $scope.loadPosition();
+            //  $scope.loadPosition();
             $scope.loadLesson();
         });
     }
@@ -326,7 +325,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
                 'position': $('.mainPosition div[data1^="' + this.items.id + '"]').children('input').val()
             }
         }).success(function(data) {
-            $scope.loadPosition();
+            //     $scope.loadPosition();
             $scope.loadLesson();
         });
     }
@@ -338,7 +337,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
                 'id': this.items.id
             }
         }).success(function(data) {
-            $scope.loadPosition();
+            //     $scope.loadPosition();
             $scope.loadLesson();
         });
     }
@@ -352,7 +351,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
                 'number': number
             }
         }).success(function(data) {
-            $scope.loadPosition();
+            //   $scope.loadPosition();
             $scope.loadLesson();
         });
     }
@@ -365,7 +364,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
                 'src': this.items.src
             }
         }).success(function(data) {
-            $scope.loadPosition();
+            //     $scope.loadPosition();
             $scope.loadLesson();
         });
     }
@@ -380,6 +379,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
 
 
 app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope, $http, language) {
+    var question_id = 0;
     var promise = language.getLang();
 
     promise.then(function(data) {
@@ -449,7 +449,6 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
     }
 
     $scope.$watch('questionAnswersLength', function(newValue, oldValue) {
-        // console.log(newValue, oldValue);
         $scope.newValue = newValue;
         $scope.answersInput = [];
         for (let i = 0; i < newValue; i++) {
@@ -459,50 +458,72 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
 
 
 
+    $http.get('../main/get_last_question_id', {})
+        .then(function(data) {
+            question_id = parseInt(data.data) + 1;
+            // console.log(question_id);
+            /*if (data.data.length != 0) {
+                $scope.question = data.data;
+                // $scope.questionArr = data.data
+                //  $scope.testList = data.data;
+                //   $scope.question = data.data[0].question_time;
+            }*/
+        });
+
 
     $scope.questionSave = function() {
         var position_id = $('#position').val(),
-
-
-            //   var x = document.querySelector("#position").selectedIndex,
-            //       position_id = document.getElementsByTagName("option")[x].getAttribute("ng-selected"),
-
-            //lesson_id = $('#lesson').val(),
             question = $('.questionTextField').val(),
             questionType = $('.questionType.ng-valid-parse').val(),
             answers = [],
             hint_lessons_id = [],
             answerVersionField = $('.answerVersionField.ng-valid-parse').val();
-
-
-
-        console.log(position_id);
-        //   console.log('log' + $('.answerTextField').length)
         for (let i = 0; i < $('.answerTextField').length; i++) {
-            answers.push($('.hintLessonField').eq(i).val());
-            hint_lessons_id.push($('#lesson').eq(i).val());
+            answers.push($('.answerTextField').eq(i).val());
+            hint_lessons_id.push($('.hintLessonId').eq(i).val().split(' ')[0]);
         }
 
 
-        //  console.log('lenh' + $('.questionTextField').val().length);
         $http({
             method: 'POST',
             url: 'add_question',
             data: {
                 'position_id': position_id,
-                //'lesson_id': lesson_id,
                 'question_type': questionType,
                 'question': question,
                 'answers': answers.join('|'),
                 'correct_answer': answerVersionField,
-                'hint_lessons_id': hint_lessons_id.join('|')
+                'hint_lessons_id': hint_lessons_id.join('|'),
+                'question_id': question_id
             }
-        }).success(function() {}).error(function(data, status) {
+        }).success(function() {
+            $scope.questionCreated = 'Հարցը պահպանվեց'
+        }).error(function(data, status) {
             if (status == 500) {
                 $scope.questionError = 'nshir'
             }
             console.log('sxal e ...' + status);
         });
+
+
+
+
+        $http({
+            method: 'POST',
+            url: 'add_question_as_lesson',
+            data: {
+                'parent_id': position_id,
+                'question_id': question_id
+            }
+        }).
+        success(function(data) {
+            //  $scope.loadPosition();
+            $scope.loadLesson();
+        });
+
+
+
+
     }
 }]);
 

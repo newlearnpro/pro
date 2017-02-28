@@ -13,7 +13,7 @@
       </div>
       <div class='modal-body'>
 		<div>
-			Search <input type='checkbox' ng-model='checked' >
+			<span class='icon icon-search'> {{language.search}}</span> <input type='checkbox' ng-model='checked' >
 			<input id='searchLessonText'  type='text' ng-show='checked' ng-model='searchLesson.keywords' ng-focus='getLessons(focus=true, blur=false)' ng-blur='getLessons(focus=false, blur=true)'/>
 			<div ng-show="checked" ng-repeat='items in searchLessons | filter:searchLesson'>
 				<div  class='lesson_types lesson_type_{{items.type_id}}' ng-click='loadPage($event)'><i class='lesson_icons lesson_icon_{{items.type_id}}'></i><span >{{items.name}}</span></div>
@@ -43,7 +43,7 @@
 <div class='row-fluid'>
 	<div class='menuPage col-xs-12 col-sm-12  col-md-4  col-lg-4' >
 	<div class='mainLessonRight'>
-		<button type='button' class='btn btn-info btn-lg' data-toggle='modal' data-target='#menuModal'>{{language.menu}}</button>
+		<button type='button' class='btn lp_btn lp_btn_full icon icon-enter' data-toggle='modal' data-target='#menuModal'>&nbsp;{{language.menu}}</button>
 
 
 
@@ -70,7 +70,7 @@
 	<div class='mainPage col-xs-12 col-sm-12  col-md-8  col-lg-8'>
 		<div style='max-width: 800px' ng-include='"../../public/partials/templates/carusel_tmpl.html"'></div>
 
-		<iframe id='pagePlayer' width='100%' height='100px' style='position:relative'>
+		<iframe id='pagePlayer' width='100%' height='100px' >
 		</iframe>		
 		
 		<img id='learnpro_logo' src='../../public/img/icons/logo.png' ng-click="resizeIframe()" />
@@ -141,17 +141,15 @@
 			<input type='button' value='add' ng-click='addTeachersMarkers()' />
 		</div>
 
-		<!--div id='question_group'><div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div></div-->
-		<div id='question_answer_group' ng-if='currentUserStatus === "pupil"'>
-			<div id='question_time_group'>
-				<div ng-repeat='items in question' class='question_time btn btn-default' ng-click='questionTest($index)'>{{items.question_time}}</div>
-			</div>
-			<div id=question_group>
-				<div class='question_item'>{{testQuestion}}</div>
-				<button class='answer_item btn' ng-repeat='items in testAnswers'  ng-click='verifyAnswer($index + 1)'>{{items}}</button>
-			</div>
-		</div>
+		<div id='question_group'>
+			<div  class='question_item'>{{testQuestion}}</div>
+			<button class='answer_item btn' ng-repeat='items in testAnswers'  ng-click='verifyAnswer($index + 1)'>{{items}}</button>
 
+		<!--div id='question_group'><div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div></div-->
+		<!--div id='question_answer_group' ng-if='currentUserStatus === "pupil"'>
+			
+		</div-->
+		</div>
 
 
 
