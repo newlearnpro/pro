@@ -69,6 +69,8 @@ $lang['admin']                      = 'admin';
 $lang['user']                       = 'user';
 
 $lang['logout']                     = 'logOut';
+$lang['how_to_use']                 = 'How to use ?';
+$lang['search']                 	= 'Search';
 
 
 $lang['verify_username_password']   = 'Login or password is wrong';

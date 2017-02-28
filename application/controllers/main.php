@@ -77,6 +77,15 @@ class Main extends CI_Controller {
 		echo json_encode($query);
 	}
 
+	public function load_hint_lesson()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$this->load->model('membership_model');
+		$get_info['id'] = $this->input->post('id');
+		$query = $this->membership_model->hint_lesson($get_info);
+		echo json_encode($query);		
+	}
+
 	public function get_lessons()
 	{
 	//	$_POST = json_decode(file_get_contents('php://input'), true);
@@ -89,9 +98,18 @@ class Main extends CI_Controller {
 	{
 	//	$_POST = json_decode(file_get_contents('php://input'), true);
 		$this->load->model('membership_model');
-		$get_info['lesson_id'] = $this->input->get('lesson_id');
+		$get_info['position_id'] = $this->input->get('parent_id');
+		$get_info['question_id'] = $this->input->get('question_id');
 		$query = $this->membership_model->question($get_info);
 		echo json_encode($query);
+	}
+
+	public function get_last_question_id()
+	{
+	//	$_POST = json_decode(file_get_contents('php://input'), true);
+		$this->load->model('membership_model');		
+		$query = $this->membership_model->last_question_id();
+		echo $query;
 	}
 
 	public function users_data(){

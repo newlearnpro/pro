@@ -92,6 +92,7 @@ it creates file table if there isn't `file` table
                 `type_name` varchar(100) NOT NULL,
                 `type_id` int(11) NOT NULL,
                 `parent_id` int(11) NOT NULL,
+                `question_id` int(11) NOT NULL,
                 `number` int(11) NOT NULL,
                 `free` varchar(10) NOT NULL,
                PRIMARY KEY(`id`)
@@ -223,7 +224,7 @@ it creates question table if there isn't `questions` table
                 `answers` varchar(255) collate utf8_general_ci NOT NULL,
                 `correct_answer` int(11) NOT NULL,
                 `hint_lessons_id` varchar(50) NOT NULL,
-                `question_time` varchar(20) NOT NULL,
+                `question_id` int(11) NOT NULL,
                PRIMARY KEY(`id`)
 
         );

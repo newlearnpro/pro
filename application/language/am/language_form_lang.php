@@ -47,7 +47,9 @@ $lang['part']                        = 'բաժին';
 $lang['admin']                       = 'ադմին';
 $lang['user']                        = 'օգտագործող';
 
-$lang['logout']                      = 'ելք';
+$lang['logout']                      = 'Ելք';
+$lang['how_to_use']                  = 'Ինչպե՞ս օգտվել';
+$lang['search']                 	 = 'Փնտրել';
 
 $lang['verify_username_password']   = 'Մուտքանունը կամ գաղտնաբառը սխալ է';
 $lang['need_activation']			= 'Դուք պետք է ակտիվացնեք ձեր գրանցումը';

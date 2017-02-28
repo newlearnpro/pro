@@ -69,6 +69,8 @@ $lang['admin']                      = 'Админ';
 $lang['user']                       = 'Пользовотель';
 
 $lang['logout']                     = 'Выход';
+$lang['how_to_use']                 = 'Как пользоваться ?';
+$lang['search']                 	= 'Искать';
 
 
 $lang['verify_username_password']   = 'Пароль не верный';

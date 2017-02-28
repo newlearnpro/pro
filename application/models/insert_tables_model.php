@@ -28,24 +28,26 @@ it creates position table if there isn't `position` table
     }
 
     public function insert_folder_name($get_info)
-    {             
-        $folder_name = array(         
-            'name' => $get_info['lesson_name'],
-            'description' => $get_info['lesson_description'],
-            'keywords' => $get_info['lesson_keywords'],
-            'src' => $get_info['lesson_src'],
-            'type_name' => $get_info['lesson_type_name'],
-            'type_id' => $get_info['lesson_type_id'],
-            'parent_id' => $get_info['lesson_parent_id'],
-            'number' => 1,
-            'free' => $get_info['lesson_is_free']
-           // 'time' => date("d-m-Y h:i:s")
-             //'time' => date("l jS \of F Y h:i:s A") 
-        );         
+    {
+        if(isset($get_info['lesson_description'])){
+            $folder_name = array(         
+                'name' => $get_info['lesson_name'],
+                'description' => $get_info['lesson_description'],
+                'keywords' => $get_info['lesson_keywords'],
+                'src' => $get_info['lesson_src'],
+                'type_name' => $get_info['lesson_type_name'],
+                'type_id' => $get_info['lesson_type_id'],
+                'parent_id' => $get_info['lesson_parent_id'],
+                'number' => 1,
+                'free' => $get_info['lesson_is_free']
+               // 'time' => date("d-m-Y h:i:s")
+                 //'time' => date("l jS \of F Y h:i:s A") 
+            );  
+        }else{
+            $folder_name = $get_info;
+        }       
         $insert = $this->db->insert('file', $folder_name);
-     //   return $message_data;
     }
-
 
     public function insert_users_data($get_info)
     {
@@ -81,7 +83,8 @@ it creates position table if there isn't `position` table
             'answers' => $get_info['answers'],
           //  'answers' => '[1,2,3]',
             'correct_answer' => $get_info['correct_answer'],
-            'hint_lessons_id'=> $get_info['hint_lessons_id']
+            'hint_lessons_id'=> $get_info['hint_lessons_id'],
+            'question_id'=> $get_info['question_id']
         );
         
        $insert = $this->db->insert('questions', $question_field);

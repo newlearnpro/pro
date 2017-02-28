@@ -10,7 +10,7 @@ class Membership_model extends CI_Model {
                 $query = $this->db->get_where('users', array('username'=>$get_info));
             }            
         }else if($permission == "user"){
-            $query = $this->db->query("SELECT username FROM users");            
+            $query = $this->db->query("SELECT username, gender FROM users");            
         }
         return   $query->result_array(); 
     }
@@ -56,12 +56,49 @@ class Membership_model extends CI_Model {
 
     public function question($get_info)
     {    
+
+   //     $query = $this->db->select('*')->where('position_id', $get_info['position_id'])->get('questions');
+   //     return   $query->result_array();
+
+
+
+
+        $arr = array('position_id'=>$get_info['position_id'], 'question_id'=>$get_info['question_id']);
+     //     $arr = array('position_id'=>$get_info['position_id']);
+        $this->db->where($arr);
+        $this->db->select('*');
+        $query = $this->db->get('questions');
+        return   $query->result_array();
+
+
+
+
+       // $this->db->order_by('number', 'ASC'); 
+
+//        $query = $this->db->select('*')->where('position_id', $get_info['position_id'])->get('questions');
+       // $query = $this->db->get("questions");
+ //       return $query->result_array();
+       // $query = $this->db->get_where('questions', array('position_id' => $get_info['position_id'], 'question_id' => $get_info['question_id']));
+       // $query = $this->db->get('questions');
+        //return   $query->result_array();
+    }
+
+    public function last_question_id()
+    {    
+
+        $this->db->order_by('id', 'DESC');
+        $this->db->select('id');
+
+        $query = $this->db->get('questions');
+
        // $this->db->order_by('number', 'ASC'); 
       /*  $query = $this->db->get("questions");
         return $query->result();*/
-        $query = $this->db->get_where('questions', array('lesson_id' => $get_info['lesson_id']));
+       // $query = $this->db->get_where('questions', array('lesson_id' => $get_info['lesson_id']));
        // $query = $this->db->get('questions');
-        return   $query->result_array();
+       foreach ($query->result() as $row){
+           return   $row->id;
+        }       
     }
 
     public function get_license_code($get_info)
@@ -82,6 +119,17 @@ class Membership_model extends CI_Model {
         //{ }
         return $query->result();
     }
+
+    public function hint_lesson($get_info)
+    {    
+        $arr = array('id'=>$get_info['id']);
+     //     $arr = array('position_id'=>$get_info['position_id']);
+        $this->db->where($arr);
+        $this->db->select('*');
+        $query = $this->db->get('file');
+        return   $query->result_array();
+    }
+
 
     public function messages($get_info)
     {   

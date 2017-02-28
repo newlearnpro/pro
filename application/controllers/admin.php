@@ -209,9 +209,29 @@ public function add_question()
 	$get_info['answers'] = $this->input->post('answers');
 	$get_info['correct_answer'] = $this->input->post('correct_answer');
 	$get_info['hint_lessons_id'] = $this->input->post('hint_lessons_id');
+	$get_info['question_id'] = $this->input->post('question_id');
 	$this->insert_tables_model->insert_question($get_info);
 	echo json_encode($get_info);
 }
+
+public function add_question_as_lesson()
+{
+	$_POST = json_decode(file_get_contents('php://input'), true);
+	$this->load->model('insert_tables_model');
+	$get_info['name'] = 'Հարց';
+	$get_info['type_name'] = 'question';	
+	$get_info['type_id'] = '6';
+	$get_info['parent_id'] = $this->input->post('parent_id');
+	$get_info['question_id'] = $this->input->post('question_id');
+	$get_info['number'] = 1;
+	$get_info['free'] = 'off';
+	$this->insert_tables_model->insert_folder_name($get_info);
+	echo json_encode($get_info);
+}
+
+
+
+
 
 	public function add_license()
 	{

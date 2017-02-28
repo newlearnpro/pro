@@ -27,8 +27,8 @@ echo form_password('password_confirm','','class="form-control"') . form_error('p
 echo $captcha_img . form_hidden('captcha_img_hint',$captcha_word).br() ;
 echo form_label(lang('captcha_hint').'*','captcha').br();
 echo form_input('captcha','','class="form-control"') . form_error('captcha', '<span class="form_error">', '</span>').br() ;
-echo form_submit('submit',lang('create_account'),'class="btn btn-default"');
-echo anchor(base_url() . $this->uri->segment(1), lang('go_back'), 'class="btn btn-default"').br();
+echo form_submit('submit',lang('create_account'),'class="btn btn-xs lp_btn lp_btn_full icon icon-list"');
+echo anchor(base_url() . $this->uri->segment(1), lang('go_back'), 'class="btn btn-xs lp_btn lp_btn_full icon icon-home"').br();
 echo form_close();
 ?>
 <!--input type="file" id="img_src" name="img_src"  style="display:none;" accept="image/bmp, image/gif, image/jpg, image/jpeg, image/png" style="" /><br />
