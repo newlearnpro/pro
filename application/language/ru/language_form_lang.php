@@ -71,6 +71,7 @@ $lang['user']                       = 'Пользовотель';
 $lang['logout']                     = 'Выход';
 $lang['how_to_use']                 = 'Как пользоваться ?';
 $lang['search']                 	= 'Искать';
+$lang['choose_lesson']              = 'Выберите урок';
 
 
 $lang['verify_username_password']   = 'Пароль не верный';
@@ -89,12 +90,11 @@ $lang['personal_page']              = 'Личная страница';
 $lang['menu']              			= 'ЛИСТ';
 $lang['open']              			= 'Открыть';
 $lang['close']              		= 'Закрыть';
-
+$lang['seperator']              	= 'Разделитель';
+$lang['upload_file']                = 'Загрузить файл';
 /*******************************************************************************/
 
 
-$lang['new_position']              = 'Новая должность';
-$lang['structure']                 = 'Структура';
 
 $lang['free_lesson']               = 'бесплатный урок';
 $lang['add_lesson']                = 'Добавить урок';

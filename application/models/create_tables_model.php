@@ -47,7 +47,7 @@ it creates position table if there isn't `position` table
     {
         $this->dbforge->add_field(array(
                     'id' => array('type' => 'INT', 'constraint' => 11, 'unsigned' => TRUE, 'auto_increment' => TRUE),
-                    'position' => array('type' => 'VARCHAR', 'constraint' => '50'),
+                    'position' => array('type' => 'VARCHAR', 'constraint' => '50'),                    
                     'description' => array('type' => 'TEXT', 'null' => TRUE),
                     'custom_id' => array('type' => 'INT', 'constraint' => 11),
                     'unique_id' => array('type' => 'INT', 'constraint' => 99, 'unsigned' => TRUE),
@@ -107,6 +107,7 @@ it creates file table if there isn't `position` table
         CREATE TABLE IF NOT EXISTS `position` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `position` varchar(255) collate utf8_general_ci NOT NULL,
+                `keywords` varchar(255) collate utf8_general_ci NOT NULL,
                 `parent_id` int(11) unsigned NOT NULL,
                 `position_group` tinyint(1) default NULL,
                PRIMARY KEY(`id`)
@@ -160,16 +161,18 @@ it creates file table if there isn't `users_armtab` table
         */
 
 /*********************
-users_data
-it creates file table if there isn't `users_data` table        
+pupil_data
+it creates file table if there isn't `pupil_data` table        
 *******************/ 
         /*********For MySQL:
-        CREATE TABLE IF NOT EXISTS `users_data` (
+        CREATE TABLE IF NOT EXISTS `pupil_data` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `username` varchar(20) collate utf8_general_ci NOT NULL,
                 `lesson_id` varchar(100) collate utf8_general_ci NOT NULL,
                 `lesson_name` varchar(100) collate utf8_general_ci NOT NULL,
-                `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+                `question_result` int(10) NOT NULL,
+                `interactive_result` int(10) NOT NULL,
+                `timestamp` int(11) unsigned DEFAULT 0 NOT NULL,
                PRIMARY KEY(`id`)
         );
         */

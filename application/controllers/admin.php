@@ -60,12 +60,12 @@ class Admin extends CI_Controller {
 		$_POST = json_decode(file_get_contents('php://input'), true);
 		$this->create_tables_model->create_position_table();
 		$get_position_name = $this->input->post('position_name');
+		$get_position_keywords = $this->input->post('position_name') . ' ' . $this->input->post('position_keywords');
 		$get_position_group = $this->input->post('position_group');
 		$get_position_parent_id = $this->input->post('parent_id');
-		$data = array('position'=>$get_position_name,'position_group'=>$get_position_group, 'parent_id'=>$get_position_parent_id);
+		$data = array('position'=>$get_position_name, 'keywords'=>$get_position_keywords, 'position_group'=>$get_position_group, 'parent_id'=>$get_position_parent_id);
 		if(!empty(get_position_name)){
-			$this->db->insert('position', $data);
-		//	copy($this->upload_folder .'images/content_default.jpg', $this->upload_folder .'images/content_'.$get_id.'.jpg');
+			$this->db->insert('position', $data);		
 		}		
 	}
 
@@ -218,7 +218,7 @@ public function add_question_as_lesson()
 {
 	$_POST = json_decode(file_get_contents('php://input'), true);
 	$this->load->model('insert_tables_model');
-	$get_info['name'] = 'Հարց';
+	$get_info['name'] = $this->input->post('name');
 	$get_info['type_name'] = 'question';	
 	$get_info['type_id'] = '6';
 	$get_info['parent_id'] = $this->input->post('parent_id');

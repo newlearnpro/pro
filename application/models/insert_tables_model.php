@@ -45,11 +45,11 @@ it creates position table if there isn't `position` table
             );  
         }else{
             $folder_name = $get_info;
-        }       
+        }     
         $insert = $this->db->insert('file', $folder_name);
     }
 
-    public function insert_users_data($get_info)
+ /*   public function insert_users_data($get_info)
     {
         $opened_lesson = array(
             'username' =>  $get_info['username'],
@@ -58,8 +58,9 @@ it creates position table if there isn't `position` table
             'timestamp' => date("U")
         );         
         $insert = $this->db->insert('users_data', $opened_lesson);
-     //   return $message_data;
+
     }
+    */
 
     public function insert_add_license($get_info)
     {
@@ -70,25 +71,21 @@ it creates position table if there isn't `position` table
             'timestamp' => date("U"),
             'time_end' => date("U") + ($get_info['time_end'] * 2592000)
         );         
-        $insert = $this->db->insert('users_license_code', $license_code);
-     //   return $message_data;
+        $this->db->insert('users_license_code', $license_code);
     }
 
-    public function insert_question($get_info)
+    function insert_question($get_info)
     {
         $question_field = array(
             'position_id' =>  $get_info['position_id'],
             'question_type' =>  $get_info['question_type'],
             'question' => $get_info['question'],
             'answers' => $get_info['answers'],
-          //  'answers' => '[1,2,3]',
             'correct_answer' => $get_info['correct_answer'],
             'hint_lessons_id'=> $get_info['hint_lessons_id'],
             'question_id'=> $get_info['question_id']
-        );
-        
-       $insert = $this->db->insert('questions', $question_field);
-     //   return $message_data;
+        );        
+        $this->db->insert('questions', $question_field);
     }
 
 
@@ -100,8 +97,7 @@ it creates position table if there isn't `position` table
             'start_time' =>  $get_info['start_time'],
             'end_time' => $get_info['end_time']
         );
-     //  return 'sd' ;
-     $this->db->insert('teachers_data', $markers_field);
+        $this->db->insert('teachers_data', $markers_field);
     }
     
     

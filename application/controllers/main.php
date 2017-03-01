@@ -112,6 +112,7 @@ class Main extends CI_Controller {
 		echo $query;
 	}
 
+/*
 	public function users_data(){
 		$get_info['id'] = $this->input->get('lesson_id');
 		$get_info['username'] = $this->input->get('username');		
@@ -119,6 +120,7 @@ class Main extends CI_Controller {
 		$this->load->model('insert_tables_model');
 		$query = $this->insert_tables_model->insert_users_data($get_info);
 	}
+	*/
 
 	public function get_users_license_code(){
 		$_POST = json_decode(file_get_contents('php://input'), true);

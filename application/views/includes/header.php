@@ -29,11 +29,11 @@
 
 
         <div class='col-xs-5 col-sm-6 col-md-3 col-lg-3 header-parts header-part2'>
-            <a href="<?=base_url() . $this->uri->segment(1)?>"><div class="logo"></div></a>
+            <a href="<?=base_url() . $this->uri->segment(1) . '/main/index/list' ?>"><div class="logo"></div></a>
         </div>
 
 
-        <div class='col-xs-7 col-sm-6 col-md-3 col-lg-3 header-parts header-part3'>
+        <div class='col-xs-7 col-sm-6 col-md-2 col-lg-3 header-parts header-part3'>
             <div>                    
                 <a href='https://www.facebook.com/Learnpro.am' target='_blank'>
                     <span id='icon_facebook' class='icons_sm icons_fwtp'></span>
@@ -53,14 +53,14 @@
         </div>
             
 
-        <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3 header-parts header-part4'>
+        <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 header-parts header-part4'>
                 <?php 
                     if(!$this->session->userdata('usr')){
                         echo anchor($this->uri->segment(1). "/login" , lang('signin'), 'id="singin" class="btn btn-xs lp_btn lp_btn_half icon icon-enter"');
                     }else{
                         echo anchor($this->uri->segment(1). "/login/logout" , lang('logout'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-exit"');
                     }                        
-                    echo anchor($this->uri->segment(1). "/login/signup" , lang('signup'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-pencil"');
+                    echo anchor($this->uri->segment(1). "/login/signup" , lang('signup'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-user-plus"');
                     echo anchor("https://www.youtube.com/watch?v=v_3Zf5IwbDg" , lang('how_to_use'), 'class="btn btn-xs lp_btn lp_btn_full icon icon-play" target="_blank"');
                 ?>
         </div>

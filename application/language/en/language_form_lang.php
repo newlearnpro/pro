@@ -71,6 +71,7 @@ $lang['user']                       = 'user';
 $lang['logout']                     = 'logOut';
 $lang['how_to_use']                 = 'How to use ?';
 $lang['search']                 	= 'Search';
+$lang['choose_lesson']              = 'Choose lesson';
 
 
 $lang['verify_username_password']   = 'Login or password is wrong';
@@ -88,12 +89,9 @@ $lang['personal_page']              = 'Personal page';
 $lang['menu']              			= 'MENU';
 $lang['open']              			= 'Open';
 $lang['close']              		= 'Close';
-
+$lang['seperator']              	= 'Divider';
+$lang['upload_file']                = 'Upload file';
 /*******************************************************************************/
-
-
-$lang['new_position']            = 'New position';
-$lang['structure']               = 'Structure';
 
 
 

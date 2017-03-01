@@ -2,7 +2,7 @@
 
 
 
-<div id="register_form" class='blockHead col-xs-12 col-sm-offset-2 col-sm-8  col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4'>
+<div id='register_form' class='blockHead col-xs-12 col-sm-offset-2 col-sm-8  col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4'>
 
 <?php 
 echo form_open($this->uri->segment(1).'/login/membership');
@@ -27,8 +27,8 @@ echo form_password('password_confirm','','class="form-control"') . form_error('p
 echo $captcha_img . form_hidden('captcha_img_hint',$captcha_word).br() ;
 echo form_label(lang('captcha_hint').'*','captcha').br();
 echo form_input('captcha','','class="form-control"') . form_error('captcha', '<span class="form_error">', '</span>').br() ;
-echo form_submit('submit',lang('create_account'),'class="btn btn-xs lp_btn lp_btn_full icon icon-list"');
-echo anchor(base_url() . $this->uri->segment(1), lang('go_back'), 'class="btn btn-xs lp_btn lp_btn_full icon icon-home"').br();
+echo form_submit('submit',lang('create_account'),'class="btn btn-xs lp_btn lp_btn_full icon icon-user"');
+echo anchor(base_url() . $this->uri->segment(1) . '/main/index/list', lang('go_back'), 'class="btn btn-xs lp_btn lp_btn_full icon icon-home"').br();
 echo form_close();
 ?>
 <!--input type="file" id="img_src" name="img_src"  style="display:none;" accept="image/bmp, image/gif, image/jpg, image/jpeg, image/png" style="" /><br />
