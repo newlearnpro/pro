@@ -173,16 +173,17 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
         }
         /*********փնտրել դասերը *****/
-    $scope.getLessons = function(focus, blur) {
+    $scope.getLessons = function($event) {
         $http({
             method: 'GET',
-            url: 'get_lessons',
+            url: 'load_position',
         }).
-        success(function(data, status) {
-            if (focus === true) {
+        success(function(data) {
+            if ($event.currentTarget.checked == true) {
+                $scope.searchLimit = 5;
                 $scope.searchLessons = data;
-            } else if (blur === true) {
-                $scope.searchLessons = "";
+            } else {
+                $scope.searchLessons = '';
             }
         });
     } /*end********փնտրել դասերը *****/
@@ -271,151 +272,146 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
     /********* ներբեռնել դասը*****/
     $scope.loadPage = function($event) {
-        var that = this;
-        var username = document.querySelector('#username').innerHTML;
-        var position_id = $('#position_name_header').attr('data1');
-        var position_parent_id = $('#position_name_header').attr('data2');
-        //  var class_name = $('#position_name_header').text();
-        // console.log(class_id)
+        if ($event.currentTarget.className != 'lesson_types lesson_type_0 position_group_out') {
+            var that = this;
+            var username = document.querySelector('#username').innerHTML;
+            var position_id = $('#position_name_header').attr('data1');
+            var position_parent_id = $('#position_name_header').attr('data2');
+            //  var class_name = $('#position_name_header').text();
+            // console.log(class_id)
 
-        $http({
-            method: 'POST',
-            url: 'get_users_license_code',
-            data: {
-                username: username,
-                position_id: position_id,
-                position_parent_id: position_parent_id,
-                //   class_name: class_name
-            }
-        }).
-        success(function(data, status) {
-            if (data[0] != undefined && username == data[0].username && (position_id == data[0].position_id || position_parent_id == data[0].position_id || data[0].position_id == 0)) {
-                if ($event.currentTarget.classList.contains('lesson_selected') == false) {
-                    $('.lesson_types').removeClass('lesson_selected');
-                    $event.currentTarget.classList.add('lesson_selected');
-                    $("#content_image").hide();
-                    $("#learnpro_logo").show();
+            $http({
+                method: 'POST',
+                url: 'get_users_license_code',
+                data: {
+                    username: username,
+                    position_id: position_id,
+                    position_parent_id: position_parent_id,
+                    //   class_name: class_name
+                }
+            }).success(function(data, status) {
+                if (data[0] != undefined && username == data[0].username && (position_id == data[0].position_id || position_parent_id == data[0].position_id || data[0].position_id == 0)) {
+                    if ($event.currentTarget.classList.contains('lesson_selected') == false) {
+                        $('.lesson_types').removeClass('lesson_selected');
+                        $event.currentTarget.classList.add('lesson_selected');
+                        $("#content_image").hide();
+                        $("#learnpro_logo").show();
 
-                    if (that.items.type_name == 'html') {
-                        $scope.src = that.items.src;
-                        $('#jp_video_0').attr('src', '');
-                        $('#jp_container_1, #teacher_data_group, #question_group').hide();
+                        if (that.items.type_name == 'html') {
+                            $scope.src = that.items.src;
+                            $('#jp_video_0').attr('src', '');
+                            $('#jp_container_1, #teacher_data_group, #question_group').hide();
 
-                        $("#pagePlayer").show().css({
-                            'width': '100%',
-                            'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                            'maxWidth': '800px'
-                        }).attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/index.html');
-
-                        $(window).resize(function() {
-                            $("#pagePlayer").css({
+                            $("#pagePlayer").show().css({
                                 'width': '100%',
                                 'height': parseInt($('#pagePlayer').css('width')) / 1.33,
                                 'maxWidth': '800px'
-                            });
-                        });
-                    }
+                            }).attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/index.html');
 
-                    /******************************************************************************************/
-
-                    if (that.items.type_name == 'question') {
-                        $scope.src = that.items.src;
-                        $('#jp_video_0, #pagePlayer').attr('src', '');
-                        $('#jp_container_1, #teacher_data_group, #pagePlayer').hide();
-                        //   console.log(that.items.parent_id);
-                        //    console.log(that.items.question_id);
-                        $('#question_group').show();
-                        $http.get('get_questions', {
-                                params: {
-                                    parent_id: that.items.parent_id,
-                                    question_id: that.items.question_id
-                                }
-                            })
-                            .then(function(data) {
-                                if (data.data.length != 0) {
-                                    $scope.testQuestion = data.data[0].question;
-                                    $scope.testAnswers = data.data[0].answers.split('|');
-                                    $scope.correctAnswer = data.data[0].correct_answer;
-                                    $scope.hintLessonId = data.data[0].hint_lessons_id.split('|');
-                                } else {
-                                    alert('f');
-                                }
-                            });
-                    }
-
-                    /*******************************************************************************************/
-                    if (that.items.type_name == 'video') {
-                        $("#jquery_jplayer_1").jPlayer({
-                            ready: function() {
-                                $(this).jPlayer("setMedia", {
-                                    title: that.items.name,
-                                    m4v: '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip'
-                                        // poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
+                            $(window).resize(function() {
+                                $("#pagePlayer").css({
+                                    'width': '100%',
+                                    'height': parseInt($('#pagePlayer').css('width')) / 1.33,
+                                    'maxWidth': '800px'
                                 });
-                            },
-                            ended: function() {
-                                clearInterval($scope.timerMarker);
-                                if (document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.className != 'lesson_group_type_0') {
-                                    document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.firstElementChild.click();
-                                }
-                            },
-                            cssSelectorAncestor: "#jp_container_1",
-                            swfPath: "/js",
-                            supplied: "m4v, ogv",
-                            useStateClassSkin: true,
-                            autoBlur: false,
-                            smoothPlayBar: true,
-                            keyEnabled: true,
-                            remainingDuration: true,
-                            toggleDuration: true
-                        });
-
-                        $('#pagePlayer, #question_group').attr('src', '').hide();
-                        $('#jp_container_1, #teacher_data_group').show();
-                        $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip').attr('data', that.items.id);
-
-                        $timeout(function() {
-                            $("#jquery_jplayer_1").jPlayer("play");
-                            $("#learnpro_logo").trigger('click');
-                        }, 200);
-
-                        function playerPauseMarker() {
-                            clearInterval($scope.timerMarker);
+                            });
                         }
 
+                        /******************************************************************************************/
 
-                        /*******for teacher**/
-                        if ($scope.currentUserStatus == 'teacher') {
-                            $('.jp-play').bind('click', function() {
-                                if ($('#jp_container_1').hasClass('jp-state-playing')) {
+                        if (that.items.type_name == 'question') {
+                            $scope.src = that.items.src;
+                            $('#jp_video_0, #pagePlayer').attr('src', '');
+                            $('#jp_container_1, #teacher_data_group, #pagePlayer').hide();
+                            //   console.log(that.items.parent_id);
+                            //    console.log(that.items.question_id);
+                            $('#question_group').show();
+                            $http.get('get_questions', {
+                                    params: {
+                                        parent_id: that.items.parent_id,
+                                        question_id: that.items.question_id
+                                    }
+                                })
+                                .then(function(data) {
+                                    if (data.data.length != 0) {
+                                        $scope.testQuestion = data.data[0].question;
+                                        $scope.testAnswers = data.data[0].answers.split('|');
+                                        $scope.correctAnswer = data.data[0].correct_answer;
+                                        $scope.hintLessonId = data.data[0].hint_lessons_id.split('|');
+                                    } else {
+                                        alert('f');
+                                    }
+                                });
+                        }
+
+                        /*******************************************************************************************/
+                        if (that.items.type_name == 'video') {
+                            $("#jquery_jplayer_1").jPlayer({
+                                ready: function() {
+                                    $(this).jPlayer("setMedia", {
+                                        title: that.items.name,
+                                        m4v: '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip'
+                                            // poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
+                                    });
+                                },
+                                ended: function() {
+                                    clearInterval($scope.timerMarker);
+                                    if (document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.className != 'lesson_group_type_0') {
+                                        document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.firstElementChild.click();
+                                    }
+                                },
+                                cssSelectorAncestor: "#jp_container_1",
+                                swfPath: "/js",
+                                supplied: "m4v, ogv",
+                                useStateClassSkin: true,
+                                autoBlur: false,
+                                smoothPlayBar: true,
+                                keyEnabled: true,
+                                remainingDuration: true,
+                                toggleDuration: true
+                            });
+
+                            $('#pagePlayer, #question_group').attr('src', '').hide();
+                            $('#jp_container_1, #teacher_data_group').show();
+                            $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip').attr('data', that.items.id);
+
+                            $timeout(function() {
+                                $("#jquery_jplayer_1").jPlayer("play");
+                                $("#learnpro_logo").trigger('click');
+                            }, 200);
+
+                            function playerPauseMarker() {
+                                clearInterval($scope.timerMarker);
+                            }
+
+
+                            /*******for teacher**/
+                            if ($scope.currentUserStatus == 'teacher') {
+                                $('.jp-play').bind('click', function() {
+                                    if ($('#jp_container_1').hasClass('jp-state-playing')) {
+                                        playerPauseMarker();
+                                    } else {
+                                        $scope.timerMarker = setInterval($scope.timer, 500);
+                                    }
+                                });
+
+                                $('.jp-stop').bind('click', function() {
                                     playerPauseMarker();
-                                } else {
-                                    $scope.timerMarker = setInterval($scope.timer, 500);
-                                }
-                            });
-
-                            $('.jp-stop').bind('click', function() {
-                                playerPauseMarker();
-                            });
-                            loadTeachersMarkers(that.items.id);
-                        } /*******end teacher**/
+                                });
+                                loadTeachersMarkers(that.items.id);
+                            } /*******end teacher**/
+                        }
                     }
+                } else {
+                    alert('not license');
                 }
-            } else {
-                alert('not license');
-            }
 
 
-        }).
-        error(function(data, status) {
-            alert('Տվյալների բազան լիցենյիայի համար չկա');
-        });
+            }).error(function(data, status) {
+                alert('Տվյալների բազան լիցենյիայի համար չկա');
+            });
 
-
-
-        /********************************************************************************************/
-
-
+        }
     } /*end******** *****/
 
     $scope.resizeIframe = function() {
@@ -499,4 +495,4 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
 
 
-}]); /*end********կատալոգների բաժին *****/
+}]); /*end********դասերի բաժին*****/

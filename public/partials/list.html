@@ -9,14 +9,15 @@
     <div class='modal-content'>
       <div class='modal-header'>
         <button type='button' class='close' data-dismiss='modal' title={{language.close}}>&times;</button>
-        <h4 class='modal-title'>Modal Header</h4>
+        <h4 class='modal-title'>{{language.choose_lesson}}</h4>
       </div>
       <div class='modal-body'>
 		<div>
-			<span class='icon icon-search'> {{language.search}}</span> <input type='checkbox' ng-model='checked' >
-			<input id='searchLessonText'  type='text' ng-show='checked' ng-model='searchLesson.keywords' ng-focus='getLessons(focus=true, blur=false)' ng-blur='getLessons(focus=false, blur=true)'/>
-			<div ng-show="checked" ng-repeat='items in searchLessons | filter:searchLesson'>
-				<div  class='lesson_types lesson_type_{{items.type_id}}' ng-click='loadPage($event)'><i class='lesson_icons lesson_icon_{{items.type_id}}'></i><span >{{items.name}}</span></div>
+			<span class='icon icon-search'> {{language.search}}</span> <input type='checkbox' ng-model='checked' ng-click='getLessons($event)'>
+			<input type='text' ng-show='checked' ng-model='searchLesson.keywords' />
+			<input type='number' ng-show='checked' ng-model='searchLimit' ng-value='searchLimit' min='1' max='20' />
+			<div ng-show='checked' ng-repeat='items in searchLessons | filter:searchLesson | limitTo : searchLimit'>
+				<div  class='pos_a_search' ng-click='getClass($event)'><span >{{items.position}}</span></div>
 			</div>
 		</div>
 		<div class='mainPosition'>
@@ -43,7 +44,7 @@
 <div class='row-fluid'>
 	<div class='menuPage col-xs-12 col-sm-12  col-md-4  col-lg-4' >
 	<div class='mainLessonRight'>
-		<button type='button' class='btn lp_btn lp_btn_full icon icon-enter' data-toggle='modal' data-target='#menuModal'>&nbsp;{{language.menu}}</button>
+		<button type='button' class='btn lp_btn lp_btn_full icon icon-menu' data-toggle='modal' data-target='#menuModal'>&nbsp;{{language.menu}}</button>
 
 
 

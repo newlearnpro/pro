@@ -190,7 +190,7 @@ $grid-breakpoints: (
 
 
 
-#pagePlayer, #content_image, #jp_container_1, #teacher_data_group{
+#pagePlayer, #content_image, #jp_container_1, #teacher_data_group{	
 	max-width:800px;
 	display:none;
 	border:none;
@@ -230,7 +230,20 @@ $grid-breakpoints: (
 		border-bottom:2px solid #e7e5e5;
 	}
 }
-
+.pos_a_search{
+	font-family:lpFont;
+	width:100%;
+	padding:10px;	 
+	border:1px solid #3971c8;
+	display:block; 
+	text-decoration:none; 
+	cursor:pointer;
+	color:#000;
+	&:hover{
+		color:red;
+		border:1px solid red;
+	}
+}
 
 .position2{
 	display:none;
@@ -243,15 +256,20 @@ $grid-breakpoints: (
 }
 
 .lesson_item table {
-	border:1px solid #000000;
+	/*border:1px solid #000000;*/
 	/*width:80%;*/
 }
 
 .lesson_item table tr td{
-	display:inline-block;
-	overflow:hidden;
-	width:160px; 
-	height:36px;
+	&:nth-child(1){
+		display:inline-block;
+		overflow:hidden;
+		width:160px; 
+		height:36px;
+	}
+	&:nth-child(2){
+		width:100px; 
+	}
 }
 
 .position_group_in{
@@ -266,6 +284,24 @@ $grid-breakpoints: (
 
 
 
+
+.carusel_func(@wh, @margin){
+	.carousel-indicators{
+		bottom:0;
+		& li{
+			width:@wh;
+			height:@wh;
+			margin:@margin;
+			border:2px solid #ffffff;
+		}
+		& .active{
+			width:@wh;
+			height:@wh;
+			margin:@margin;
+			border:2px solid #3971c8;
+		}
+	}
+}
 
 
 
@@ -306,7 +342,8 @@ $grid-breakpoints: (
 		.lesson_type_func(grey);
 		padding:0;
 		margin:6px 0;
-		height:2px;		
+		height:2px;
+		cursor:default;		
 	}
 	&.lesson_type_1{
 		.lesson_type_func(#ed145b);
@@ -462,6 +499,7 @@ header{
 	background:white;
 	margin:0;
 	padding:0;
+	text-align:center;
 }
 
 .menuPage{
@@ -500,8 +538,7 @@ header{
 	.carousel-caption > h1{
 		font-size:18px;
 	}
-
-
+	.carusel_func(12px, 3px);
 
 	.lesson_types{
 		max-width:100%;
@@ -523,6 +560,8 @@ header{
 		font-size:24px;
 	}
 
+	.carusel_func(16px, 6px);
+
 
 
 	.lesson_types{
@@ -539,6 +578,7 @@ header{
 		font-size:32px;
 	}
 
+	.carusel_func(20px, 8px);
 
 
 	.lesson_types{
@@ -555,7 +595,7 @@ header{
 		font-size:48px;
 	}
 
-
+	.carusel_func(22px, 10px);
 
 	.menuPage{
 		padding:0 10px 0 0;	
@@ -568,7 +608,7 @@ header{
 		font-size:56px;
 	}
 
-
+	.carusel_func(22px, 10px);
 
 	.lesson_types{
 		max-width:400px;
@@ -664,6 +704,8 @@ header{
     display: inline-block;
     cursor: pointer;
     outline: none;
+    font-weight:bold;
+    margin: 2px 0;
     &:hover{
         background: #3971c8;
       	color: #ffffff;
@@ -696,6 +738,7 @@ header{
 }
 
 .lp_link{
+	font-weight:bold;
     background: #ffffff;
     color: #3971c8;
  	border-radius:0  0 10px 10px ;
@@ -721,6 +764,18 @@ header{
 
 
 /*bootstrap rename*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 .btn-info.active{
 	border: 4px solid #3971c8;

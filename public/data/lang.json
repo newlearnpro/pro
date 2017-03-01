@@ -6,7 +6,6 @@
     "username_hint",
     "password_hint",
     "position_hint",
-    "structure",
     "search",
     "save",
     "delete",
@@ -23,5 +22,8 @@
     "success_add_license",
     "menu",
     "open",
-    "close"
+    "close",
+    "seperator",
+    "upload_file",
+    "choose_lesson"
 ]

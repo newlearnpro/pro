@@ -209,6 +209,20 @@ $grid-breakpoints: (
   color: red;
   border-bottom: 2px solid #e7e5e5;
 }
+.pos_a_search {
+  font-family: lpFont;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #3971c8;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+  color: #000;
+}
+.pos_a_search:hover {
+  color: red;
+  border: 1px solid red;
+}
 .position2 {
   display: none;
   margin-left: 20px;
@@ -218,14 +232,17 @@ $grid-breakpoints: (
   margin-left: 50px;
 }
 .lesson_item table {
-  border: 1px solid #000000;
+  /*border:1px solid #000000;*/
   /*width:80%;*/
 }
-.lesson_item table tr td {
+.lesson_item table tr td:nth-child(1) {
   display: inline-block;
   overflow: hidden;
   width: 160px;
   height: 36px;
+}
+.lesson_item table tr td:nth-child(2) {
+  width: 100px;
 }
 .position_group_in {
   visibility: hidden;
@@ -263,6 +280,7 @@ $grid-breakpoints: (
   padding: 0;
   margin: 6px 0;
   height: 2px;
+  cursor: default;
 }
 .lesson_types.lesson_type_1 {
   width: auto;
@@ -468,6 +486,7 @@ header {
   background: white;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 .menuPage {
   margin: 0;
@@ -490,6 +509,21 @@ header {
   .carousel-caption > h1 {
     font-size: 18px;
   }
+  .carousel-indicators {
+    bottom: 0;
+  }
+  .carousel-indicators li {
+    width: 12px;
+    height: 12px;
+    margin: 3px;
+    border: 2px solid #ffffff;
+  }
+  .carousel-indicators .active {
+    width: 12px;
+    height: 12px;
+    margin: 3px;
+    border: 2px solid #3971c8;
+  }
   .lesson_types {
     max-width: 100%;
   }
@@ -506,6 +540,21 @@ header {
   .carousel-caption > h1 {
     font-size: 24px;
   }
+  .carousel-indicators {
+    bottom: 0;
+  }
+  .carousel-indicators li {
+    width: 16px;
+    height: 16px;
+    margin: 6px;
+    border: 2px solid #ffffff;
+  }
+  .carousel-indicators .active {
+    width: 16px;
+    height: 16px;
+    margin: 6px;
+    border: 2px solid #3971c8;
+  }
   .lesson_types {
     max-width: 100%;
   }
@@ -516,6 +565,21 @@ header {
 @media (min-width: 768px) and (max-width: 991px) {
   .carousel-caption > h1 {
     font-size: 32px;
+  }
+  .carousel-indicators {
+    bottom: 0;
+  }
+  .carousel-indicators li {
+    width: 20px;
+    height: 20px;
+    margin: 8px;
+    border: 2px solid #ffffff;
+  }
+  .carousel-indicators .active {
+    width: 20px;
+    height: 20px;
+    margin: 8px;
+    border: 2px solid #3971c8;
   }
   .lesson_types {
     max-width: 100%;
@@ -528,6 +592,21 @@ header {
   .carousel-caption > h1 {
     font-size: 48px;
   }
+  .carousel-indicators {
+    bottom: 0;
+  }
+  .carousel-indicators li {
+    width: 22px;
+    height: 22px;
+    margin: 10px;
+    border: 2px solid #ffffff;
+  }
+  .carousel-indicators .active {
+    width: 22px;
+    height: 22px;
+    margin: 10px;
+    border: 2px solid #3971c8;
+  }
   .menuPage {
     padding: 0 10px 0 0;
   }
@@ -535,6 +614,21 @@ header {
 @media (min-width: 1200px) {
   .carousel-caption > h1 {
     font-size: 56px;
+  }
+  .carousel-indicators {
+    bottom: 0;
+  }
+  .carousel-indicators li {
+    width: 22px;
+    height: 22px;
+    margin: 10px;
+    border: 2px solid #ffffff;
+  }
+  .carousel-indicators .active {
+    width: 22px;
+    height: 22px;
+    margin: 10px;
+    border: 2px solid #3971c8;
   }
   .lesson_types {
     max-width: 400px;
@@ -610,6 +704,8 @@ header {
   display: inline-block;
   cursor: pointer;
   outline: none;
+  font-weight: bold;
+  margin: 2px 0;
 }
 .lp_btn:hover {
   background: #3971c8;
@@ -640,6 +736,7 @@ header {
   outline: none;
 }
 .lp_link {
+  font-weight: bold;
   background: #ffffff;
   color: #3971c8;
   border-radius: 0  0 10px 10px ;

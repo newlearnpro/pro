@@ -1,4 +1,8 @@
 <div ng-cloak ng-controller='questionsGroup'>
+
+
+<div class='col-xs-12 col-sm-offset-2 col-sm-8  col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4'>
+
 <div position-table></div>
 
 
@@ -12,15 +16,15 @@
 
 <div ng-show='quesionPart1'>
 	<div><span>Հարց</span></div>
-	<input type='text' class='questionTextField' /><br />
-	<input type='number' min='2' max='6' ng-model='questionAnswersLength' ng-value='questionAnswersLength' />
+	<input type='text' class='questionTextField form-control' /><br />
+	<input type='number' min='2' max='6' ng-model='questionAnswersLength' ng-value='questionAnswersLength' class='form-control' />
 	<div><span>Պատասխանի տարբերակներ</span></div>
 
 
 
 	<div ng-repeat='items in answersInput'>
-		<input type='text' class='answerTextField' /> 
-		<input type='radio' class='answerVersionField' ng-model='aq.version' value='{{items}}' />
+		<input type='text' class='answerTextField'  /> 
+		<input type='radio' class='answerVersionField'  ng-model='aq.version' value='{{items}}' />
 		<label>Ընտրել դասը</label>			
 		<!--select id='lesson' ng-model='userField.id'-->
 		<select class='hintLessonId'>
@@ -44,4 +48,5 @@
 	<div><span>{{questionCreated}}</span></div>
 
 	
+</div>
 </div>

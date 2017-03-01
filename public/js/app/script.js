@@ -298,6 +298,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
     }
     $scope.createPosition = function() {
         var position_name = document.querySelector('#position_name').value,
+            position_keywords = document.querySelector('#position_keywords').value,
             position_group = document.querySelector('#position_group').checked,
             x = document.querySelector("#position").selectedIndex,
             parent_id = document.getElementsByTagName("option")[x].getAttribute("ng-selected");
@@ -307,6 +308,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
             url: 'create_position',
             data: {
                 'position_name': position_name,
+                'position_keywords': position_keywords,
                 'position_group': position_group,
                 'parent_id': parent_id
             }
@@ -434,7 +436,7 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
     // $scope.quesionPart1 = true;
     //$scope.mypattern = /^\s*$/g;
     $scope.questionType = function($event) {
-        console.log($event.target.value);
+        //  console.log($event.target.value);
         if ($event.target.value == 1) {
             $scope.quesionPart1 = true;
         } else {
@@ -512,11 +514,13 @@ app.controller('questionsGroup', ['$scope', '$http', 'language', function($scope
             method: 'POST',
             url: 'add_question_as_lesson',
             data: {
+                'name': question,
                 'parent_id': position_id,
                 'question_id': question_id
             }
         }).
         success(function(data) {
+            //  console.log(data)
             //  $scope.loadPosition();
             $scope.loadLesson();
         });
