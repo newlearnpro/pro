@@ -1,0 +1,216 @@
+#school_girl {
+    height: 218px;
+    width: 197px;
+    left: 237px;
+}
+#shelf {
+    height: 103px;
+    width: 580px;
+    top: 18px;
+    left: 30px;
+}
+#beads {
+    width: 553px;
+    height: 63px;
+    top: 20px;
+    left: 13px;
+}
+#type {
+    height: 111px;
+    width: 125px;
+    top: 150px;
+    left: 30px;
+}
+.beads_click {
+    height: 50px;
+    width: 50px;
+}
+.b_click1_1 {
+    top: 45px;
+    left: 59px;
+}
+.b_click1_2 {
+    top: 45px;
+    left: 52px;
+}
+.b_click2_1 {
+    top: 46px;
+    left: 120px;
+}
+.b_click2_2 {
+    top: 46px;
+    left: 106px;
+}
+.b_click3_1 {
+    top: 38px;
+    left: 178px;
+}
+.b_click3_2 {
+    top: 38px;
+    left: 163px;
+}
+.b_click4_1 {
+    top: 49px;
+    left: 236px;
+}
+.b_click4_2 {
+    top: 50px;
+    left: 214px;
+}
+.b_click5_1 {
+    top: 52px;
+    left: 296px;
+}
+.b_click5_2 {
+    top: 52px;
+    left: 270px;
+}
+.b_click6_1 {
+    top: 38px;
+    left: 353px;
+}
+.b_click6_2 {
+    top: 38px;
+    left: 324px;
+}
+.b_click7_1 {
+    top: 43px;
+    left: 412px;
+}
+.b_click7_2 {
+    top: 45px;
+    left: 378px;
+}
+.b_click8_1 {
+    top: 51px;
+    left: 471px;
+}
+.b_click8_2 {
+    top: 51px;
+    left: 432px;
+}
+.b_click9_1 {
+    top: 37px;
+    left: 528px;
+}
+.b_click9_2 {
+    top: 38px;
+    left: 490px;
+}
+.b_click10_1 {
+    top: -62px;
+    left: -62px;
+}
+.b_click10_2 {
+    top: 38px;
+    left: 546px;
+}
+#mouth {
+    height: 6px;
+    width: 10px;
+    top: 71px;
+    left: 95px;
+}
+#border_true {
+    height: 48px;
+    width: 48px;
+    border: 3px solid #07202C;
+}
+.border_true_1 {
+    top: 49px;
+    left: 468px;
+}
+.border_true_2 {
+    top: 49px;
+    left: 430px;
+}
+#shelf2 {
+    width: 198px;
+    height: 22px;
+    left: 18px;
+    bottom: 6px;
+}
+.drag_obj {
+    height: 46px;
+    width: 46px;
+    bottom: 22px;
+}
+.drag_1_3 {
+    left: 0px;
+}
+.drag_1_4 {
+    left: -9px;
+}
+.drag_2_3 {
+    left: 50px;
+}
+.drag_2_4 {
+    left: 37px;
+}
+.drag_3_3 {
+    left: 100px;
+}
+.drag_3_4 {
+    left: 84px;
+}
+.drag_4_3 {
+    left: 150px;
+}
+.drag_4_4 {
+    left: 131px;
+}
+.drag_5_3 {
+    left: -187px;
+}
+.drag_5_4 {
+    left: 178px;
+}
+.shelf2_4type {
+    width: 218px !important;
+}
+
+
+.dropped {
+    top: 20px !important;
+    left: 23px !important;
+}
+.drop_obj {
+    height: 93px;
+    width: 93px;
+}
+.drop_1_3 {
+    top: 26px;
+    left: 357px;
+}
+.drop_2_3 {
+    top: 33px;
+    left: 410px;
+}
+.drop_3_3 {
+    top: 20px;
+    left: 468px;
+}
+.drop_4_3 {
+    top: 20px;
+    left: 524px;
+}
+.drop_1_4 {
+    top: 32px;
+    left: 274px;
+}
+.drop_2_4 {
+    top: 22px;
+    left: 328px;
+}
+.drop_3_4 {
+    top: 25px;
+    left: 388px;
+}
+.drop_4_4 {
+    top: 32px;
+    left: 448px;
+}
+.drop_5_4 {
+    top: 26px;
+    left: 507px;
+}
