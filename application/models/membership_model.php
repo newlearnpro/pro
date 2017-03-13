@@ -30,7 +30,7 @@ class Membership_model extends CI_Model {
     public function user_page($get_info)
     {   
         $this->db->where('username', $get_info);
-        $this->db->select('username, first_name, last_name, status, gender, age, email, activation_code');        
+        $this->db->select('username, first_name, last_name, status, gender, age, email, activation_code, activation_schoolclick');        
         $query = $this->db->get('users');
         return   $query->result_array();
         /*foreach ($query->result() as $row){ 
@@ -103,10 +103,29 @@ class Membership_model extends CI_Model {
 
     public function get_license_code($get_info)
     {   
-        $where = "(username='$get_info[username]' AND position_id='$get_info[position_id]') OR (username='$get_info[username]') OR (username='$get_info[username]' AND position_parent_id='$get_info[position_id]')";
+       /* $where = "username='$get_info[username]'";
       // $where = "(username='$get_info[username]' AND class_id='$get_info[class_id]') OR (username='$get_info[username]' AND class_name=0) OR (username='$get_info[username]')";
      //   $query = $this->db->get_where('users_license_code', array('username'=>$get_info['username'],'class_id'=>$get_info['class_id']));
-           $query = $this->db->get_where('users_license_code', $where);
+           $query = $this->db->get_where('users_license_code', $where));
+        return   $query->result_array();*/
+
+        $this->db->where('username', $get_info['username']);
+        $this->db->select('*');        
+        $query = $this->db->get('users_license_code');
+        return   $query->result_array();
+    }
+
+    public function get_license_code_bypos($get_info)
+    {   
+       /* $where = "username='$get_info[username]'";
+      // $where = "(username='$get_info[username]' AND class_id='$get_info[class_id]') OR (username='$get_info[username]' AND class_name=0) OR (username='$get_info[username]')";
+     //   $query = $this->db->get_where('users_license_code', array('username'=>$get_info['username'],'class_id'=>$get_info['class_id']));
+           $query = $this->db->get_where('users_license_code', $where));
+        return   $query->result_array();*/
+
+        $this->db->where(array('username'=> $get_info['username'], 'position_id'=> $get_info['position_id']));
+        $this->db->select('*');        
+        $query = $this->db->get('users_license_code');
         return   $query->result_array();
     }
 

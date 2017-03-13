@@ -112,9 +112,9 @@ $lang['not_selected']         = 'Ընտրված չէ';
 $lang['success_add_license'] = 'Լիցենզիան հաջողությամբ ավելացված է';
 
 
-
-
-
-
+$lang['insert_tablet_code'] = 'Մուտքագրեք պլանշետի համարը';
+$lang['insert_tablet_code_wrong'] = 'Մուտքագրված համարը սխալ է';
+$lang['insert_tablet_code_is'] = 'Մուտքագրված համարը գրանցված է';
+$lang['insert_activation_code'] = 'Մուտքագրեք արտոնագրի համարը';
 
 ?>

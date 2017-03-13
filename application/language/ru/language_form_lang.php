@@ -122,6 +122,11 @@ $lang['gender_hint']          = 'Пол';
 $lang['age_hint']             = 'Возраст';
 $lang['not_selected']         = 'Не выбран';
 
+$lang['success_add_license'] = 'Лицензия успешно добавлена';
 
+$lang['insert_tablet_code'] = 'Введите номер планшета';
+$lang['insert_tablet_code_wrong'] = 'Введенный номер неправильный';
+$lang['insert_tablet_code_is'] = 'Введенный номер зарегистрирован';
+$lang['insert_activation_code'] = 'Введите номер лицензии';
 
 ?>

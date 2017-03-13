@@ -13,7 +13,7 @@ ci_sessions
 it creates ci_sessions table if there isn't `ci_sessions` table        
 *******************/ 
     public function create_ci_sessions_table()
-    {   
+    {
         /*********For MySQL:
         CREATE TABLE IF NOT EXISTS `ci_sessions` (
                 `id` varchar(128) NOT NULL,
@@ -31,7 +31,7 @@ it creates ci_sessions table if there isn't `ci_sessions` table
             'last_activity' => array('type'=>'int', 'constraint' => 10, 'collation'=>'utf8_general_ci','null'=>'FALSE'),
             'timestamp' => array('type'=>'int', 'constraint' => 10, 'collation'=>'utf8_general_ci','null'=>'FALSE', 'UNSIGNED'=>true),
             'data' => array('type'=>'blob', 'collation'=>'utf8_general_ci','null'=>'FALSE')
-        );      
+        );
         
         $this->dbforge->add_field($fields);
         $this->dbforge->add_key('timestamp', true);
@@ -132,6 +132,7 @@ it creates file table if there isn't `users` table
                 `img_src` text NOT NULL,
                 `activation_code` varchar(100) NOT NULL,
                 `activation` varchar(10) NOT NULL,
+                `activation_schoolclick` int(10) NOT NULL,
                 `permission` varchar(10) NOT NULL,
                PRIMARY KEY(`id`)
         );
@@ -199,15 +200,26 @@ users_license_code
 it creates file table if there isn't `users_license_code` table        
 *******************/ 
         /*********For MySQL:
-        CREATE TABLE IF NOT EXISTS `users_license_code` (
+        CREATE TABLE IF NOT EXISTS `users_license_code` old (
                 `id` int(11) NOT NULL AUTO_INCREMENT,                
-                `username` varchar(20) collate utf8_general_ci NOT NULL,
+                `username` varchar(20) collate utf8_general_ci NOT NULL,                
+                `generated_code` varchar(20) NOT NULL,
                 `license_code` varchar(20) NOT NULL,
-                `position_id` int(11) NOT NULL,                
-                `position_parent_id` int(11) NOT NULL,            
+                `position_id` int(11) NOT NULL,         
+                `position_parent_id` int(11) NOT NULL,           
+                `mount_count` int(10) NOT NULL,
                 `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
                 `time_end` int(10) unsigned DEFAULT 0 NOT NULL,
                 PRIMARY KEY(`id`)
+        );
+
+        CREATE TABLE IF NOT EXISTS `users_license_code` (
+                `license_code` varchar(10) NOT NULL UNIQUE,                
+                `username` varchar(20) collate utf8_general_ci NOT NULL,                
+                `description` varchar(255) collate utf8_general_ci NOT NULL,
+                `position_id` int(11) NOT NULL,
+                `mount_count` int(10) NOT NULL,
+                `start_time` int(10) unsigned DEFAULT 0 NOT NULL
         );
         */
 

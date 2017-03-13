@@ -74,16 +74,6 @@ class Login extends CI_Controller {
       }
 
 
-
-
-
-
-
-
-
-
-
-
         }
       else
         {
@@ -120,6 +110,164 @@ class Login extends CI_Controller {
           fclose($fp);
       }
   }
+
+
+
+
+
+
+
+//for school
+
+  public function school()         
+  { 
+
+
+
+
+      //  $this->db->where('username', '00123');     
+      //  $query = $this->db->get("users");
+       // echo json_encode($query2->row_array(0));
+
+/*
+foreach ($query2->result() as $row)
+{
+        echo json_encode($row->id);
+       // echo $row->ip_address;
+}*/
+
+
+
+
+        $data = array('usr' => $this->input->post('username'), 'pwd' => $this->input->post('username'));
+        $query = $this->db->get_where('users', array('username' => $this->input->post('username'), 'password' => $this->input->post('username')), 0, 0);
+        $info['insert_tablet_code'] = $this->lang->line('insert_tablet_code');
+        if($this->input->post('username')){
+            $info['insert_tablet_code'] = $this->lang->line('insert_tablet_code_wrong');
+        }
+        $info['activation_schoolclick'] = false;
+
+        foreach($query->result() as $row){
+            if($row->activation_code == $this->input->post('activation_code')){
+                $username = $this->input->post('username');
+                $query_remove = $this->db->query("SELECT * FROM ci_sessions WHERE data LIKE '%$username%'");
+                while ($row_remove = $query_remove->unbuffered_row()){
+                    $this->db->delete('ci_sessions', array('id' => $row_remove->id));
+                }
+
+                $this->db->where('username', $this->input->post('username'));
+                $this->db->update('users', array('activation_schoolclick' => 0));
+
+                $data['prm'] = 'user';
+                $this->session->set_userdata($data);
+                redirect($this->uri->segment(1).'/main/index/list');
+            }
+
+            if($row->username == $this->input->post('username')){
+                if($row->activation == 'no'){
+                    $data_activation = array(
+                          'activation' => 'yes',
+                    );
+                    $this->db->where('username', $this->input->post('username'));
+                    $this->db->update('users', $data_activation);
+
+                    $data['prm'] = 'user';
+                    $this->session->set_userdata($data);
+                    redirect($this->uri->segment(1).'/main/index/list');
+
+                }else if($row->activation == 'yes'){
+                    $this->db->where('username', $this->input->post('username'));                    
+                    $info['insert_tablet_code'] = $this->lang->line('insert_tablet_code_is');
+
+                    switch ($row->activation_schoolclick) {
+                        case 0:
+                            $this->db->update('users', array('activation_schoolclick' => 1));
+                            break;
+                        case 1:
+                            $this->db->update('users', array('activation_schoolclick' => 2));
+                            break;
+                        case 2:
+                            $this->db->update('users', array('activation_schoolclick' => 3));
+                            break;
+                        case 3:
+                            $info['insert_tablet_code'] = $this->lang->line('insert_tablet_code');
+                            $info['insert_activation_code'] = $this->lang->line('insert_activation_code');
+                            $info['activation_schoolclick'] = true;
+                            break;
+                        default:
+                            echo "";
+                    }
+                  //  echo  $row->activation_schoolclick;            
+                }
+            }
+        }  
+
+
+
+        if(!$this->session->userdata('usr')){
+            $this->load->view('includes/header');
+            $this->load->view('school_form', $info);
+            $this->load->view('includes/footer');
+        }else{ 
+                redirect($this->session->userdata('lang').'/main/index/list');
+        }
+
+
+  }
+
+
+/*
+if($this->input->post('username')=="012"){
+
+  echo "yes";
+}else{
+  echo "no";
+}*/
+// $data = array('usr' => $this->input->post('username'), 'pwd' => md5($this->input->post('password')));
+
+
+   //   $query = $this->db->get_where('users', array('username' => $this->input->post('username'), 'password' => $this->input->post('username')), 0, 0);
+    //  $data = array('usr' => $this->input->post('username'), 'pwd' => $this->input->post('username'));
+   //   $info['activation'] = false;
+
+    /*  foreach($query->result() as $row){           
+          if($row->activation == 'yes'){
+             $data['prm'] = 'user';
+             $this->session->set_userdata($data);
+             redirect($this->uri->segment(1).'/main/index/list');
+          }else if($row->activation == 'no'){
+             $info['activation'] = false;      
+          }     
+      }
+*/
+
+     /* foreach($query->result() as $row){           
+          if($row->activation == 'no'){
+            
+           //  $this->session->set_userdata($data);
+          //   redirect($this->uri->segment(1).'/main/index/list');
+          }else if($row->activation == 'yes'){
+             echo "I am sorry";
+          }     
+      }*/
+
+
+
+      /*else{   
+              redirect($this->session->userdata('lang').'/main/index/list');
+      }*/
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -288,17 +436,22 @@ $data['status'] = array(
         $this->session->sess_destroy();
         redirect($this->uri->segment(1));
   }
- 
-    public function validate_captcha()
-    {        
-        $my_captcha_words = $this->input->post('captcha');
-        $captcha_img_hint = $this->input->post('captcha_img_hint');
-        if($my_captcha_words == $captcha_img_hint){
-            return true;
-        }else{             
-           return false;
-        }
-    }
+
+  public function end()
+  {
+      echo "Դուք դուրս եկաք համակարգից";
+  }
+
+  public function validate_captcha()
+  {        
+      $my_captcha_words = $this->input->post('captcha');
+      $captcha_img_hint = $this->input->post('captcha_img_hint');
+      if($my_captcha_words == $captcha_img_hint){
+          return true;
+      }else{             
+         return false;
+      }
+  }
 
 
     public function check_if_username_exists($requested_username)

@@ -235,19 +235,25 @@ public function add_question_as_lesson()
 
 	public function add_license()
 	{
+		$str='1234567890';
+		$code_length=6;
+		$codes_count=1;
+		$code_separartor=6;
+		$str_length=strlen($str)-1;
+		$generated_code='';
+
+		for ($i=0; $i<$code_length; $i++){	       
+	        $generated_code.=substr($str, mt_rand(0,$str_length), 1);
+	    }
+	//	echo $generated_code;
 		$_POST = json_decode(file_get_contents('php://input'), true);
 		$this->load->model('insert_tables_model');
 		$get_info['username'] = $this->input->post('username');
+		$get_info['generated_code'] = $generated_code;
 		$get_info['position_id'] = $this->input->post('position_id');
 		$get_info['position_parent_id'] = $this->input->post('position_parent_id');
-		$get_info['time_end'] =  $this->input->post('time_mount');
-
-	
+		$get_info['mount_count'] =  $this->input->post('time_mount');	
 		$this->insert_tables_model->insert_add_license($get_info);
-		//echo json_encode($get_info);
-		
-//echo "dg";
-		//2.592.000
 	}
 
 

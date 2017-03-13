@@ -126,11 +126,43 @@ class Main extends CI_Controller {
 		$_POST = json_decode(file_get_contents('php://input'), true);
 		$this->load->model('membership_model');
 		$get_info['username'] = $this->input->post('username');
-		$get_info['position_id'] = $this->input->post('position_id');
-		$get_info['position_parent_id'] = $this->input->post('position_parent_id');
+	//	$get_info['position_id'] = $this->input->post('position_id');
+//		$get_info['position_parent_id'] = $this->input->post('position_parent_id');
 		//$get_info['class_name'] = $this->input->post('class_name');
 		$query = $this->membership_model->get_license_code($get_info);
 		echo json_encode($query);
+	}
+
+	public function get_users_license_code_bypos(){
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$this->load->model('membership_model');
+		$get_info['username'] = $this->input->post('username');
+		$get_info['position_id'] = $this->input->post('position_id');
+	//	$get_info['position_id'] = $this->input->post('position_id');
+//		$get_info['position_parent_id'] = $this->input->post('position_parent_id');
+		//$get_info['class_name'] = $this->input->post('class_name');
+		$query = $this->membership_model->get_license_code_bypos($get_info);
+		echo json_encode($query);
+	}
+
+	public function confirm_users_license_code(){
+		$_POST = json_decode(file_get_contents('php://input'), true);
+
+
+		$query = $this->db->get_where('users_license_code', array('license_code'=>$this->input->post('license_code')));
+		echo json_encode($query);
+
+
+
+        $data = array(          
+            'username' => $this->input->post('username'),
+            'start_time' => $this->input->post('start_time')
+        );
+       //  $where = "(license_code='$this->input->post(license_code)')";
+        $where = array('license_code'=> $this->input->post('license_code'), 'start_time'=>0);
+        $this->db->where($where);
+        $this->db->update('users_license_code', $data);
+
 	}
 
 	public function get_teachers_markers(){
@@ -152,7 +184,7 @@ class Main extends CI_Controller {
 		$get_info['start_time'] = $this->input->post('start_time');
 		$get_info['end_time'] = $this->input->post('end_time');
 
-		echo "fsd";
+		//echo "fsd";
 	//	
 		$query = $this->insert_tables_model->insert_markers($get_info);
 	}

@@ -122,5 +122,13 @@ $lang['age_hint']             = 'Age';
 $lang['not_selected']         = 'Not selected';
 
 
+$lang['success_add_license'] = 'The license is successfully added';
+
+$lang['insert_tablet_code'] = 'Type the number of tablet';
+$lang['insert_tablet_code_wrong'] = 'The number entered is incorrect';
+$lang['insert_tablet_code_is'] = 'The number entered is registered';
+$lang['insert_activation_code'] = 'Type the license number';
+
+
 
 ?>

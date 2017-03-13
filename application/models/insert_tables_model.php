@@ -66,13 +66,15 @@ it creates position table if there isn't `position` table
     {
         $license_code = array(
             'username' =>  $get_info['username'],
+            'generated_code' => $get_info['generated_code'],
             'position_id' =>  $get_info['position_id'],
             'position_parent_id' => $get_info['position_parent_id'],
-            'timestamp' => date("U"),
-            'time_end' => date("U") + ($get_info['time_end'] * 2592000)
+            'mount_count' => $get_info['mount_count']
+           // 'time_end' => date("U") + ($get_info['time_end'] * 2592000)
         );         
         $this->db->insert('users_license_code', $license_code);
     }
+
 
     function insert_question($get_info)
     {

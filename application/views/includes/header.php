@@ -54,13 +54,18 @@
             
 
         <div class='col-xs-12 col-sm-6 col-md-4 col-lg-3 header-parts header-part4'>
-                <?php 
+                <?php
                     if(!$this->session->userdata('usr')){
                         echo anchor($this->uri->segment(1). "/login" , lang('signin'), 'id="singin" class="btn btn-xs lp_btn lp_btn_half icon icon-enter"');
+                        echo anchor($this->uri->segment(1). "/login/signup" , lang('signup'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-user-plus"');
                     }else{
-                        echo anchor($this->uri->segment(1). "/login/logout" , lang('logout'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-exit"');
-                    }                        
-                    echo anchor($this->uri->segment(1). "/login/signup" , lang('signup'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-user-plus"');
+                        if($this->session->userdata('usr') == $this->session->userdata('pwd')){
+                            echo anchor($this->uri->segment(1). "/login/end" , lang('logout'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-exit" ng-click="schoolLogout()"');
+                        }else{
+                            echo anchor($this->uri->segment(1). "/login/logout" , lang('logout'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-exit"');
+                            echo anchor($this->uri->segment(1). "/login/signup" , lang('signup'), 'class="btn btn-xs lp_btn lp_btn_half icon icon-user-plus"');
+                        }
+                    }
                     echo anchor("https://www.youtube.com/watch?v=v_3Zf5IwbDg" , lang('how_to_use'), 'class="btn btn-xs lp_btn lp_btn_full icon icon-play" target="_blank"');
                 ?>
         </div>
@@ -69,13 +74,13 @@
 
         <div class='col-xs-12 col-sm-6 col-md-3 col-lg-3 header-parts header-part5' >
 
-                <?php 
+                <?php
                     if($this->uri->total_rsegments() > 2){
                       $url = explode('/', $this->uri->ruri_string(), $this->uri->total_rsegments());
                     }  
                     echo "<a href='".base_url()."en/".$this->uri->ruri_string()."' id='lang_en'><div id='flag_en' class='pull-right flags ".$this->uri->segment(1)."' title='".lang('english')."'></div></a>";
                     echo "<a href='".base_url()."ru/".$this->uri->ruri_string()."' id='lang_ru'><div id='flag_ru' class='pull-right flags ".$this->uri->segment(1)."' title='".lang('russian')."'></div></a>";
                     echo "<a href='".base_url()."am/".$this->uri->ruri_string()."' id='lang_am'><div id='flag_am' class='pull-right flags ".$this->uri->segment(1)."' title='".lang('armenian')."'></div></a>";
-                ?>          
-        </div>  
+                ?>
+        </div>
     </header>
