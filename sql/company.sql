@@ -1,30 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Хост: 127.0.0.1
--- Время создания: Мар 07 2017 г., 08:33
--- Версия сервера: 10.1.9-MariaDB
--- Версия PHP: 5.6.15
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
---
--- База данных: `company`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `ci_sessions`
---
 
 CREATE TABLE `ci_sessions` (
   `id` varchar(128) NOT NULL,
@@ -33,9 +11,6 @@ CREATE TABLE `ci_sessions` (
   `data` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `ci_sessions`
---
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('db1ff68da9e351b8dc08c4d08fe7025add460dc1', '192.168.3.60', 1488438094, 0x7573727c733a353a2261646d696e223b7077647c733a33323a223564373933666335623030613233343863336662396162353965356361393861223b70726d7c733a353a2261646d696e223b6c616e677c733a323a227275223b),
@@ -65,11 +40,7 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
 ('1798b0084ec6e5fa30f7f6a954c651338898c879', '::1', 1488870332, ''),
 ('3646dbc90bbbaba4e2b181c7104b999b3c1ad053', '::1', 1488870332, '');
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `file`
---
 
 CREATE TABLE `file` (
   `id` int(11) NOT NULL,
@@ -85,9 +56,7 @@ CREATE TABLE `file` (
   `free` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `file`
---
+
 
 INSERT INTO `file` (`id`, `name`, `description`, `keywords`, `src`, `type_name`, `type_id`, `parent_id`, `question_id`, `number`, `free`) VALUES
 (73, 'Դաս1', '', 'Դաս1  ', '01129_1487318149', 'video', 1, 129, 0, 1, 'off'),
@@ -105,11 +74,7 @@ INSERT INTO `file` (`id`, `name`, `description`, `keywords`, `src`, `type_name`,
 (92, 'vidio', '', 'vidio  ', '01125_1488195706', 'video', 1, 125, 0, 1, 'off'),
 (103, 'Հարց', '', '', '', 'question', 6, 129, 67, 1, 'off');
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `messages_room`
---
 
 CREATE TABLE `messages_room` (
   `id` int(11) NOT NULL,
@@ -119,9 +84,6 @@ CREATE TABLE `messages_room` (
   `timestamp` int(10) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `messages_room`
---
 
 INSERT INTO `messages_room` (`id`, `sender`, `recipient`, `message`, `timestamp`) VALUES
 (1, 'sveta', 'artak', 'hi', 1481615144),
@@ -133,11 +95,7 @@ INSERT INTO `messages_room` (`id`, `sender`, `recipient`, `message`, `timestamp`
 (7, 'ani', 'arasg', 'hghvgc', 1486714994),
 (8, 'ani', 'artak', 'ggfd', 1486715017);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `position`
---
 
 CREATE TABLE `position` (
   `id` int(11) NOT NULL,
@@ -147,9 +105,6 @@ CREATE TABLE `position` (
   `position_group` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `position`
---
 
 INSERT INTO `position` (`id`, `position`, `keywords`, `parent_id`, `position_group`) VALUES
 (102, 'ԴՊՐՈՑԱԿԱՆ', 'ԴՊՐՈՑԱԿԱՆ', 0, 1),
@@ -165,11 +120,7 @@ INSERT INTO `position` (`id`, `position`, `keywords`, `parent_id`, `position_gro
 (129, 'Դաս 1: Գույներ', 'Գույներ բանալի', 128, 1),
 (131, 'նոր թեմա', 'նոր թեմա նոր բանալի', 105, 0);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `pupil_data`
---
 
 CREATE TABLE `pupil_data` (
   `id` int(11) NOT NULL,
@@ -181,11 +132,7 @@ CREATE TABLE `pupil_data` (
   `timestamp` int(11) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `questions`
---
 
 CREATE TABLE `questions` (
   `id` int(11) NOT NULL,
@@ -198,9 +145,7 @@ CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `questions`
---
+
 
 INSERT INTO `questions` (`id`, `position_id`, `question_type`, `question`, `answers`, `correct_answer`, `hint_lessons_id`, `question_id`) VALUES
 (49, 73, 1, 'harc', 'pat1|pat2', 1, '75|75', 0),
@@ -212,11 +157,7 @@ INSERT INTO `questions` (`id`, `position_id`, `question_type`, `question`, `answ
 (66, 129, 1, 'asf', 'asg|asgu', 2, '92|92', 66),
 (73, 129, 1, 'Հարց', 'պատասխան1|պատասխան2|պատասխան3 ճիշտ է|պատասխան4', 3, '73|80|75|92', 67);
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `teachers_data`
---
 
 CREATE TABLE `teachers_data` (
   `id` int(11) NOT NULL,
@@ -226,9 +167,7 @@ CREATE TABLE `teachers_data` (
   `end_time` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `teachers_data`
---
+
 
 INSERT INTO `teachers_data` (`id`, `username`, `lesson_id`, `start_time`, `end_time`) VALUES
 (8, 'ani', 73, '00:04', '00:14'),
@@ -238,11 +177,7 @@ INSERT INTO `teachers_data` (`id`, `username`, `lesson_id`, `start_time`, `end_t
 (24, 'ani', 82, '00:06', '00:09'),
 (25, 'ani', 73, '00:12', '00:15');
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `users`
---
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
@@ -259,9 +194,6 @@ CREATE TABLE `users` (
   `permission` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `users`
---
 
 INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `status`, `gender`, `age`, `email`, `activation_code`, `activation`, `permission`) VALUES
 (1, 'artak', '5d793fc5b00a2348c3fb9ab59e5ca98a', 'Artak', 'Gevorgyan', 'pupil', 'male', 0, 'arta@yahoo.com', 'J7MdheyiarlDGY85', 'yes', 'user'),
@@ -283,11 +215,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`, `s
 (65, 'albert', '5d793fc5b00a2348c3fb9ab59e5ca98a', 'albert', 'galstyan', 'pupil', 'male', 7, 'albert@yahoo.com', '1X5N2AOum96BZC8z', 'yes', 'user'),
 (66, 'artur', '20f5dce8f87a79d93b7104e58079425b', 'DESKTOP', 'DESKTOP', 'DESKTOP', '', 0, '', '', 'yes', 'user');
 
--- --------------------------------------------------------
 
---
--- Структура таблицы `users_license_code`
---
 
 CREATE TABLE `users_license_code` (
   `id` int(11) NOT NULL,
@@ -299,9 +227,7 @@ CREATE TABLE `users_license_code` (
   `time_end` int(10) UNSIGNED NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `users_license_code`
---
+
 
 INSERT INTO `users_license_code` (`id`, `username`, `license_code`, `position_id`, `position_parent_id`, `timestamp`, `time_end`) VALUES
 (1, 'vahram', '', 124, 105, 1487312850, 1489904850),
@@ -312,109 +238,64 @@ INSERT INTO `users_license_code` (`id`, `username`, `license_code`, `position_id
 (6, 'artak', '', 129, 128, 1487318711, 1489910711),
 (7, 'ManArm', '', 129, 128, 1487573414, 1490165414);
 
---
--- Индексы сохранённых таблиц
---
 
---
--- Индексы таблицы `ci_sessions`
---
 ALTER TABLE `ci_sessions`
   ADD KEY `ci_sessions_timestamp` (`timestamp`);
 
---
--- Индексы таблицы `file`
---
+
 ALTER TABLE `file`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `messages_room`
---
+
 ALTER TABLE `messages_room`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `position`
---
+
 ALTER TABLE `position`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `pupil_data`
---
+
 ALTER TABLE `pupil_data`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `questions`
---
+
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `teachers_data`
---
+
 ALTER TABLE `teachers_data`
   ADD PRIMARY KEY (`id`);
 
---
--- Индексы таблицы `users`
---
+
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
---
--- Индексы таблицы `users_license_code`
---
+
 ALTER TABLE `users_license_code`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT для сохранённых таблиц
---
 
---
--- AUTO_INCREMENT для таблицы `file`
---
 ALTER TABLE `file`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
---
--- AUTO_INCREMENT для таблицы `messages_room`
---
+
 ALTER TABLE `messages_room`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
---
--- AUTO_INCREMENT для таблицы `position`
---
+
 ALTER TABLE `position`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
---
--- AUTO_INCREMENT для таблицы `pupil_data`
---
+
 ALTER TABLE `pupil_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT для таблицы `questions`
---
+
 ALTER TABLE `questions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
---
--- AUTO_INCREMENT для таблицы `teachers_data`
---
+
 ALTER TABLE `teachers_data`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
---
--- AUTO_INCREMENT для таблицы `users`
---
+
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
---
--- AUTO_INCREMENT для таблицы `users_license_code`
---
+
 ALTER TABLE `users_license_code`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
