@@ -64,8 +64,11 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             $scope.position = data;
             $timeout(function() {
                 for (var i = 0; i < data.length; i++) {
-                    $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                    //    console.log(data[i])
+                    // if ($('.mainPosition div[data2^>"0"]')) {
 
+                    $('.mainPosition div[data2^="' + data[i].parent_id + '"]').appendTo(".mainPosition div[data1^='" + data[i].parent_id + "']").removeClass("position1").addClass("position2");
+                    // }
 
 
 
@@ -275,22 +278,22 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         if ($event.currentTarget.className != 'lesson_types lesson_type_0 position_group_out') {
             var that = this;
             var username = document.querySelector('#username').innerHTML;
-            var position_id = $('#position_name_header').attr('data1');
-            var position_parent_id = $('#position_name_header').attr('data2');
+            var position_id = $('#position_name_header').attr('data2');
+            //  var position_parent_id = $('#position_name_header').attr('data2');
             //  var class_name = $('#position_name_header').text();
             // console.log(class_id)
 
             $http({
                 method: 'POST',
-                url: 'get_users_license_code',
+                url: 'get_users_license_code_bypos',
                 data: {
                     username: username,
-                    position_id: position_id,
-                    position_parent_id: position_parent_id,
-                    //   class_name: class_name
+                    position_id: position_id
+                        //   class_name: class_name
                 }
             }).success(function(data, status) {
-                if (data[0] != undefined && username == data[0].username && (position_id == data[0].position_id || position_parent_id == data[0].position_id || data[0].position_id == 0)) {
+                console.log(data);
+                if (data[0] != undefined && username == data[0].username && (position_id == data[0].position_id || data[0].position_id == 0)) {
                     if ($event.currentTarget.classList.contains('lesson_selected') == false) {
                         $('.lesson_types').removeClass('lesson_selected');
                         $event.currentTarget.classList.add('lesson_selected');
@@ -402,10 +405,10 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                             } /*******end teacher**/
                         }
                     }
+
                 } else {
                     alert('not license');
                 }
-
 
             }).error(function(data, status) {
                 alert('Տվյալների բազան լիցենյիայի համար չկա');

@@ -550,12 +550,60 @@ app.controller('personalpageGroup', ['$scope', '$http', 'language', 'currentUser
     var promise_language = language.getLang();
     promise_language.then(function(data) {
         $scope.language = data;
+
     });
 
     var promise_currentUserData = currentUserData.getUserData();
     promise_currentUserData.then(function(data) {
         $scope.currentUserStatus = data;
+        load_license_code();
     });
+
+
+
+    function load_license_code() {
+        var username = document.querySelector('#username').innerHTML,
+            options = {
+                // weekday: 'long',
+                month: 'numeric',
+                year: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            },
+            intlDate = new Intl.DateTimeFormat(undefined, options);
+
+        $http({
+            method: 'POST',
+            url: 'get_users_license_code',
+            data: {
+                username: username
+            }
+        }).
+        success(function(data) {
+            $scope.license_lessons = data;
+        });
+    }
+
+    $scope.confirm_license_code = function() {
+        var username = document.querySelector('#username').innerHTML,
+            license_code = $('#insert_license_code').val(),
+            dat = new Date(),
+            start_time = Date.parse(dat);
+
+        $http({
+            method: 'POST',
+            url: 'confirm_users_license_code',
+            data: {
+                username: username,
+                license_code: license_code,
+                start_time: start_time
+            }
+        }).success(function(data) {
+            load_license_code();
+        });
+    }
 }]);
 
 

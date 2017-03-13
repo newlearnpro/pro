@@ -10,4 +10,29 @@
 		<label for='oldPassword'>{{language.password_hint}}</label> <input id='oldPassword' type='text' /><input type='button' value='change' /><br />
 	</div>
 
+	<div>
+
+		<div>
+			<table border='2'>
+			    <tr>
+				    <th>լիցենզիայի համարը</th>
+				    <th>դասարանը</th>
+				    <th>Ամիս</th>
+				    <th>Ակտիվացվել է</th>
+				    <th>Ակտիվացիան կավարտվի</th>
+			    </tr>
+				<tr ng-repeat='items in license_lessons'>
+					<td>{{items.license_code}}</td>				
+					<td>{{items.description}}</td>
+					<td>{{items.mount_count | fltConvertToInt:items.mount_count}}</td>
+					<td>{{items.start_time  | date:'medium'}}</td>
+					<td>{{items.start_time  | fltConvertToInt:items.mount_count | date:'medium'}}</td>
+				</tr>
+			</table>		
+		</div>
+			<input type='text' id='insert_license_code'>		
+			<input type='button' value='add license code' ng-click='confirm_license_code()'>
+	</div>
+
+
 </div>
