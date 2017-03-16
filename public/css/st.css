@@ -175,6 +175,7 @@ $grid-breakpoints: (
 }
 #pagePlayer,
 #content_image,
+#not_license,
 #jp_container_1,
 #teacher_data_group {
   max-width: 800px;
@@ -492,7 +493,7 @@ header {
   margin: 0;
   padding: 0;
 }
-#position_name_header {
+.position_name_header {
   font-family: lpFont;
   font-size: 20px;
   color: #ed145b;

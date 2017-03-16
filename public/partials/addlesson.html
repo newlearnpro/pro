@@ -4,14 +4,14 @@
 			<div position-table name='lesson_parent_id'></div>
 			<div>
 				<select name='lesson_type_name' ng-model='file_type' class='form-control'>
-					<option value='html'>HTML</option>
-					<option value='video'>Video</option>
+					<option value='video'>Video</option>	
+					<option value='html'>HTML</option>																					
 					<option value='seperator'>{{language.seperator}}</option>
 				</select><br />
 				<div ng-if='file_type!="seperator"'>				
-					<input id='name' placeholder='name' type='text' name='lesson_name' /><br/>
-					<input id='description' placeholder='description' type='text' name='lesson_description' /><br/>
-					<input id='keywords' placeholder='keywords' type='text' name='lesson_keywords' /><br/>
+					<input id='name' placeholder='name' type='text' name='lesson_name' class='form-control' /><br/>
+					<input id='description' placeholder='description' type='text' name='lesson_description'  class='form-control' /><br/>
+					<!--input id='keywords' placeholder='keywords' type='text' name='lesson_keywords' /><br/-->
 					<select name='lesson_type_id' class='form-control'>
 						<option value='1' class='lesson_types lesson_type_1'>{{language.lesson}}</option>
 						<option value='2' class='lesson_types lesson_type_2'>{{language.interesting}}</option>	

@@ -20,6 +20,10 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
             url: '/index/questions',
             templateUrl: '../../public/partials/questions.html',
         })
+        .state('uploadpicture', {
+            url: '/index/uploadpicture',
+            templateUrl: '../../public/partials/uploadpicture.html',
+        })
         .state('contacts', {
             url: '/index/contacts',
             templateUrl: '../../public/partials/contacts.html',

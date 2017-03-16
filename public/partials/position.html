@@ -8,7 +8,7 @@
 				<input type='text' id='position_keywords' class='form-control' placeholder='keywords' /><br/>
 				<a class='btn btn-xs lp_btn lp_btn_full icon icon-folder-plus' ng-click='createPosition()'>&nbsp;{{language.save}}</a>
 			</div>
-			<div><label><input type='checkbox' id='position_group' />&nbsp;группировать</label></div>
+			<div><label><input type='checkbox' id='license_type' />&nbsp;Лицензия + </label></div>
 		</div>
 	</div>	
 	<div class='col-xs-12 col-sm-offset-0 col-sm-12  col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8'>
@@ -16,7 +16,7 @@
 		<div class='mainPosition'>
 			<div ng-repeat='items in position'>
 				<div class='position_item position1' data1='{{items.id}}' data2='{{items.parent_id}}'>
-					<span class='icon icon-folder' ng-click='openClosePosition()'></span>					
+					<span class='icon icon-folder' ng-click='openClosePosition()'>&nbsp;{{items.id}}</span>					
 					<input value='{{items.position}}' />
 					<a class='btn btn-danger btn-xs ' ng-click='editPosition()'>edit</a>
 					<a class='btn btn-danger btn-xs remove' ng-click='removePosition()'>remove</a>

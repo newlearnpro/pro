@@ -25,5 +25,11 @@
     "close",
     "seperator",
     "upload_file",
-    "choose_lesson"
+    "choose_lesson",
+    "license_number",
+    "license_description",
+    "license_type",
+    "license_mount",
+    "license_activated",
+    "license_end"
 ]

@@ -22,7 +22,7 @@
 		</div>
 		<div class='mainPosition'>
 			<div ng-repeat='items in position'>
-				<div class='position1' data1='{{items.id}}' data2='{{items.parent_id}}' ng-click='openClosePosition()'>								
+				<div class='position1' data1='{{items.id}}' data2='{{items.parent_id}}' data3='{{items.license_type}}' ng-click='openClosePosition()'>								
 					<a class='pos_a' ng-click='getClass($event)'>{{items.position}}</a>
 				</div>	
 			</div>
@@ -49,7 +49,7 @@
 
 
 
-		<div><span id='position_name_header' data1='{{position_id}}' data2='{{parent_id}}'>{{position_name}}</span></div>
+		<div><span class='position_name_header' data1='{{position_id}}' data2='{{parent_id}}' data3='{{license_type}}'>{{position_name}}</span></div>
 		<div class='mainLesson'>
 			<div ng-repeat='items in lessons' class='lesson_group_type_{{items.type_id}}'>			
 				<div class='position_group_in lesson_types lesson_type_{{items.type_id}}' title='{{items.name}}' ng-click='loadPage($event)'>
@@ -71,12 +71,11 @@
 	<div class='mainPage col-xs-12 col-sm-12  col-md-8  col-lg-8'>
 		<div style='max-width: 800px' ng-include='"../../public/partials/templates/carusel_tmpl.html"'></div>
 
-		<iframe id='pagePlayer' width='100%' height='100px' >
-		</iframe>		
+		<iframe id='pagePlayer' width='100%' height='100px' ></iframe>		
 		
 		<img id='learnpro_logo' src='../../public/img/icons/logo.png' ng-click="resizeIframe()" />
 		<img id='content_image' src='' />
-
+		<div id='not_license'>Տվյալ դասը դիտելու համար անհրաժեշտ է գնել լիցենզիոն կոդ (License number): Այն ձեզ թույլ կտա դիտել ամբողջ դասընթացը: Կապվեք մեզ հետ: Կոմպաս ՍՊԸ Հասցե՝ Երևան, Սայաթ Նովա 15 Հեռ.՝ (011)211-211 Էլ. հասցե՝ info@compass.am</div>
 		<div id="jp_container_1" class="jp-video jp-video-270p" role="application" aria-label="media player">
 			<div class="jp-type-playlist">
 				<div id="jquery_jplayer_1" class="jp-jplayer"></div>
@@ -116,10 +115,6 @@
 			
 		</div>
 		<div id='teacher_data_group' ng-if='currentUserStatus === "teacher"'>
-
-
-
-
 			<div ng-repeat='items in startEndTime'>
 				<div class='teacher_marker_list'>
 					<span>{{items.start_time}} - {{items.end_time}}</span>

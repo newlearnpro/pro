@@ -7,10 +7,7 @@ app.directive('usersTable', function($http) {
         link: function(scope, element, attrs, ctrl) {
             $http({
                 method: 'POST',
-                url: '../admin/users_info',
-                // data: {
-                //     'users': "username"
-                // }
+                url: '../admin/users_info'
             }).
             success(function(data) {
                 scope.users = data;
@@ -137,7 +134,7 @@ app.controller('contactsCtrl', function($scope, $http) {
             'sender': username,
             'recipient': $scope.recipient,
             'message': message_text
-        };
+        }
         $http({
             method: 'POST',
             url: '../main/send_message',
@@ -256,9 +253,10 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
 app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language', function($scope, $http, $q, $timeout, language) {
     var promise = language.getLang();
     promise.then(function(data) {
+        $scope.file_type = 'video';
         $scope.language = data;
         //   $scope.loadPosition();
-        $scope.loadLesson();
+        loadLesson();
     });
     /* $scope.loadPosition = function() {
          $http({
@@ -280,14 +278,15 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
              }, 10);
          });
      }*/
-    $scope.loadLesson = function() {
+    function loadLesson() {
+        // $scope.loadLesson = function() {
         $http({
             method: 'POST',
             url: 'load_lesson',
 
         }).
         success(function(data, status) {
-
+            //   console.log(this);
             $scope.lesson = data;
             $timeout(function() {
                 for (var i = 0; i < data.length; i++) {
@@ -299,7 +298,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
     $scope.createPosition = function() {
         var position_name = document.querySelector('#position_name').value,
             position_keywords = document.querySelector('#position_keywords').value,
-            position_group = document.querySelector('#position_group').checked,
+            license_type = document.querySelector('#license_type').checked,
             x = document.querySelector("#position").selectedIndex,
             parent_id = document.getElementsByTagName("option")[x].getAttribute("ng-selected");
 
@@ -309,13 +308,14 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
             data: {
                 'position_name': position_name,
                 'position_keywords': position_keywords,
-                'position_group': position_group,
+                'license_type': license_type,
                 'parent_id': parent_id
             }
         }).
         success(function(data) {
             //  $scope.loadPosition();
-            $scope.loadLesson();
+            //loadLesson();
+            location.reload();
         });
     }
     $scope.editPosition = function() {
@@ -328,7 +328,7 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
             }
         }).success(function(data) {
             //     $scope.loadPosition();
-            $scope.loadLesson();
+            //  loadLesson();
         });
     }
     $scope.removePosition = function() {
@@ -339,12 +339,15 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
                 'id': this.items.id
             }
         }).success(function(data) {
+            location.reload();
             //     $scope.loadPosition();
-            $scope.loadLesson();
+            //  loadLesson();
+            //reload.locat
         });
     }
     $scope.editNumberLesson = function(number) {
         var number = $('.lesson_item[data1^="' + this.items.id + '"]').find('input').val();
+        console.log(number);
         $http({
             method: 'POST',
             url: '../admin/edit_number_lesson',
@@ -353,8 +356,9 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
                 'number': number
             }
         }).success(function(data) {
+
             //   $scope.loadPosition();
-            $scope.loadLesson();
+            //  loadLesson();
         });
     }
     $scope.removeLesson = function() {
@@ -366,8 +370,9 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
                 'src': this.items.src
             }
         }).success(function(data) {
-            //     $scope.loadPosition();
-            $scope.loadLesson();
+            location.reload();
+            //     $scope.loadPosition();            
+            // loadLesson();
         });
     }
     $scope.openClosePosition = function() {
@@ -582,6 +587,7 @@ app.controller('personalpageGroup', ['$scope', '$http', 'language', 'currentUser
             }
         }).
         success(function(data) {
+            console.log(data);
             $scope.license_lessons = data;
         });
     }
@@ -634,11 +640,13 @@ app.controller('sessionsCtrl', ['$scope', '$http', '$timeout', 'language', funct
                 },
                 intlDate = new Intl.DateTimeFormat(undefined, options);
             angular.forEach(data, function(value, key) {
+                console.log(data)
                 sessions_data.push(data[key].data.split(';'));
                 var from = sessions_data[key][1].search('"'),
                     to = sessions_data[key][1].length,
                     newstr = sessions_data[key][0].substring(from, to),
                     user = newstr.slice(0, -1);
+
                 $scope.sessions.push({
                     'id': data[key].id,
                     'usr': user,
