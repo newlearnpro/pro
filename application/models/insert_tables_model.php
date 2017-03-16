@@ -33,7 +33,7 @@ it creates position table if there isn't `position` table
             $folder_name = array(         
                 'name' => $get_info['lesson_name'],
                 'description' => $get_info['lesson_description'],
-                'keywords' => $get_info['lesson_keywords'],
+              //  'keywords' => $get_info['lesson_keywords'],
                 'src' => $get_info['lesson_src'],
                 'type_name' => $get_info['lesson_type_name'],
                 'type_id' => $get_info['lesson_type_id'],
@@ -61,19 +61,6 @@ it creates position table if there isn't `position` table
 
     }
     */
-
-    public function insert_add_license($get_info)
-    {
-        $license_code = array(
-            'username' =>  $get_info['username'],
-            'generated_code' => $get_info['generated_code'],
-            'position_id' =>  $get_info['position_id'],
-            'position_parent_id' => $get_info['position_parent_id'],
-            'mount_count' => $get_info['mount_count']
-           // 'time_end' => date("U") + ($get_info['time_end'] * 2592000)
-        );         
-        $this->db->insert('users_license_code', $license_code);
-    }
 
 
     function insert_question($get_info)

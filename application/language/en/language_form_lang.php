@@ -96,8 +96,9 @@ $lang['upload_file']                = 'Upload file';
 
 
 $lang['free_lesson']            = 'Free lesson';
-$lang['add_lesson']            = 'Add lesson';
-$lang['question_list']		   = 'Question list';
+$lang['add_lesson']             = 'Add lesson';
+$lang['question_list']		    = 'Question list';
+$lang['upload_picture']         = 'Upload picture';
 $lang['save']            		= 'Save';
 $lang['delete']            		= 'Delete';
 $lang['remove']            	   	= 'Remove';
@@ -122,13 +123,22 @@ $lang['age_hint']             = 'Age';
 $lang['not_selected']         = 'Not selected';
 
 
-$lang['success_add_license'] = 'The license is successfully added';
+$lang['success_add_license'] 		= 'The license is successfully added';
+$lang['insert_tablet_code'] 		= 'Type the number of tablet';
+$lang['insert_tablet_code_wrong']   = 'The number entered is incorrect';
+$lang['insert_tablet_code_is']		= 'The number entered is registered';
+$lang['insert_activation_code'] 	= 'Type the license number';
 
-$lang['insert_tablet_code'] = 'Type the number of tablet';
-$lang['insert_tablet_code_wrong'] = 'The number entered is incorrect';
-$lang['insert_tablet_code_is'] = 'The number entered is registered';
-$lang['insert_activation_code'] = 'Type the license number';
 
+
+/*activation group*/
+
+$lang['license_number'] 					= 'License number';
+$lang['license_description'] 				= 'Subject / Class';
+$lang['license_type'] 						= 'License type';
+$lang['license_mount'] 						= 'Number of months';
+$lang['license_activated'] 					= 'Activated';
+$lang['license_end'] 						= 'The license will end';
 
 
 ?>

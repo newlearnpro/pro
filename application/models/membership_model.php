@@ -43,14 +43,14 @@ class Membership_model extends CI_Model {
 
     public function position()
     {   
-        $query = $this->db->get("position");  
+        $query = $this->db->get('position');  
         return   $query->result_array();
     }
 
     public function lesson()
     {    
         $this->db->order_by('number', 'ASC'); 
-        $query = $this->db->get("file");
+        $query = $this->db->get('file');
         return $query->result();
     }
 
@@ -123,7 +123,11 @@ class Membership_model extends CI_Model {
            $query = $this->db->get_where('users_license_code', $where));
         return   $query->result_array();*/
 
-        $this->db->where(array('username'=> $get_info['username'], 'position_id'=> $get_info['position_id']));
+        if($get_info['position_id']){
+            $this->db->where(array('username'=> $get_info['username'], 'position_id'=> $get_info['position_id']));
+        }else{
+            $this->db->where(array('username'=> $get_info['username']));
+        }
         $this->db->select('*');        
         $query = $this->db->get('users_license_code');
         return   $query->result_array();

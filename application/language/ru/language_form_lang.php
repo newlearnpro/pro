@@ -99,6 +99,7 @@ $lang['upload_file']                = 'Загрузить файл';
 $lang['free_lesson']               = 'бесплатный урок';
 $lang['add_lesson']                = 'Добавить урок';
 $lang['question_list']             = 'Вопросник';
+$lang['upload_picture']        	   = 'Загрузить картинку';
 $lang['save']           		   = 'Сохранить';
 $lang['delete']            		   = 'Удалить';
 $lang['remove']            	   	   = 'Удалить';
@@ -128,5 +129,15 @@ $lang['insert_tablet_code'] = 'Введите номер планшета';
 $lang['insert_tablet_code_wrong'] = 'Введенный номер неправильный';
 $lang['insert_tablet_code_is'] = 'Введенный номер зарегистрирован';
 $lang['insert_activation_code'] = 'Введите номер лицензии';
+
+
+/*activation group*/
+
+$lang['license_number'] 					= 'Лицензионный номер';
+$lang['license_description'] 				= 'Предмет / Класс';
+$lang['license_type'] 						= 'Тип лицензии';
+$lang['license_mount'] 						= 'Количество месяцев';
+$lang['license_activated'] 					= 'Активированный';
+$lang['license_end'] 						= 'Лицензия закончится';
 
 ?>

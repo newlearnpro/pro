@@ -58,12 +58,12 @@ class Admin extends CI_Controller {
 	public function create_position()
 	{
 		$_POST = json_decode(file_get_contents('php://input'), true);
-		$this->create_tables_model->create_position_table();
+	//	$this->create_tables_model->create_position_table();
 		$get_position_name = $this->input->post('position_name');
 		$get_position_keywords = $this->input->post('position_name') . ' ' . $this->input->post('position_keywords');
-		$get_position_group = $this->input->post('position_group');
+		$get_position_license_type = $this->input->post('license_type');
 		$get_position_parent_id = $this->input->post('parent_id');
-		$data = array('position'=>$get_position_name, 'keywords'=>$get_position_keywords, 'position_group'=>$get_position_group, 'parent_id'=>$get_position_parent_id);
+		$data = array('position'=>$get_position_name, 'keywords'=>$get_position_keywords, 'license_type'=>$get_position_license_type, 'parent_id'=>$get_position_parent_id);
 		if(!empty(get_position_name)){
 			$this->db->insert('position', $data);		
 		}		
@@ -95,8 +95,8 @@ class Admin extends CI_Controller {
 
 	public function load_position()
 	{
-		$query = $this->membership_model->position();
-		echo json_encode($query);
+		$query = $this->membership_model->position();		
+		echo json_encode($query);		
 	}
 
 	public function load_lesson()
@@ -153,7 +153,7 @@ public function add_lesson()
 		$date = date('U');
 		$get_info['lesson_name'] = 	$this->input->post('lesson_name');
 		$get_info['lesson_description'] = 	$this->input->post('lesson_description');
-		$get_info['lesson_keywords'] = $this->input->post('lesson_name') . ' ' .  $this->input->post('lesson_description') . ' ' . $this->input->post('lesson_keywords');
+//		$get_info['lesson_keywords'] = $this->input->post('lesson_name') . ' ' .  $this->input->post('lesson_description') . ' ' . $this->input->post('lesson_keywords');
 		$get_info['lesson_src'] = '0' . $this->input->post('lesson_type_id') . ($this->input->post('lesson_parent_id')*1) . '_'.$date.'';
 		$get_info['lesson_type_name'] = 	$this->input->post('lesson_type_name');
 		$get_info['lesson_type_id'] = 	$this->input->post('lesson_type_id');
@@ -186,7 +186,7 @@ public function add_lesson()
 	if($this->input->post('add_seperator')){
 		$get_info['lesson_name'] = 	'';
 		$get_info['lesson_description'] = 	'';
-		$get_info['lesson_keywords'] = '';
+	//	$get_info['lesson_keywords'] = '';
 		$get_info['lesson_src'] = '';
 		$get_info['lesson_type_name'] = $this->input->post('lesson_type_name');
 		$get_info['lesson_type_id'] = 0;
@@ -230,35 +230,25 @@ public function add_question_as_lesson()
 }
 
 
+public function upload_picure()
+{
+	$picture_name = $this->input->post('lesson_parent_id');
+	$file_name = 'content_' . stristr($picture_name, ' ', true);
+	$config = array(
+		'upload_path' => $this->upload_folder . 'images/',
+		'file_name' => $file_name,
+		'allowed_types' => 'jpg',
+		'overwrite' => TRUE,
+		'max_size' => '4096000',
+		'max_height' => '768',
+		'max_width' => '1024'
+	);
 
-
-
-	public function add_license()
-	{
-		$str='1234567890';
-		$code_length=6;
-		$codes_count=1;
-		$code_separartor=6;
-		$str_length=strlen($str)-1;
-		$generated_code='';
-
-		for ($i=0; $i<$code_length; $i++){	       
-	        $generated_code.=substr($str, mt_rand(0,$str_length), 1);
-	    }
-	//	echo $generated_code;
-		$_POST = json_decode(file_get_contents('php://input'), true);
-		$this->load->model('insert_tables_model');
-		$get_info['username'] = $this->input->post('username');
-		$get_info['generated_code'] = $generated_code;
-		$get_info['position_id'] = $this->input->post('position_id');
-		$get_info['position_parent_id'] = $this->input->post('position_parent_id');
-		$get_info['mount_count'] =  $this->input->post('time_mount');	
-		$this->insert_tables_model->insert_add_license($get_info);
+	$this->load->library('upload', $config);
+	if($this->upload->do_upload('userfile')){
+		redirect($this->uri->segment(1).'/admin/index/uploadpicture');
 	}
-
-
-
-
+}
 
 
 

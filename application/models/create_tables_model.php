@@ -109,7 +109,7 @@ it creates file table if there isn't `position` table
                 `position` varchar(255) collate utf8_general_ci NOT NULL,
                 `keywords` varchar(255) collate utf8_general_ci NOT NULL,
                 `parent_id` int(11) unsigned NOT NULL,
-                `position_group` tinyint(1) default NULL,
+                `license_type` tinyint(1) default NULL,
                PRIMARY KEY(`id`)
         );
         */
@@ -217,9 +217,10 @@ it creates file table if there isn't `users_license_code` table
                 `license_code` varchar(10) NOT NULL UNIQUE,                
                 `username` varchar(20) collate utf8_general_ci NOT NULL,                
                 `description` varchar(255) collate utf8_general_ci NOT NULL,
+                `license_type` varchar(100) collate utf8_general_ci NOT NULL,
                 `position_id` int(11) NOT NULL,
                 `mount_count` int(10) NOT NULL,
-                `start_time` int(10) unsigned DEFAULT 0 NOT NULL
+                `start_time` varchar(13) unsigned DEFAULT 0 NOT NULL
         );
         */
 
