@@ -118,23 +118,24 @@
 			<div ng-repeat='items in startEndTime'>
 				<div class='teacher_marker_list'>
 					<span>{{items.start_time}} - {{items.end_time}}</span>
-					<input type='button' ng-click='removeTeachersMarkers($index)' value='{{language.remove}}' />
+					<!--input type='button' ng-click='removeTeachersMarkers($index)' value='{{language.remove}}' class='btn btn-xs lp_btn lp_btn_standA icon icon-bin' /-->
+					<a ng-click='removeTeachersMarkers($index)' class='btn btn-xs lp_btn lp_btn_standB icon icon-bin'>{{language.remove}}</a>
 				</div>
 			</div>
 
 			<div>	
-				<label>start time
+				<label>{{language.start_time}}
 					<input type='text' class='form-control lesson_time st_min' type=text />
 					<span>:</span><input type='text' class='form-control lesson_time st_sec' type=text />
 				</label>
 			</div>
 			<div>	
-				<label>end time
+				<label>{{language.end_time}}
 					<input type='text' class='form-control lesson_time et_min' type=text />
 					<span>:</span><input type='text' class='form-control lesson_time et_sec' type=text />
 				</label>
 			</div>
-			<input type='button' value='add' ng-click='addTeachersMarkers()' />
+			<input type='button' value='{{language.save}}' ng-click='addTeachersMarkers()' class='btn btn-xs lp_btn lp_btn_standB icon icon-bin' />
 		</div>
 
 		<div id='question_group'>

@@ -331,11 +331,13 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                     position_id: position_id
                 }
             }).success(function(data, status) {
-                var end_time = parseInt(data[0].start_time) + (2592000000 * parseInt(data[0].mount_count)),
-                    dat = new Date(),
-                    current_time = Date.parse(dat);
-
-                if (data[0] != undefined && end_time > current_time && username == data[0].username && (position_id == data[0].position_id || data[0].position_id == 0)) {
+                console.log(data)
+                if (data[0] != undefined) {
+                    var end_time = parseInt(data[0].start_time) + (2592000000 * parseInt(data[0].mount_count)),
+                        dat = new Date(),
+                        current_time = Date.parse(dat);
+                }
+                if (end_time > current_time && username == data[0].username && (position_id == data[0].position_id || data[0].position_id == 0)) {
                     // console.log($event.currentTarget.classList.contains('lesson_type_2'));
                     //  if ($event.currentTarget.classList.contains('lesson_selected') == false && $event.currentTarget.classList.contains('lesson_type_1') == true) {
                     if ($event.currentTarget.classList.contains('lesson_selected') == false) {

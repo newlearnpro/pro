@@ -639,13 +639,47 @@ app.controller('sessionsCtrl', ['$scope', '$http', '$timeout', 'language', funct
                     second: 'numeric'
                 },
                 intlDate = new Intl.DateTimeFormat(undefined, options);
+
+
+            /* var array1 = ['BA11', 'BA14', 'BA15'];
+             var array2 = ['GL156', 'GL24', 'GL31'];
+             var search = 'sgBA1*';
+             $.each([array1, array2], function(index, value) {
+                 $.each(value, function(key, cell) {
+                     //  if (search.indexOf(cell) !== -1)
+                     console.log('found in array ' + index, cell);
+                 });
+             });*/
+
+
             angular.forEach(data, function(value, key) {
-                console.log(data)
+
                 sessions_data.push(data[key].data.split(';'));
+
+
+                console.log(value.data);
+
+                var re = /(usr\|s:5) */ig;
+
+                //                var result = value.data.match(/usr\|s:5/ig);
+                var found = value.data.match(re);
+
+                console.log(found); // ОЙ, Ой, ой
+
+
                 var from = sessions_data[key][1].search('"'),
                     to = sessions_data[key][1].length,
                     newstr = sessions_data[key][0].substring(from, to),
                     user = newstr.slice(0, -1);
+                //  console.log(sessions_data)
+                //   console.log(from)
+
+
+
+
+
+
+
 
                 $scope.sessions.push({
                     'id': data[key].id,
