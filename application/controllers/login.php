@@ -278,17 +278,17 @@ if($this->input->post('username')=="012"){
       $this->load->helper('string');
      // $position = $this->membership_model->position();
     //  $this->membership_model->position();
-
+echo base_url() .$this->uri->segment(1).'public/img/captcha/';
       $captcha = array(
         //  'word'  => random_string('alnum', 6),
           'word'  => random_string('numeric', 6),
           'img_path'  => 'public/img/captcha/',
           'img_url'   => base_url() .'public/img/captcha/',
           //'font_path' => 'public/fonts/gheagpalatbld.ttf',
-          'font_size'     => 40,
+          'font_size'     => '40',
           'img_width' => '200',
-          'img_height' => 60,
-          'expiration' => 0,
+          'img_height' => '60',
+          'expiration' => '0',
           'pool'          => '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
       );
       $img = create_captcha($captcha);    

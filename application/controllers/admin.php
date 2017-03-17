@@ -267,4 +267,52 @@ public function upload_picure()
 		$this->db->delete('ci_sessions', array('id' => $get_info));
 	}
 
+
+
+	public function xml()
+	{
+		
+		/*if (file_exists('../html/data/users_fin.xml')) {
+			$xml = simplexml_load_file('../html/data/users_fin.xml');
+			foreach ($xml->children() as $children) {
+		        $users_data = array(         
+		            //'id' => $children->id,
+		            'username' => $children->username,
+		            'password' => $children->password,
+		            'first_name' => $children->first_name,
+		            'last_name' => $children->last_name,
+		            'status' => $children->status,
+		            'gender' => $children->gender,
+		            'age' => $children->age,
+		            'email' => $children->email,
+		            'activation_code' => $children->activation_code,
+		            'activation' => $children->activation,
+		            'activation_schoolclick' => $children->activation_schoolclick,
+		            'permission' => $children->permission
+		        );         
+		        $insert = $this->db->insert('users', $users_data);
+			}
+		} else {
+		    exit('Failed to open users.xml.');
+		}*/
+/*
+		if (file_exists('../html/data/users_license_code_part1_fin.xml')) {
+			$xml = simplexml_load_file('../html/data/users_license_code_part1_fin.xml');
+			foreach ($xml->children() as $children) {
+		        $users_data = array(         
+		            //'id' => $children->id,
+		            'license_code' => $children->license_code,
+		            'username' => $children->username,
+		            'description' => $children->description,
+		            'license_type' => $children->license_type,
+		            'position_id' => $children->position_id,
+		            'mount_count' => $children->mount_count,
+		            'start_time' => $children->start_time
+		        );         
+		        $insert = $this->db->insert('users_license_code', $users_data);
+			}
+		} else {
+		    exit('Failed to open users_license_code_fin.xml.');
+		}*/
+	}
 }

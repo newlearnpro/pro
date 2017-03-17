@@ -91,6 +91,8 @@ $lang['open']              			= 'Open';
 $lang['close']              		= 'Close';
 $lang['seperator']              	= 'Divider';
 $lang['upload_file']                = 'Upload file';
+$lang['start_time']                	= 'Start time';
+$lang['end_time']                	= 'End time';
 /*******************************************************************************/
 
 

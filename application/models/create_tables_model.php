@@ -220,7 +220,7 @@ it creates file table if there isn't `users_license_code` table
                 `license_type` varchar(100) collate utf8_general_ci NOT NULL,
                 `position_id` int(11) NOT NULL,
                 `mount_count` int(10) NOT NULL,
-                `start_time` varchar(13) unsigned DEFAULT 0 NOT NULL
+                `start_time` varchar(13) NOT NULL
         );
         */
 
