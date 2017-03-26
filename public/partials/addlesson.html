@@ -1,0 +1,34 @@
+<div ng-cloak ng-controller='positionGroup'>
+	<div class='col-xs-12 col-sm-offset-2 col-sm-8  col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4'>
+		<form method='post' enctype='multipart/form-data' action='add_lesson'>  
+			<div position-table name='lesson_parent_id'></div>
+			<div>
+				<select name='lesson_type_name' ng-model='file_type' class='form-control'>
+					<option value='video'>Video</option>	
+					<option value='html'>HTML</option>																					
+					<option value='seperator'>{{language.seperator}}</option>
+				</select><br />
+				<div ng-if='file_type!="seperator"'>				
+					<input id='name' placeholder='name' type='text' name='lesson_name' class='form-control' /><br/>
+					<input id='description' placeholder='description' type='text' name='lesson_description'  class='form-control' /><br/>
+					<!--input id='keywords' placeholder='keywords' type='text' name='lesson_keywords' /><br/-->
+					<select name='lesson_type_id' class='form-control'>
+						<option value='1' class='lesson_types lesson_type_1'>{{language.lesson}}</option>
+						<option value='2' class='lesson_types lesson_type_2'>{{language.interesting}}</option>	
+						<option value='3' class='lesson_types lesson_type_3'>{{language.laboratory_work}}</option>
+						<option value='4' class='lesson_types lesson_type_4'>{{language.task}}</option>
+						<option value='5' class='lesson_types lesson_type_5'>{{language.interactive}}</option>
+					</select><br />
+					<!--input id='savefiles' type='button' value='{{language.save}}' /-->                
+					<label><i class='icon icon-upload'></i>&nbsp;{{language.upload_file}}</label>  
+					<input type='file' name='zip_file' /><br /> 			
+					<label><input name='lesson_is_free' type='checkbox' /> {{language.free_lesson}}</label><br />
+					<input type='submit' name='btn_zip' class='btn btn-xs lp_btn lp_btn_full icon icon-file-text' value={{language.save}} />
+				</div>
+				<div ng-if='file_type=="seperator"'>
+					<input type='submit' name='add_seperator' class='btn btn-xs lp_btn lp_btn_full icon icon-file-text' value={{language.save}} />
+				</div>
+			</div>
+		</form> 
+	</div>
+</div>

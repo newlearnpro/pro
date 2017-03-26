@@ -3,7 +3,7 @@
 <input type='text' ng-model='searchUser' />
 <table border='1'>
 	<tr ng-repeat="item in users | filter:searchUser">
-		<td ng-click='selectUser(item.username)'>{{item.username}}</td>
+		<td ng-click='selectUser(item.username)'><i ng-if='item.gender=="male"' class='icon-man'></i><i ng-if='item.gender=="female"' class='icon-woman'></i><i ng-if='item.gender=="DESKTOP"' class='icon-laptop'></i>{{item.username}}</td>
 	</tr>
 </table>
 </div>

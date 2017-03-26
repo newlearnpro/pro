@@ -1,0 +1,4 @@
+<select id='position' ng-model='userField.id' class='form-control'>
+	<option ng-selected='0'>{{language.position_main}}ԳԼԽԱՎՈՐ</option>
+	<option ng-repeat='items in position' ng-selected='{{items.id}}'>{{items.id}} - {{items.position}}</option>
+</select>

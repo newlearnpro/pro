@@ -1,26 +1,39 @@
-<div ng-cloak ng-controller='classCtrl'>
-	<h2>This is position.html</h2>
-	<div>
-		<label>{{language.position_hint}}</label>			
-		<select id='position' ng-model='userField.id'>
-			<option ng-selected='0'>{{language.position_main}}ԳԼԽԱՎՈՐ</option>
-			<option ng-repeat='items in position' ng-selected='{{items.id}}'>{{items.id}} - {{items.position}} - {{items.parent_id}}</option>
-		</select>
-		<label>{{language.new_position}}</label>&nbsp;
-		<position-group></position-group>
-	</div>
-	<div>
-		<label>{{language.structure}}</label>&nbsp;
+<div ng-cloak ng-controller='positionGroup'>
+	<div class='col-xs-12 col-sm-offset-2 col-sm-8  col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6'>
+		<div position-table></div>
+		<div>
+			<div>
+				<label>имя каталога</label>&nbsp;
+				<input type='text' id='position_name' class='form-control' />
+				<input type='text' id='position_keywords' class='form-control' placeholder='keywords' /><br/>
+				<a class='btn btn-xs lp_btn lp_btn_full icon icon-folder-plus' ng-click='createPosition()'>&nbsp;{{language.save}}</a>
+			</div>
+			<div><label><input type='checkbox' id='license_type' />&nbsp;Лицензия + </label></div>
+		</div>
+	</div>	
+	<div class='col-xs-12 col-sm-offset-0 col-sm-12  col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8'>
+		<span class='icon icon-tree'></span>&nbsp;
 		<div class='mainPosition'>
 			<div ng-repeat='items in position'>
-				<div class='position1' data1='{{items.id}}' data2='{{items.parent_id}}' ng-click='openClosePosition()'>
-					<span>+</span>					
+				<div class='position_item position1' data1='{{items.id}}' data2='{{items.parent_id}}'>
+					<span class='icon icon-folder' ng-click='openClosePosition()'>&nbsp;{{items.id}}</span>					
 					<input value='{{items.position}}' />
-					<a class='btn btn-danger btn-xs' ng-click='editPosition()'>edit</a>
-					<a class='btn btn-danger btn-xs' ng-click='removePosition()'>remove</a>
+					<a class='btn btn-danger btn-xs ' ng-click='editPosition()'>edit</a>
+					<a class='btn btn-danger btn-xs remove' ng-click='removePosition()'>remove</a>
 				</div>	
 			</div>
+			<div ng-repeat='items in lesson'>
+				<div class='lesson_item' data1='{{items.id}}' data2='{{items.parent_id}}'>
+					<table>
+						<tr>
+							<td><div class='lesson_types lesson_type_{{items.type_id}}' title='{{items.name}}'>{{items.name}}</div></td>
+							<td><a class='btn btn-danger btn-sm remove' ng-click='removeLesson()'>remove</a></td>
+							<td><input type='number' ng-value='items.number' min='1' max='99' /></td>
+							<td><a class='btn btn-danger btn-sm' ng-click='editNumberLesson($index)'>edit position</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
 		</div>
-	</div>
+	</div>	
 </div>
-

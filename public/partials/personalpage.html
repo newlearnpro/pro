@@ -1,0 +1,40 @@
+<div ng-cloak ng-controller='personalpageGroup'>
+
+	<div ng-repeat='item in currentUserStatus'>
+		<div><label>{{language.first_name_hint}}</label>&ensp;<span>{{item.first_name}}</span></div>
+		<div><label>{{language.last_name_hint}}</label>&ensp;<span>{{item.last_name}}</span></div>
+		<div><label>{{language.age_hint}}</label>&ensp;<span>{{item.age}}</span></div>
+		<div ng-if='item.email!="armtab"'><label>{{language.activation_code}}</label>&ensp;<span>{{item.activation_code}}</span></div>
+		<div ng-if='item.email!="armtab"'><label>{{language.email_hint}}</label>&ensp;<span>{{item.email}}</span></div>
+		<div><label>{{language.username_hint}}</label>&ensp;<span>{{item.username}}</span></div>
+		<!--label for='oldPassword'>{{language.password_hint}}</label> <input id='oldPassword' type='text' /><input type='button' value='change' /><br /-->
+	</div>
+
+	<div>
+
+		<div>
+			<table class='table table-hover'>
+			    <tr class='info'>			    
+				    <th>{{language.license_number}}</th>
+				    <th>{{language.license_description}}</th>
+				    <th>{{language.license_type}}</th>
+				    <th>{{language.license_mount}}</th>
+				    <th>{{language.license_activated}}</th>				    
+				    <th>{{language.license_end}}</th>
+			    </tr>
+				<tr ng-repeat='items in license_lessons'>
+					<td>{{items.license_code}}</td>				
+					<td>{{items.description}}</td>
+					<td>{{items.license_type}}</td>
+					<td>{{items.mount_count | fltConvertToInt:items.mount_count}}</td>
+					<td>{{items.start_time  | date:'medium'}}</td>
+					<td>{{items.start_time  | fltConvertToInt:items.mount_count | date:'medium'}}</td>
+				</tr>
+			</table>		
+		</div>
+			<input type='text' id='insert_license_code'>		
+			<input type='button' value='add license code' ng-click='confirm_license_code()'>
+	</div>
+
+
+</div>

@@ -1,0 +1,52 @@
+<div ng-cloak ng-controller='questionsGroup'>
+
+
+<div class='col-xs-12 col-sm-offset-2 col-sm-8  col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4'>
+
+<div position-table></div>
+
+
+<div>
+	<label><input type='radio' class='questionType' ng-model='aq.type' value='1' ng-click='questionType($event)' />Հարց1</label>
+	<label><input type='radio' class='questionType' ng-model='aq.type' value='2' ng-click='questionType($event)' />Հարց2</label>
+	<label><input type='radio' class='questionType' ng-model='aq.type' value='3' ng-click='questionType($event)'/>Հարց3</label>
+	<label><input type='radio' class='questionType' ng-model='aq.type' value='4' ng-click='questionType($event)'/>Հարց4</label>
+</div>
+
+
+<div ng-show='quesionPart1'>
+	<div><span>Հարց</span></div>
+	<input type='text' class='questionTextField form-control' /><br />
+	<input type='number' min='2' max='6' ng-model='questionAnswersLength' ng-value='questionAnswersLength' class='form-control' />
+	<div><span>Պատասխանի տարբերակներ</span></div>
+
+
+
+	<div ng-repeat='items in answersInput'>
+		<input type='text' class='answerTextField'  /> 
+		<input type='radio' class='answerVersionField'  ng-model='aq.version' value='{{items}}' />
+		<label>Ընտրել դասը</label>			
+		<!--select id='lesson' ng-model='userField.id'-->
+		<select class='hintLessonId'>
+			<option  ng-if='items.type_id==1' ng-repeat='items in lesson' ng-selected='{{items.id}}'>{{items.id}} - {{items.name}}</option>
+		</select>
+
+
+	</div>
+
+	<!--input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='1'/><br />
+	<input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='2' /><br />
+	<input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='3' /><br />
+	<input type='text' class='answerTextField' /> <input type='radio' class='answerVersionField' ng-model='answer.version' value='4' /><br /-->
+
+
+
+</div>
+
+	<input type='button' value={{language.save}} ng-click='questionSave()'/>
+	<div><span ng-model='questionError'>{{questionError}}</span></div>
+	<div><span>{{questionCreated}}</span></div>
+
+	
+</div>
+</div>

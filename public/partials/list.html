@@ -1,14 +1,191 @@
-<div ng-cloak >
+<div ng-cloak ng-controller='listGroup'> 
+
+<!-- Modal -->
+<div id='menuModal' class='modal fade' role='dialog'>
+  <div class='modal-dialog'>
+
+    <!-- Modal content-->
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' title={{language.close}}>&times;</button>
+        <h4 class='modal-title'>{{language.choose_lesson}}</h4>
+      </div>
+      <div class='modal-body'>
+		<div>
+			<span class='icon icon-search'> {{language.search}}</span> <input type='checkbox' ng-model='checked' ng-click='getLessons($event)'>
+			<input type='text' ng-show='checked' ng-model='searchLesson.keywords' />
+			<input type='number' ng-show='checked' ng-model='searchLimit' ng-value='searchLimit' min='1' max='20' />
+			<div ng-show='checked' ng-repeat='items in searchLessons | filter:searchLesson | limitTo : searchLimit'>
+				<div  class='pos_a_search' ng-click='getClass($event)'><span >{{items.position}}</span></div>
+			</div>
+		</div>
+		<div class='mainPosition'>
+			<div ng-repeat='items in position'>
+				<div class='position1' data1='{{items.id}}' data2='{{items.parent_id}}' data3='{{items.license_type}}' ng-click='openClosePosition()'>								
+					<a class='pos_a' ng-click='getClass($event)'>{{items.position}}</a>
+				</div>	
+			</div>
+		</div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
 
-	<div>
 
-		<list-group></list-group>
+
+
+
+
+<div class='container-fluid'>
+<div class='row-fluid'>
+	<div class='menuPage col-xs-12 col-sm-12  col-md-4  col-lg-4' >
+	<div class='mainLessonRight'>
+		<button type='button' id='menuBtn' class='btn lp_btn lp_btn_full icon icon-menu' data-toggle='modal' data-target='#menuModal'>&nbsp;{{language.menu}}</button>
+
+
+
+
+		<div><span class='position_name_header' data1='{{position_id}}' data2='{{parent_id}}' data3='{{license_type}}'>{{position_name}}</span></div>
+		<div class='mainLesson'>
+			<div ng-repeat='items in lessons' class='lesson_group_type_{{items.type_id}}'>			
+				<div class='position_group_in lesson_types lesson_type_{{items.type_id}}' title='{{items.name}}' ng-click='loadPage($event)'>
+					<i class='lesson_icons lesson_icon_{{items.type_id}}'></i><span>{{items.name}}</span>
+				</div>
+			</div>
+		</div>
+		</div>
 	</div>
 
 
 
 
+
+
+
+
+
+	<div class='mainPage col-xs-12 col-sm-12  col-md-8  col-lg-8'>
+		<div style='max-width: 800px' ng-include='"../../public/partials/templates/carusel_tmpl.html"'></div>
+
+		<iframe id='pagePlayer' width='100%' height='100px' ></iframe>		
+		
+		<img id='learnpro_logo' src='../../public/img/icons/logo.png' ng-click="resizeIframe()" />
+		<img id='content_image' src='' />
+		<div id='not_license'>Տվյալ դասը դիտելու համար անհրաժեշտ է գնել լիցենզիոն կոդ (License number): Այն ձեզ թույլ կտա դիտել ամբողջ դասընթացը: Կապվեք մեզ հետ: Կոմպաս ՍՊԸ Հասցե՝ Երևան, Սայաթ Նովա 15 Հեռ.՝ (011)211-211 Էլ. հասցե՝ info@learnpro.am</div>
+		<div id="jp_container_1" class="jp-video jp-video-270p" role="application" aria-label="media player">
+			<div class="jp-type-playlist">
+				<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+				<div class="jp-gui">
+					<div class="jp-interface">			
+						<div class="jp-progress">
+							<div class="jp-seek-bar">
+								<div class="jp-play-bar"></div>
+							</div>
+						</div>
+						<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+						<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+						<div class="jp-controls-holder">
+							<div class="jp-controls">
+								<button class="jp-play" role="button" tabindex="0">play</button>
+								<button class="jp-stop" role="button" tabindex="0">stop</button>								
+							</div>
+							<select ng-if='currentUserStatus === "teacher"' class='jp-marker'></select>
+							<div class="jp-toggles" >
+								<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+								<button class="jp-full-screen" role="button" tabindex="0">full screen</button>	
+							</div>							
+						</div>
+						<div class="jp-volume-controls">
+							<button class="jp-mute" role="button" tabindex="0">mute</button>
+							<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+							<div class="jp-volume-bar">
+								<div class="jp-volume-bar-value"></div>
+							</div>
+						</div>
+						<div class="jp-details">
+							<div class="jp-title" aria-label="title">&nbsp;</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div id='teacher_data_group' ng-if='currentUserStatus === "teacher"'>
+			<div ng-repeat='items in startEndTime'>
+				<div class='teacher_marker_list'>
+					<span>{{items.start_time}} - {{items.end_time}}</span>
+					<!--input type='button' ng-click='removeTeachersMarkers($index)' value='{{language.remove}}' class='btn btn-xs lp_btn lp_btn_standA icon icon-bin' /-->
+					<a ng-click='removeTeachersMarkers($index)' class='btn btn-xs lp_btn lp_btn_standB icon icon-bin'>{{language.remove}}</a>
+				</div>
+			</div>
+
+			<div>	
+				<label>{{language.start_time}}
+					<input type='text' class='form-control lesson_time st_min' type=text />
+					<span>:</span><input type='text' class='form-control lesson_time st_sec' type=text />
+				</label>
+			</div>
+			<div>	
+				<label>{{language.end_time}}
+					<input type='text' class='form-control lesson_time et_min' type=text />
+					<span>:</span><input type='text' class='form-control lesson_time et_sec' type=text />
+				</label>
+			</div>
+			<input type='button' value='{{language.save}}' ng-click='addTeachersMarkers()' class='btn btn-xs lp_btn lp_btn_standB icon icon-bin' />
+		</div>
+
+		<div id='question_group'>
+			<div  class='question_item'>{{testQuestion}}</div>
+			<button class='answer_item btn' ng-repeat='items in testAnswers'  ng-click='verifyAnswer($index + 1)'>{{items}}</button>
+
+		<!--div id='question_group'><div class='nn btn-success' ng-repeat='items in testAnswers' >{{items}}</div></div-->
+		<!--div id='question_answer_group' ng-if='currentUserStatus === "pupil"'>
+			
+		</div-->
+		</div>
+
+
+
+
+	</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--iframe  scrolling='auto'  src='../../uploads/0270_0001/index.html' width='300' height='300' align='left'></iframe>
+	<div><input type='button' value='full Screen' ng-click='fullscreen()' /></div-->
 
 
 </div>
