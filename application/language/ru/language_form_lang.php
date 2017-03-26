@@ -48,8 +48,12 @@ $lang['position_hint']               = 'Должность';
 $lang['captcha_hint']                = 'Напечатаейте текст капча';
 $lang['old_password_hint']           = 'Old password';
 $lang['new_password_hint']           = 'New Password';
+$lang['activation_code']	         = 'Код активации';
+$lang['activation']	         		 = 'Активация';
+$lang['you_activated']	             = 'Вы прошли активацию';
+$lang['you_exited']	             	 = 'Вы вышли из сайта';
 
-$lang['account_created']             = 'accaunt created';
+$lang['account_created']             = 'аккаунт создан';
 $lang['img_error']                   = 'Your picture is too large';
 
 
@@ -57,7 +61,8 @@ $lang['img_error']                   = 'Your picture is too large';
 
 
 $lang['account_change']             = 'To save your changes';
-
+$lang['create_account']             = 'Создать аккаунт';
+$lang['go_back']             		= 'Главная страница';
 $lang['signin']                     = 'Вход';
 $lang['signup']                     = 'Регистрация';
 
@@ -66,26 +71,77 @@ $lang['admin']                      = 'Админ';
 $lang['user']                       = 'Пользовотель';
 
 $lang['logout']                     = 'Выход';
+$lang['how_to_use']                 = 'Как пользоваться ?';
+$lang['search']                 	= 'Искать';
+$lang['choose_lesson']              = 'Выберите урок';
 
 
-$lang['verify_username_password']    = 'Пароль не верный';
+$lang['verify_username_password']   = 'Пароль не верный';
+$lang['need_activation']			= 'Вам нужна активировать ваш аккаунт';
+$lang['enter_login_password'] 		= 'Введите ваш логин и пароль';
 
 
 $lang['create_position']            = 'Создать должность';
 $lang['registration_employees']     = 'Регистрация служащих';
-$lang['change_info_employees']      = 'Изменить информацию служащих';
+$lang['change_users_info']          = 'Информация о пользователях';
+$lang['sessions']                   = 'Сессий';
 $lang['contacts']                   = 'Контакты';
 $lang['tasks']                   	= 'Задачы';
 $lang['list']                   	= 'Список';
-
+$lang['personal_page']              = 'Личная страница';
+$lang['menu']              			= 'ЛИСТ';
+$lang['open']              			= 'Открыть';
+$lang['close']              		= 'Закрыть';
+$lang['seperator']              	= 'Разделитель';
+$lang['upload_file']                = 'Загрузить файл';
+$lang['start_time']                	= 'Начало';
+$lang['end_time']                	= 'Конец';
 /*******************************************************************************/
 
 
-$lang['new_position']            = 'Новая должность';
-$lang['structure']               = 'Структура';
+
+$lang['free_lesson']               = 'бесплатный урок';
+$lang['add_lesson']                = 'Добавить урок';
+$lang['question_list']             = 'Вопросник';
+$lang['upload_picture']        	   = 'Загрузить картинку';
+$lang['save']           		   = 'Сохранить';
+$lang['delete']            		   = 'Удалить';
+$lang['remove']            	   	   = 'Удалить';
+$lang['update']            	       = 'Обновить';
 
 
-$lang['add_class']            = 'Добавить урок';
-$lang['save']            = 'Сохранить';
+$lang['lesson']               = 'Урок';
+$lang['interesting']  	      = 'Интересно знать';
+$lang['laboratory_work']      = 'Лабораторная работа';
+$lang['task']   			  = 'Задача';
+$lang['interactive']          = 'Интерактив';
+
+
+/*status*/
+$lang['pupil']                = 'Ученик';
+$lang['teacher']              = 'Учитель';
+$lang['male']                 = 'Мужской';
+$lang['female']               = 'Женский';
+$lang['status_hint']          = '----';
+$lang['gender_hint']          = 'Пол';
+$lang['age_hint']             = 'Возраст';
+$lang['not_selected']         = 'Не выбран';
+
+$lang['success_add_license'] = 'Лицензия успешно добавлена';
+
+$lang['insert_tablet_code'] = 'Введите номер планшета';
+$lang['insert_tablet_code_wrong'] = 'Введенный номер неправильный';
+$lang['insert_tablet_code_is'] = 'Введенный номер зарегистрирован';
+$lang['insert_activation_code'] = 'Введите номер лицензии';
+
+
+/*activation group*/
+
+$lang['license_number'] 					= 'Лицензионный номер';
+$lang['license_description'] 				= 'Предмет / Класс';
+$lang['license_type'] 						= 'Тип лицензии';
+$lang['license_mount'] 						= 'Количество месяцев';
+$lang['license_activated'] 					= 'Активированный';
+$lang['license_end'] 						= 'Лицензия закончится';
 
 ?>

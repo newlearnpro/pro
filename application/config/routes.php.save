@@ -53,8 +53,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['api/v1/(:any)'] = 'api_v1/$1';
-$route['item/(:any)'] = 'item/show_item/$1';
+$route['api/v1/(:any)'] = "api_v1/$1";
+     $route['item/(:any)'] = "item/show_item/$";
 
 
 $route['^am/(.+)$'] = "$1";

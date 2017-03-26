@@ -23,8 +23,9 @@ $lang['is_natural_no_zero']	= "The %s field must contain a number greater than z
 $lang['decimal']			= "The %s field must contain a decimal number.";
 $lang['less_than']			= "The %s field must contain a number less than %s.";
 $lang['greater_than']		= "The %s field must contain a number greater than %s.";
-$lang['check_if_username_exists'] = "Login is already ...";
-$lang['check_if_email_exists'] = "Email is already ...";
+$lang['check_if_username_exists'] = "Для логина выберите другое имя";
+$lang['check_if_email_exists'] 	= "Такая электронная почта уже сушетвует";
+$lang['check_if_age_null'] 		= "Выберите свой возраст";
 $lang['validate_captcha']   = "this %s words dont write";
 
 $lang['first_name']         = "Имя";

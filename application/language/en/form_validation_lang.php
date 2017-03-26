@@ -25,6 +25,7 @@ $lang['less_than']			= "The %s field must contain a number less than %s.";
 $lang['greater_than']		= "The %s field must contain a number greater than %s.";
 $lang['check_if_username_exists'] = "Login is already ...";
 $lang['check_if_email_exists'] = "Email is already ...";
+$lang['check_if_age_null'] = "Select your age";
 $lang['validate_captcha']   = "this %s words dont write";
 
 $lang['first_name']         = "Name";
