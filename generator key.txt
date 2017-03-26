@@ -1,0 +1,64 @@
+
+
+$str='1234567890';
+// Длина кода без учета разделителей
+$code_length=6;
+// Нужное количество кодов
+$codes_count=200;
+// Позиции разделителя (0 - не надо)
+$code_separartor=6;
+ 
+$tmp=array();
+$str_length=strlen($str)-1;
+ 
+// Цикл до заполнения массива
+while (count($tmp)<$codes_count) {
+    // Сгенерировать индекс массива
+    $code='';
+	 for ($i=0; $i<$code_length; $i++){
+        // Разделитель можно не добавлять
+        if ($i>0 && $code_separartor>0 && $i%$code_separartor==0) { $code.='-';}
+        $code.=substr($str, mt_rand(0,$str_length), 1);
+    }
+    // Или в массив добавится новый элемент, или
+    // перепишется поверх уже имеющийся
+    $tmp[$code]=1;
+}
+// Теперь в массиве $codes уникальные коды
+$codes=array_keys($tmp);
+echo "<pre>";
+print_r($codes);
+echo "</pre>";
+
+
+
+
+$str='1234567890';
+// Длина кода без учета разделителей
+$code_length=6;
+// Нужное количество кодов
+$codes_count=200;
+// Позиции разделителя (0 - не надо)
+$code_separartor=6;
+ 
+$tmp=array();
+$str_length=strlen($str)-1;
+ 
+// Цикл до заполнения массива
+while (count($tmp)<$codes_count) {
+    // Сгенерировать индекс массива
+    $code='';
+     for ($i=0; $i<$code_length; $i++){
+        // Разделитель можно не добавлять
+        if ($i>0 && $code_separartor>0 && $i%$code_separartor==0) { $code.='-';}
+        $code.=substr($str, mt_rand(0,$str_length), 1);
+    }
+    // Или в массив добавится новый элемент, или
+    // перепишется поверх уже имеющийся
+    $tmp[$code]=$code;
+}
+// Теперь в массиве $codes уникальные коды
+$codes=$tmp;
+echo "<pre>";
+print_r($codes);
+echo "</pre>";
