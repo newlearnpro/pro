@@ -25,7 +25,7 @@ echo form_password('password','','class="form-control"') . form_error('password'
 echo form_label(lang('password_confirm_hint').'*','password_confirm').br();
 echo form_password('password_confirm','','class="form-control"') . form_error('password_confirm', '<span class="form_error">', '</span>').br() ;
 echo $captcha_img . form_hidden('captcha_img_hint', $captcha_word).br() ;
-echo form_label($captcha_word,'', array('style'=>'display:block; text-align:center; color: #ffffff; background: #9c9191; border-radius:15px; font-size:20px;margin:4px 10px; padding 10px 0'));
+echo form_label($captcha_word,'', array('class'=>'captcha'));
 echo form_label(lang('captcha_hint').'*','captcha').br();
 echo form_input('captcha','','class="form-control"') . form_error('captcha', '<span class="form_error">', '</span>').br() ;
 echo form_submit('submit',lang('create_account'),'class="btn btn-xs lp_btn lp_btn_full icon icon-user"');

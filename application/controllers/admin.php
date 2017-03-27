@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
 		$get_position_keywords = $this->input->post('position_name') . ' ' . $this->input->post('position_keywords');
 		$get_position_license_type = $this->input->post('license_type');
 		$get_position_parent_id = $this->input->post('parent_id');
-		$data = array('position'=>$get_position_name, 'keywords'=>$get_position_keywords, 'license_type'=>$get_position_license_type, 'parent_id'=>$get_position_parent_id);
+		$data = array('position'=>$get_position_name, 'keywords'=>$get_position_keywords, 'license_type'=>$get_position_license_type, 'parent_id'=>$get_position_parent_id, 'number'=>'1');
 		if(!empty(get_position_name)){
 			$this->db->insert('position', $data);		
 		}		
@@ -103,6 +103,17 @@ class Admin extends CI_Controller {
 	{
 		$query = $this->membership_model->lesson();
 		echo json_encode($query);
+	}
+
+	public function edit_number_position()
+	{
+		$_POST = json_decode(file_get_contents('php://input'), true);
+		$get_info_id = $this->input->post('id');
+		$get_info_number = $this->input->post('number');
+		$this->db->set('number', $get_info_number);
+		$this->db->where('id', $get_info_id);
+		$this->db->update('position');
+		//echo $get_info_id;
 	}
 
 	public function edit_number_lesson()
@@ -289,9 +300,9 @@ print_r($config);
 
 	public function xml()
 	{
-		/*
-		if (file_exists('../html/data/users.xml')) {
-			$xml = simplexml_load_file('../html/data/users.xml');
+		
+		/*if (file_exists('../html/data/users_fin.xml')) {
+			$xml = simplexml_load_file('../html/data/users_fin.xml');
 			foreach ($xml->children() as $children) {
 		        $users_data = array(         
 		            //'id' => $children->id,

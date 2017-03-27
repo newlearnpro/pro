@@ -43,6 +43,7 @@ class Membership_model extends CI_Model {
 
     public function position()
     {   
+        $this->db->order_by('number', 'ASC'); 
         $query = $this->db->get('position');  
         return   $query->result_array();
     }
