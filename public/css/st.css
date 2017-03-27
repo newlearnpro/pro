@@ -56,6 +56,8 @@ $grid-breakpoints: (
   position: absolute;
   top: 10px;
   left: 20px;
+  right:0;
+  bottom: 0;
   z-index: 9999;
   display: none;
 }
@@ -180,7 +182,7 @@ $grid-breakpoints: (
 #not_license,
 #jp_container_1,
 #teacher_data_group {
-  max-width: 800px;
+  max-width: 1024px;
   display: none;
   border: none;
 }

@@ -20,6 +20,9 @@
 					<input value='{{items.position}}' />
 					<a class='btn btn-danger btn-xs ' ng-click='editPosition()'>edit</a>
 					<a class='btn btn-danger btn-xs remove' ng-click='removePosition()'>remove</a>
+
+					<input type='number' ng-value='items.number' min='1' max='99' />
+					<a class='btn btn-danger btn-xs' ng-click='editNumberPosition($index)'>edit position</a>
 				</div>	
 			</div>
 			<div ng-repeat='items in lesson'>

@@ -345,7 +345,25 @@ app.controller('positionGroup', ['$scope', '$http', '$q', '$timeout', 'language'
             //reload.locat
         });
     }
+    $scope.editNumberPosition = function(number) {
+
+        var number = $('.position_item[data1^="' + this.items.id + '"]').find('input[type=number]').val();
+        console.log(number)
+        $http({
+            method: 'POST',
+            url: '../admin/edit_number_position',
+            data: {
+                'id': this.items.id,
+                'number': number
+            }
+        }).success(function(data) {
+
+            //   $scope.loadPosition();
+            //  loadLesson();
+        });
+    }
     $scope.editNumberLesson = function(number) {
+        console.log(this.items.id)
         var number = $('.lesson_item[data1^="' + this.items.id + '"]').find('input').val();
         console.log(number);
         $http({

@@ -182,7 +182,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                 $('#content_image').show().css({
                     'width': '100%',
                     'height': 'auto',
-                    'maxWidth': '800px'
+                    'maxWidth': '1024px'
                 }).attr('src', '../../uploads/images/content_' + that.items.id + '.jpg ');
                 position_cur2.parent().parent().children().removeAttr('openFolder');
                 position_curent.parent().attr('openFolder', 'yes');
@@ -368,7 +368,9 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                     position_id: position_id
                 }
             }).success(function(data, status) {
-                console.log(data)
+               // console.log(data);
+
+
                 if (data[0] != undefined) {
                     var end_time = parseInt(data[0].start_time) + (2592000000 * parseInt(data[0].mount_count)),
                         dat = new Date(),
@@ -393,14 +395,14 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                         $("#pagePlayer").show().css({
                             'width': '100%',
                             'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                            'maxWidth': '800px'
+                            'maxWidth': '1024px'
                         }).attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/index.html');
 
                         $(window).resize(function() {
                             $("#pagePlayer").css({
                                 'width': '100%',
                                 'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                                'maxWidth': '800px'
+                                'maxWidth': '1024px'
                             });
                         });
                     }
@@ -510,23 +512,75 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     } /*end******** *****/
 
     $scope.resizeIframe = function() {
+        var angle = ((Math.random()*1)+1).toFixed(0);
+        $('#learnpro_logo').draggable({
+            containment: '.mainPage',
+            revert: 'invalid',
+            cursor: 'pointer',
+            stop: function(){
+                $scope.resizeIframe();
+            }
+        });
+
+        $('.mainPage').droppable({
+            accept: '#learnpro_logo',
+         
+            drop: function(){
+              //  $scope.resizeIframe();
+             //   $timeout(function(){
+                    console.log(angle)
+                    switch(angle){
+
+                          case '1':
+                            $('#learnpro_logo').css({'top': '10px','left': '10%'});
+                            break;
+                          case '2':
+                            $('#learnpro_logo').css({'top': '10px','left': '80%'});
+                            break;
+                        /*  case '3':
+                            $('#learnpro_logo').css({'top': '10px', 'left': '80%'});
+                            break;
+                          case '4':
+                            $('#learnpro_logo').css({'top': '80%', 'left': '80%'});
+                            break;*/
+                          default:
+                            console.log('the number is wrong');
+                    }    
+               // },600);
+            }
+        });
+
+
+
         if ($('#pagePlayer').hasClass('resizePlayer')) {
             $('header').show();
             $('.mainPage').removeAttr('style');
-            $('#jp_container_1').css('max-width', '800px');
+            $('#jp_container_1').css('max-width', '1024px');
             $("#pagePlayer").removeClass('resizePlayer').css({
                 'width': '100%',
                 'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                'maxWidth': '800px'
+                'maxWidth': '1024px'
             });
+
+
             $(window).resize(function() {
                 $("#pagePlayer").css({
                     'width': '100%',
                     'height': parseInt($('#pagePlayer').css('width')) / 1.33,
-                    'maxWidth': '800px'
+                    'maxWidth': '1024px'
                 });
+
+
+
+
+
+
             });
         } else {
+
+
+
+
             $('#jp_container_1').css('max-width', '100%');
             $('#pagePlayer').addClass('resizePlayer');
             $('.mainPage').css({
