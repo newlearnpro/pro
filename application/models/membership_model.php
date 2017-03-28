@@ -208,7 +208,7 @@ class Membership_model extends CI_Model {
           $this->email->subject('Email using Gmail.');
           //$this->email->message('<a href="'.base_url().$this->session->userdata('lang').'"/login/activation?username="'.$new_member_insert_data['username'].'"&keycode="'.$new_member_insert_data['activation_code'].'">Click here for activation</a>');
           //$this->email->message('<a href="http://localhost/newlearnpro/pro/'.$this->session->userdata('lang').'/login/activation/'.$new_member_insert_data['username'].'/'.$new_member_insert_data['activation_code'].'">Click here for activation</a>');
-          $this->email->message('<div><span>Your Login: '.$new_member_insert_data['username'].'</span><br /><span>Your Password: '.$this->input->post('password').'</span><br /><span>Your keyCode: '.$new_member_insert_data['activation_code'].'</span><br /><a href="http://compass.learnpro.am/am/login/activation/'.$new_member_insert_data['username'].'/'.$new_member_insert_data['activation_code'].'">Click here for activation</a></div>');
+          $this->email->message('<div><span>Your Login: '.$new_member_insert_data['username'].'</span><br /><span>Your Password: '.$this->input->post('password').'</span><br /><span>Your keyCode: '.$new_member_insert_data['activation_code'].'</span><br /><a href="'.base_url().'am/login/activation/'.$new_member_insert_data['username'].'/'.$new_member_insert_data['activation_code'].'">Click here for activation</a></div>');
           $this->email->send();
           return $insert;
         /*if($this->email->send())

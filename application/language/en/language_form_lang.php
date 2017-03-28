@@ -132,12 +132,12 @@ $lang['insert_tablet_code'] 		= 'Type the number of tablet';
 $lang['insert_tablet_code_wrong']   = 'The number entered is incorrect';
 $lang['insert_tablet_code_is']		= 'The number entered is registered';
 $lang['insert_activation_code'] 	= 'Type the license number';
-
+$lang['insert_license_code'] 		= 'Insert license code';
 
 
 /*activation group*/
 
-$lang['license_number'] 					= 'License number';
+$lang['license_number'] 					= 'License code';
 $lang['license_description'] 				= 'Subject / Class';
 $lang['license_type'] 						= 'License type';
 $lang['license_mount'] 						= 'Number of months';

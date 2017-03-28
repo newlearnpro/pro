@@ -60,7 +60,7 @@ class Home extends CI_Controller {
 			if($this->session->userdata('prm')==='admin'){
 				redirect($this->session->userdata('lang').'/admin');
 			}else{
-				redirect($this->session->userdata('lang').'/main');
+				redirect($this->session->userdata('lang').'/main/index/list');
 			}
 		}else{
 	        $this->load->view('includes/header');

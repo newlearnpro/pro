@@ -130,14 +130,14 @@ $lang['not_selected']         = 'Не выбран';
 $lang['success_add_license'] = 'Лицензия успешно добавлена';
 
 $lang['insert_tablet_code'] = 'Введите номер планшета';
-$lang['insert_tablet_code_wrong'] = 'Введенный номер неправильный';
-$lang['insert_tablet_code_is'] = 'Введенный номер зарегистрирован';
-$lang['insert_activation_code'] = 'Введите номер лицензии';
-
+$lang['insert_tablet_code_wrong'] 	= 'Введенный номер неправильный';
+$lang['insert_tablet_code_is'] 		= 'Введенный номер зарегистрирован';
+$lang['insert_activation_code'] 	= 'Введите номер лицензии';
+$lang['insert_license_code'] 		= 'Введите код лицензии';
 
 /*activation group*/
 
-$lang['license_number'] 					= 'Лицензионный номер';
+$lang['license_number'] 					= 'Лицензионный код';
 $lang['license_description'] 				= 'Предмет / Класс';
 $lang['license_type'] 						= 'Тип лицензии';
 $lang['license_mount'] 						= 'Количество месяцев';
