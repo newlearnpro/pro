@@ -19,6 +19,8 @@ class Membership_model extends CI_Model {
     public function users_change($get_info)
     {   
         $data = array(           
+            'username' => $get_info['username'],
+            'password' => $get_info['password'],
             'first_name' => $get_info['first_name'],
             'last_name' => $get_info['last_name'],
             'activation' => $get_info['activation'],
