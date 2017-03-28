@@ -31,6 +31,7 @@
     "license_type",
     "license_mount",
     "license_activated",
+    "insert_license_code",
     "license_end",
     "start_time",
     "end_time"
