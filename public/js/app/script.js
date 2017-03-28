@@ -192,7 +192,8 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
             data: {
                 'edit_user': {
                     login: $scope.userField.username,
-                    // username: document.querySelector("#userName").value,
+                    username: document.querySelector("#userName").value,
+                    password: document.querySelector("#password").value,
                     first_name: document.querySelector("#firstName").value,
                     last_name: document.querySelector("#lastName").value,
                     activation: document.querySelector("#activation").value,

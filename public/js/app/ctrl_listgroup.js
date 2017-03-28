@@ -512,7 +512,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
     } /*end******** *****/
 
     $scope.resizeIframe = function() {
-        var angle = ((Math.random()*1)+1).toFixed(0);
+        //var angle = ((Math.random()*1)+1).toFixed(0);
         $('#learnpro_logo').draggable({
             containment: '.mainPage',
             revert: 'invalid',
@@ -524,12 +524,18 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
         $('.mainPage').droppable({
             accept: '#learnpro_logo',
-         
             drop: function(){
+
+                if( $('#learnpro_logo').css('left') > '200px'){
+                    console.log(true)
+                    $('#learnpro_logo').css({'top': '10px','left': '80%'});
+                }else{
+                    $('#learnpro_logo').css({'top': '10px','left': '10%'});
+                }
               //  $scope.resizeIframe();
              //   $timeout(function(){
-                    console.log(angle)
-                    switch(angle){
+                  //  console.log(angle)
+                  /*  switch(angle){
 
                           case '1':
                             $('#learnpro_logo').css({'top': '10px','left': '10%'});
@@ -537,15 +543,10 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                           case '2':
                             $('#learnpro_logo').css({'top': '10px','left': '80%'});
                             break;
-                        /*  case '3':
-                            $('#learnpro_logo').css({'top': '10px', 'left': '80%'});
-                            break;
-                          case '4':
-                            $('#learnpro_logo').css({'top': '80%', 'left': '80%'});
-                            break;*/
+
                           default:
                             console.log('the number is wrong');
-                    }    
+                    }   */ 
                // },600);
             }
         });

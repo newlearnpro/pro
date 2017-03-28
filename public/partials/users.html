@@ -6,7 +6,13 @@
 			<div ng-if='users'>
 				<div>
 					<label>{{language.username_hint}}</label>
-					<span>{{userField.username}}</span>
+					<!--span>{{userField.username}}</span-->
+					<input id='userName' type='text' value='{{userField.username}}' />
+				</div>
+				<div>
+					<label>{{language.password_hint}}</label>
+					<!--span>{{userField.username}}</span-->
+					<input id='password' type='text' value='{{userField.password}}' />
 				</div>
 				<div>	
 					<label>{{language.first_name_hint}}</label>
