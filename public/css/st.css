@@ -54,6 +54,8 @@ $grid-breakpoints: (
 }
 #learnpro_logo {
   position: absolute;
+  width: 100px;
+  height: 54px;
   top: 10px;
   left: 10%;
   right:0;

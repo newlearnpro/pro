@@ -196,6 +196,7 @@ app.controller('usersCtrl', function($scope, $http, $q, language) {
                     password: document.querySelector("#password").value,
                     first_name: document.querySelector("#firstName").value,
                     last_name: document.querySelector("#lastName").value,
+                    activation_code: document.querySelector("#activationCode").value,
                     activation: document.querySelector("#activation").value,
                     //  last_name: document.querySelector("#lastName").value,
                     //     position: document.querySelector("#position").firstElementChild.getAttribute("ng-selected")

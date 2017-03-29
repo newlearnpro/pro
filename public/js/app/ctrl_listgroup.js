@@ -360,6 +360,20 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
            // console.log($('.position_name_header').attr('data1'))
 
+
+
+                        $timeout(function() {
+                            if($('#pagePlayer').css('maxWidth') !== '100%'){
+                                console.log('df');
+                                $('#learnpro_logo').trigger('click');
+                            }
+                        }, 50);
+
+
+
+
+
+
             $http({
                 method: 'POST',
                 url: 'get_users_license_code_bypos',
@@ -387,7 +401,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                     $("#content_image").hide();
                     $("#learnpro_logo").show();
 
-                    if (that.items.type_name == 'html') {
+                    if (that.items.type_name == 'html') {                        
                         $scope.src = that.items.src;
                         $('#jp_video_0').attr('src', '');
                         $('#jp_container_1, #teacher_data_group, #question_group').hide();
@@ -397,6 +411,11 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                             'height': parseInt($('#pagePlayer').css('width')) / 1.33,
                             'maxWidth': '1024px'
                         }).attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/index.html');
+
+
+
+
+
 
                         $(window).resize(function() {
                             $("#pagePlayer").css({
@@ -436,6 +455,8 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
 
                     /*******************************************************************************************/
                     if (that.items.type_name == 'video') {
+                        
+                        //$('#learnpro_logo').trigger('click');
                         $("#jquery_jplayer_1").jPlayer({
                             ready: function() {
                                 $(this).jPlayer("setMedia", {
@@ -445,6 +466,11 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                                 });
                             },
                             ended: function() {
+                                if(document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.firstElementChild.classList.contains('lesson_type_0')){
+                                   $('#learnpro_logo').trigger('click');
+                                }
+                               // console.log(document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.firstElementChild);
+                                //$('#learnpro_logo').trigger('click');
                                 clearInterval($scope.timerMarker);
                                 if (document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.className != 'lesson_group_type_0') {
                                     document.getElementsByClassName("lesson_selected")[0].parentElement.nextElementSibling.firstElementChild.click();
@@ -470,8 +496,12 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
                         $('#jp_video_0').attr('src', '../../uploads/lesson_type_' + that.items.type_id + '/' + that.items.src + '/data.zip').attr('data', that.items.id);
 
                         $timeout(function() {
-                            $("#jquery_jplayer_1").jPlayer("play");
-                            $("#learnpro_logo").trigger('click');
+                            $('#jquery_jplayer_1').jPlayer('play');
+
+
+                            /*if($('#pagePlayer').css('maxWidth') != '100%'){
+                                $('#learnpro_logo').trigger('click');
+                            }*/
                         }, 200);
 
                         function playerPauseMarker() {
@@ -515,7 +545,7 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
         //var angle = ((Math.random()*1)+1).toFixed(0);
         $('#learnpro_logo').draggable({
             containment: '.mainPage',
-            revert: 'invalid',
+            //revert: 'invalid',
             cursor: 'pointer',
             stop: function(){
                 $scope.resizeIframe();
@@ -527,27 +557,12 @@ app.controller('listGroup', ['$scope', '$rootScope', '$http', '$q', '$timeout', 
             drop: function(){
 
                 if( $('#learnpro_logo').css('left') > '200px'){
-                    console.log(true)
+                    console.log($('#learnpro_logo').css('left'))
                     $('#learnpro_logo').css({'top': '10px','left': '80%'});
-                }else{
+                }else if($('#learnpro_logo').css('left') <= '200px'){
+                    console.log($('#learnpro_logo').css('left'))
                     $('#learnpro_logo').css({'top': '10px','left': '10%'});
                 }
-              //  $scope.resizeIframe();
-             //   $timeout(function(){
-                  //  console.log(angle)
-                  /*  switch(angle){
-
-                          case '1':
-                            $('#learnpro_logo').css({'top': '10px','left': '10%'});
-                            break;
-                          case '2':
-                            $('#learnpro_logo').css({'top': '10px','left': '80%'});
-                            break;
-
-                          default:
-                            console.log('the number is wrong');
-                    }   */ 
-               // },600);
             }
         });
 
