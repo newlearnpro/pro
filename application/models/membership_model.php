@@ -23,6 +23,7 @@ class Membership_model extends CI_Model {
             'password' => $get_info['password'],
             'first_name' => $get_info['first_name'],
             'last_name' => $get_info['last_name'],
+            'activation_code' => $get_info['activation_code'],
             'activation' => $get_info['activation'],
         );
         $this->db->where('username', $get_info['login']);
